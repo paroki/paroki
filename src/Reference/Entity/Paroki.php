@@ -1,181 +1,170 @@
 <?php
 
-/*
- * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
- *
- * (c) Anthonius Munthi <me@itstoni.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-declare(strict_types=1);
-
 namespace Paroki\Reference\Entity;
 
 class Paroki
 {
-    private $NoParoki;
+    private $noParoki;
 
-    private $NamaParoki;
+    private $namaParoki;
 
-    private $NamaGereja;
+    private $namaGereja;
 
-    private $AlamatParoki;
+    private $alamatParoki;
 
-    private $KotaParoki;
+    private $kotaParoki;
 
-    private $TeleponParoki;
+    private $teleponParoki;
 
-    private $FaxParoki;
+    private $faxParoki;
 
-    private $WebsiteParoki;
+    private $websiteParoki;
 
-    private $EmailParoki;
+    private $emailParoki;
 
-    private $PastorParoki;
+    private $pastorParoki;
 
-    private $WilayahKeuskupan;
+    private $wilayahKeuskupan;
 
-    private $ParokiID;
+    private $id;
 
     private $keuskupan;
 
     public function getNoParoki(): ?int
     {
-        return $this->NoParoki;
+        return $this->noParoki;
     }
 
-    public function setNoParoki(?int $NoParoki): self
+    public function setNoParoki(?int $noParoki): self
     {
-        $this->NoParoki = $NoParoki;
+        $this->noParoki = $noParoki;
 
         return $this;
     }
 
     public function getNamaParoki(): ?string
     {
-        return $this->NamaParoki;
+        return $this->namaParoki;
     }
 
-    public function setNamaParoki(?string $NamaParoki): self
+    public function setNamaParoki(?string $namaParoki): self
     {
-        $this->NamaParoki = $NamaParoki;
+        $this->namaParoki = $namaParoki;
 
         return $this;
     }
 
     public function getNamaGereja(): ?string
     {
-        return $this->NamaGereja;
+        return $this->namaGereja;
     }
 
-    public function setNamaGereja(?string $NamaGereja): self
+    public function setNamaGereja(?string $namaGereja): self
     {
-        $this->NamaGereja = $NamaGereja;
+        $this->namaGereja = $namaGereja;
 
         return $this;
     }
 
     public function getAlamatParoki(): ?string
     {
-        return $this->AlamatParoki;
+        return $this->alamatParoki;
     }
 
-    public function setAlamatParoki(?string $AlamatParoki): self
+    public function setAlamatParoki(?string $alamatParoki): self
     {
-        $this->AlamatParoki = $AlamatParoki;
+        $this->alamatParoki = $alamatParoki;
 
         return $this;
     }
 
     public function getKotaParoki(): ?string
     {
-        return $this->KotaParoki;
+        return $this->kotaParoki;
     }
 
-    public function setKotaParoki(?string $KotaParoki): self
+    public function setKotaParoki(?string $kotaParoki): self
     {
-        $this->KotaParoki = $KotaParoki;
+        $this->kotaParoki = $kotaParoki;
 
         return $this;
     }
 
     public function getTeleponParoki(): ?string
     {
-        return $this->TeleponParoki;
+        return $this->teleponParoki;
     }
 
-    public function setTeleponParoki(?string $TeleponParoki): self
+    public function setTeleponParoki(?string $teleponParoki): self
     {
-        $this->TeleponParoki = $TeleponParoki;
+        $this->teleponParoki = $teleponParoki;
 
         return $this;
     }
 
     public function getFaxParoki(): ?string
     {
-        return $this->FaxParoki;
+        return $this->faxParoki;
     }
 
-    public function setFaxParoki(?string $FaxParoki): self
+    public function setFaxParoki(?string $faxParoki): self
     {
-        $this->FaxParoki = $FaxParoki;
+        $this->faxParoki = $faxParoki;
 
         return $this;
     }
 
     public function getWebsiteParoki(): ?string
     {
-        return $this->WebsiteParoki;
+        return $this->websiteParoki;
     }
 
-    public function setWebsiteParoki(?string $WebsiteParoki): self
+    public function setWebsiteParoki(?string $websiteParoki): self
     {
-        $this->WebsiteParoki = $WebsiteParoki;
+        $this->websiteParoki = $websiteParoki;
 
         return $this;
     }
 
     public function getEmailParoki(): ?string
     {
-        return $this->EmailParoki;
+        return $this->emailParoki;
     }
 
-    public function setEmailParoki(?string $EmailParoki): self
+    public function setEmailParoki(?string $emailParoki): self
     {
-        $this->EmailParoki = $EmailParoki;
+        $this->emailParoki = $emailParoki;
 
         return $this;
     }
 
     public function getPastorParoki(): ?string
     {
-        return $this->PastorParoki;
+        return $this->pastorParoki;
     }
 
-    public function setPastorParoki(?string $PastorParoki): self
+    public function setPastorParoki(?string $pastorParoki): self
     {
-        $this->PastorParoki = $PastorParoki;
+        $this->pastorParoki = $pastorParoki;
 
         return $this;
     }
 
     public function getWilayahKeuskupan(): ?string
     {
-        return $this->WilayahKeuskupan;
+        return $this->wilayahKeuskupan;
     }
 
-    public function setWilayahKeuskupan(?string $WilayahKeuskupan): self
+    public function setWilayahKeuskupan(?string $wilayahKeuskupan): self
     {
-        $this->WilayahKeuskupan = $WilayahKeuskupan;
+        $this->wilayahKeuskupan = $wilayahKeuskupan;
 
         return $this;
     }
 
-    public function getParokiID(): ?string
+    public function getId(): ?string
     {
-        return $this->ParokiID;
+        return $this->id;
     }
 
     public function getKeuskupan(): ?Keuskupan

@@ -1,16 +1,5 @@
 <?php
 
-/*
- * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
- *
- * (c) Anthonius Munthi <me@itstoni.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-declare(strict_types=1);
-
 namespace Paroki\Baptis\Entity;
 
 use Paroki\Reference\Entity\Paroki;
@@ -94,7 +83,7 @@ class BaptisKomuni
         $this->baptis = $baptis;
 
         // set (or unset) the owning side of the relation if necessary
-        $newKomuni = null === $baptis ? null : $this;
+        $newKomuni = $baptis === null ? null : $this;
         if ($newKomuni !== $baptis->getKomuni()) {
             $baptis->setKomuni($newKomuni);
         }

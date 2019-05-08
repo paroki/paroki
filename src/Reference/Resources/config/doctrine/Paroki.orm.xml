@@ -1,25 +1,21 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="Paroki\Reference\Entity\Paroki" table="MasterParoki">
-    <id name="ParokiID" type="string" length="7"/>
-    <field name="NoParoki" type="integer" length="4" nullable="true"/>
-    <field name="NamaParoki" type="string" length="50" nullable="true"/>
-    <field name="NamaGereja" type="string" length="150" nullable="true"/>
-    <field name="AlamatParoki" type="string" length="255" nullable="true"/>
-    <field name="KotaParoki" type="string" length="50" nullable="true"/>
-    <field name="TeleponParoki" type="string" length="50" nullable="true"/>
-    <field name="FaxParoki" type="string" length="50" nullable="true"/>
-    <field name="WebsiteParoki" type="string" length="50" nullable="true"/>
-    <field name="EmailParoki" type="string" length="50" nullable="true"/>
-    <field name="PastorParoki" type="string" length="100" nullable="true"/>
-    <field name="WilayahKeuskupan" type="string" length="50" nullable="true"/>
-    <indexes>
-      <index name="ix_paroki_nama_gereja" columns="NamaGereja"/>
-      <index name="ix_paroki_nama_paroki" columns="NamaParoki"/>
-    </indexes>
+  <entity name="Paroki\Reference\Entity\Paroki" table="ref_paroki">
+    <id name="id" type="string" length="7" column="id"/>
+    <field name="noParoki" type="integer" length="4" nullable="true"/>
+    <field name="namaParoki" type="string" length="50" nullable="true"/>
+    <field name="namaGereja" type="string" length="150" nullable="true"/>
+    <field name="alamatParoki" type="string" length="255" nullable="true"/>
+    <field name="kotaParoki" type="string" length="50" nullable="true"/>
+    <field name="teleponParoki" type="string" length="50" nullable="true"/>
+    <field name="faxParoki" type="string" length="50" nullable="true"/>
+    <field name="websiteParoki" type="string" length="50" nullable="true"/>
+    <field name="emailParoki" type="string" length="50" nullable="true"/>
+    <field name="pastorParoki" type="string" length="100" nullable="true"/>
+    <field name="wilayahKeuskupan" type="string" length="50" nullable="true"/>
     <many-to-one field="keuskupan" target-entity="Paroki\Reference\Entity\Keuskupan" inversed-by="parokis">
       <join-columns>
-        <join-column name="keuskupan_id" referenced-column-name="KeuskupanID" nullable="false"/>
+        <join-column name="keuskupan_id" referenced-column-name="id" nullable="false"/>
       </join-columns>
     </many-to-one>
   </entity>

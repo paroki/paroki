@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="Paroki\Baptis\Entity\Baptis">
+  <entity name="Paroki\Baptis\Entity\Baptis" table="td_baptis">
     <id name="id" type="guid">
       <generator strategy="UUID"/>
     </id>
@@ -12,12 +12,18 @@
       </options>
     </field>
     <field name="nomor" type="integer" nullable="false"/>
+    <field name="lanjutan" type="string" length="1" nullable="true"/>
     <field name="tempatBaptis" type="string" length="255" nullable="true"/>
     <field name="tanggalBaptis" type="date" nullable="true"/>
     <field name="waliBaptis1" type="string" nullable="true"/>
     <field name="waliBaptis2" type="string" nullable="true"/>
     <field name="catatan" type="text" nullable="true"/>
     <field name="updatedAt" type="date" nullable="false"/>
+    <indexes>
+      <index name="ix_baptis_nama" columns="nama"/>
+      <index name="ix_baptis_id" columns="baptis_id"/>
+      <index name="ix_baptis_key" columns="id"/>
+    </indexes>
     <many-to-one field="updatedBy" target-entity="Paroki\User\Entity\User">
       <join-columns>
         <join-column name="updated_by_user_id" referenced-column-name="id" nullable="false"/>
@@ -25,7 +31,7 @@
     </many-to-one>
     <many-to-one field="paroki" target-entity="Paroki\Reference\Entity\Paroki">
       <join-columns>
-        <join-column name="paroki_id" referenced-column-name="ParokiID"/>
+        <join-column name="paroki_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
     <one-to-one field="komuni" target-entity="Paroki\Baptis\Entity\BaptisKomuni" inversed-by="baptis">
@@ -50,7 +56,12 @@
     </one-to-one>
     <many-to-one field="lingkungan" target-entity="Paroki\Reference\Entity\Lingkungan">
       <join-columns>
-        <join-column name="lingkungan_id" referenced-column-name="KodeWLID"/>
+        <join-column name="lingkungan_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="agamaSebelumBaptis" target-entity="Paroki\Reference\Entity\Agama">
+      <join-columns>
+        <join-column name="agama_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
   </entity>

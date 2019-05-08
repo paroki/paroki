@@ -1,85 +1,74 @@
 <?php
 
-/*
- * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
- *
- * (c) Anthonius Munthi <me@itstoni.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-declare(strict_types=1);
-
 namespace Paroki\Reference\Entity;
 
 class Lingkungan
 {
-    private $LingkunganID;
+    private $lingkunganId;
 
-    private $NoLingkungan;
+    private $noLingkungan;
 
-    private $NamaKetuaLingkungan;
+    private $namaKetuaLingkungan;
 
-    private $F5;
+    private $f5;
 
-    private $KodeWLID;
+    private $id;
 
     private $wilayah;
 
     private $bagian;
 
-    public function getLingkunganID(): ?string
+    public function getLingkunganId(): ?string
     {
-        return $this->LingkunganID;
+        return $this->lingkunganId;
     }
 
-    public function setLingkunganID(?string $LingkunganID): self
+    public function setLingkunganId(?string $lingkunganId): self
     {
-        $this->LingkunganID = $LingkunganID;
+        $this->lingkunganId = $lingkunganId;
 
         return $this;
     }
 
     public function getNoLingkungan(): ?int
     {
-        return $this->NoLingkungan;
+        return $this->noLingkungan;
     }
 
-    public function setNoLingkungan(?int $NoLingkungan): self
+    public function setNoLingkungan(?int $noLingkungan): self
     {
-        $this->NoLingkungan = $NoLingkungan;
+        $this->noLingkungan = $noLingkungan;
 
         return $this;
     }
 
     public function getNamaKetuaLingkungan(): ?string
     {
-        return $this->NamaKetuaLingkungan;
+        return $this->namaKetuaLingkungan;
     }
 
-    public function setNamaKetuaLingkungan(?string $NamaKetuaLingkungan): self
+    public function setNamaKetuaLingkungan(?string $namaKetuaLingkungan): self
     {
-        $this->NamaKetuaLingkungan = $NamaKetuaLingkungan;
+        $this->namaKetuaLingkungan = $namaKetuaLingkungan;
 
         return $this;
     }
 
     public function getF5(): ?string
     {
-        return $this->F5;
+        return $this->f5;
     }
 
-    public function setF5(?string $F5): self
+    public function setF5(?string $f5): self
     {
-        $this->F5 = $F5;
+        $this->f5 = $f5;
 
         return $this;
     }
 
-    public function getKodeWLID(): ?string
+    public function getId(): ?string
     {
-        return $this->KodeWLID;
+        return $this->id;
     }
 
     public function getWilayah(): ?Wilayah

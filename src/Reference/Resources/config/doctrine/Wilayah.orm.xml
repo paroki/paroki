@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="Paroki\Reference\Entity\Wilayah" table="Wilayah">
-    <id name="ID" type="integer" length="4"/>
-    <field name="NamaWilayah" type="string" length="100" nullable="true"/>
-    <field name="KetuaWilayah" type="string" length="255" nullable="true"/>
+  <entity name="Paroki\Reference\Entity\Wilayah" table="ref_wilayah">
+    <id name="id" type="integer" length="4"/>
+    <field name="namaWilayah" type="string" length="100" nullable="true"/>
+    <field name="ketuaWilayah" type="string" length="255" nullable="true"/>
     <many-to-one field="wilayah" target-entity="Paroki\Reference\Entity\WilayahBagian" inversed-by="wilayahs">
       <join-columns>
         <join-column name="wilayah_bagian_id" referenced-column-name="id"/>

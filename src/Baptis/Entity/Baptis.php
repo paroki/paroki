@@ -1,60 +1,114 @@
 <?php
 
-/*
- * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
- *
- * (c) Anthonius Munthi <me@itstoni.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-declare(strict_types=1);
-
 namespace Paroki\Baptis\Entity;
 
 use Paroki\Core\Entity\AbstractBiodata;
+use Paroki\Reference\Entity\Agama;
 use Paroki\Reference\Entity\Lingkungan;
 use Paroki\Reference\Entity\Paroki;
 use Paroki\User\Entity\User;
 
 class Baptis extends AbstractBiodata
 {
+    /**
+     * @var string
+     */
     private $baptisId;
 
+    /**
+     * @var string
+     */
     private $buku;
 
+    /**
+     * @var integer
+     */
     private $halaman;
 
+    /**
+     * @var string
+     */
     private $nomor;
 
+    /**
+     * @var int
+     */
+    private $lanjutan;
+
+    /**
+     * @var string
+     */
     private $tempatBaptis;
 
+    /**
+     * @var \DateTime
+     */
     private $tanggalBaptis;
 
+    /**
+     * @var string
+     */
     private $waliBaptis1;
 
+    /**
+     * @var string
+     */
     private $waliBaptis2;
 
+    /**
+     * @var string
+     */
     private $catatan;
 
+    /**
+     * @var \DateTime
+     */
     private $updatedAt;
 
+    /**
+     * @var string
+     */
     private $id;
 
+    /**
+     * @var null|BaptisKomuni
+     */
     private $komuni;
 
+    /**
+     * @var null|BaptisKrisma
+     */
     private $krisma;
 
+    /**
+     * @var null|BaptisPerkawinan
+     */
     private $perkawinan;
 
+    /**
+     * @var null|Diterima
+     */
     private $diterima;
 
+    /**
+     * @var null|User
+     */
     private $updatedBy;
 
+    /**
+     * @var null|Paroki
+     */
     private $paroki;
 
+    /**
+     * @var null|Lingkungan
+     */
     private $lingkungan;
+
+    /**
+     * @var null|Agama
+     */
+    private $agamaSebelumBaptis;
 
     public function getBaptisId(): ?string
     {
@@ -261,6 +315,30 @@ class Baptis extends AbstractBiodata
     public function setLingkungan(?Lingkungan $lingkungan): self
     {
         $this->lingkungan = $lingkungan;
+
+        return $this;
+    }
+
+    public function getAgamaSebelumBaptis(): ?Agama
+    {
+        return $this->agamaSebelumBaptis;
+    }
+
+    public function setAgamaSebelumBaptis(?Agama $agamaSebelumBaptis): self
+    {
+        $this->agamaSebelumBaptis = $agamaSebelumBaptis;
+
+        return $this;
+    }
+
+    public function getLanjutan(): ?string
+    {
+        return $this->lanjutan;
+    }
+
+    public function setLanjutan(?string $lanjutan): self
+    {
+        $this->lanjutan = $lanjutan;
 
         return $this;
     }

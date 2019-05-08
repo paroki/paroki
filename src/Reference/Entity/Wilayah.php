@@ -1,16 +1,5 @@
 <?php
 
-/*
- * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
- *
- * (c) Anthonius Munthi <me@itstoni.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-declare(strict_types=1);
-
 namespace Paroki\Reference\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,11 +7,11 @@ use Doctrine\Common\Collections\Collection;
 
 class Wilayah
 {
-    private $NamaWilayah;
+    private $namaWilayah;
 
-    private $KetuaWilayah;
+    private $ketuaWilayah;
 
-    private $ID;
+    private $id;
 
     private $lingkungans;
 
@@ -35,31 +24,31 @@ class Wilayah
 
     public function getNamaWilayah(): ?string
     {
-        return $this->NamaWilayah;
+        return $this->namaWilayah;
     }
 
-    public function setNamaWilayah(?string $NamaWilayah): self
+    public function setNamaWilayah(?string $namaWilayah): self
     {
-        $this->NamaWilayah = $NamaWilayah;
+        $this->namaWilayah = $namaWilayah;
 
         return $this;
     }
 
     public function getKetuaWilayah(): ?string
     {
-        return $this->KetuaWilayah;
+        return $this->ketuaWilayah;
     }
 
-    public function setKetuaWilayah(?string $KetuaWilayah): self
+    public function setKetuaWilayah(?string $ketuaWilayah): self
     {
-        $this->KetuaWilayah = $KetuaWilayah;
+        $this->ketuaWilayah = $ketuaWilayah;
 
         return $this;
     }
 
-    public function getID(): ?int
+    public function getId(): ?int
     {
-        return $this->ID;
+        return $this->id;
     }
 
     /**

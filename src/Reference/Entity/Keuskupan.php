@@ -1,16 +1,5 @@
 <?php
 
-/*
- * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
- *
- * (c) Anthonius Munthi <me@itstoni.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-declare(strict_types=1);
-
 namespace Paroki\Reference\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,27 +7,27 @@ use Doctrine\Common\Collections\Collection;
 
 class Keuskupan
 {
-    private $NoUrutKeuskupan;
+    private $noUrutKeuskupan;
 
-    private $NamaKeuskupan;
+    private $namaKeuskupan;
 
-    private $NamaKeuskupanLatin;
+    private $namaKeuskupanLatin;
 
-    private $AlamatKeuskupan;
+    private $alamatKeuskupan;
 
-    private $KotaKeuskupan;
+    private $kotaKeuskupan;
 
-    private $TeleponKeuskupan;
+    private $teleponKeuskupan;
 
-    private $FaxKeuskupan;
+    private $faxKeuskupan;
 
-    private $WebsiteKeuskupan;
+    private $websiteKeuskupan;
 
-    private $EmailKeuskupan;
+    private $emailKeuskupan;
 
-    private $NamaUskupSaatIni;
+    private $namaUskupSaatIni;
 
-    private $KeuskupanID;
+    private $id;
 
     private $parokis;
 
@@ -49,127 +38,127 @@ class Keuskupan
 
     public function getNoUrutKeuskupan(): ?int
     {
-        return $this->NoUrutKeuskupan;
+        return $this->noUrutKeuskupan;
     }
 
-    public function setNoUrutKeuskupan(?int $NoUrutKeuskupan): self
+    public function setNoUrutKeuskupan(?int $noUrutKeuskupan): self
     {
-        $this->NoUrutKeuskupan = $NoUrutKeuskupan;
+        $this->noUrutKeuskupan = $noUrutKeuskupan;
 
         return $this;
     }
 
     public function getNamaKeuskupan(): ?string
     {
-        return $this->NamaKeuskupan;
+        return $this->namaKeuskupan;
     }
 
-    public function setNamaKeuskupan(?string $NamaKeuskupan): self
+    public function setNamaKeuskupan(?string $namaKeuskupan): self
     {
-        $this->NamaKeuskupan = $NamaKeuskupan;
+        $this->namaKeuskupan = $namaKeuskupan;
 
         return $this;
     }
 
     public function getNamaKeuskupanLatin(): ?string
     {
-        return $this->NamaKeuskupanLatin;
+        return $this->namaKeuskupanLatin;
     }
 
-    public function setNamaKeuskupanLatin(?string $NamaKeuskupanLatin): self
+    public function setNamaKeuskupanLatin(?string $namaKeuskupanLatin): self
     {
-        $this->NamaKeuskupanLatin = $NamaKeuskupanLatin;
+        $this->namaKeuskupanLatin = $namaKeuskupanLatin;
 
         return $this;
     }
 
     public function getAlamatKeuskupan(): ?string
     {
-        return $this->AlamatKeuskupan;
+        return $this->alamatKeuskupan;
     }
 
-    public function setAlamatKeuskupan(?string $AlamatKeuskupan): self
+    public function setAlamatKeuskupan(?string $alamatKeuskupan): self
     {
-        $this->AlamatKeuskupan = $AlamatKeuskupan;
+        $this->alamatKeuskupan = $alamatKeuskupan;
 
         return $this;
     }
 
     public function getKotaKeuskupan(): ?string
     {
-        return $this->KotaKeuskupan;
+        return $this->kotaKeuskupan;
     }
 
-    public function setKotaKeuskupan(?string $KotaKeuskupan): self
+    public function setKotaKeuskupan(?string $kotaKeuskupan): self
     {
-        $this->KotaKeuskupan = $KotaKeuskupan;
+        $this->kotaKeuskupan = $kotaKeuskupan;
 
         return $this;
     }
 
     public function getTeleponKeuskupan(): ?string
     {
-        return $this->TeleponKeuskupan;
+        return $this->teleponKeuskupan;
     }
 
-    public function setTeleponKeuskupan(?string $TeleponKeuskupan): self
+    public function setTeleponKeuskupan(?string $teleponKeuskupan): self
     {
-        $this->TeleponKeuskupan = $TeleponKeuskupan;
+        $this->teleponKeuskupan = $teleponKeuskupan;
 
         return $this;
     }
 
     public function getFaxKeuskupan(): ?string
     {
-        return $this->FaxKeuskupan;
+        return $this->faxKeuskupan;
     }
 
-    public function setFaxKeuskupan(?string $FaxKeuskupan): self
+    public function setFaxKeuskupan(?string $faxKeuskupan): self
     {
-        $this->FaxKeuskupan = $FaxKeuskupan;
+        $this->faxKeuskupan = $faxKeuskupan;
 
         return $this;
     }
 
     public function getWebsiteKeuskupan(): ?string
     {
-        return $this->WebsiteKeuskupan;
+        return $this->websiteKeuskupan;
     }
 
-    public function setWebsiteKeuskupan(?string $WebsiteKeuskupan): self
+    public function setWebsiteKeuskupan(?string $websiteKeuskupan): self
     {
-        $this->WebsiteKeuskupan = $WebsiteKeuskupan;
+        $this->websiteKeuskupan = $websiteKeuskupan;
 
         return $this;
     }
 
     public function getEmailKeuskupan(): ?string
     {
-        return $this->EmailKeuskupan;
+        return $this->emailKeuskupan;
     }
 
-    public function setEmailKeuskupan(?string $EmailKeuskupan): self
+    public function setEmailKeuskupan(?string $emailKeuskupan): self
     {
-        $this->EmailKeuskupan = $EmailKeuskupan;
+        $this->emailKeuskupan = $emailKeuskupan;
 
         return $this;
     }
 
     public function getNamaUskupSaatIni(): ?string
     {
-        return $this->NamaUskupSaatIni;
+        return $this->namaUskupSaatIni;
     }
 
-    public function setNamaUskupSaatIni(?string $NamaUskupSaatIni): self
+    public function setNamaUskupSaatIni(?string $namaUskupSaatIni): self
     {
-        $this->NamaUskupSaatIni = $NamaUskupSaatIni;
+        $this->namaUskupSaatIni = $namaUskupSaatIni;
 
         return $this;
     }
 
-    public function getKeuskupanID(): ?string
+    public function getId(): ?string
     {
-        return $this->KeuskupanID;
+        return $this->id;
     }
 
     /**
