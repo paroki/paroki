@@ -1,0 +1,20 @@
+fos_user:
+    db_driver: orm
+    user_class: Paroki\User\Entity\User
+    firewall_name: main
+    from_email:
+        address: "me@itstoni.com"
+        sender_name: "Anthonius Munthi"
+
+framework:
+    translator: ~
+    templating:
+        engines: twig
+
+api_platform:
+    mapping:
+        paths:
+            - '%kernel.project_dir%/src/Core/Entity'
+            - '%kernel.project_dir%/src/User/Entity'
+            - '%kernel.project_dir%/src/Reference/Entity'
+            - '%kernel.project_dir%/src/Baptis/Entity'

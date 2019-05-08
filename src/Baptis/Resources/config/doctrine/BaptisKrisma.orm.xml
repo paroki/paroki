@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Paroki\Baptis\Entity\BaptisKrisma">
+    <id name="id" type="guid">
+      <generator strategy="UUID"/>
+    </id>
+    <field name="nama" type="string" nullable="true"/>
+    <field name="tempat" type="string" nullable="true"/>
+    <field name="tanggal" type="string" nullable="true"/>
+    <field name="pemberi" type="string" nullable="true"/>
+    <field name="catatan" type="text" nullable="true"/>
+    <many-to-one field="paroki" target-entity="Paroki\Reference\Entity\Paroki">
+      <join-columns>
+        <join-column name="paroki_id" referenced-column-name="ParokiID" on-delete="RESTRICT" on-update="RESTRICT"/>
+      </join-columns>
+    </many-to-one>
+    <one-to-one field="baptis" target-entity="Paroki\Baptis\Entity\Baptis" mapped-by="krisma"/>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Paroki\Baptis\Entity\Diterima">
+    <id name="id" type="guid">
+      <generator strategy="UUID"/>
+    </id>
+    <field name="tempatBaptis" type="string" nullable="true"/>
+    <field name="tanggalBaptis" type="string" nullable="true"/>
+    <field name="gerejaBaptis" type="string" nullable="true"/>
+    <field name="yangMembaptis" type="string" nullable="true"/>
+    <field name="nomorBukuBaptis" type="string" nullable="true"/>
+    <field name="catatan" type="text" nullable="true"/>
+    <field name="updatedAt" type="date" nullable="true"/>
+    <many-to-one field="updatedBy" target-entity="Paroki\User\Entity\User">
+      <join-columns>
+        <join-column name="updated_user_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <one-to-one field="baptis" target-entity="Paroki\Baptis\Entity\Baptis" mapped-by="diterima"/>
+  </entity>
+</doctrine-mapping>
