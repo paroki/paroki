@@ -13,7 +13,7 @@ class Baptis extends AbstractBiodata
     /**
      * @var string
      */
-    private $baptisId;
+    private $kodeBaptis;
 
     /**
      * @var string
@@ -23,7 +23,7 @@ class Baptis extends AbstractBiodata
     /**
      * @var integer
      */
-    private $halaman;
+    private $halaman = 0;
 
     /**
      * @var string
@@ -34,6 +34,11 @@ class Baptis extends AbstractBiodata
      * @var int
      */
     private $lanjutan;
+
+    /**
+     * @var null|string
+     */
+    private $namaBaptis;
 
     /**
      * @var string
@@ -112,12 +117,12 @@ class Baptis extends AbstractBiodata
 
     public function getBaptisId(): ?string
     {
-        return $this->baptisId;
+        return $this->kodeBaptis;
     }
 
-    public function setBaptisId(string $baptisId): self
+    public function setBaptisId(string $kodeBaptis): self
     {
-        $this->baptisId = $baptisId;
+        $this->kodeBaptis = $kodeBaptis;
 
         return $this;
     }
@@ -240,7 +245,7 @@ class Baptis extends AbstractBiodata
         return $this->komuni;
     }
 
-    public function setKomuni(BaptisKomuni $komuni): self
+    public function setKomuni(?BaptisKomuni $komuni): self
     {
         $this->komuni = $komuni;
 
@@ -252,7 +257,7 @@ class Baptis extends AbstractBiodata
         return $this->krisma;
     }
 
-    public function setKrisma(BaptisKrisma $krisma): self
+    public function setKrisma(?BaptisKrisma $krisma): self
     {
         $this->krisma = $krisma;
 
@@ -264,7 +269,7 @@ class Baptis extends AbstractBiodata
         return $this->perkawinan;
     }
 
-    public function setPerkawinan(BaptisPerkawinan $perkawinan): self
+    public function setPerkawinan(?BaptisPerkawinan $perkawinan): self
     {
         $this->perkawinan = $perkawinan;
 
@@ -276,7 +281,7 @@ class Baptis extends AbstractBiodata
         return $this->diterima;
     }
 
-    public function setDiterima(Diterima $diterima): self
+    public function setDiterima(?Diterima $diterima): self
     {
         $this->diterima = $diterima;
 
@@ -339,6 +344,30 @@ class Baptis extends AbstractBiodata
     public function setLanjutan(?string $lanjutan): self
     {
         $this->lanjutan = $lanjutan;
+
+        return $this;
+    }
+
+    public function getKodeBaptis(): ?string
+    {
+        return $this->kodeBaptis;
+    }
+
+    public function setKodeBaptis(string $kodeBaptis): self
+    {
+        $this->kodeBaptis = $kodeBaptis;
+
+        return $this;
+    }
+
+    public function getNamaBaptis(): ?string
+    {
+        return $this->namaBaptis;
+    }
+
+    public function setNamaBaptis(?string $namaBaptis): self
+    {
+        $this->namaBaptis = $namaBaptis;
 
         return $this;
     }

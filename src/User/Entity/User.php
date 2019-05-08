@@ -2,11 +2,31 @@
 
 namespace Paroki\User\Entity;
 
-class User
+use Paroki\Reference\Entity\Paroki;
+use FOS\UserBundle\Model\User as BaseUser;
+
+class User extends BaseUser
 {
+    /**
+     * @var string Nama lengkap pengguna
+     */
     private $nama;
 
-    private $id;
+    /**
+     * @var Paroki paroki pengguna
+     */
+    private $paroki;
+
+    /**
+     * @var string
+     */
+    protected $id;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setEnabled(true);
+    }
 
     public function getNama(): ?string
     {
@@ -23,5 +43,17 @@ class User
     public function getId(): ?string
     {
         return $this->id;
+    }
+
+    public function getParoki(): ?Paroki
+    {
+        return $this->paroki;
+    }
+
+    public function setParoki(?Paroki $paroki): self
+    {
+        $this->paroki = $paroki;
+
+        return $this;
     }
 }

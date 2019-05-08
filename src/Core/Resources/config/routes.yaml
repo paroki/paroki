@@ -1,0 +1,12 @@
+api_platform:
+    resource: .
+    type: api_platform
+    prefix: /api
+
+authentication_token:
+    path: /token
+    methods: ['POST']
+
+core_controllers:
+    resource: ../../Controller/
+    type: annotation

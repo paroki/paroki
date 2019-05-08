@@ -5,9 +5,9 @@ namespace Paroki\Reference\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class WilayahBagian
+class JenisWilayah
 {
-    private $wilayahBagianID;
+    private $jenis;
 
     private $id;
 
@@ -18,14 +18,14 @@ class WilayahBagian
         $this->wilayahs = new ArrayCollection();
     }
 
-    public function getWilayahBagianID(): ?string
+    public function getJenis(): ?string
     {
-        return $this->wilayahBagianID;
+        return $this->jenis;
     }
 
-    public function setWilayahBagianID(?string $wilayahBagianID): self
+    public function setJenis(?string $jenis): self
     {
-        $this->wilayahBagianID = $wilayahBagianID;
+        $this->jenis = $jenis;
 
         return $this;
     }

@@ -16,6 +16,6 @@
         <join-column name="updated_user_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <one-to-one field="baptis" target-entity="Paroki\Baptis\Entity\Baptis" mapped-by="diterima"/>
+    <one-to-one field="baptis" target-entity="Paroki\Baptis\Entity\Baptis" mapped-by="diterima" fetch="EXTRA_LAZY"/>
   </entity>
 </doctrine-mapping>

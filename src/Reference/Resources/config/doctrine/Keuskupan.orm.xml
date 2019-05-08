@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="Paroki\Reference\Entity\Keuskupan" table="ref_keuskupan">
-    <id name="id" type="string" length="3" column="id"/>
+    <id name="kode" type="string" length="3" column="kode"/>
     <field name="noUrutKeuskupan" type="integer" nullable="true">
       <options>
         <option name="default">0</option>
@@ -16,6 +16,8 @@
     <field name="websiteKeuskupan" type="string" length="50" nullable="true"/>
     <field name="emailKeuskupan" type="string" length="50" nullable="true"/>
     <field name="namaUskupSaatIni" type="string" length="50" nullable="true"/>
-    <one-to-many field="parokis" target-entity="Paroki\Reference\Entity\Paroki" mapped-by="keuskupan"/>
+    <unique-constraints>
+      <unique-constraint name="ix_keuskupan_kode" columns="kode"/>
+    </unique-constraints>
   </entity>
 </doctrine-mapping>

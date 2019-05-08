@@ -1,0 +1,6 @@
+Paroki\Baptis\Entity\Baptis:
+    collectionOperations:
+        post: ~
+        get:
+            filters:
+                - 'siap.baptis.filters.search'

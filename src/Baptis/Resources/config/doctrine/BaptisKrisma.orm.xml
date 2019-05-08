@@ -11,9 +11,9 @@
     <field name="catatan" type="text" nullable="true"/>
     <many-to-one field="paroki" target-entity="Paroki\Reference\Entity\Paroki">
       <join-columns>
-        <join-column name="paroki_id" referenced-column-name="id"/>
+        <join-column name="kode_paroki" referenced-column-name="kode"/>
       </join-columns>
     </many-to-one>
-    <one-to-one field="baptis" target-entity="Paroki\Baptis\Entity\Baptis" mapped-by="krisma"/>
+    <one-to-one field="baptis" target-entity="Paroki\Baptis\Entity\Baptis" mapped-by="krisma" fetch="EXTRA_LAZY"/>
   </entity>
 </doctrine-mapping>

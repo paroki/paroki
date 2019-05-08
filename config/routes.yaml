@@ -1,3 +1,2 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+siap_core:
+    resource: '@CoreBundle/Resources/config/routes.yaml'

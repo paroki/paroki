@@ -1,0 +1,8 @@
+Paroki\Reference\Entity\Keuskupan:
+    routePrefix: '/reference'
+
+Paroki\Reference\Entity\Paroki: ~
+Paroki\Reference\Entity\JenisWilayah: ~
+Paroki\Reference\Entity\Wilayah: ~
+Paroki\Reference\Entity\Lingkungan: ~
+Paroki\Reference\Entity\Agama: ~

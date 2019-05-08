@@ -27,13 +27,23 @@ class Keuskupan
 
     private $namaUskupSaatIni;
 
-    private $id;
+    private $kode;
 
-    private $parokis;
+    /**
+     * GUID for keuskupan
+     * @var string
+     */
+    private $id;
 
     public function __construct()
     {
-        $this->parokis = new ArrayCollection();
+    }
+
+    public function setKode(string $kode): self
+    {
+        $this->kode = $kode;
+
+        return $this;
     }
 
     public function getNoUrutKeuskupan(): ?int
@@ -156,39 +166,13 @@ class Keuskupan
         return $this;
     }
 
+    public function getKode(): ?string
+    {
+        return $this->kode;
+    }
+
     public function getId(): ?string
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection|Paroki[]
-     */
-    public function getParokis(): Collection
-    {
-        return $this->parokis;
-    }
-
-    public function addParoki(Paroki $paroki): self
-    {
-        if (!$this->parokis->contains($paroki)) {
-            $this->parokis[] = $paroki;
-            $paroki->setKeuskupan($this);
-        }
-
-        return $this;
-    }
-
-    public function removeParoki(Paroki $paroki): self
-    {
-        if ($this->parokis->contains($paroki)) {
-            $this->parokis->removeElement($paroki);
-            // set the owning side to null (unless already changed)
-            if ($paroki->getKeuskupan() === $this) {
-                $paroki->setKeuskupan(null);
-            }
-        }
-
-        return $this;
     }
 }

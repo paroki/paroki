@@ -4,11 +4,16 @@ namespace Paroki\Reference\Entity;
 
 class Lingkungan
 {
-    private $lingkunganId;
+    /**
+     * @var string
+     */
+    private $kode;
 
-    private $noLingkungan;
+    private $nama;
 
-    private $namaKetuaLingkungan;
+    private $noUrut;
+
+    private $ketua;
 
     private $f5;
 
@@ -18,38 +23,15 @@ class Lingkungan
 
     private $bagian;
 
-    public function getLingkunganId(): ?string
+    private $paroki;
+
+    /**
+     * @param string $id
+     * @return self
+     */
+    public function setId(string $id): self
     {
-        return $this->lingkunganId;
-    }
-
-    public function setLingkunganId(?string $lingkunganId): self
-    {
-        $this->lingkunganId = $lingkunganId;
-
-        return $this;
-    }
-
-    public function getNoLingkungan(): ?int
-    {
-        return $this->noLingkungan;
-    }
-
-    public function setNoLingkungan(?int $noLingkungan): self
-    {
-        $this->noLingkungan = $noLingkungan;
-
-        return $this;
-    }
-
-    public function getNamaKetuaLingkungan(): ?string
-    {
-        return $this->namaKetuaLingkungan;
-    }
-
-    public function setNamaKetuaLingkungan(?string $namaKetuaLingkungan): self
-    {
-        $this->namaKetuaLingkungan = $namaKetuaLingkungan;
+        $this->id = $id;
 
         return $this;
     }
@@ -83,14 +65,74 @@ class Lingkungan
         return $this;
     }
 
-    public function getBagian(): ?WilayahBagian
+    public function getBagian(): ?JenisWilayah
     {
         return $this->bagian;
     }
 
-    public function setBagian(?WilayahBagian $bagian): self
+    public function setBagian(?JenisWilayah $bagian): self
     {
         $this->bagian = $bagian;
+
+        return $this;
+    }
+
+    public function getKode(): ?string
+    {
+        return $this->kode;
+    }
+
+    public function setKode(?string $kode): self
+    {
+        $this->kode = $kode;
+
+        return $this;
+    }
+
+    public function getNama(): ?string
+    {
+        return $this->nama;
+    }
+
+    public function setNama(?string $nama): self
+    {
+        $this->nama = $nama;
+
+        return $this;
+    }
+
+    public function getNoUrut(): ?int
+    {
+        return $this->noUrut;
+    }
+
+    public function setNoUrut(?int $noUrut): self
+    {
+        $this->noUrut = $noUrut;
+
+        return $this;
+    }
+
+    public function getKetua(): ?string
+    {
+        return $this->ketua;
+    }
+
+    public function setKetua(?string $ketua): self
+    {
+        $this->ketua = $ketua;
+
+        return $this;
+    }
+
+    public function getParoki(): ?Paroki
+    {
+        return $this->paroki;
+    }
+
+    public function setParoki(?Paroki $paroki): self
+    {
+        $this->paroki = $paroki;
 
         return $this;
     }

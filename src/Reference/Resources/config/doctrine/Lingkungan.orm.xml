@@ -1,23 +1,31 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="Paroki\Reference\Entity\Lingkungan" table="ref_lingkungan">
-    <id name="id" type="string" length="4" column="id"/>
-    <field name="lingkunganId" type="string" unique="true" length="75" nullable="true"/>
-    <field name="noLingkungan" type="integer" nullable="true">
+    <id name="id" type="string" length="50" column="id">
+      <custom-id-generator class="Paroki\Reference\Doctrine\CustomIdGenerator"/>
+    </id>
+    <field name="kode" type="string" unique="true" length="50" nullable="true"/>
+    <field name="nama" type="string" length="255" nullable="true"/>
+    <field name="noUrut" type="integer" nullable="true">
       <options>
         <option name="default">0</option>
       </options>
     </field>
-    <field name="namaKetuaLingkungan" type="string" length="255" nullable="true"/>
+    <field name="ketua" type="string" length="255" nullable="true"/>
     <field name="f5" type="string" length="255" nullable="true"/>
-    <many-to-one field="wilayah" target-entity="Paroki\Reference\Entity\Wilayah" inversed-by="lingkungans">
+    <many-to-one field="wilayah" target-entity="Paroki\Reference\Entity\Wilayah">
       <join-columns>
         <join-column name="wilayah_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="bagian" target-entity="Paroki\Reference\Entity\WilayahBagian">
+    <many-to-one field="bagian" target-entity="Paroki\Reference\Entity\JenisWilayah">
       <join-columns>
         <join-column name="wilayah_bagian_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="paroki" target-entity="Paroki\Reference\Entity\Paroki">
+      <join-columns>
+        <join-column name="paroki_kode" referenced-column-name="kode"/>
       </join-columns>
     </many-to-one>
   </entity>

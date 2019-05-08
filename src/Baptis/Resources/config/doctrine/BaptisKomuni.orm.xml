@@ -10,9 +10,9 @@
     <field name="catatan" type="text" nullable="true"/>
     <many-to-one field="paroki" target-entity="Paroki\Reference\Entity\Paroki">
       <join-columns>
-        <join-column name="paroki_id" referenced-column-name="id" on-delete="RESTRICT" on-update="RESTRICT"/>
+        <join-column name="kode_paroki" referenced-column-name="kode" on-delete="RESTRICT" on-update="RESTRICT"/>
       </join-columns>
     </many-to-one>
-    <one-to-one field="baptis" target-entity="Paroki\Baptis\Entity\Baptis" mapped-by="komuni"/>
+    <one-to-one field="baptis" target-entity="Paroki\Baptis\Entity\Baptis" mapped-by="komuni" fetch="EXTRA_LAZY"/>
   </entity>
 </doctrine-mapping>

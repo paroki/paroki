@@ -12,6 +12,7 @@ framework:
         engines: twig
 
 api_platform:
+    enable_fos_user: true
     mapping:
         paths:
             - '%kernel.project_dir%/src/Core/Entity'

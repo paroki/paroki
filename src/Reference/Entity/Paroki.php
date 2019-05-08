@@ -26,9 +26,25 @@ class Paroki
 
     private $wilayahKeuskupan;
 
+    /**
+     * GUID for paroki
+     * @var string
+     */
     private $id;
 
+    /**
+     * @var string
+     */
+    private $kode;
+
     private $keuskupan;
+
+    public function setKode(string $kode): self
+    {
+        $this->kode = $kode;
+
+        return $this;
+    }
 
     public function getNoParoki(): ?int
     {
@@ -119,7 +135,7 @@ class Paroki
         return $this->websiteParoki;
     }
 
-    public function setWebsiteParoki(?string $websiteParoki): self
+    public function setWebsiteParoki(string $websiteParoki): self
     {
         $this->websiteParoki = $websiteParoki;
 
@@ -162,9 +178,9 @@ class Paroki
         return $this;
     }
 
-    public function getId(): ?string
+    public function getKode(): ?string
     {
-        return $this->id;
+        return $this->kode;
     }
 
     public function getKeuskupan(): ?Keuskupan
@@ -177,5 +193,10 @@ class Paroki
         $this->keuskupan = $keuskupan;
 
         return $this;
+    }
+
+    public function getId(): ?string
+    {
+        return $this->id;
     }
 }

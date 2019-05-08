@@ -7,15 +7,19 @@ use Doctrine\Common\Collections\Collection;
 
 class Wilayah
 {
-    private $namaWilayah;
-
-    private $ketuaWilayah;
-
     private $id;
 
-    private $lingkungans;
+    private $nama;
+
+    private $ketua;
 
     private $wilayah;
+
+    private $kode;
+
+    private $refDuk;
+
+    private $lingkungans;
 
     public function __construct()
     {
@@ -46,7 +50,7 @@ class Wilayah
         return $this;
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -82,14 +86,62 @@ class Wilayah
         return $this;
     }
 
-    public function getWilayah(): ?WilayahBagian
+    public function getWilayah(): ?JenisWilayah
     {
         return $this->wilayah;
     }
 
-    public function setWilayah(?WilayahBagian $wilayah): self
+    public function setWilayah(?JenisWilayah $wilayah): self
     {
         $this->wilayah = $wilayah;
+
+        return $this;
+    }
+
+    public function getKode(): ?string
+    {
+        return $this->kode;
+    }
+
+    public function setKode(?string $kode): self
+    {
+        $this->kode = $kode;
+
+        return $this;
+    }
+
+    public function getNama(): ?string
+    {
+        return $this->nama;
+    }
+
+    public function setNama(?string $nama): self
+    {
+        $this->nama = $nama;
+
+        return $this;
+    }
+
+    public function getKetua(): ?string
+    {
+        return $this->ketua;
+    }
+
+    public function setKetua(?string $ketua): self
+    {
+        $this->ketua = $ketua;
+
+        return $this;
+    }
+
+    public function getRefDuk(): ?int
+    {
+        return $this->refDuk;
+    }
+
+    public function setRefDuk(?int $refDuk): self
+    {
+        $this->refDuk = $refDuk;
 
         return $this;
     }

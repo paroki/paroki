@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="Paroki\Baptis\Entity\Baptis" table="td_baptis">
+  <entity name="Paroki\Baptis\Entity\Baptis" extends="Paroki\Core\Entity\AbstractBiodata" table="td_baptis">
     <id name="id" type="guid">
       <generator strategy="UUID"/>
     </id>
-    <field name="baptisId" type="string" unique="true" length="50" nullable="false"/>
+    <field name="kodeBaptis" type="string" unique="true" length="50" nullable="false"/>
+    <field name="namaBaptis" type="string" nullable="true"/>
     <field name="buku" type="string" length="50" nullable="false"/>
     <field name="halaman" type="integer" nullable="false">
       <options>
@@ -21,37 +22,37 @@
     <field name="updatedAt" type="date" nullable="false"/>
     <indexes>
       <index name="ix_baptis_nama" columns="nama"/>
-      <index name="ix_baptis_id" columns="baptis_id"/>
+      <index name="ix_baptis_kode" columns="kode_baptis"/>
       <index name="ix_baptis_key" columns="id"/>
     </indexes>
     <many-to-one field="updatedBy" target-entity="Paroki\User\Entity\User">
       <join-columns>
-        <join-column name="updated_by_user_id" referenced-column-name="id" nullable="false"/>
+        <join-column name="updated_by_user_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
     <many-to-one field="paroki" target-entity="Paroki\Reference\Entity\Paroki">
       <join-columns>
-        <join-column name="paroki_id" referenced-column-name="id"/>
+        <join-column name="kode_paroki" referenced-column-name="kode"/>
       </join-columns>
     </many-to-one>
-    <one-to-one field="komuni" target-entity="Paroki\Baptis\Entity\BaptisKomuni" inversed-by="baptis">
+    <one-to-one field="komuni" target-entity="Paroki\Baptis\Entity\BaptisKomuni" inversed-by="baptis" fetch="EXTRA_LAZY">
       <join-columns>
-        <join-column name="baptis_komuni_id" referenced-column-name="id" nullable="false" unique="true" on-delete="CASCADE" on-update="CASCADE"/>
+        <join-column name="baptis_komuni_id" referenced-column-name="id" unique="true" on-delete="CASCADE" on-update="CASCADE"/>
       </join-columns>
     </one-to-one>
-    <one-to-one field="krisma" target-entity="Paroki\Baptis\Entity\BaptisKrisma" inversed-by="baptis">
+    <one-to-one field="krisma" target-entity="Paroki\Baptis\Entity\BaptisKrisma" inversed-by="baptis" fetch="EXTRA_LAZY">
       <join-columns>
-        <join-column name="baptis_krisma_id" referenced-column-name="id" nullable="false" unique="true" on-delete="CASCADE" on-update="CASCADE"/>
+        <join-column name="baptis_krisma_id" referenced-column-name="id" unique="true" on-delete="CASCADE" on-update="CASCADE"/>
       </join-columns>
     </one-to-one>
-    <one-to-one field="perkawinan" target-entity="Paroki\Baptis\Entity\BaptisPerkawinan" inversed-by="baptis">
+    <one-to-one field="perkawinan" target-entity="Paroki\Baptis\Entity\BaptisPerkawinan" inversed-by="baptis" fetch="EXTRA_LAZY">
       <join-columns>
-        <join-column name="baptis_perkawinan_id" referenced-column-name="id" nullable="false" unique="true" on-delete="CASCADE" on-update="CASCADE"/>
+        <join-column name="baptis_perkawinan_id" referenced-column-name="id" unique="true" on-delete="CASCADE" on-update="CASCADE"/>
       </join-columns>
     </one-to-one>
-    <one-to-one field="diterima" target-entity="Paroki\Baptis\Entity\Diterima" inversed-by="baptis">
+    <one-to-one field="diterima" target-entity="Paroki\Baptis\Entity\Diterima" inversed-by="baptis" fetch="EXTRA_LAZY">
       <join-columns>
-        <join-column name="diterima_id" referenced-column-name="id" nullable="false" unique="true"/>
+        <join-column name="diterima_id" referenced-column-name="id" unique="true"/>
       </join-columns>
     </one-to-one>
     <many-to-one field="lingkungan" target-entity="Paroki\Reference\Entity\Lingkungan">

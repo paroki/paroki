@@ -5,5 +5,10 @@
       <generator strategy="UUID"/>
     </id>
     <field name="nama" type="string" nullable="false"/>
+    <many-to-one field="paroki" target-entity="Paroki\Reference\Entity\Paroki" fetch="EAGER">
+      <join-columns>
+        <join-column name="paroki_kode" referenced-column-name="kode"/>
+      </join-columns>
+    </many-to-one>
   </entity>
 </doctrine-mapping>

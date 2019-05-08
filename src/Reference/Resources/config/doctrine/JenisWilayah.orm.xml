@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="Paroki\Reference\Entity\WilayahBagian" table="ref_wilayah_bagian">
+  <entity name="Paroki\Reference\Entity\JenisWilayah" table="ref_wilayah_bagian">
     <id name="id" type="integer">
       <generator strategy="AUTO"/>
     </id>
-    <field name="wilayahBagianID" type="string" length="50" nullable="true"/>
+    <field name="jenis" type="string" length="50" nullable="true"/>
     <one-to-many field="wilayahs" target-entity="Paroki\Reference\Entity\Wilayah" mapped-by="wilayah"/>
   </entity>
 </doctrine-mapping>

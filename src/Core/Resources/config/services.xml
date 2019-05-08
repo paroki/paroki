@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--
+    <parameters>
+        <parameter key="paroki.core.example.class">Paroki\Core\Example</parameter>
+    </parameters>
+
+    <services>
+        <service id="paroki.core.example" class="%paroki.core.example.class%">
+            <argument type="service" id="service_id" />
+            <argument>plain_value</argument>
+            <argument>%parameter_name%</argument>
+            <call method="setService">
+                <argument type="service" id="service_id" />
+            </call>
+            <tag name="twig.extension" />
+            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
+        </service>
+    </services>
+    -->
+    <services>
+        <prototype namespace="Paroki\Core\Controller\" resource="../../Controller">
+            <tag name="controller.service_arguments"/>
+        </prototype>
+    </services>
+</container>

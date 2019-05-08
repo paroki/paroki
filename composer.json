@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "api-platform/api-pack": "^1.2",
+        "lexik/jwt-authentication-bundle": "^2.6",
         "symfony/console": "4.2.*",
         "symfony/dotenv": "4.2.*",
         "symfony/flex": "^1.1",
@@ -47,7 +48,8 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "load-fixtures": "bin/console hautelook:fixtures:load -n"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -59,7 +61,10 @@
         }
     },
     "require-dev": {
+        "hautelook/alice-bundle": "^2.5",
+        "symfony/apache-pack": "^1.0",
         "symfony/maker-bundle": "^1.11",
+        "symfony/profiler-pack": "^1.0",
         "symfony/test-pack": "^1.0"
     }
 }
