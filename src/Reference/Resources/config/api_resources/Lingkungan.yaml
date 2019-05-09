@@ -1,0 +1,18 @@
+Paroki\Reference\Entity\Lingkungan:
+    shortName: 'lingkungan'
+    attributes:
+        route_prefix: '/reference'
+    collectionOperations:
+        get: ~
+        post: ~
+    itemOperations:
+        get:
+            #path: '/lingkungan/{id}.{_format}'
+            requirements:
+                id: '\d{3}\.\d{3}\.\d+'
+        put: ~
+        delete: ~
+
+Paroki\Reference\Entity\JenisWilayah: ~
+Paroki\Reference\Entity\Wilayah: ~
+Paroki\Reference\Entity\Agama: ~

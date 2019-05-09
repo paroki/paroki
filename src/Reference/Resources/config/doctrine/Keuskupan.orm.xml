@@ -16,6 +16,7 @@
     <field name="websiteKeuskupan" type="string" length="50" nullable="true"/>
     <field name="emailKeuskupan" type="string" length="50" nullable="true"/>
     <field name="namaUskupSaatIni" type="string" length="50" nullable="true"/>
+    <field name="guid" type="guid" unique="true" nullable="false"/>
     <unique-constraints>
       <unique-constraint name="ix_keuskupan_kode" columns="kode"/>
     </unique-constraints>

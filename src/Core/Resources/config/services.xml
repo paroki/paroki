@@ -26,5 +26,6 @@
         <prototype namespace="Paroki\Core\Controller\" resource="../../Controller">
             <tag name="controller.service_arguments"/>
         </prototype>
+        <service id="siap.core.api.operation_path_resolver" class="Paroki\Core\Bridge\ApiPlatform\OperationPathResolver"/>
     </services>
 </container>

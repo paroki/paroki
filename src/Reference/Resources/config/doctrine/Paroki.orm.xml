@@ -13,6 +13,7 @@
     <field name="emailParoki" type="string" length="50" nullable="true"/>
     <field name="pastorParoki" type="string" length="100" nullable="true"/>
     <field name="wilayahKeuskupan" type="string" length="50" nullable="true"/>
+    <field name="guid" type="guid" unique="true" nullable="false"/>
     <indexes>
       <index name="ix_paroki_nama" columns="nama_paroki"/>
       <index name="ix_paroki_gereja" columns="nama_gereja"/>

@@ -33,7 +33,7 @@ class Keuskupan
      * GUID for keuskupan
      * @var string
      */
-    private $id;
+    private $guid;
 
     public function __construct()
     {
@@ -171,8 +171,15 @@ class Keuskupan
         return $this->kode;
     }
 
-    public function getId(): ?string
+    public function getGuid(): ?string
     {
-        return $this->id;
+        return $this->guid;
+    }
+
+    public function setGuid(string $guid): self
+    {
+        $this->guid = $guid;
+
+        return $this;
     }
 }

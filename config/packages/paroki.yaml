@@ -12,10 +12,10 @@ framework:
         engines: twig
 
 api_platform:
+    path_segment_name_generator: 'siap.core.api.operation_path_resolver'
     enable_fos_user: true
-    mapping:
-        paths:
-            - '%kernel.project_dir%/src/Core/Entity'
-            - '%kernel.project_dir%/src/User/Entity'
-            - '%kernel.project_dir%/src/Reference/Entity'
-            - '%kernel.project_dir%/src/Baptis/Entity'
+
+doctrine:
+    dbal:
+        types:
+            uuid:  Ramsey\Uuid\Doctrine\UuidType

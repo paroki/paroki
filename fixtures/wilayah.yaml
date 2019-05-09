@@ -7,7 +7,7 @@ Paroki\Reference\Entity\Keuskupan:
 
 Paroki\Reference\Entity\Paroki:
     pkrbt:
-        kode: '028-018'
+        kode: '028.018'
         noParoki: 1
         namaParoki: Barong Tongkok
         namaGereja: Kristus Raja

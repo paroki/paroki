@@ -1,0 +1,10 @@
+Paroki\Reference\Entity\Keuskupan:
+    attributes:
+        route_prefix: '/reference'
+    collectionOperations:
+        get: ~
+        post: ~
+    itemOperations:
+        get: ~
+        put: ~
+        delete: ~

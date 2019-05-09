@@ -2,6 +2,12 @@
 
 namespace Paroki\Reference\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
+
+/**
+ * Class Paroki
+ * @package Paroki\Reference\Entity
+ */
 class Paroki
 {
     private $noParoki;
@@ -30,7 +36,7 @@ class Paroki
      * GUID for paroki
      * @var string
      */
-    private $id;
+    private $guid;
 
     /**
      * @var string
@@ -135,7 +141,7 @@ class Paroki
         return $this->websiteParoki;
     }
 
-    public function setWebsiteParoki(string $websiteParoki): self
+    public function setWebsiteParoki(?string $websiteParoki): self
     {
         $this->websiteParoki = $websiteParoki;
 
@@ -195,8 +201,15 @@ class Paroki
         return $this;
     }
 
-    public function getId(): ?string
+    public function getGuid(): ?string
     {
-        return $this->id;
+        return $this->guid;
+    }
+
+    public function setGuid(string $guid): self
+    {
+        $this->guid = $guid;
+
+        return $this;
     }
 }
