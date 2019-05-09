@@ -1,29 +1,38 @@
 security:
     encoders:
-        FOS\UserBundle\Model\UserInterface: bcrypt
+        Paroki\User\Entity\User:
+            algorithm: bcrypt
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
-        app_user_provider:
+        app_entity_provider:
+            #id: fos_user.provider.username
             entity:
                 class: Paroki\User\Entity\User
                 property: username
 
     firewalls:
         dev:
-            pattern: ^/_(profiler|wdt)
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
+        login:
+            pattern:  ^/login
             stateless: true
             anonymous: true
-            provider: app_user_provider
+            provider: app_entity_provider
             json_login:
-                check_path: /token
-                username_path: username
-                password_path: password
-                success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+                check_path:               /login_check
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+        api:
+            pattern:  ^/api
+            stateless: true
+            anonymous: false
+            provider: app_entity_provider
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }

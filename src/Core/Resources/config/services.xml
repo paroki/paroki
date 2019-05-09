@@ -23,9 +23,16 @@
     </services>
     -->
     <services>
+        <defaults autowire="true" autoconfigure="true"></defaults>
         <prototype namespace="Paroki\Core\Controller\" resource="../../Controller">
             <tag name="controller.service_arguments"/>
         </prototype>
+        <service id="siap.commands.generate_key" class="Paroki\Core\Command\GenerateJWTKeyCommand">
+            <argument>%env(resolve:JWT_SECRET_KEY)%</argument>
+            <argument>%env(resolve:JWT_PUBLIC_KEY)%</argument>
+            <argument>%env(resolve:JWT_PASSPHRASE)%</argument>
+            <tag name="console.command"/>
+        </service>
         <service id="siap.core.api.operation_path_resolver" class="Paroki\Core\Bridge\ApiPlatform\OperationPathResolver"/>
     </services>
 </container>

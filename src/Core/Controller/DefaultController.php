@@ -12,7 +12,11 @@ class DefaultController extends AbstractController
 {
     /**
      * @Route("/", name="homepage")
-     * @Route("/{route}", name="vue_pages", requirements={"route"="^.+"})
+     * @Route(
+     *     name="vue_pages",
+     *     path="/{route}",
+     *     requirements={"route"="^(?!.*_wdt|_profiler).+"}
+     * )
      */
     public function index()
     {

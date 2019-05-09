@@ -3,9 +3,10 @@ api_platform:
     type: api_platform
     prefix: /api
 
-authentication_token:
-    path: /token
-    methods: ['POST']
+
+login_check:
+    path: /login_check
+    methods: [POST]
 
 core_controllers:
     resource: ../../Controller/

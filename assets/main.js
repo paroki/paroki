@@ -1,16 +1,27 @@
-import Vue from 'vue'
-import App from './App'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import BootstrapVue from 'bootstrap-vue';
+import moment from 'moment';
 
-Vue.config.productionTip = false
+Vue.use(VueRouter);
+Vue.use(BootstrapVue);
 
-import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.min.css'
-import 'vue-material/dist/theme/default.css'
+Vue.prototype.moment = moment;
 
-Vue.use(VueMaterial)
+import routes from './router';
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        ...routes
+    ]
+});
+
+import stores from './store';
+import App from './App';
 
 new Vue({
-    el: '#app',
-    components: { App },
-    template: '<App/>'
-})
+  el: '#app',
+  stores,
+  router,
+  render: h => h(App)
+});

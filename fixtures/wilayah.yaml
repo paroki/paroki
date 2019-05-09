@@ -25,7 +25,7 @@ Paroki\User\Entity\User:
         nama: Anthonius
         username: toni
         email: me@itstoni.com
-        plainPassword: '123password'
+        plainPassword: 123password
 
 Paroki\Baptis\Entity\Baptis:
     markus:

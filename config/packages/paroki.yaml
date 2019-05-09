@@ -13,7 +13,7 @@ framework:
 
 api_platform:
     path_segment_name_generator: 'siap.core.api.operation_path_resolver'
-    enable_fos_user: true
+    #enable_fos_user: true
 
 doctrine:
     dbal:
