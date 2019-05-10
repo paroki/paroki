@@ -1,4 +1,4 @@
-FROM php:7.3-fpm-alpine
+FROM php:7.2-fpm-alpine
 
 MAINTAINER Anthonius <me@itstoni.com>
 
@@ -11,8 +11,6 @@ RUN apk upgrade --update && apk --no-cache add \
     gcc g++ make git autoconf tzdata openntpd libcurl curl-dev coreutils \
     libmcrypt-dev freetype-dev libxpm-dev libjpeg-turbo-dev libvpx-dev \
     libpng-dev libxml2-dev postgresql-dev icu-dev pcre-dev libzip-dev
-
-RUN apk add --no-cache bash
 
 RUN docker-php-ext-configure intl \
     && docker-php-ext-configure opcache \
