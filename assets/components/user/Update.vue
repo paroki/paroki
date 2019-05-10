@@ -1,5 +1,5 @@
 <template>
-    <b-card v-if="!isLoading" class="animated fadeIn">
+    <b-card class="animated fadeIn">
         <div slot="header">
             {{retrieved && retrieved['nama']}}
         </div>
@@ -12,6 +12,12 @@
             :initial-values="retrieved"
             :fields="fields"
         />
+        <div slot="footer">
+            <b-button @click="onSendForm" variant="success">
+                <i class="fa fa-save"></i>
+                Simpan
+            </b-button>
+        </div>
     </b-card>
 </template>
 
@@ -28,7 +34,9 @@
             return {
                 item: {},
                 fields: [
-                    { name: 'nama', type: 'text', label: 'Nama Lengkap Pengguna'}
+                    { name: 'nama', type: 'text', label: 'Nama Lengkap Pengguna', required: true},
+                    { name: 'username', type: 'text', label: 'Username yang digunakan untuk login'},
+                    { name: 'email', type: 'text', label: 'Email pengguna'},
                 ]
             }
         },

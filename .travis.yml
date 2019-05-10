@@ -1,0 +1,3 @@
+before_install:
+- openssl aes-256-cbc -K $encrypted_6041831ee8a2_key -iv $encrypted_6041831ee8a2_iv
+  -in deploy_key.enc -out deploy_key -d

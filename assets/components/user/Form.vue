@@ -3,31 +3,22 @@
         <div v-for="field in fields">
             <b-form-group
                 :label="field.label"
-                :label-for="'fr'&&field.name"
+                :label-for="'fr-'+field.name"
             >
                 <b-input
+                    :id="'fr-'+field.name"
                     type="text"
-                    :v-model="item[field.name]"
+                    :name="field.name"
+                    :value="getItem(item, field.name)"
+                    v-model="item[field.name]"
                     :v-if="field.type === 'text'"
-                ></b-input>
-            </b-form-group>
-        </div>
-        <div>
-            <b-form-group
-                label="Nama Lengkap Tanpa Title"
-                for-label="frNama"
-            >
-                <b-input
-                    id="frNama"
-                    type="text"
-                    :class="['form-control', isInvalid('nama') ? 'is-invalid' : '']"
-                    v-model="item['nama']"
+                    :required="field.required ? field.required:false"
+                    :class="['form-control', isInvalid(field.name) ? 'is-invalid' : '']"
                 ></b-input>
                 <div
-                    v-if="isInvalid('nama')"
-                    class="invalid-feedback">{{ violations.nama }}</div>
+                    v-if="isInvalid(field.name)"
+                    class="invalid-feedback">{{ violations[field.name] }}</div>
             </b-form-group>
-
         </div>
     </b-form>
 </template>
@@ -80,7 +71,8 @@
                 return Object.keys(this.violations).length > 0 && this.violations[key]
             },
             getItem(item, name){
-                return item && item[name];
+                const ret = item && item[name];
+                return ret;
             }
         }
     }

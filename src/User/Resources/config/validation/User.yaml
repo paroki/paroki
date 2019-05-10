@@ -1,0 +1,8 @@
+Paroki\User\Entity\User:
+    properties:
+        nama:
+            - NotBlank: { message: "siap.validation.nama" }
+        username:
+            - NotBlank: { message: "siap.validation.username" }
+        email:
+            - NotBlank: { message: "siap.validation.email" }
