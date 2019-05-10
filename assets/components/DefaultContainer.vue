@@ -10,7 +10,6 @@
                 <span class="navbar-brand-full">SIAP</span>
             </b-link>
             <SidebarToggler class="d-md-down-none" display="lg" />
-            <AsideToggler class="d-lg-none" mobile />
         </AppHeader>
         <div class="app-body">
             <AppSidebar fixed>
@@ -26,18 +25,12 @@
                     <router-view></router-view>
                 </div>
             </main>
-            <AppAside fixed>
-                <!--aside-->
-                <!--
-                <DefaultAside/>
-                -->
-            </AppAside>
         </div>
         <TheFooter>
             <!--footer-->
             <div>
                 <a href="https://github.com/paroki/paroki">SIAP</a>
-                <span class="ml-1">&copy; 2018 DoyoLabs.</span>
+                <span class="ml-1">&copy; 2019 Tim Pendataan Kristus Raja</span>
             </div>
         </TheFooter>
     </div>
@@ -45,19 +38,26 @@
 
 <script>
     import nav from '../config/nav'
-    import { Header as AppHeader, SidebarToggler, Sidebar as AppSidebar, SidebarFooter, SidebarForm, SidebarHeader, SidebarMinimizer, SidebarNav, Aside as AppAside, AsideToggler, Footer as TheFooter, Breadcrumb } from '@coreui/vue'
+    import {
+        Header as AppHeader,
+        SidebarToggler,
+        Sidebar as AppSidebar,
+        SidebarFooter,
+        SidebarForm,
+        SidebarHeader,
+        SidebarMinimizer,
+        Footer as TheFooter,
+        Breadcrumb
+    } from '@coreui/vue'
+    import SidebarNav from './Sidebar';
 
     export default {
         name: 'DefaultContainer',
         components: {
-            AsideToggler,
             AppHeader,
             AppSidebar,
-            AppAside,
             TheFooter,
             Breadcrumb,
-            //DefaultAside,
-            //DefaultHeaderDropdownAccnt,
             SidebarForm,
             SidebarFooter,
             SidebarToggler,

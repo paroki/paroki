@@ -1,4 +1,5 @@
 import * as types from './types';
+import jwt from 'jsonwebtoken';
 
 export default {
     [types.SIAP_TOGGLE_LOADING](state){
@@ -18,6 +19,15 @@ export default {
     },
 
     [types.SIAP_UPDATE_TOKEN](state,token){
-        Object.assign(state,{ token });
+        let credentials = null;
+        if(token !== null){
+            credentials = jwt.decode(token);
+        }
+        Object.assign(state,{ token, credentials });
+    },
+
+    [types.SIAP_LOGOUT](state,token){
+        localStorage.removeItem('token');
+        Object.assign(state, {token: null});
     }
 }

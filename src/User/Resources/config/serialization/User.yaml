@@ -1,0 +1,18 @@
+Paroki\User\Entity\User:
+    attributes:
+        id:
+            groups: ['read']
+        nama:
+            groups: ['read', 'write']
+        username:
+            groups: ['read','write']
+        email:
+            groups: ['read','write']
+        enabled:
+            groups: ['read','write']
+        groups:
+            groups: ['read','write']
+        roles:
+            groups: ['read','write']
+        plainPassword:
+            groups: ['write']

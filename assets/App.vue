@@ -1,16 +1,19 @@
 <template>
-<div>
     <router-view></router-view>
-</div>
 </template>
 
 
 <script>
+    import Vue from 'vue';
+    import moment from 'moment';
+    import BootstrapVue from 'bootstrap-vue';
+
+    Vue.prototype.moment = moment;
+    Vue.use(BootstrapVue);
     export default {
-        name: 'App',
-        data: () => ({
-            menuVisible: false
-        })
+        name: 'app',
+        components: {
+        }
     }
 </script>
 <style lang="scss">

@@ -5,7 +5,7 @@ api_platform:
 
 
 login_check:
-    path: /login_check
+    path: /api/login_check
     methods: [POST]
 
 core_controllers:
