@@ -1,4 +1,5 @@
 deploy_key
+deploy_key.enc
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
