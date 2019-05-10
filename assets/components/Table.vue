@@ -24,6 +24,7 @@
             :current-page="currentPage"
             :per-page="perPage"
             :primary-key="primaryKey"
+            :total="total"
         >
 
             <template slot="actions" slot-scope="row">
@@ -110,6 +111,10 @@
             dark: {
                 type: Boolean,
                 default: false
+            },
+            total: {
+                type: Number,
+                default: 0
             }
         },
         data: () => {

@@ -30,22 +30,17 @@
         <join-column name="updated_by_user_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="paroki" target-entity="Paroki\Reference\Entity\Paroki">
-      <join-columns>
-        <join-column name="kode_paroki" referenced-column-name="kode"/>
-      </join-columns>
-    </many-to-one>
-    <one-to-one field="komuni" target-entity="Paroki\Baptis\Entity\BaptisKomuni" inversed-by="baptis" fetch="EXTRA_LAZY">
+    <one-to-one field="komuni" target-entity="Paroki\Baptis\Entity\BaptisKomuni" fetch="EAGER">
       <join-columns>
         <join-column name="baptis_komuni_id" referenced-column-name="id" unique="true" on-delete="CASCADE" on-update="CASCADE"/>
       </join-columns>
     </one-to-one>
-    <one-to-one field="krisma" target-entity="Paroki\Baptis\Entity\BaptisKrisma" inversed-by="baptis" fetch="EXTRA_LAZY">
+    <one-to-one field="krisma" target-entity="Paroki\Baptis\Entity\BaptisKrisma" fetch="EXTRA_LAZY">
       <join-columns>
         <join-column name="baptis_krisma_id" referenced-column-name="id" unique="true" on-delete="CASCADE" on-update="CASCADE"/>
       </join-columns>
     </one-to-one>
-    <one-to-one field="perkawinan" target-entity="Paroki\Baptis\Entity\BaptisPerkawinan" inversed-by="baptis" fetch="EXTRA_LAZY">
+    <one-to-one field="perkawinan" target-entity="Paroki\Baptis\Entity\BaptisPerkawinan" fetch="EXTRA_LAZY">
       <join-columns>
         <join-column name="baptis_perkawinan_id" referenced-column-name="id" unique="true" on-delete="CASCADE" on-update="CASCADE"/>
       </join-columns>
@@ -55,15 +50,25 @@
         <join-column name="diterima_id" referenced-column-name="id" unique="true"/>
       </join-columns>
     </one-to-one>
-    <many-to-one field="lingkungan" target-entity="Paroki\Reference\Entity\Lingkungan">
-      <join-columns>
-        <join-column name="lingkungan_id" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
     <many-to-one field="agamaSebelumBaptis" target-entity="Paroki\Reference\Entity\Agama">
       <join-columns>
         <join-column name="agama_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
+    <many-to-one field="paroki" target-entity="Paroki\Reference\Entity\Paroki" fetch="EAGER">
+      <join-columns>
+        <join-column name="paroki_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="dokumen" target-entity="Paroki\Core\Entity\Dokumen">
+      <join-table name="td_baptis_dokumen">
+        <join-columns>
+          <join-column name="baptis_id" referenced-column-name="id" nullable="false"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="dokumen_id" referenced-column-name="id" nullable="false"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
   </entity>
 </doctrine-mapping>

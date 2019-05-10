@@ -2,15 +2,19 @@
 
 namespace Paroki\Baptis\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Paroki\Core\Entity\Dokumen;
 use Paroki\Reference\Entity\Paroki;
+use Paroki\User\Entity\User;
 
 class BaptisKomuni
 {
-    private $tempatKomuni;
+    private $tempat;
 
-    private $tanggalKomuni;
+    private $tanggal;
 
-    private $yangMemberiKomuni;
+    private $yangMemberi;
 
     private $catatan;
 
@@ -20,38 +24,63 @@ class BaptisKomuni
 
     private $paroki;
 
-    public function getTempatKomuni(): ?string
+    private $register;
+
+    private $updatedAt;
+
+    private $updatedBy;
+
+    private $dokumen;
+
+    public function __construct()
     {
-        return $this->tempatKomuni;
+        $this->dokumen = new ArrayCollection();
     }
 
-    public function setTempatKomuni(?string $tempatKomuni): self
+    public function getRegister(): ?string
     {
-        $this->tempatKomuni = $tempatKomuni;
+        return $this->register;
+    }
+
+    public function setRegister(?string $register): self
+    {
+        $this->register = $register;
 
         return $this;
     }
 
-    public function getTanggalKomuni(): ?\DateTimeInterface
+    public function getTempat(): ?string
     {
-        return $this->tanggalKomuni;
+        return $this->tempat;
     }
 
-    public function setTanggalKomuni(?\DateTimeInterface $tanggalKomuni): self
+    public function setTempat(?string $tempat): self
     {
-        $this->tanggalKomuni = $tanggalKomuni;
+        $this->tempat = $tempat;
 
         return $this;
     }
 
-    public function getYangMemberiKomuni(): ?string
+    public function getTanggal(): ?\DateTimeInterface
     {
-        return $this->yangMemberiKomuni;
+        return $this->tanggal;
     }
 
-    public function setYangMemberiKomuni(?string $yangMemberiKomuni): self
+    public function setTanggal(?\DateTimeInterface $tanggal): self
     {
-        $this->yangMemberiKomuni = $yangMemberiKomuni;
+        $this->tanggal = $tanggal;
+
+        return $this;
+    }
+
+    public function getYangMemberi(): ?string
+    {
+        return $this->yangMemberi;
+    }
+
+    public function setYangMemberi(?string $yangMemberi): self
+    {
+        $this->yangMemberi = $yangMemberi;
 
         return $this;
     }
@@ -68,27 +97,21 @@ class BaptisKomuni
         return $this;
     }
 
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
     public function getId(): ?string
     {
         return $this->id;
-    }
-
-    public function getBaptis(): ?Baptis
-    {
-        return $this->baptis;
-    }
-
-    public function setBaptis(?Baptis $baptis): self
-    {
-        $this->baptis = $baptis;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newKomuni = $baptis === null ? null : $this;
-        if ($newKomuni !== $baptis->getKomuni()) {
-            $baptis->setKomuni($newKomuni);
-        }
-
-        return $this;
     }
 
     public function getParoki(): ?Paroki
@@ -102,4 +125,43 @@ class BaptisKomuni
 
         return $this;
     }
+
+    public function getUpdatedBy(): ?User
+    {
+        return $this->updatedBy;
+    }
+
+    public function setUpdatedBy(?User $updatedBy): self
+    {
+        $this->updatedBy = $updatedBy;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Dokumen[]
+     */
+    public function getDokumen(): Collection
+    {
+        return $this->dokumen;
+    }
+
+    public function addDokuman(Dokumen $dokuman): self
+    {
+        if (!$this->dokumen->contains($dokuman)) {
+            $this->dokumen[] = $dokuman;
+        }
+
+        return $this;
+    }
+
+    public function removeDokuman(Dokumen $dokuman): self
+    {
+        if ($this->dokumen->contains($dokuman)) {
+            $this->dokumen->removeElement($dokuman);
+        }
+
+        return $this;
+    }
+
 }

@@ -2,7 +2,11 @@
 
 namespace Paroki\Baptis\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Paroki\Core\Entity\Dokumen;
 use Paroki\Reference\Entity\Paroki;
+use Paroki\User\Entity\User;
 
 class BaptisKrisma
 {
@@ -21,6 +25,43 @@ class BaptisKrisma
     private $baptis;
 
     private $paroki;
+
+    /**
+     * @var string
+     */
+    private $register;
+
+    /**
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    /**
+     * @var User
+     */
+    private $updatedBy;
+
+    /**
+     * @var Dokumen[]
+     */
+    private $dokumen;
+
+    public function __construct()
+    {
+        $this->dokumen = new ArrayCollection();
+    }
+
+    public function getRegister(): ?string
+    {
+        return $this->register;
+    }
+
+    public function setRegister(?string $register): self
+    {
+        $this->register = $register;
+
+        return $this;
+    }
 
     public function getNama(): ?string
     {
@@ -82,27 +123,21 @@ class BaptisKrisma
         return $this;
     }
 
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
     public function getId(): ?string
     {
         return $this->id;
-    }
-
-    public function getBaptis(): ?Baptis
-    {
-        return $this->baptis;
-    }
-
-    public function setBaptis(?Baptis $baptis): self
-    {
-        $this->baptis = $baptis;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newKrisma = $baptis === null ? null : $this;
-        if ($newKrisma !== $baptis->getKrisma()) {
-            $baptis->setKrisma($newKrisma);
-        }
-
-        return $this;
     }
 
     public function getParoki(): ?Paroki
@@ -113,6 +148,44 @@ class BaptisKrisma
     public function setParoki(?Paroki $paroki): self
     {
         $this->paroki = $paroki;
+
+        return $this;
+    }
+
+    public function getUpdatedBy(): ?User
+    {
+        return $this->updatedBy;
+    }
+
+    public function setUpdatedBy(?User $updatedBy): self
+    {
+        $this->updatedBy = $updatedBy;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Dokumen[]
+     */
+    public function getDokumen(): Collection
+    {
+        return $this->dokumen;
+    }
+
+    public function addDokuman(Dokumen $dokuman): self
+    {
+        if (!$this->dokumen->contains($dokuman)) {
+            $this->dokumen[] = $dokuman;
+        }
+
+        return $this;
+    }
+
+    public function removeDokuman(Dokumen $dokuman): self
+    {
+        if ($this->dokumen->contains($dokuman)) {
+            $this->dokumen->removeElement($dokuman);
+        }
 
         return $this;
     }

@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="Paroki\Reference\Entity\Paroki" table="ref_paroki">
-    <id name="kode" type="string" length="7" column="kode"/>
+    <id name="id" type="guid">
+      <generator strategy="UUID"/>
+    </id>
+    <field name="kode" type="string" unique="true" length="7" nullable="false" column="kode"/>
     <field name="noParoki" type="integer" length="4" nullable="true"/>
     <field name="namaParoki" type="string" length="50" nullable="true"/>
     <field name="namaGereja" type="string" length="150" nullable="true"/>
@@ -13,7 +16,6 @@
     <field name="emailParoki" type="string" length="50" nullable="true"/>
     <field name="pastorParoki" type="string" length="100" nullable="true"/>
     <field name="wilayahKeuskupan" type="string" length="50" nullable="true"/>
-    <field name="guid" type="guid" unique="true" nullable="false"/>
     <indexes>
       <index name="ix_paroki_nama" columns="nama_paroki"/>
       <index name="ix_paroki_gereja" columns="nama_gereja"/>
@@ -24,7 +26,7 @@
     </unique-constraints>
     <many-to-one field="keuskupan" target-entity="Paroki\Reference\Entity\Keuskupan" fetch="EAGER">
       <join-columns>
-        <join-column name="keuskupan_kode" referenced-column-name="kode"/>
+        <join-column name="keuskupan_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
   </entity>

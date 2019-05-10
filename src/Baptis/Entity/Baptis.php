@@ -2,7 +2,10 @@
 
 namespace Paroki\Baptis\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Paroki\Core\Entity\AbstractBiodata;
+use Paroki\Core\Entity\Dokumen;
 use Paroki\Reference\Entity\Agama;
 use Paroki\Reference\Entity\Lingkungan;
 use Paroki\Reference\Entity\Paroki;
@@ -114,6 +117,13 @@ class Baptis extends AbstractBiodata
      * @var null|Agama
      */
     private $agamaSebelumBaptis;
+
+    private $dokumen;
+
+    public function __construct()
+    {
+        $this->dokumen = new ArrayCollection();
+    }
 
     public function getBaptisId(): ?string
     {
@@ -368,6 +378,32 @@ class Baptis extends AbstractBiodata
     public function setNamaBaptis(?string $namaBaptis): self
     {
         $this->namaBaptis = $namaBaptis;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Dokumen[]
+     */
+    public function getDokumen(): Collection
+    {
+        return $this->dokumen;
+    }
+
+    public function addDokuman(Dokumen $dokuman): self
+    {
+        if (!$this->dokumen->contains($dokuman)) {
+            $this->dokumen[] = $dokuman;
+        }
+
+        return $this;
+    }
+
+    public function removeDokuman(Dokumen $dokuman): self
+    {
+        if ($this->dokumen->contains($dokuman)) {
+            $this->dokumen->removeElement($dokuman);
+        }
 
         return $this;
     }

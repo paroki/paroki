@@ -2,6 +2,9 @@
 
 namespace Paroki\Baptis\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Paroki\Core\Entity\Dokumen;
 use Paroki\User\Entity\User;
 
 class Diterima
@@ -25,6 +28,13 @@ class Diterima
     private $baptis;
 
     private $updatedBy;
+
+    private $dokumen;
+
+    public function __construct()
+    {
+        $this->dokumen = new ArrayCollection();
+    }
 
     public function getTempatBaptis(): ?string
     {
@@ -141,6 +151,32 @@ class Diterima
     public function setUpdatedBy(?User $updatedBy): self
     {
         $this->updatedBy = $updatedBy;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Dokumen[]
+     */
+    public function getDokumen(): Collection
+    {
+        return $this->dokumen;
+    }
+
+    public function addDokuman(Dokumen $dokuman): self
+    {
+        if (!$this->dokumen->contains($dokuman)) {
+            $this->dokumen[] = $dokuman;
+        }
+
+        return $this;
+    }
+
+    public function removeDokuman(Dokumen $dokuman): self
+    {
+        if ($this->dokumen->contains($dokuman)) {
+            $this->dokumen->removeElement($dokuman);
+        }
 
         return $this;
     }

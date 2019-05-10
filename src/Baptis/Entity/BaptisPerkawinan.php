@@ -2,11 +2,19 @@
 
 namespace Paroki\Baptis\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Paroki\Core\Entity\Dokumen;
+use Paroki\Core\Entity\LoggableInterface;
+use Paroki\Core\Entity\LoggableTrait;
 use Paroki\Reference\Entity\Paroki;
+use Paroki\User\Entity\User;
 
-class BaptisPerkawinan
+class BaptisPerkawinan implements LoggableInterface
 {
-    private $nomorBuku;
+    use LoggableTrait;
+
+    private $register;
 
     private $tanggal;
 
@@ -24,14 +32,24 @@ class BaptisPerkawinan
 
     private $paroki;
 
-    public function getNomorBuku(): ?string
+    /**
+     * @var Dokumen[]
+     */
+    private $dokumen;
+
+    public function __construct()
     {
-        return $this->nomorBuku;
+        $this->dokumen = new ArrayCollection();
     }
 
-    public function setNomorBuku(?string $nomorBuku): self
+    public function getRegister(): ?string
     {
-        $this->nomorBuku = $nomorBuku;
+        return $this->register;
+    }
+
+    public function setRegister(?string $register): self
+    {
+        $this->register = $register;
 
         return $this;
     }
@@ -101,32 +119,46 @@ class BaptisPerkawinan
         return $this->id;
     }
 
-    public function getBaptis(): ?Baptis
+    /**
+     * @return Collection|Dokumen[]
+     */
+    public function getDokumen(): Collection
     {
-        return $this->baptis;
+        return $this->dokumen;
     }
 
-    public function setBaptis(?Baptis $baptis): self
+    public function addDokumen(Dokumen $dokuman): self
     {
-        $this->baptis = $baptis;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newPerkawinan = $baptis === null ? null : $this;
-        if ($newPerkawinan !== $baptis->getPerkawinan()) {
-            $baptis->setPerkawinan($newPerkawinan);
+        if (!$this->dokumen->contains($dokuman)) {
+            $this->dokumen[] = $dokuman;
         }
 
         return $this;
     }
 
-    public function getParoki(): ?Paroki
+    public function removeDokumen(Dokumen $dokuman): self
     {
-        return $this->paroki;
+        if ($this->dokumen->contains($dokuman)) {
+            $this->dokumen->removeElement($dokuman);
+        }
+
+        return $this;
     }
 
-    public function setParoki(?Paroki $paroki): self
+    public function addDokuman(Dokumen $dokuman): self
     {
-        $this->paroki = $paroki;
+        if (!$this->dokumen->contains($dokuman)) {
+            $this->dokumen[] = $dokuman;
+        }
+
+        return $this;
+    }
+
+    public function removeDokuman(Dokumen $dokuman): self
+    {
+        if ($this->dokumen->contains($dokuman)) {
+            $this->dokumen->removeElement($dokuman);
+        }
 
         return $this;
     }

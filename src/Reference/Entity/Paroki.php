@@ -45,6 +45,8 @@ class Paroki
 
     private $keuskupan;
 
+    private $id;
+
     public function setKode(string $kode): self
     {
         $this->kode = $kode;
@@ -211,5 +213,10 @@ class Paroki
         $this->guid = $guid;
 
         return $this;
+    }
+
+    public function getId(): ?string
+    {
+        return $this->id;
     }
 }

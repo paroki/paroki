@@ -35,6 +35,8 @@ class Keuskupan
      */
     private $guid;
 
+    private $id;
+
     public function __construct()
     {
     }
@@ -181,5 +183,10 @@ class Keuskupan
         $this->guid = $guid;
 
         return $this;
+    }
+
+    public function getId(): ?string
+    {
+        return $this->id;
     }
 }

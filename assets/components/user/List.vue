@@ -8,7 +8,9 @@
                     :caption="caption"
                     :striped="true",
                     :primary-key="primaryKey"
+                    :per-page="items.length"
                     :actions="actions"
+                    :total="total"
                 ></c-table>
             </b-col>
         </b-row>
@@ -27,8 +29,9 @@
             deletedItem: 'user/del/deleted',
             error: 'user/list/error',
             items: 'user/list/items',
-            //isLoading: 'siap/list/isLoading',
-            view: 'user/list/view'
+            isLoading: 'siap/list/isLoading',
+            view: 'user/list/view',
+            total: 'user/list/total'
         }),
         data(){
             return {

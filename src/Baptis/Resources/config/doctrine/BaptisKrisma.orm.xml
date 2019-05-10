@@ -4,16 +4,32 @@
     <id name="id" type="guid">
       <generator strategy="UUID"/>
     </id>
+    <field name="register" type="string" length="100" nullable="true"/>
     <field name="nama" type="string" nullable="true"/>
     <field name="tempat" type="string" nullable="true"/>
     <field name="tanggal" type="string" nullable="true"/>
     <field name="pemberi" type="string" nullable="true"/>
     <field name="catatan" type="text" nullable="true"/>
+    <field name="updatedAt" type="date" nullable="true"/>
     <many-to-one field="paroki" target-entity="Paroki\Reference\Entity\Paroki">
       <join-columns>
-        <join-column name="kode_paroki" referenced-column-name="kode"/>
+        <join-column name="paroki_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <one-to-one field="baptis" target-entity="Paroki\Baptis\Entity\Baptis" mapped-by="krisma" fetch="EXTRA_LAZY"/>
+    <many-to-one field="updatedBy" target-entity="Paroki\User\Entity\User" fetch="EAGER">
+      <join-columns>
+        <join-column name="updated_by_user_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="dokumen" target-entity="Paroki\Core\Entity\Dokumen">
+      <join-table name="BaptisKrismaDokumen">
+        <join-columns>
+          <join-column name="baptis_krisma_id" referenced-column-name="id" nullable="false"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="dokumen_id" referenced-column-name="id" nullable="false"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
   </entity>
 </doctrine-mapping>

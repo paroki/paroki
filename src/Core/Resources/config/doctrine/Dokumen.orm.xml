@@ -1,13 +1,15 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="Paroki\User\Entity\User" extends="FOS\UserBundle\Model\User" table="sc_user">
+  <entity name="Paroki\Core\Entity\Dokumen" table="td_core_dokumen">
     <id name="id" type="guid">
       <generator strategy="UUID"/>
     </id>
     <field name="nama" type="string" nullable="false"/>
-    <many-to-one field="paroki" target-entity="Paroki\Reference\Entity\Paroki" fetch="EAGER">
+    <field name="uploadedAt" type="date" nullable="true"/>
+    <field name="fileLocation" type="string" length="255" nullable="true"/>
+    <many-to-one field="uploadedBy" target-entity="Paroki\User\Entity\User">
       <join-columns>
-        <join-column name="paroki_id" referenced-column-name="id"/>
+        <join-column name="uploaded_by_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
   </entity>

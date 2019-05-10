@@ -1,0 +1,7 @@
+Paroki\User\Entity\User:
+    user_{1..10}:
+        nama: <name()>
+        username: <userName()>
+        email: <email()>
+        plainPassword: 123password
+        paroki: '@pkrbt'

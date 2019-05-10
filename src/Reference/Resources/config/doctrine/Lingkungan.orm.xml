@@ -23,10 +23,5 @@
         <join-column name="wilayah_bagian_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="paroki" target-entity="Paroki\Reference\Entity\Paroki">
-      <join-columns>
-        <join-column name="paroki_kode" referenced-column-name="kode"/>
-      </join-columns>
-    </many-to-one>
   </entity>
 </doctrine-mapping>
