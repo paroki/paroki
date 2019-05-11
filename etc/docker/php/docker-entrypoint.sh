@@ -19,7 +19,7 @@ if [ "${1#-}" != "$1" ]; then
 fi
 
 ./bin/start-selenium > /dev/null 2>&1 &
-./bin/console clear-cache
+./bin/console cache:clear
 umask 0000
 chmod 777 var/cache -Rf
 chmod 777 var/log -Rf
