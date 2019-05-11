@@ -1,15 +1,26 @@
 <?php
 
-namespace Paroki\Baptis\Entity;
+/*
+ * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
+ *
+ * (c) Anthonius Munthi <me@itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace SIAP\Baptis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Paroki\Core\Entity\AbstractBiodata;
-use Paroki\Core\Entity\Dokumen;
-use Paroki\Reference\Entity\Agama;
-use Paroki\Reference\Entity\Lingkungan;
-use Paroki\Reference\Entity\Paroki;
-use Paroki\User\Entity\User;
+use SIAP\Core\Entity\AbstractBiodata;
+use SIAP\Core\Entity\Dokumen;
+use SIAP\Reference\Entity\Agama;
+use SIAP\Reference\Entity\Lingkungan;
+use SIAP\Reference\Entity\Paroki;
+use SIAP\User\Entity\User;
 
 class Baptis extends AbstractBiodata
 {
@@ -24,7 +35,7 @@ class Baptis extends AbstractBiodata
     private $buku;
 
     /**
-     * @var integer
+     * @var int
      */
     private $halaman = 0;
 
@@ -39,7 +50,7 @@ class Baptis extends AbstractBiodata
     private $lanjutan;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     private $namaBaptis;
 
@@ -79,42 +90,42 @@ class Baptis extends AbstractBiodata
     private $id;
 
     /**
-     * @var null|BaptisKomuni
+     * @var BaptisKomuni|null
      */
     private $komuni;
 
     /**
-     * @var null|BaptisKrisma
+     * @var BaptisKrisma|null
      */
     private $krisma;
 
     /**
-     * @var null|BaptisPerkawinan
+     * @var BaptisPerkawinan|null
      */
     private $perkawinan;
 
     /**
-     * @var null|Diterima
+     * @var Diterima|null
      */
     private $diterima;
 
     /**
-     * @var null|User
+     * @var User|null
      */
     private $updatedBy;
 
     /**
-     * @var null|Paroki
+     * @var Paroki|null
      */
     private $paroki;
 
     /**
-     * @var null|Lingkungan
+     * @var Lingkungan|null
      */
     private $lingkungan;
 
     /**
-     * @var null|Agama
+     * @var Agama|null
      */
     private $agamaSebelumBaptis;
 

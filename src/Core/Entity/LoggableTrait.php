@@ -1,58 +1,63 @@
 <?php
 
+/*
+ * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
+ *
+ * (c) Anthonius Munthi <me@itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-namespace Paroki\Core\Entity;
+declare(strict_types=1);
 
+namespace SIAP\Core\Entity;
 
-use Paroki\User\Entity\User;
+use SIAP\User\Entity\User;
 
 trait LoggableTrait
 {
     /**
-     * Data di update pada waktu
-     * @var null|\DateTime
+     * Data di update pada waktu.
+     *
+     * @var \DateTime|null
      */
     protected $updatedAt;
 
     /**
-     * Data di update oleh user
-     * @var null|User
+     * Data di update oleh user.
+     *
+     * @var User|null
      */
     protected $updatedBy;
 
-    /**
-     * @return \DateTime|null
-     */
     public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
 
     /**
-     * @param \DateTime|null $updatedAt
      * @return static
      */
     public function setUpdatedAt(?\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 
-    /**
-     * @return User|null
-     */
     public function getUpdatedBy(): ?User
     {
         return $this->updatedBy;
     }
 
     /**
-     * @param User|null $updatedBy
      * @return static
      */
     public function setUpdatedBy(?User $updatedBy = null)
     {
         $this->updatedBy = $updatedBy;
+
         return $this;
     }
 }

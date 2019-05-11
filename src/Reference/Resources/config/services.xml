@@ -6,7 +6,7 @@
 
     <!--
     <parameters>
-        <parameter key="paroki.reference.example.class">Paroki\Reference\Example</parameter>
+        <parameter key="paroki.reference.example.class">SIAP\Reference\Example</parameter>
     </parameters>
 
     <services>
@@ -24,8 +24,8 @@
     -->
     <services>
         <defaults autoconfigure="true" autowire="true"/>
-        <prototype namespace="Paroki\Reference\" resource="../../" exclude="../../{Resources,Entity,Migrations,Tests,DependencyInjection}"/>
-        <prototype namespace="Paroki\Reference\Listener\" resource="../../Listener">
+        <prototype namespace="SIAP\Reference\" resource="../../" exclude="../../{Resources,Entity,Migrations,Tests,DependencyInjection}"/>
+        <prototype namespace="SIAP\Reference\Listener\" resource="../../Listener">
             <tag name="doctrine.event_subscriber"/>
         </prototype>
     </services>

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Paroki\Reference;
+namespace SIAP\Reference;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

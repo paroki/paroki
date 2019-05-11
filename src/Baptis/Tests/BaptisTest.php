@@ -1,6 +1,17 @@
 <?php
 
 /*
+ * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
+ *
+ * (c) Anthonius Munthi <me@itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+/*
  * This file is part of the Omed package.
  *
  * (c) Anthonius Munthi <me@itstoni.com>
@@ -9,11 +20,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Paroki\Baptis\Tests\Entity;
+namespace SIAP\Baptis\Tests\Entity;
 
-use Paroki\Baptis\Entity\Baptis;
-use Paroki\Core\Test\DatabaseTestCase;
-use Paroki\Reference\Entity\Paroki;
+use SIAP\Baptis\Entity\Baptis;
+use SIAP\Core\Test\DatabaseTestCase;
+use SIAP\Reference\Entity\Paroki;
 
 class BaptisTest extends DatabaseTestCase
 {
@@ -33,8 +44,7 @@ class BaptisTest extends DatabaseTestCase
         $ob->setBuku('BT')
             ->setNomor(1)
             ->setParoki($this->getParoki())
-            ->setNama('Antonius')
-        ;
+            ->setNama('Antonius');
 
         $em->persist($ob);
         $em->flush();

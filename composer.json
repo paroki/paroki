@@ -1,6 +1,8 @@
 {
+    "name": "paroki/siap",
+    "description": "Sistim Informasi dan Administrasi Paroki",
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
     "config": {
         "preferred-install": {
             "*": "dist"
@@ -9,12 +11,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Paroki\\": "src/"
+            "SIAP\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Paroki\\Tests\\": "tests/"
+            "SIAP\\Tests\\": "tests/"
         }
     },
     "replace": {

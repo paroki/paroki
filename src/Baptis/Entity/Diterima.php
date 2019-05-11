@@ -1,11 +1,22 @@
 <?php
 
-namespace Paroki\Baptis\Entity;
+/*
+ * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
+ *
+ * (c) Anthonius Munthi <me@itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace SIAP\Baptis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Paroki\Core\Entity\Dokumen;
-use Paroki\User\Entity\User;
+use SIAP\Core\Entity\Dokumen;
+use SIAP\User\Entity\User;
 
 class Diterima
 {
@@ -135,7 +146,7 @@ class Diterima
         $this->baptis = $baptis;
 
         // set (or unset) the owning side of the relation if necessary
-        $newDiterima = $baptis === null ? null : $this;
+        $newDiterima = null === $baptis ? null : $this;
         if ($newDiterima !== $baptis->getDiterima()) {
             $baptis->setDiterima($newDiterima);
         }

@@ -1,6 +1,6 @@
 fos_user:
     db_driver: orm
-    user_class: Paroki\User\Entity\User
+    user_class: SIAP\User\Entity\User
     firewall_name: main
     from_email:
         address: "me@itstoni.com"

@@ -1,14 +1,23 @@
 <?php
 
+/*
+ * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
+ *
+ * (c) Anthonius Munthi <me@itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-namespace Paroki\Reference\Listener;
+declare(strict_types=1);
 
+namespace SIAP\Reference\Listener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
-use Paroki\Reference\Entity\Lingkungan;
 use Ramsey\Uuid\Uuid;
+use SIAP\Reference\Entity\Lingkungan;
 
 class KodeGenerator implements EventSubscriber
 {
@@ -16,7 +25,7 @@ class KodeGenerator implements EventSubscriber
     {
         return [
             Events::prePersist,
-            Events::postPersist
+            Events::postPersist,
         ];
     }
 
@@ -30,28 +39,24 @@ class KodeGenerator implements EventSubscriber
         $this->doProcess($args);
     }
 
-    /**
-     * @param LifecycleEventArgs $args
-     */
     private function doProcess(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
-        if($entity instanceof Lingkungan){
+        if ($entity instanceof Lingkungan) {
             $this->generateLingkunganId($entity, $args);
         }
 
-        if(method_exists($entity,'setGuid')){
+        if (method_exists($entity, 'setGuid')) {
             $entity->setGuid(Uuid::uuid4());
         }
     }
 
     private function generateLingkunganId(Lingkungan $entity, LifecycleEventArgs $args)
     {
-        $kode = implode('.',[
+        $kode = implode('.', [
             $entity->getParoki()->getKode(),
-            $entity->getKode()
+            $entity->getKode(),
         ]);
         $entity->setId($kode);
     }
-
 }

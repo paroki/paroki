@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="Paroki\Baptis\Entity\BaptisPerkawinan" table="td_baptis_perkawinan">
+  <entity name="SIAP\Baptis\Entity\BaptisPerkawinan" table="td_baptis_perkawinan">
     <id name="id" type="guid">
       <generator strategy="UUID"/>
     </id>
@@ -11,12 +11,12 @@
     <field name="saksiGereja" type="string" length="255" nullable="true"/>
     <field name="catatan" type="text" nullable="true"/>
     <field name="updatedAt" type="date" nullable="true"/>
-    <many-to-one field="updatedBy" target-entity="Paroki\User\Entity\User">
+    <many-to-one field="updatedBy" target-entity="SIAP\User\Entity\User">
       <join-columns>
         <join-column name="updated_by_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-many field="dokumen" target-entity="Paroki\Core\Entity\Dokumen">
+    <many-to-many field="dokumen" target-entity="SIAP\Core\Entity\Dokumen">
       <join-table name="BaptisPerkawinanDokumen">
         <join-columns>
           <join-column name="baptis_perkawinan_id" referenced-column-name="id" nullable="false"/>

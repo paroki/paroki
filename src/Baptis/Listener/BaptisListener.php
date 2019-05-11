@@ -1,13 +1,22 @@
 <?php
 
+/*
+ * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
+ *
+ * (c) Anthonius Munthi <me@itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-namespace Paroki\Baptis\Listener;
+declare(strict_types=1);
 
+namespace SIAP\Baptis\Listener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
-use Paroki\Baptis\Entity\Baptis;
+use SIAP\Baptis\Entity\Baptis;
 
 class BaptisListener implements EventSubscriber
 {
@@ -15,7 +24,7 @@ class BaptisListener implements EventSubscriber
     {
         return [
             Events::prePersist,
-            Events::preUpdate
+            Events::preUpdate,
         ];
     }
 
@@ -31,21 +40,21 @@ class BaptisListener implements EventSubscriber
 
     public function updateBaptisId(LifecycleEventArgs $args)
     {
-        /* @var Baptis $entity */
+        /** @var Baptis $entity */
         $entity = $args->getObject();
 
-        if(!$entity instanceof Baptis){
+        if (!$entity instanceof Baptis) {
             return;
         }
 
-        $exp = array(
+        $exp = [
             $entity->getParoki()->getKode(),
             $entity->getBuku(),
             $entity->getHalaman(),
-            $entity->getNomor()
-        );
+            $entity->getNomor(),
+        ];
 
-        $kode = trim(implode('.',$exp).$entity->getLanjutan());
+        $kode = trim(implode('.', $exp).$entity->getLanjutan());
 
         $entity->setKodeBaptis($kode);
 

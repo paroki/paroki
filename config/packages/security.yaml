@@ -1,6 +1,6 @@
 security:
     encoders:
-        Paroki\User\Entity\User:
+        SIAP\User\Entity\User:
             algorithm: bcrypt
 
     role_hierarchy:
@@ -11,7 +11,7 @@ security:
         app_entity_provider:
             #id: fos_user.provider.username
             entity:
-                class: Paroki\User\Entity\User
+                class: SIAP\User\Entity\User
                 property: username
 
     firewalls:

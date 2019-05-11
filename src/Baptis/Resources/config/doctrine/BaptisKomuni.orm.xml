@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="Paroki\Baptis\Entity\BaptisKomuni" table="td_baptis_komuni">
+  <entity name="SIAP\Baptis\Entity\BaptisKomuni" table="td_baptis_komuni">
     <id name="id" type="guid">
       <generator strategy="UUID"/>
     </id>
@@ -10,17 +10,17 @@
     <field name="yangMemberi" type="string" nullable="true"/>
     <field name="catatan" type="text" nullable="true"/>
     <field name="updatedAt" type="date" nullable="true"/>
-    <many-to-one field="paroki" target-entity="Paroki\Reference\Entity\Paroki" fetch="EAGER">
+    <many-to-one field="paroki" target-entity="SIAP\Reference\Entity\Paroki" fetch="EAGER">
       <join-columns>
         <join-column name="paroki_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="updatedBy" target-entity="Paroki\User\Entity\User" fetch="EAGER">
+    <many-to-one field="updatedBy" target-entity="SIAP\User\Entity\User" fetch="EAGER">
       <join-columns>
         <join-column name="updated_by_user_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-many field="dokumen" target-entity="Paroki\Core\Entity\Dokumen">
+    <many-to-many field="dokumen" target-entity="SIAP\Core\Entity\Dokumen">
       <join-table name="td_baptis_komuni_dokumen">
         <join-columns>
           <join-column name="baptis_komuni_id" referenced-column-name="id" nullable="false"/>

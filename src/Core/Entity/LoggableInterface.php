@@ -1,13 +1,23 @@
 <?php
 
-namespace Paroki\Core\Entity;
+/*
+ * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
+ *
+ * (c) Anthonius Munthi <me@itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-use Paroki\User\Entity\User;
+declare(strict_types=1);
+
+namespace SIAP\Core\Entity;
+
+use SIAP\User\Entity\User;
 
 interface LoggableInterface
 {
     /**
-     * @param \DateTime|null $updatedAt
      * @return static
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
@@ -15,7 +25,6 @@ interface LoggableInterface
     public function getUpdatedAt(): ?\DateTime;
 
     /**
-     * @param User|null $user
      * @return static
      */
     public function setUpdatedBy(User $user = null);

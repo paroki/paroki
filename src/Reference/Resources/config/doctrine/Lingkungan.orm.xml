@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="Paroki\Reference\Entity\Lingkungan" table="ref_lingkungan">
+  <entity name="SIAP\Reference\Entity\Lingkungan" table="ref_lingkungan">
     <id name="id" type="string" length="50" column="id">
-      <custom-id-generator class="Paroki\Reference\Doctrine\CustomIdGenerator"/>
+      <custom-id-generator class="SIAP\Reference\Doctrine\CustomIdGenerator"/>
     </id>
     <field name="kode" type="string" unique="true" length="50" nullable="true"/>
     <field name="nama" type="string" length="255" nullable="true"/>
@@ -13,12 +13,12 @@
     </field>
     <field name="ketua" type="string" length="255" nullable="true"/>
     <field name="f5" type="string" length="255" nullable="true"/>
-    <many-to-one field="wilayah" target-entity="Paroki\Reference\Entity\Wilayah">
+    <many-to-one field="wilayah" target-entity="SIAP\Reference\Entity\Wilayah">
       <join-columns>
         <join-column name="wilayah_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="bagian" target-entity="Paroki\Reference\Entity\JenisWilayah">
+    <many-to-one field="bagian" target-entity="SIAP\Reference\Entity\JenisWilayah">
       <join-columns>
         <join-column name="wilayah_bagian_id" referenced-column-name="id"/>
       </join-columns>
