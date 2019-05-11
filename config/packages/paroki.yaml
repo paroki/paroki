@@ -15,7 +15,7 @@ api_platform:
     path_segment_name_generator: 'siap.core.api.operation_path_resolver'
     collection:
         pagination:
-            maximum_items_per_page: 5
+            items_per_page: 5
 
 doctrine:
     dbal:

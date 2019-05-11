@@ -7,7 +7,6 @@ let token = localStorage.getItem('token');
 let defCredentials = null;
 if(token !== null){
     defCredentials = jwt.decode(token);
-    console.log(defCredentials);
 }
 export default {
     namespaced: true,

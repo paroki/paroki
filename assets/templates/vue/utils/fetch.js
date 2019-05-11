@@ -25,10 +25,10 @@ export default function (id, options = {}) {
                     const errors = { _error: error }
                     json.violations.map(violation =>Object.assign(errors, { [violation.propertyPath]: violation.message }))
 
-                    throw new SubmissionError(errors)
+                    throw new SubmissionError(errors);
                 })
                 .catch((e) => {
-                    console.log(e);
+                    throw new SubmissionError(e);
                 })
         })
 }
