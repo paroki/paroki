@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="Paroki\Baptis\Entity\Baptis" extends="Paroki\Core\Entity\AbstractBiodata" table="td_baptis">
+  <entity name="SIAP\Baptis\Entity\Baptis" extends="SIAP\Core\Entity\AbstractBiodata" table="td_baptis">
     <id name="id" type="guid">
       <generator strategy="UUID"/>
     </id>
@@ -25,42 +25,42 @@
       <index name="ix_baptis_kode" columns="kode_baptis"/>
       <index name="ix_baptis_key" columns="id"/>
     </indexes>
-    <many-to-one field="updatedBy" target-entity="Paroki\User\Entity\User">
+    <many-to-one field="updatedBy" target-entity="SIAP\User\Entity\User">
       <join-columns>
         <join-column name="updated_by_user_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <one-to-one field="komuni" target-entity="Paroki\Baptis\Entity\BaptisKomuni" fetch="EAGER">
+    <one-to-one field="komuni" target-entity="SIAP\Baptis\Entity\BaptisKomuni" fetch="EAGER">
       <join-columns>
         <join-column name="baptis_komuni_id" referenced-column-name="id" unique="true" on-delete="CASCADE" on-update="CASCADE"/>
       </join-columns>
     </one-to-one>
-    <one-to-one field="krisma" target-entity="Paroki\Baptis\Entity\BaptisKrisma" fetch="EXTRA_LAZY">
+    <one-to-one field="krisma" target-entity="SIAP\Baptis\Entity\BaptisKrisma" fetch="EXTRA_LAZY">
       <join-columns>
         <join-column name="baptis_krisma_id" referenced-column-name="id" unique="true" on-delete="CASCADE" on-update="CASCADE"/>
       </join-columns>
     </one-to-one>
-    <one-to-one field="perkawinan" target-entity="Paroki\Baptis\Entity\BaptisPerkawinan" fetch="EXTRA_LAZY">
+    <one-to-one field="perkawinan" target-entity="SIAP\Baptis\Entity\BaptisPerkawinan" fetch="EXTRA_LAZY">
       <join-columns>
         <join-column name="baptis_perkawinan_id" referenced-column-name="id" unique="true" on-delete="CASCADE" on-update="CASCADE"/>
       </join-columns>
     </one-to-one>
-    <one-to-one field="diterima" target-entity="Paroki\Baptis\Entity\Diterima" inversed-by="baptis" fetch="EXTRA_LAZY">
+    <one-to-one field="diterima" target-entity="SIAP\Baptis\Entity\Diterima" inversed-by="baptis" fetch="EXTRA_LAZY">
       <join-columns>
         <join-column name="diterima_id" referenced-column-name="id" unique="true"/>
       </join-columns>
     </one-to-one>
-    <many-to-one field="agamaSebelumBaptis" target-entity="Paroki\Reference\Entity\Agama">
+    <many-to-one field="agamaSebelumBaptis" target-entity="SIAP\Reference\Entity\Agama">
       <join-columns>
         <join-column name="agama_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="paroki" target-entity="Paroki\Reference\Entity\Paroki" fetch="EAGER">
+    <many-to-one field="paroki" target-entity="SIAP\Reference\Entity\Paroki" fetch="EAGER">
       <join-columns>
         <join-column name="paroki_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-many field="dokumen" target-entity="Paroki\Core\Entity\Dokumen">
+    <many-to-many field="dokumen" target-entity="SIAP\Core\Entity\Dokumen">
       <join-table name="td_baptis_dokumen">
         <join-columns>
           <join-column name="baptis_id" referenced-column-name="id" nullable="false"/>

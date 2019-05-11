@@ -15,6 +15,7 @@ $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
     ->exclude('tests/Resources/app/var')
     ->exclude('var')
+    ->exclude('assets')
     ->exclude('build');
 
 return PhpCsFixer\Config::create()

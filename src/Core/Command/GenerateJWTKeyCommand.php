@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the DoyoUserBundle project.
+ * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
  *
  * (c) Anthonius Munthi <me@itstoni.com>
  *
@@ -20,12 +20,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Paroki\Core\Command;
+namespace SIAP\Core\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Process\Process;
 
 class GenerateJWTKeyCommand extends Command
@@ -37,9 +36,8 @@ class GenerateJWTKeyCommand extends Command
     private $passphrase;
 
     public function __construct(
-        $secKeyPath, $pubKeyPath,$passphrase
-    )
-    {
+        $secKeyPath, $pubKeyPath, $passphrase
+    ) {
         $this->secKeyPath = $secKeyPath;
         $this->pubKeyPath = $pubKeyPath;
         $this->passphrase = $passphrase;

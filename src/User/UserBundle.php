@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Paroki\User;
+namespace SIAP\User;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

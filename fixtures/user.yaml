@@ -1,4 +1,4 @@
-Paroki\User\Entity\User:
+SIAP\User\Entity\User:
     user_{1..10}:
         nama: <name()>
         username: <userName()>

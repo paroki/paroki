@@ -1,6 +1,6 @@
 fos_user:
     db_driver: orm
-    user_class: Paroki\User\Entity\User
+    user_class: SIAP\User\Entity\User
     firewall_name: main
     from_email:
         address: "me@itstoni.com"
@@ -15,7 +15,7 @@ api_platform:
     path_segment_name_generator: 'siap.core.api.operation_path_resolver'
     collection:
         pagination:
-            maximum_items_per_page: 5
+            items_per_page: 5
 
 doctrine:
     dbal:

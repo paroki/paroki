@@ -1,12 +1,20 @@
 <?php
 
-namespace Paroki\Reference\Entity;
+/*
+ * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
+ *
+ * (c) Anthonius Munthi <me@itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-use ApiPlatform\Core\Annotation\ApiProperty;
+declare(strict_types=1);
+
+namespace SIAP\Reference\Entity;
 
 /**
- * Class Paroki
- * @package Paroki\Reference\Entity
+ * Class Paroki.
  */
 class Paroki
 {
@@ -33,7 +41,8 @@ class Paroki
     private $wilayahKeuskupan;
 
     /**
-     * GUID for paroki
+     * GUID for paroki.
+     *
      * @var string
      */
     private $guid;

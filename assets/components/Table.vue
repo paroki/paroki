@@ -134,7 +134,6 @@
             navigate(template,item){
                 const href= template.replace('{id}',item[this.primaryKey]);
                 this.$router.push(href);
-                console.log(href);
             },
             getBadge (status) {
                 return status === 'Active' ? 'success'

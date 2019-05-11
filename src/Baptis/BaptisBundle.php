@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Paroki\Baptis;
+namespace SIAP\Baptis;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

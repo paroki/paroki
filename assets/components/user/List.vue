@@ -46,7 +46,7 @@
                 primaryKey: 'id',
                 actions: {
                     edit: {
-                        url: '/user/edit/{id}'
+                        url: '/user/{id}'
                     }
                 }
             }

@@ -1,4 +1,4 @@
-Paroki\Reference\Entity\Lingkungan:
+SIAP\Reference\Entity\Lingkungan:
     shortName: 'lingkungan'
     attributes:
         route_prefix: '/reference'
@@ -13,6 +13,6 @@ Paroki\Reference\Entity\Lingkungan:
         put: ~
         delete: ~
 
-Paroki\Reference\Entity\JenisWilayah: ~
-Paroki\Reference\Entity\Wilayah: ~
-Paroki\Reference\Entity\Agama: ~
+SIAP\Reference\Entity\JenisWilayah: ~
+SIAP\Reference\Entity\Wilayah: ~
+SIAP\Reference\Entity\Agama: ~

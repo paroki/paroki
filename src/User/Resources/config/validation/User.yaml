@@ -1,4 +1,4 @@
-Paroki\User\Entity\User:
+SIAP\User\Entity\User:
     properties:
         nama:
             - NotBlank: { message: "siap.validation.nama" }

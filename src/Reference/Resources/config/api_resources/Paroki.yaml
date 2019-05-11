@@ -1,4 +1,4 @@
-Paroki\Reference\Entity\Paroki:
+SIAP\Reference\Entity\Paroki:
     attributes:
         route_prefix: '/reference'
     collectionOperations:

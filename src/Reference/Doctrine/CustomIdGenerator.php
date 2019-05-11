@@ -1,24 +1,34 @@
 <?php
 
+/*
+ * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
+ *
+ * (c) Anthonius Munthi <me@itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-namespace Paroki\Reference\Doctrine;
+declare(strict_types=1);
 
+namespace SIAP\Reference\Doctrine;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Id\AbstractIdGenerator;
-use Paroki\Reference\Entity\Lingkungan;
+use SIAP\Reference\Entity\Lingkungan;
 
 class CustomIdGenerator extends AbstractIdGenerator
 {
     /**
-     * @param EntityManager $em
      * @param object|null $entity
-     * @return mixed|string
+     *
      * @throws \Exception When entity is not supported
+     *
+     * @return mixed|string
      */
     public function generate(EntityManager $em, $entity)
     {
-        if($entity instanceof Lingkungan){
+        if ($entity instanceof Lingkungan) {
             return $this->generateLingkunganId($entity);
         }
 
@@ -29,9 +39,9 @@ class CustomIdGenerator extends AbstractIdGenerator
     {
         $exp = [
             $entity->getParoki()->getKode(),
-            $entity->getKode()
+            $entity->getKode(),
         ];
 
-        return implode('.',$exp);
+        return implode('.', $exp);
     }
 }
