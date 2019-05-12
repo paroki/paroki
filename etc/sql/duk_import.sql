@@ -1,7 +1,7 @@
 --- Import data from database umat katolik (DUK) ---
-DELETE from ref_keuskupan;
+DELETE from tr_keuskupan;
 INSERT into
-    ref_keuskupan(
+    tr_keuskupan(
     id,
     kode,
     no_urut,
@@ -31,8 +31,8 @@ INSERT into
         FROM master_keuskupan
     );
 
-DELETE from ref_paroki;
-INSERT INTO ref_paroki(
+DELETE from tr_paroki;
+INSERT INTO tr_paroki(
     id,
     keuskupan_id,
     kode,
@@ -50,7 +50,7 @@ INSERT INTO ref_paroki(
 )
     (select
          uuid_generate_v4(),
-         (select id from ref_keuskupan where kode=paroki."KeuskupanID") as keuskupan_id,
+         (select id from tr_keuskupan where kode=paroki."KeuskupanID") as keuskupan_id,
          "ParokiID",
          "NoParoki",
          "NamaParoki",
@@ -65,18 +65,5 @@ INSERT INTO ref_paroki(
          "WilayahKeuskupan"
      from master_paroki paroki);
 
-delete from ref_lingkungan;
-INSERT INTO ref_lingkungan(
-    id,
-    paroki_id,
-    wilayah_id,
-    wilayah_bagian_id,
-    kode,
-    nama,
-    no_urut,
-    ketua,
-    f5
-)
-    (select
-             KodeWLID=
-     from master_lingkungan lingkungan);
+
+UPDATE sc_user SET paroki_id=(SELECT id from tr_paroki where kode='027.018');

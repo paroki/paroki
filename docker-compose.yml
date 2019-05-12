@@ -10,7 +10,6 @@ services:
             - "80:80"
         links:
             - php
-            - db
         environment:
             - UMASK="0000"
 
@@ -23,23 +22,21 @@ services:
         volumes:
             - ./:/var/www/siap:rw,cached
             - ./var:/var/www/siap/var:rw
-        links:
-            - db
 
-    db:
-        container_name: ${DOCKER_CONTAINER_NAME}.db
-        # In production, you may want to use a managed database service
-        image: postgres:10-alpine
-        environment:
-            - POSTGRES_DB=paroki
-            - POSTGRES_USER=paroki
-            # You should definitely change the password in production
-            - POSTGRES_PASSWORD=paroki
-        volumes:
-            # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-            - ./var/db/data:/var/lib/postgresql/data:rw
-        ports:
-            - "5432:5432"
+    #db:
+    #    container_name: ${DOCKER_CONTAINER_NAME}.db
+    #    # In production, you may want to use a managed database service
+    #    image: postgres:10-alpine
+    #    environment:
+    #        - POSTGRES_DB=paroki
+    #        - POSTGRES_USER=paroki
+    #        # You should definitely change the password in production
+    #        - POSTGRES_PASSWORD=paroki
+    #    volumes:
+    #        # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+    #        - ./var/db/data:/var/lib/postgresql/data:rw
+    #    ports:
+    #        - "5432:5432"
 
     #client:
     #    container_name: ${DOCKER_CONTAINER_NAME}.client
