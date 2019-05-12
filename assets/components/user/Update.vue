@@ -13,10 +13,17 @@
             :fields="fields"
         />
         <div slot="footer">
-            <b-button @click="onSendForm" variant="success">
+            <b-button @click="onSendForm" size="sm" variant="success">
                 <i class="fa fa-save"></i>
                 Simpan
             </b-button>
+            <router-link
+                v-if="item"
+                itemtype="button"
+                :to="{ name: 'UserList' }"
+                class="btn btn-sm btn-primary">
+                Kembali
+            </router-link>
         </div>
     </b-card>
 </template>

@@ -7,7 +7,15 @@
             </div>
             <div class="card-header-actions">
                 <nav class="card-header-action">
-                    <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" prev-text="<" next-text=">"/>
+                    <b-pagination
+                        :total-rows="total"
+                        :per-page="perPage"
+                        :current-page="currentPage"
+                        prev-text="<"
+                        next-text=">"
+                        @change="loadPage"
+                        small
+                    />
                 </nav>
             </div>
         </div>
@@ -19,12 +27,11 @@
             :small="small"
             :fixed="fixed"
             responsive="sm"
-            :items="items"
+            :items="tableData"
             :fields="captions"
-            :current-page="currentPage"
-            :per-page="perPage"
             :primary-key="primaryKey"
-            :total="total"
+            :total-rows="total"
+            :current-page="currentPage"
         >
 
             <template slot="actions" slot-scope="row">
@@ -59,7 +66,7 @@
     }
 </style>
 <script>
-
+    import { mapGetters } from 'vuex';
     export default {
         name: 'c-table',
         inheritAttrs: false,
@@ -112,27 +119,39 @@
                 type: Boolean,
                 default: false
             },
+            loadPage: {
+                type: Function,
+                required: true
+            },
             total: {
                 type: Number,
                 default: 0
-            }
+            },
+            currentPage: {
+                type: Number,
+                default: 1
+            },
         },
         data: () => {
             return {
-                currentPage: 1,
+                //currentPage: 1,
             }
         },
         computed: {
-            items: function() {
+            items: function(ctx) {
                 const items =  this.tableData
-                return Array.isArray(items) ? items : items()
+                return Array.isArray(items) ? items : items(ctx)
             },
-            totalRows: function () { return this.getRowCount() },
-            captions: function() { return this.fields }
+            totalRows: function () {
+                return this.total;
+            },
+            captions: function() { return this.fields },
+        },
+        created(){
         },
         methods: {
             navigate(template,item){
-                const href= template.replace('{id}',item[this.primaryKey]);
+                const href= template.replace('@id',item[this.primaryKey]);
                 this.$router.push(href);
             },
             getBadge (status) {
@@ -142,8 +161,9 @@
                             : status === 'Banned' ? 'danger' : 'primary'
             },
             getRowCount: function () {
-                return this.items.length
-            }
+                return this.total; //this.items.length
+            },
+
         }
     }
 </script>

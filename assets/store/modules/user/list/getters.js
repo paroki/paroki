@@ -3,3 +3,4 @@ export const isLoading = state => state.isLoading
 export const items = state => state.items
 export const view = state => state.view
 export const total = state => state.total
+export const page = state => state.page

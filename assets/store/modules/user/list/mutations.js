@@ -7,7 +7,8 @@ export default {
             isLoading: false,
             items: [],
             view: [],
-            total: null
+            total: 0,
+            page: null
         })
     },
 
@@ -29,6 +30,10 @@ export default {
 
     [types.SET_TOTAL] (state, total) {
         Object.assign(state, { total })
+    },
+
+    [types.SET_PAGE] (state, page) {
+        Object.assign(state, {page})
     }
 
 }

@@ -1,29 +1,30 @@
-import SubmissionError from '../../../../error/SubmissionError'
-import fetch from '../../../../utils/fetch'
-import * as types from './mutation_types'
+import SubmissionError from '../../../../error/SubmissionError';
+import fetch from '../../../../utils/fetch';
+import * as types from './mutation_types';
+import toggleLoading from '../../../../utils/toggleLoading';
 
 export const reset = ({ commit }) => {
   commit(types.RESET)
 }
 
 export const retrieve = ({ commit }, id) => {
-  commit(types.TOGGLE_LOADING)
+  toggleLoading(commit)
 
   return fetch(`/api/user/${id}`)
     .then(response => response.json())
     .then((data) => {
-      commit(types.TOGGLE_LOADING)
+      toggleLoading(commit)
       commit(types.SET_RETRIEVED, data)
     })
     .catch((e) => {
-      commit(types.TOGGLE_LOADING)
+      toggleLoading(commit)
       commit(types.SET_ERROR, e.message)
     })
 }
 
 export const update = ({ commit, state }) => {
   commit(types.SET_ERROR, '')
-  commit(types.TOGGLE_LOADING)
+  toggleLoading(commit)
 
   return fetch(state.retrieved['@id'], {
     method: 'PUT',
@@ -32,11 +33,11 @@ export const update = ({ commit, state }) => {
   })
     .then(response => response.json())
     .then((data) => {
-      commit(types.TOGGLE_LOADING)
+      toggleLoading(commit)
       commit(types.SET_UPDATED, data)
     })
     .catch((e) => {
-      commit(types.TOGGLE_LOADING)
+      toggleLoading(commit)
 
       if (e instanceof SubmissionError) {
         commit(types.SET_VIOLATIONS, e.errors)

@@ -22,6 +22,7 @@
             <main class="main">
                 <Breadcrumb :list="list"/>
                 <div class="container-fluid">
+                    <loading-overlay />
                     <router-view></router-view>
                 </div>
             </main>
@@ -50,6 +51,7 @@
         Breadcrumb
     } from '@coreui/vue'
     import SidebarNav from './Sidebar';
+    import LoadingOverlay from './LoadingOverlay';
 
     export default {
         name: 'DefaultContainer',
@@ -63,7 +65,8 @@
             SidebarToggler,
             SidebarHeader,
             SidebarNav,
-            SidebarMinimizer
+            SidebarMinimizer,
+            LoadingOverlay
         },
         data () {
             return {
