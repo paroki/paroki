@@ -5,19 +5,19 @@
       <generator strategy="UUID"/>
     </id>
     <field name="kode" type="string" unique="true" length="3" nullable="false" column="kode"/>
-    <field name="noUrutKeuskupan" type="integer" nullable="true">
+    <field name="noUrut" type="integer" nullable="true">
       <options>
         <option name="default">0</option>
       </options>
     </field>
-    <field name="namaKeuskupan" type="string" length="100" nullable="true"/>
-    <field name="namaKeuskupanLatin" type="string" length="50" nullable="true"/>
-    <field name="alamatKeuskupan" type="string" length="150" nullable="true"/>
-    <field name="kotaKeuskupan" type="string" length="50" nullable="true"/>
-    <field name="teleponKeuskupan" type="string" length="50" nullable="true"/>
-    <field name="faxKeuskupan" type="string" length="50" nullable="true"/>
-    <field name="websiteKeuskupan" type="string" length="50" nullable="true"/>
-    <field name="emailKeuskupan" type="string" length="50" nullable="true"/>
+    <field name="nama" type="string" length="100" nullable="true"/>
+    <field name="namaLatin" type="string" length="50" nullable="true"/>
+    <field name="alamat" type="string" length="150" nullable="true"/>
+    <field name="kota" type="string" length="50" nullable="true"/>
+    <field name="telepon" type="string" length="50" nullable="true"/>
+    <field name="fax" type="string" length="50" nullable="true"/>
+    <field name="website" type="string" length="50" nullable="true"/>
+    <field name="email" type="string" length="50" nullable="true"/>
     <field name="namaUskupSaatIni" type="string" length="50" nullable="true"/>
     <unique-constraints>
       <unique-constraint name="ix_keuskupan_kode" columns="kode"/>

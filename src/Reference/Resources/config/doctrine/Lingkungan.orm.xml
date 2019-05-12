@@ -2,7 +2,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="SIAP\Reference\Entity\Lingkungan" table="ref_lingkungan">
     <id name="id" type="string" length="50" column="id">
-      <custom-id-generator class="SIAP\Reference\Doctrine\CustomIdGenerator"/>
+      <custom-id-generator class="Paroki\Reference\Doctrine\CustomIdGenerator"/>
     </id>
     <field name="kode" type="string" unique="true" length="50" nullable="true"/>
     <field name="nama" type="string" length="255" nullable="true"/>
@@ -21,6 +21,11 @@
     <many-to-one field="bagian" target-entity="SIAP\Reference\Entity\JenisWilayah">
       <join-columns>
         <join-column name="wilayah_bagian_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="paroki" target-entity="SIAP\Reference\Entity\Paroki">
+      <join-columns>
+        <join-column name="paroki_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
   </entity>
