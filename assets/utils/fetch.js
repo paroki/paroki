@@ -1,5 +1,5 @@
-import SubmissionError from '../error/SubmissionError'
-import { ENTRYPOINT } from '../config/entrypoint';
+import SubmissionError from './SubmissionError'
+export const ENTRYPOINT = document.getElementById('api-entrypoint').innerText.trim();
 
 const MIME_TYPE = 'application/ld+json'
 

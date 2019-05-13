@@ -1,0 +1,10 @@
+SIAP\Reference\Entity\Paroki:
+    attributes:
+        id:
+            groups: ['read']
+        nama:
+            groups: ['read', 'write', 'paroki']
+        namaGereja:
+            groups: ['read', 'write', 'paroki']
+        keuskupan:
+            groups: ['read', 'write', 'paroki']

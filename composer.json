@@ -65,6 +65,7 @@
         "symfony/yaml": "4.2.*"
     },
     "require-dev": {
+        "behat/symfony2-extension": "^2.1",
         "hautelook/alice-bundle": "^2.5",
         "symfony/apache-pack": "^1.0",
         "symfony/maker-bundle": "^1.11",

@@ -1,21 +1,23 @@
 <template>
     <v-data-table
-        must-sort
         :headers="headers"
         :items="items"
         :pagination.sync="pagination"
         :total-items="totalItems"
         :rows-per-page-items="pagination.rowsPerPageItems"
         :loading="isLoading"
+        min-height="400px"
     >
         <template v-slot:items="props">
             <td v-for="(header, i) in headers">
                     <span v-if="header.value==='actions'">
                         <v-icon
+                            color="green"
                             small
                             class="mr-2"
                             @click="editAction(props.item)"
                             v-if="actions.edit"
+                            fab
                         >
                             edit
                         </v-icon>
@@ -32,19 +34,6 @@
                     </span>
             </td>
         </template>
-        <template v-slot:actions>
-            <v-btn
-                :to="{ name: 'UserCreate' }"
-                color="info"
-                align-right
-                small
-                right
-                round
-            >
-                <v-icon left>arrow_back_ios</v-icon>
-                new
-            </v-btn>
-        </template>
 
     </v-data-table>
 </template>
@@ -53,12 +42,21 @@
     export default {
         name: 'c-table',
         props: {
+            items: {
+                type: [Array, Object],
+                required: true
+            },
             headers: {
                 type: [Array, Object],
                 required: true
             },
+            loading: {
+                type: Boolean,
+                default: false
+            },
+            // pager getter/setter name
             pager: {
-                type: [Array, Object],
+                type: String,
                 required: true
             },
             pageAction: {
@@ -76,6 +74,10 @@
             actions: {
                 type: [Array, Object],
                 default: () => {}
+            },
+            totalItems: {
+                type: Number,
+                default: 0
             }
         },
         data: () => {
@@ -85,7 +87,7 @@
         watch: {
             pagination: {
                 handler() {
-                    this.$store.dispatch('user/list/default');
+                    this.pageAction();
                 },
                 deep: true
             }
@@ -93,18 +95,12 @@
         computed: {
             pagination: {
                 get: function(){
-                    return this.$store.getters['user/list/pager'];
+                    return this.$store.getters[this.pager];
                 },
                 set: function(value){
                     value.rowsPerPage = 5;
-                    this.$store.commit('user/list/pager',value);
+                    this.$store.commit(this.pager,value);
                 }
-            },
-            items(){
-                return this.$store.getters['user/list/items'];
-            },
-            totalItems(){
-                return this.$store.getters['user/list/view']['totalItems'];
             },
             isLoading() {
                 return this.$store.getters['user/list/isLoading'];

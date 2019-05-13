@@ -1,8 +1,18 @@
 SIAP\User\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: email
+            message: 'siap.validation.email.unique'
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: username
+            message: 'siap.validation.username.unique'
     properties:
         nama:
             - NotBlank: { message: "siap.validation.nama" }
         username:
-            - NotBlank: { message: "siap.validation.username" }
+            - NotBlank: { message: "siap.validation.username.blank" }
         email:
-            - NotBlank: { message: "siap.validation.email" }
+            - NotBlank: { message: "siap.validation.email.blank" }
+            - Email: { message: "siap.validation.email.format" }
+        plainPassword:
+            - NotBlank: { message: 'siap.validation.password.blank', groups: ['password']}

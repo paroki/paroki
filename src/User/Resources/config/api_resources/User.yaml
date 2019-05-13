@@ -1,13 +1,14 @@
 SIAP\User\Entity\User:
     attributes:
         normalization_context:
-            groups: ['read']
+            groups: ['read','paroki']
         denormalization_context:
             groups: ['write']
     collectionOperations:
         get:
             filters:
                 - siap.user.orders.user
+            groups: ['read']
         post: ~
     itemOperations:
         get: ~
@@ -15,5 +16,3 @@ SIAP\User\Entity\User:
         delete: ~
     properties:
         paroki:
-            subresource:
-                resourceClass: SIAP\Reference\Entity\Paroki

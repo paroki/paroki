@@ -7,6 +7,7 @@
         <v-content>
             <v-container fluid fill-height class="grey lighten-3">
                 <LoadingOverlay></LoadingOverlay>
+                <c-snackbar/>
                 <v-layout
                     align-left
                 >

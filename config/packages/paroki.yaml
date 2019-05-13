@@ -7,9 +7,11 @@ fos_user:
         sender_name: "Anthonius Munthi"
 
 framework:
-    translator: ~
     templating:
         engines: twig
+    default_locale: 'id'
+    translator:
+        fallbacks: ['id']
 
 api_platform:
     path_segment_name_generator: 'siap.core.api.operation_path_resolver'
@@ -21,3 +23,4 @@ doctrine:
     dbal:
         types:
             uuid:  Ramsey\Uuid\Doctrine\UuidType
+

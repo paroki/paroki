@@ -31,15 +31,15 @@ class KodeGenerator implements EventSubscriber
 
     public function prePersist(LifecycleEventArgs $args)
     {
-        $this->doProcess($args);
+        $this->doProcess($args, Events::prePersist);
     }
 
     public function postPersist(LifecycleEventArgs $args)
     {
-        $this->doProcess($args);
+        $this->doProcess($args, Events::prePersist);
     }
 
-    private function doProcess(LifecycleEventArgs $args)
+    private function doProcess(LifecycleEventArgs $args, $event)
     {
         $entity = $args->getObject();
         if ($entity instanceof Lingkungan) {
@@ -48,6 +48,10 @@ class KodeGenerator implements EventSubscriber
 
         if (method_exists($entity, 'setGuid')) {
             $entity->setGuid(Uuid::uuid4());
+        }
+
+        if(method_exists($entity,'setParoki') && $event==Events::prePersist){
+            $this->setParoki($entity);
         }
     }
 
@@ -58,5 +62,10 @@ class KodeGenerator implements EventSubscriber
             $entity->getKode(),
         ]);
         $entity->setId($kode);
+    }
+
+    private function setParoki($entity)
+    {
+
     }
 }

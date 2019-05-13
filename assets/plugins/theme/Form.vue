@@ -7,6 +7,8 @@
                     :label="field.label"
                     :name="field.name"
                     :placeholder="field.placeholder"
+                    :error="isInvalid(field.name)"
+                    :error-messages="getError(field.name)"
                     v-model="item[field.name]"
                     v-if="field.type === 'text'"
                 ></v-text-field>
@@ -17,6 +19,8 @@
                     type="password"
                     v-model="item[field.name]"
                     v-if="field.type === 'password'"
+                    :error="isInvalid(field.name)"
+                    :error-messages="getError(field.name)"
                 ></v-text-field>
                 <c-datepicker
                     v-if="field.type === 'date'"
@@ -24,11 +28,15 @@
                     :label="field.label"
                     :format="field.format"
                     :data="item"
+                    :error="isInvalid(field.name)"
+                    :error-messages="getError(field.name)"
                 ></c-datepicker>
                 <v-radio-group
                     v-model="item[field.name]"
                     v-if="field.type === 'radio'"
                     :label="field.label"
+                    :error="isInvalid(field.name)"
+                    :error-messages="getError(field.name)"
                 >
                     <v-radio
                         v-for="(option, index) in field.options"
@@ -48,12 +56,16 @@
                         :key="`${field.name}_${index}`"
                         :label="option.label"
                         :value="option.value"
+                        :error="isInvalid(field.name)"
+                        :error-messages="getError(field.name)"
                     ></v-checkbox>
                 </v-item-group>
                 <c-autocomplete
                     v-if="field.type === 'autocomplete'"
                     :item="item[field.name]"
                     :label="field.label"
+                    :error="isInvalid(field.name)"
+                    :error-messages="getError(field.name)"
                 ></c-autocomplete>
             </div>
         </template>
@@ -93,6 +105,9 @@
         methods: {
             isInvalid (key) {
                 return Object.keys(this.violations).length > 0 && this.violations[key]
+            },
+            getError(key){
+                return this.violations[key];
             }
         }
 

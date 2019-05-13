@@ -1,0 +1,6 @@
+SIAP\Reference\Entity\Keuskupan:
+    attributes:
+        id:
+            groups: ['read']
+        nama:
+            groups: ['read', 'paroki']
