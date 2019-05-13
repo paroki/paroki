@@ -66,7 +66,6 @@
     }
 </style>
 <script>
-    import { mapGetters } from 'vuex';
     export default {
         name: 'c-table',
         inheritAttrs: false,

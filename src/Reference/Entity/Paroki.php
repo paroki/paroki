@@ -45,9 +45,17 @@ class Paroki
      */
     private $kode;
 
-    private $keuskupan;
+    /**
+     * @var Keuskupan
+     */
+    protected $keuskupan;
 
     private $id;
+
+    public function __toString()
+    {
+        return $this->getNama(). ' / '.$this->getNamaGereja();
+    }
 
     public function getKode(): ?string
     {
@@ -198,11 +206,18 @@ class Paroki
         return $this->id;
     }
 
+    /**
+     * @return Keuskupan|null
+     */
     public function getKeuskupan(): ?Keuskupan
     {
         return $this->keuskupan;
     }
 
+    /**
+     * @param Keuskupan|null $keuskupan
+     * @return Paroki
+     */
     public function setKeuskupan(?Keuskupan $keuskupan): self
     {
         $this->keuskupan = $keuskupan;

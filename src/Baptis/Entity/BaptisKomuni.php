@@ -31,8 +31,6 @@ class BaptisKomuni
 
     private $id;
 
-    private $baptis;
-
     private $paroki;
 
     private $register;
@@ -47,6 +45,7 @@ class BaptisKomuni
     {
         $this->dokumen = new ArrayCollection();
     }
+
 
     public function getRegister(): ?string
     {

@@ -1,70 +1,40 @@
-export default {
-    items: [
-        {
-            name: 'Dashboard',
-            url: '/dashboard',
-            icon: 'icon-speedometer',
-            badge: {
-                variant: 'primary',
-                text: 'NEW'
+export default [
+    {
+        name: 'Dashboard',
+        icon: 'dashboard'
+    },
+    {
+        name: 'Sakramentalia',
+        children: [
+            {
+                name: 'Baptis',
+                icon: 'icon-user'
+            },
+            {
+                name: 'Perkawinan',
+                icon: 'icon-people',
+            },
+            {
+                name: 'Komuni',
+                icon: 'icon-check'
+            },
+            {
+                name: 'Viaticum',
+                url: '/viaticum',
+                icon: 'icon-chemistry'
             }
-        },
-        {
-            title: true,
-            name: 'Sakramentalia',
-            class: '',
-            wrapper: {
-                element: '',
-                attributes: {}
+        ]
+    },
+    {
+        name: 'Administrasi',
+        icon: 'icon-folder-alt',
+        children: [
+            {
+                name: 'UserList',
+                label: 'User',
+                icon: 'people',
+                url: '/user/'
             }
-        },
-        {
-            name: 'Baptis',
-            url: '/baptis',
-            icon: 'icon-user',
-            badge: {
-                variant: 'primary'
-            }
-        },
-        {
-            name: 'Perkawinan',
-            url: '/perkawinan',
-            icon: 'icon-people',
-            badge: {
-                variant: 'primary'
-            }
-        },
-        {
-            name: 'Komuni',
-            url: '/komuni',
-            icon: 'icon-check',
-            badge: {
-                variant: 'primary'
-            }
-        },
-        {
-            name: 'Viaticum',
-            url: '/viaticum',
-            icon: 'icon-chemistry',
-            badge: {
-                variant: 'primary'
-            }
-        },
-        {
-            name: 'Data Umat',
-            url: '/under-construction',
-            icon: 'icon-folder-alt'
-        },
-        {
-            name: 'Administrasi',
-            url: '#',
-            children: [
-                {
-                    name: 'Pengguna',
-                    icon: 'icon-key',
-                    url: '/user/'
-                }
-            ]
-        }
-    ]
-}
+        ]
+    }
+];

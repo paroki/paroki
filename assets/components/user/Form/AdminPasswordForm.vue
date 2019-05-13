@@ -1,0 +1,53 @@
+<template>
+    <v-flex>
+        <c-form
+            :fields="fields"
+            :values="values"
+            :errors="violations"
+        ></c-form>
+        <v-btn
+            @click="onSendForm"
+            color="success"
+        >
+            <v-icon left>cloud_upload</v-icon>
+            Update Password
+        </v-btn>
+    </v-flex>
+</template>
+
+<script>
+    import { mapGetters, mapActions } from 'vuex';
+
+    export default {
+        name: 'AdminPasswordForm',
+        computed: {
+            ...mapGetters({
+                violations: 'user/update/violations',
+                loading: 'user/update/isLoading'
+            })
+        },
+        data: () => {
+            return {
+                fields: [
+                    { name: 'plainPassword', type: 'password', label: 'Masukkan password baru', required: true},
+                    { name: 'plainPasswordConfirm', type: 'password', label: 'Masukkan ulang password baru'},
+                ],
+                values: {
+                    plainPassword: null,
+                    plainPasswordConfirm: null,
+                }
+            }
+        },
+        methods: {
+            ...mapActions({
+                update: 'user/update/update'
+            }),
+            onSendForm(){
+                const payload = {
+                    plainPassword: this.values.plainPassword
+                };
+                this.update(payload);
+            }
+        }
+    }
+</script>

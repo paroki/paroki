@@ -8,6 +8,10 @@ login_check:
     path: /api/login_check
     methods: [POST]
 
+bundle_routes:
+    resource: '@ReferenceBundle/Controller/'
+    type: annotation
+
 core_controllers:
     resource: ../../Controller/
     type: annotation

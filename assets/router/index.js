@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import DefaultContainer from '../components/DefaultContainer';
+import DefaultContainer from '../plugins/siap/DefaultContainer';
 import Login from '../components/Login';
 import Dashboard from '../components/Dashboard';
 import UnderConstruction from '../components/pages/UnderConstruction';
@@ -20,8 +20,10 @@ let router =  new VueRouter({
                 requiresAuth: false
             }
         },
+
         {
             path: '/',
+            name: 'Dashboard',
             redirect: '/dashboard',
             component: DefaultContainer,
             meta: {

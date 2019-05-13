@@ -1,0 +1,6 @@
+services:
+    siap.reference.filters.paroki:
+        parent: 'api_platform.doctrine.orm.search_filter'
+        arguments: [{ nama: ipartial, namaGereja: ipartial  }]
+        tags: ['api_platform.filter']
+

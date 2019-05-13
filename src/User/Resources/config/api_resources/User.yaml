@@ -5,9 +5,15 @@ SIAP\User\Entity\User:
         denormalization_context:
             groups: ['write']
     collectionOperations:
-        get: ~
+        get:
+            filters:
+                - siap.user.orders.user
         post: ~
     itemOperations:
         get: ~
         put: ~
         delete: ~
+    properties:
+        paroki:
+            subresource:
+                resourceClass: SIAP\Reference\Entity\Paroki

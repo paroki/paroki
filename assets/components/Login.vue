@@ -1,102 +1,76 @@
 <template>
-    <div class="app flex-row align-items-center">
-        <loading-overlay />
-        <div class="container">
-            <b-row class="justify-content-center">
-                <b-col md="8">
-                    <b-card-group>
-                        <b-card no-body class="p-4">
-                            <b-card-body>
-                                <b-form>
-                                    <h1>Login</h1>
-                                    <p class="text-muted">Masuk ke dalam applikasi SIAP</p>
-                                    <b-alert v-if="error" variant="danger" show>
-                                        {{error}}
-                                    </b-alert>
-                                    <b-input-group class="mb-3">
-                                        <b-input-group-prepend><b-input-group-text><i class="icon-user"></i></b-input-group-text></b-input-group-prepend>
-                                        <b-form-input
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Username"
-                                            autocomplete="username email"
-                                            v-model="username"
-                                        />
-                                    </b-input-group>
-                                    <b-input-group class="mb-4">
-                                        <b-input-group-prepend><b-input-group-text><i class="icon-lock"></i></b-input-group-text></b-input-group-prepend>
-                                        <b-form-input
-                                            v-model="password"
-                                            type="password"
-                                            class="form-control"
-                                            placeholder="Password"
-                                            autocomplete="current-password"
-                                        />
-                                    </b-input-group>
-                                    <b-row>
-                                        <b-col cols="6">
-                                            <b-button
-                                                @click="handleLogin"
-                                                type="button"
-                                                variant="primary"
-                                                class="px-4">
-                                                <i class="icon icon-login"></i>
-                                                Login
-                                            </b-button>
-                                        </b-col>
-                                    </b-row>
-                                </b-form>
-                            </b-card-body>
-                        </b-card>
-                        <b-card no-body class="text-white bg-primary py-5 d-md-down-none" style="width:44%">
-                            <b-card-body class="text-center">
-                                <div>
-                                    <h2>SIAP</h2>
-                                    <p>Selamat datang di: <br/><b>Sistim Informasi Antar Paroki</b></p>
-                                </div>
-                            </b-card-body>
-                        </b-card>
-                    </b-card-group>
-                </b-col>
-            </b-row>
-        </div>
-    </div>
+    <v-app id="inspire">
+        <v-content>
+            <v-container fluid fill-height>
+                <v-layout align-center justify-center>
+                    <v-flex xs12 sm8 md4>
+                        <v-card class="elevation-12">
+                            <v-toolbar dark color="primary">
+                                <v-toolbar-title>Login form</v-toolbar-title>
+                                <v-spacer></v-spacer>
+                            </v-toolbar>
+                            <v-card-text>
+                                <v-form>
+                                    <v-text-field
+                                        prepend-icon="person"
+                                        name="username"
+                                        label="Enter your username"
+                                        v-model="username"
+                                        type="text"></v-text-field>
+
+                                    <v-text-field
+                                        id="current-password"
+                                        prepend-icon="lock"
+                                        name="currentPassword"
+                                        label="Enter your current password"
+                                        v-model="currentPassword"
+                                        type="password"></v-text-field>
+                                </v-form>
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn @click="handleLogin" color="primary">Login</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
+            </v-container>
+        </v-content>
+    </v-app>
 </template>
 
 <script>
-    import { mapActions, mapGetters } from 'vuex';
-    import LoadingOverlay from './LoadingOverlay';
-
+    import { mapGetters, mapActions } from 'vuex';
     export default {
-        name: 'Login',
-        components: {
-            LoadingOverlay
-        },
-        data(){
-            return {
-                username: null,
-                password: null
-            };
+        data: () => ({
+            drawer: null,
+            username: null,
+            currentPassword: null
+        }),
+        props: {
+            source: String,
+            default: 'https://github.com/paroki/siap.git'
         },
         computed: {
             ...mapGetters({
-                isLoading: 'siap/isLoading',
-                token: 'siap/token',
-                error: 'siap/error'
+
             })
         },
         methods: {
             ...mapActions({
-                login: 'siap/login',
-                logout: 'siap/logout'
+                login: 'siap/login'
             }),
             handleLogin(){
-                this.login({
+                const payload = {
                     username: this.username,
-                    password: this.password
-                }).then(() => {
-                    this.$router.push("/");
-                });
+                    password: this.currentPassword
+                };
+                console.log(payload);
+                this.login(payload)
+                    .then(() => {
+                        this.$router.push('/');
+                    })
+                ;
             }
         }
     }

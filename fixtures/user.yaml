@@ -4,4 +4,4 @@ SIAP\User\Entity\User:
         username: <userName()>
         email: <email()>
         plainPassword: 123password
-        paroki: '@pkrbt'
+        paroki: '@paroki'

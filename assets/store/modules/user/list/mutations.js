@@ -7,8 +7,13 @@ export default {
             isLoading: false,
             items: [],
             view: [],
-            total: 0,
-            page: null
+            pager: {
+                descending: true,
+                page: 1,
+                rowsPerPage: 5,
+                sortBy: null,
+                rowsPerPageItems: [5]
+            }
         })
     },
 
@@ -28,12 +33,7 @@ export default {
         Object.assign(state, { view })
     },
 
-    [types.SET_TOTAL] (state, total) {
-        Object.assign(state, { total })
+    [types.SET_PAGER] (state, pager) {
+        Object.assign(state, { pager })
     },
-
-    [types.SET_PAGE] (state, page) {
-        Object.assign(state, {page})
-    }
-
 }

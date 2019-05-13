@@ -9,8 +9,13 @@ export default {
         isLoading: false,
         items: [],
         view: [],
-        total: 0,
-        page: null
+        pager: {
+            descending: true,
+            page: 1,
+            rowsPerPage: 5,
+            sortBy: null,
+            rowsPerPageItems: [5]
+        },
     },
     actions,
     getters,

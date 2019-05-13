@@ -1,50 +1,66 @@
 <template>
-    <b-card class="animated fadeIn">
-        <div slot="header">
-            {{retrieved && retrieved['nama']}}
-        </div>
-        <UserForm
-            v-if="item"
-            :handle-submit="onSendForm"
-            :handle-update-field="updateField"
-            :values="item"
-            :errors="violations"
-            :initial-values="retrieved"
-            :fields="fields"
-        />
-        <div slot="footer">
-            <b-button @click="onSendForm" size="sm" variant="success">
-                <i class="fa fa-save"></i>
-                Simpan
-            </b-button>
-            <router-link
-                v-if="item"
-                itemtype="button"
-                :to="{ name: 'UserList' }"
-                class="btn btn-sm btn-primary">
-                Kembali
-            </router-link>
-        </div>
-    </b-card>
+    <v-flex md12 fill-height>
+        <v-toolbar color="cyan" dark tabs>
+            <v-toolbar-title centered>{{ retrieved && retrieved.nama }}</v-toolbar-title>
+            <template v-slot:extension>
+                <v-tabs
+                    color="cyan"
+                    dark
+                    v-model="tab"
+                >
+                    <v-tabs-slider color="yellow"></v-tabs-slider>
+
+                    <v-tab href="#tab-profil">
+                        <v-icon>account_box</v-icon>
+                        Profil
+                    </v-tab>
+
+                    <v-tab href="#tab-password">
+                        <v-icon>lock</v-icon>
+                        Password
+                    </v-tab>
+                </v-tabs>
+            </template>
+        </v-toolbar>
+        <v-tabs-items v-model="tab">
+            <v-tab-item value="tab-profil" darken10>
+                <v-card flat>
+                    <v-card-text>
+                        <profile-form></profile-form>
+                    </v-card-text>
+                </v-card>
+            </v-tab-item>
+            <v-tab-item value="tab-password">
+                <v-card flat>
+                    <v-card-text>
+                        <AdminPasswordForm
+                            v-if="user.hasRole('ROLE_ADMIN')"
+                        ></AdminPasswordForm>
+                    </v-card-text>
+                </v-card>
+            </v-tab-item>
+        </v-tabs-items>
+    </v-flex>
+
 </template>
 
 <script>
     import { mapActions, mapGetters } from 'vuex'
-    import UserForm from './Form.vue'
+    import ProfileForm from './ProfileForm.vue'
+    import User from "../../utils/user";
+    import AdminPasswordForm from './Form/AdminPasswordForm';
 
     export default {
         components: {
-            UserForm
+            ProfileForm,
+            AdminPasswordForm
         },
 
         data () {
             return {
                 item: {},
-                fields: [
-                    { name: 'nama', type: 'text', label: 'Nama Lengkap Pengguna', required: true},
-                    { name: 'username', type: 'text', label: 'Username yang digunakan untuk login'},
-                    { name: 'email', type: 'text', label: 'Email pengguna'},
-                ]
+                tab: null,
+                user: new User()
             }
         },
 
@@ -62,6 +78,10 @@
             })
         },
 
+        created () {
+            this.retrieve(decodeURIComponent(this.$route.params.id))
+        },
+
         watch: {
             // eslint-disable-next-line object-shorthand,func-names
             deleted: function (deleted) {
@@ -73,13 +93,7 @@
             }
         },
 
-        beforeDestroy () {
-            this.reset()
-        },
 
-        created () {
-            this.retrieve(decodeURIComponent(this.$route.params.id))
-        },
 
         methods: {
             ...mapActions({
@@ -92,25 +106,7 @@
                 updateRetrieved: 'user/update/updateRetrieved'
             }),
 
-            del () {
-                if (window.confirm('Are you sure you want to delete this user ?')) {
-                    this.deleteItem(this.retrieved)
-                }
-            },
 
-            reset () {
-                this.updateReset()
-                this.delReset()
-                this.createReset()
-            },
-
-            onSendForm () {
-                this.update()
-            },
-
-            updateField (field, value) {
-                this.updateRetrieved({ [field]: value })
-            }
         }
     }
 </script>

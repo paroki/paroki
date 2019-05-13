@@ -1,6 +1,24 @@
+SIAP\Baptis\Entity\BaptisKomuni:
+    shortName: baptis-komuni
+SIAP\Baptis\Entity\BaptisKrisma:
+    shortName: baptis-krisma
+SIAP\Baptis\Entity\BaptisPerkawinan:
+    shortName: baptis-perkawinan
 SIAP\Baptis\Entity\Baptis:
+    shortName: baptis
     collectionOperations:
         post: ~
         get:
             filters:
                 - 'siap.baptis.filters.search'
+    properties:
+        komuni:
+            subresource:
+                resourceClass: SIAP\Baptis\Entity\BaptisKomuni
+        krisma:
+            subresource:
+                resourceClass: SIAP\Baptis\Entity\BaptisKrisma
+        perkawinan:
+            subresource:
+                resourceClass: SIAP\Baptis\Entity\BaptisPerkawinan
+
