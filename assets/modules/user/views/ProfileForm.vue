@@ -7,21 +7,6 @@
             :initial-values="retrieved"
         >
         </c-form>
-        <v-btn
-            :to="{ name: 'UserList' }"
-            color="info"
-        >
-            <v-icon left>arrow_back_ios</v-icon>
-            Kembali
-        </v-btn>
-        <v-btn
-            @click="onSendForm"
-            color="success"
-	    :loading="isLoading"
-        >
-            <v-icon left>cloud_upload</v-icon>
-            Simpan
-        </v-btn>
     </v-flex>
 </template>
 <script>
@@ -43,34 +28,12 @@
             }
         },
         computed: {
-            ...mapGetters({
-                isLoading: 'siap/isLoading',
-                error: 'user/update/error',
-                deleteError: 'user/del/error',
-                deleteLoading: 'user/del/isLoading',
-                created: 'user/create/created',
-                deleted: 'user/del/deleted',
-                retrieved: 'user/update/retrieved',
-                updated: 'user/update/updated',
-                violations: 'user/update/violations'
-            }),
             // eslint-disable-next-line
             item () {
                 return this.initialValues || this.values
             }
         },
         methods: {
-            ...mapActions({
-                createReset: 'user/create/reset',
-                deleteItem: 'user/del/del',
-                delReset: 'user/del/reset',
-                retrieve: 'user/update/retrieve',
-                updateReset: 'user/update/reset',
-                update: 'user/update/update',
-                updateRetrieved: 'user/update/updateRetrieved',
-                snackbarSuccess: 'siap/snackbarSuccess',
-                snackbarError: 'siap/snackbarError',
-            }),
             beforeDestroy () {
                 this.reset()
             },
@@ -89,17 +52,6 @@
                 this.updateReset()
                 this.delReset()
                 this.createReset()
-            },
-
-            onSendForm () {
-                this.update()
-                    .then(() => {
-                        if(!this.error){
-                            this.snackbarSuccess('Perubahan data berhasil disimpan!');
-                        }else{
-                            this.snackbarError();
-                        }
-                    });
             }
         }
     }

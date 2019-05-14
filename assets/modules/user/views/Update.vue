@@ -28,6 +28,21 @@
                     <v-card-text>
                         <profile-form></profile-form>
                     </v-card-text>
+                    <v-btn
+                        :to="{ name: 'UserList' }"
+                        color="info"
+                    >
+                        <v-icon left>arrow_back_ios</v-icon>
+                        Kembali
+                    </v-btn>
+                    <v-btn
+                        @click="onSendForm"
+                        color="success"
+                        :loading="isLoading"
+                    >
+                        <v-icon left>cloud_upload</v-icon>
+                        Simpan
+                    </v-btn>
                 </v-card>
             </v-tab-item>
             <v-tab-item value="tab-password">
@@ -82,6 +97,10 @@
             this.retrieve(decodeURIComponent(this.$route.params.id))
         },
 
+        destroyed(){
+            this.updateReset();
+        },
+
         watch: {
             // eslint-disable-next-line object-shorthand,func-names
             deleted: function (deleted) {
@@ -103,8 +122,20 @@
                 retrieve: 'user/update/retrieve',
                 updateReset: 'user/update/reset',
                 update: 'user/update/update',
-                updateRetrieved: 'user/update/updateRetrieved'
+                updateRetrieved: 'user/update/updateRetrieved',
+                snackbarSuccess: 'siap/snackbarSuccess',
+                snackbarError: 'siap/snackbarError',
             }),
+            onSendForm () {
+                this.update()
+                    .then(() => {
+                        if(!this.error){
+                            this.snackbarSuccess('Perubahan data berhasil disimpan!');
+                        }else{
+                            this.snackbarError();
+                        }
+                    });
+            }
         }
     }
 </script>

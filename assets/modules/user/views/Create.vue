@@ -1,30 +1,30 @@
 <template>
-    <div>
-        <h1>New User</h1>
+    <v-flex md12>
+        <v-toolbar color="cyan" dark>
+            <v-toolbar-title centered>Pengguna Baru</v-toolbar-title>
+        </v-toolbar>
 
-        <div
-            v-if="isLoading"
-            class="alert alert-info"
-            role="status">Loading...</div>
-        <div
-            v-if="error"
-            class="alert alert-danger"
-            role="alert">
-      <span
-          class="fa fa-exclamation-triangle"
-          aria-hidden="true" /> {{ error }}
-        </div>
-
-        <UserForm
-            :handle-submit="onSendForm"
-            :handle-update-field="updateField"
-            :values="item"
-            :errors="violations" />
-
-        <router-link
-            :to="{ name: 'UserList' }"
-            class="btn btn-default">Back to list</router-link>
-    </div>
+        <v-card flat>
+            <v-card-text>
+                <user-form></user-form>
+            </v-card-text>
+            <v-btn
+                :to="{ name: 'UserList' }"
+                color="info"
+            >
+                <v-icon left>arrow_back_ios</v-icon>
+                Kembali
+            </v-btn>
+            <v-btn
+                @click="onSendForm"
+                color="success"
+                :loading="isLoading"
+            >
+                <v-icon left>cloud_upload</v-icon>
+                Simpan
+            </v-btn>
+        </v-card>
+    </v-flex>
 </template>
 
 <script>

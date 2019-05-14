@@ -28,7 +28,6 @@ export const update = ({ commit, state }, payload) => {
     }
     commit(types.SET_ERROR, '')
     commit(types.TOGGLE_LOADING);
-    console.log(payload);
     return fetch(state.retrieved['@id'], {
         method: 'PUT',
         headers: new Headers({ 'Content-Type': 'application/ld+json' }),

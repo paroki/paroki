@@ -65,7 +65,6 @@
                     username: this.username,
                     password: this.currentPassword
                 };
-                console.log(payload);
                 this.login(payload)
                     .then(() => {
                         this.$router.push('/');

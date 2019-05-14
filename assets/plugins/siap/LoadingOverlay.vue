@@ -43,7 +43,6 @@
         },
         methods: {
             onCancel() {
-                console.log('User cancelled the loader.')
             }
         }
     }

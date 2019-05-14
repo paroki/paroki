@@ -6,7 +6,7 @@ export const create = ({ commit }, values) => {
   commit(types.USER_CREATE_SET_ERROR, '')
   commit(types.USER_CREATE_TOGGLE_LOADING)
 
-  return fetch('user', { method: 'POST', body: JSON.stringify(values) })
+  return fetch('/api/user', { method: 'POST', body: JSON.stringify(values) })
     .then((response) => {
       commit(types.USER_CREATE_TOGGLE_LOADING)
 
