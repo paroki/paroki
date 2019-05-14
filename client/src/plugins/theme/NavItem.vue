@@ -11,7 +11,7 @@
         </v-list-tile-content>
     </v-list-tile>
     <v-list-group
-        prepend-icon="account_circle"
+        :prepend-icon="item.icon"
         v-else-if="item.hasChildren"
     >
             <template v-slot:activator>

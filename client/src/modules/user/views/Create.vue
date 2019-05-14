@@ -16,7 +16,7 @@
                 :to="{ name: 'UserList' }"
                 color="info"
             >
-                <v-icon left>arrow_back_ios</v-icon>
+                <v-icon left>fas fa-angle-left</v-icon>
                 Kembali
             </v-btn>
             <v-btn
@@ -24,7 +24,7 @@
                 color="success"
                 :loading="isLoading"
             >
-                <v-icon left>cloud_upload</v-icon>
+                <v-icon left>fas fa-save</v-icon>
                 Simpan
             </v-btn>
         </v-card>
@@ -73,7 +73,7 @@
 
             onSendForm () {
                 this.create(this.item)
-            }
+            },
         }
     }
 </script>

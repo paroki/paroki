@@ -2,7 +2,6 @@
     <v-flex md-12 fill-height>
         <v-toolbar color="cyan" dark>
             <v-toolbar-title centered>Daftar User</v-toolbar-title>
-
         </v-toolbar>
         <v-card>
             <v-card-text>
@@ -26,7 +25,7 @@
                     left
                     fab
                 >
-                    <v-icon>add</v-icon>
+                    <v-icon>fas fa-plus</v-icon>
                 </v-btn>
             </v-card-text>
         </v-card>
@@ -64,6 +63,9 @@
                 actions: {
                     edit: {
                         url: urlEdit
+                    },
+                    delete: {
+
                     }
                 },
                 perPage: null,
