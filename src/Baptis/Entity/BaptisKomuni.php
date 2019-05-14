@@ -46,7 +46,6 @@ class BaptisKomuni
         $this->dokumen = new ArrayCollection();
     }
 
-
     public function getRegister(): ?string
     {
         return $this->register;

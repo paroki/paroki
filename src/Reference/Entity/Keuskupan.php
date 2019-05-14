@@ -175,5 +175,4 @@ class Keuskupan
     {
         return $this->id;
     }
-
 }

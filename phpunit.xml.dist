@@ -26,6 +26,8 @@
             <exclude>
                 <directory>src/*/Tests</directory>
                 <directory>src/*/Spec</directory>
+                <directory>src/*/Test</directory>
+                <directory>src/Behat</directory>
             </exclude>
         </whitelist>
     </filter>

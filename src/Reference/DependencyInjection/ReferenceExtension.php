@@ -36,6 +36,5 @@ class ReferenceExtension extends Extension
     {
         $loader = new YamlRoutingLoader($locator);
         $loader->load(__DIR__.'/../Resources/config/routes.yaml');
-
     }
 }

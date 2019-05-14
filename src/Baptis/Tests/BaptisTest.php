@@ -39,12 +39,11 @@ class BaptisTest extends DatabaseTestCase
 
     public function findAndDelete($kode)
     {
-        $em = $this->em;
+        $em   = $this->em;
         $data = $this->getRepository(Baptis::class)
-            ->findOneBy(['kodeBaptis' => $kode])
-        ;
+            ->findOneBy(['kodeBaptis' => $kode]);
 
-        if($data instanceof Baptis){
+        if ($data instanceof Baptis) {
             $em->remove($data);
             $em->flush();
         }
@@ -52,11 +51,9 @@ class BaptisTest extends DatabaseTestCase
 
     public function testRelation()
     {
-        $em = $this->em;
-        $kode = '999.999.I.1.1';
+        $em     = $this->em;
+        $kode   = '999.999.I.1.1';
         $paroki = $this->getParoki();
-
-
 
         $this->findAndDelete($kode);
         $ob = new Baptis();

@@ -54,7 +54,7 @@ class Paroki
 
     public function __toString()
     {
-        return $this->getNama(). ' / '.$this->getNamaGereja();
+        return $this->getNama().' / '.$this->getNamaGereja();
     }
 
     public function getKode(): ?string
@@ -206,16 +206,12 @@ class Paroki
         return $this->id;
     }
 
-    /**
-     * @return Keuskupan|null
-     */
     public function getKeuskupan(): ?Keuskupan
     {
         return $this->keuskupan;
     }
 
     /**
-     * @param Keuskupan|null $keuskupan
      * @return Paroki
      */
     public function setKeuskupan(?Keuskupan $keuskupan): self
@@ -224,5 +220,4 @@ class Paroki
 
         return $this;
     }
-
 }

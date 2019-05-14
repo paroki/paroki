@@ -50,7 +50,7 @@ class KodeGenerator implements EventSubscriber
             $entity->setGuid(Uuid::uuid4());
         }
 
-        if(method_exists($entity,'setParoki') && $event==Events::prePersist){
+        if (method_exists($entity, 'setParoki') && Events::prePersist === $event) {
             $this->setParoki($entity);
         }
     }
@@ -66,6 +66,5 @@ class KodeGenerator implements EventSubscriber
 
     private function setParoki($entity)
     {
-
     }
 }
