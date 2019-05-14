@@ -34,17 +34,27 @@ jobs:
 before_install:
   # remove xdebug when not collecting code coverage
   - if [[ $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini || echo "xdebug not available"; fi;
+  - sudo rm -rf ~/.nvm
+  - curl -sL "https://deb.nodesource.com/setup_10.x" | sudo -E bash -
+  - sudo apt-get install -y nodejs
+
 install:
-  - cp etc/travis/env.local .env.local
-  - yarn install
+  - cp etc/travis/env.local api/.env.local
+  - cd $TRAVIS_BUILD_DIR/api
   - composer install --ansi
-  - yarn build
   - composer prepare-test
+  - cd $TRAVIS_BUILD_DIR/client
+  - yarn install
+  - yarn build
 
 script:
+- cd $TRAVIS_BUILD_DIR
 - ./etc/travis/test.sh
+- cd client
+- yarn test:unit
 
 before_deploy:
+- cd $TRAVIS_BUILD_DIR
 - openssl aes-256-cbc -K $encrypted_6041831ee8a2_key -iv $encrypted_6041831ee8a2_iv
   -in etc/travis/deploy_key.enc -out deploy_key -d
 - eval "$(ssh-agent -s)"
@@ -57,8 +67,10 @@ before_deploy:
 after_script:
   # process coverage
   - 'if [[ $COVERAGE = yes ]]; then
-        composer require php-coveralls/php-coveralls --no-scripts;
-        travis_retry vendor/bin/php-coveralls -vvv;
+        cd $TRAVIS_BUILD_DIR;
+        wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.1.0/php-coveralls.phar;
+        chmod +x php-coveralls.phar;
+        travis_retry ./php-coveralls.phar -vvv -x build/logs/clover.xml;
         wget https://scrutinizer-ci.com/ocular.phar;
         travis_retry php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml;
     fi'

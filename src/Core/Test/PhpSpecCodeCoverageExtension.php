@@ -1,25 +1,15 @@
 <?php
-
-/*
- * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
- *
- * (c) Anthonius Munthi <me@itstoni.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-declare(strict_types=1);
 /**
- * This file is part of the leanphp/phpspec-code-coverage package.
+ * This file is part of the leanphp/phpspec-code-coverage package
  *
  * @author ek9 <dev@ek9.co>
+ *
  * @license MIT
  *
  * For the full copyright and license information, please see the LICENSE file
  * that was distributed with this source code.
+ *
  */
-
 namespace SIAP\Core\Test;
 
 use PhpSpec\Extension;
@@ -29,17 +19,16 @@ use SebastianBergmann\CodeCoverage\Filter;
 use SebastianBergmann\CodeCoverage\Report;
 use SebastianBergmann\CodeCoverage\Version;
 use Symfony\Component\Console\Input\InputOption;
-
 /**
  * Injects Code Coverage Event Subscriber into the EventDispatcher.
- * The Subscriber will add Code Coverage information before each example.
+ * The Subscriber will add Code Coverage information before each example
  *
  * @author Henrik Bjornskov
  */
 class PhpSpecCodeCoverageExtension implements Extension
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function load(ServiceContainer $container, array $params = [])
     {
@@ -55,14 +44,14 @@ class PhpSpecCodeCoverageExtension implements Extension
         $container->define('code_coverage.options', function ($container) use ($params) {
             $options = !empty($params) ? $params : $container->getParam('code_coverage');
             if (!isset($options['format'])) {
-                $options['format'] = ['html'];
-            } elseif (!\is_array($options['format'])) {
+                $options['format'] = array('html');
+            } elseif (!is_array($options['format'])) {
                 $options['format'] = (array) $options['format'];
             }
             if (isset($options['output'])) {
-                if (!\is_array($options['output']) && 1 === \count($options['format'])) {
+                if (!is_array($options['output']) && count($options['format']) === 1) {
                     $format = $options['format'][0];
-                    $options['output'] = [$format => $options['output']];
+                    $options['output'] = array($format => $options['output']);
                 }
             }
             if (!isset($options['show_uncovered_files'])) {
@@ -74,12 +63,11 @@ class PhpSpecCodeCoverageExtension implements Extension
             if (!isset($options['high_lower_bound'])) {
                 $options['high_lower_bound'] = 70;
             }
-
             return $options;
         });
         $container->define('code_coverage.reports', function ($container) {
             $options = $container->get('code_coverage.options');
-            $reports = [];
+            $reports = array();
             foreach ($options['format'] as $format) {
                 switch ($format) {
                     case 'clover':
@@ -108,7 +96,6 @@ class PhpSpecCodeCoverageExtension implements Extension
                 }
             }
             $container->setParam('code_coverage', $options);
-
             return $reports;
         });
         $container->define('event_dispatcher.listeners.code_coverage', function ($container) {
@@ -123,8 +110,7 @@ class PhpSpecCodeCoverageExtension implements Extension
                 $container->get('code_coverage.reports'),
                 $skipCoverage
             );
-            $listener->setOptions($container->getParam('code_coverage', []));
-
+            $listener->setOptions($container->getParam('code_coverage', array()));
             return $listener;
         }, ['event_dispatcher.listeners']);
     }

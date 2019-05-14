@@ -1,49 +1,71 @@
-version: "3"
+version: '3.4'
+
+x-cache:
+  &cache
+  cache_from:
+    - ${CONTAINER_REGISTRY_BASE}/php
+    - ${CONTAINER_REGISTRY_BASE}/nginx
+    - ${CONTAINER_REGISTRY_BASE}/varnish
+
 services:
-    nginx:
-        image: nginx:alpine
-        container_name: ${DOCKER_CONTAINER_NAME}.nginx
-        volumes:
-            - ./etc/docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-            - ./:/var/www/siap:rw
-        ports:
-            - "80:80"
-        links:
-            - php
-        environment:
-            - UMASK="0000"
+  php:
+    container_name: siap.php
+    image: ${CONTAINER_REGISTRY_BASE}/php
+    build:
+      context: ./api
+      target: api_platform_php
+      <<: *cache
+    depends_on:
+      - db
+    # Comment out these volumes in production
+    volumes:
+      - ./api:/srv/api:rw,cached
+      # If you develop on Linux, uncomment the following line to use a bind-mounted host directory instead
+      - ./api/var:/srv/api/var:rw
 
-    php:
-        container_name: ${DOCKER_CONTAINER_NAME}.php
-        build:
-            context: etc/docker/php
-            args:
-                TIMEZONE: ${TIMEZONE}
-        volumes:
-            - ./:/var/www/siap:rw,cached
-            - ./var:/var/www/siap/var:rw
+  api:
+    container_name: siap.api
+    image: ${CONTAINER_REGISTRY_BASE}/nginx
+    build:
+      context: ./api
+      target: api_platform_nginx
+      <<: *cache
+    depends_on:
+      - php
+    # Comment out this volume in production
+    volumes:
+      - ./api/public:/srv/api/public:ro
+    ports:
+      - "8080:80"
 
-    #db:
-    #    container_name: ${DOCKER_CONTAINER_NAME}.db
-    #    # In production, you may want to use a managed database service
-    #    image: postgres:10-alpine
-    #    environment:
-    #        - POSTGRES_DB=paroki
-    #        - POSTGRES_USER=paroki
-    #        # You should definitely change the password in production
-    #        - POSTGRES_PASSWORD=paroki
-    #    volumes:
-    #        # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-    #        - ./var/db/data:/var/lib/postgresql/data:rw
-    #    ports:
-    #        - "5432:5432"
+  db:
+    # In production, you may want to use a managed database service
+    container_name: siap.db
+    image: postgres:10-alpine
+    environment:
+      - POSTGRES_DB=paroki
+      - POSTGRES_USER=paroki
+      # You should definitely change the password in production
+      - POSTGRES_PASSWORD=paroki
+    volumes:
+      - ./docker/db/data:/var/lib/postgresql/data:rw
+    ports:
+      - "5432:5432"
 
-    #client:
-    #    container_name: ${DOCKER_CONTAINER_NAME}.client
-    #    build:
-    #        context: ./etc/docker/client
-    #    volumes:
-    #        - ./:/usr/src/client:rw,cached
-    #        - /usr/src/client/node_modules
-    #    ports:
-    #        - "8080:8080"
+  client:
+    container_name: siap.client
+    image: ${CONTAINER_REGISTRY_BASE}/client
+    build:
+      context: ./client
+      cache_from:
+        - ${CONTAINER_REGISTRY_BASE}/client
+    env_file:
+      - ./client/.env
+    volumes:
+      - ./client:/usr/src/client:rw,cached
+      - /usr/src/client/node_modules
+    ports:
+      - "80:8080"
+
+volumes:
+  db-data: {}
