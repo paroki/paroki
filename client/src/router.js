@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import DefaultContainer from './plugins/siap/DefaultContainer';
 import Login from './views/Login';
 import Dashboard from './views/Dashboard';
+import { TokenService } from './services/token';
 
 Vue.use(VueRouter);
 
@@ -52,7 +53,7 @@ let router =  new VueRouter({
 
 router.beforeEach((to, from, next) =>{
     if(to.matched.some(record => record.meta.requiresAuth )){
-        if(localStorage.getItem('token') == null){
+        if(TokenService.getToken() == null){
             next ({
                 path: '/login',
                 params: { nextUrl: to.fullPath }

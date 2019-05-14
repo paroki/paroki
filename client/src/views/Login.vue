@@ -77,7 +77,7 @@
         created(){
             this.reset();
         },
-        destroy(){
+        beforeDestroy(){
             this.reset();
         },
         methods: {
@@ -95,8 +95,8 @@
                     .then(() => {
                         this.$router.push('/');
                     })
-                    .catch( () => {
-
+                    .catch( (e) => {
+                        this.error = e;
                     })
                 ;
             }

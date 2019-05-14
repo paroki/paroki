@@ -11,7 +11,7 @@
     "dev-server": "webpack-dev-server --hot"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.2.0",
+    "@fortawesome/fontawesome-free": "^5.8.2",
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
     "jsonwebtoken": "^8.5.1",

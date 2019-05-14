@@ -9,7 +9,7 @@
             @click="onSendForm"
             color="success"
         >
-            <v-icon left>cloud_upload</v-icon>
+            <v-icon left>fas fa-save</v-icon>
             Update Password
         </v-btn>
     </v-flex>
