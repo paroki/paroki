@@ -7,7 +7,7 @@ SIAP\Reference\Entity\Keuskupan:
 
 SIAP\Reference\Entity\Paroki:
     paroki:
-        kode: '999.001'
+        kode: '999.999'
         noUrut: 1
         nama: Paroki Test
         namaGereja: Gereja Test

@@ -38,7 +38,10 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "load-fixtures": "bin/console hautelook:fixtures:load -n",
+        "load-fixtures": "APP_ENV=test bin/console hautelook:fixtures:load -n",
+        "prepare-test": [
+            "@load-fixtures"
+        ],
         "test": "./vendor/bin/phpunit"
     },
     "conflict": {
@@ -50,23 +53,31 @@
             "require": "4.2.*"
         }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": "^7.1.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "api-platform/api-pack": "^1.2",
         "lexik/jwt-authentication-bundle": "^2.6",
+        "phpunit/phpcov": "^5.0",
         "ramsey/uuid-doctrine": "^1.5",
         "symfony/console": "4.2.*",
         "symfony/dotenv": "4.2.*",
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.2.*",
+        "symfony/swiftmailer-bundle": "^3.2",
         "symfony/webpack-encore-bundle": "^1.5",
         "symfony/yaml": "4.2.*"
     },
     "require-dev": {
+        "behat/mink-browserkit-driver": "^1.3",
         "behat/symfony2-extension": "^2.1",
+        "behatch/contexts": "^3.0@dev",
         "hautelook/alice-bundle": "^2.5",
+        "leanphp/phpspec-code-coverage": "^4.2@dev",
+        "phpspec/phpspec": "~4.3",
         "symfony/apache-pack": "^1.0",
         "symfony/maker-bundle": "^1.11",
         "symfony/profiler-pack": "^1.0",

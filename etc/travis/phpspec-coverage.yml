@@ -1,0 +1,12 @@
+formatter.name: pretty
+suites:
+    default:
+        namespace: Doyo\UserBundle
+        psr4_prefix: Doyo\UserBundle
+
+extensions:
+  LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
+    format:
+      - php
+    output:
+      php: build/cov/coverage-phpspec.cov
