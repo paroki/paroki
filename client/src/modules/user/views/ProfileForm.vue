@@ -20,6 +20,10 @@
                 type: [Array, Object],
                 default: () => {}
             },
+            type: {
+                type: String,
+                default: 'update'
+            }
         },
 
         data: () => {
@@ -30,7 +34,23 @@
                     { name: 'email', type: 'text', label: 'Email pengguna'},
                 ],
                 values: {},
-                snackbar: {}
+                snackbar: {},
+                passwordField: {
+                    name: 'plainPassword',
+                    type: 'password',
+                    label: 'Masukkan password yang diinginkan',
+                },
+                passwordConfirmField: {
+                    name: 'plainPasswordConfirm',
+                    type: 'password',
+                    label: 'Masukkan ulang password yang diinginkan',
+                }
+            }
+        },
+        created(){
+            if(this.type === 'create'){
+                this.fields.push(this.passwordField);
+                this.fields.push(this.passwordConfirmField);
             }
         },
         computed: {

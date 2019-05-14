@@ -97,11 +97,14 @@
         },
 
         created () {
-            this.retrieve(decodeURIComponent(this.$route.params.id))
+            this.retrieve(decodeURIComponent(this.$route.params.id));
+            if(this.created){
+                this.snackbarSuccess(`User ${this.created.nama} berhasil dibuat!`);
+            }
         },
 
-        destroyed(){
-            this.updateReset();
+        beforeDestroy(){
+            this.reset();
         },
 
         watch: {
@@ -136,6 +139,11 @@
                             this.snackbarError();
                         }
                     });
+            },
+            reset(){
+                this.updateReset()
+                this.delReset()
+                this.createReset()
             }
         }
     }

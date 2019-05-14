@@ -1,3 +1,4 @@
 /docker-compose.override.yaml
 /docker-compose.override.yml
-docker
+/docker/
+/build/

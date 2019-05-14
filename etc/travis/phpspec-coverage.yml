@@ -1,0 +1,19 @@
+formatter.name: pretty
+suites:
+    default:
+        namespace: SIAP
+        psr4_prefix: SIAP
+
+extensions:
+    SIAP\Core\Test\PhpSpecCodeCoverageExtension:
+        format:
+            - php
+        output:
+            php: build/cov/coverage-phpspec.cov
+        whitelist:
+            - src
+        blacklist:
+            - src/*/Test
+            - src/*/Tests
+            - src/*/Spec
+            - src/Behat

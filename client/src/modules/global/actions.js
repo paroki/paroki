@@ -37,7 +37,7 @@ export const login = ({commit},payload) => {
     commit(types.SIAP_LOGIN_START);
     commit(types.SIAP_LOGIN_ERROR,false);
 
-    return ApiService.post('/login_check',payload)
+    return ApiService.post('/api/login_check',payload)
         .then(data => {
             TokenService.saveToken(data.token);
             commit(types.SIAP_LOGIN_END);

@@ -1,29 +1,76 @@
-sudo: required
+language: php
 
-services:
-  - docker
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/.npm
 
-addons:
-  apt:
-    packages:
-      - docker-ce
+stages:
+  - test
+  - deploy
+  
+jobs:
+  include:
+    - stage: test
+      php: '7.2'
+    - stage: test
+      php: '7.3'
+    - stage: test
+      php: '7.3'
+      env: COVERAGE=yes
+    - stage: deploy
+      php: '7.2'
+      install: "echo 'No install required'"
+      script: "echo 'No script during deploy'"
+      deploy:
+        provider: script
+        script: etc/travis/deploy.sh
+        skip_cleanup: true
+        on:
+          branch: master
+  allow_failures:
+    - env: COVERAGE=yes
 
-install: true
+before_install:
+  # remove xdebug when not collecting code coverage
+  - if [[ $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini || echo "xdebug not available"; fi;
+  - sudo rm -rf ~/.nvm
+  - curl -sL "https://deb.nodesource.com/setup_10.x" | sudo -E bash -
+  - sudo apt-get install -y nodejs
 
-before_script:
-  - sudo service postgresql stop
-  # wait for postgresql to shutdown
-  - while sudo lsof -Pi :5432 -sTCP:LISTEN -t; do sleep 1; done
+install:
+  - cp etc/travis/env.local api/.env.local
+  - cd $TRAVIS_BUILD_DIR/api
+  - composer install --ansi
+  - composer prepare-test
+  - cd $TRAVIS_BUILD_DIR/client
+  - yarn install
+  - yarn build
 
 script:
-  - if jq '.extra.symfony.id != null' api/composer.json -e > /dev/null; then echo 'composer.json must not have symfony.id' 1>&2 && false; fi
-  - docker-compose pull --ignore-pull-failures
-  - docker-compose build --pull
-  - docker-compose up -d
-  - sleep 30
-  - docker-compose exec -T php composer req sensiolabs/security-checker
-  - docker-compose exec -T php bin/console security:check
-  - curl -f http://localhost # Client
-  - curl -f http://localhost:8080 # API
-  - curl -fk https://localhost # Client (HTTP/2)
-  - curl -fk https://localhost:8443 # API (HTTP/2)
+- cd $TRAVIS_BUILD_DIR
+- ./etc/travis/test.sh
+- cd client
+- yarn test:unit
+
+before_deploy:
+- cd $TRAVIS_BUILD_DIR
+- openssl aes-256-cbc -K $encrypted_6041831ee8a2_key -iv $encrypted_6041831ee8a2_iv
+  -in etc/travis/deploy_key.enc -out deploy_key -d
+- eval "$(ssh-agent -s)"
+- chmod 600 ./deploy_key
+- echo -e "Host $IP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+- ssh-add ./deploy_key
+- chmod +x etc/travis/deploy.sh
+
+
+after_script:
+  # process coverage
+  - 'if [[ $COVERAGE = yes ]]; then
+        cd $TRAVIS_BUILD_DIR;
+        wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.1.0/php-coveralls.phar;
+        chmod +x php-coveralls.phar;
+        travis_retry ./php-coveralls.phar -vvv -x build/logs/clover.xml;
+        wget https://scrutinizer-ci.com/ocular.phar;
+        travis_retry php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml;
+    fi'
