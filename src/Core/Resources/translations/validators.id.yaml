@@ -1,0 +1,9 @@
+siap.validation.nama: Nama lengkap harus diisi.
+siap.validation.email.blank: Email harus diisi
+siap.validation.email.format: Email harus diisi dengan format yang benar.
+siap.validation.email.unique: Email ini sudah digunakan oleh orang lain.
+
+siap.validation.password.blank: Password tidak boleh kosong
+
+siap.validation.username.blank: Username harus diisi
+siap.validation.username.unique: Username ini sudah digunakan oleh orang lain.

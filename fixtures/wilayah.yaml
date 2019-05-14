@@ -1,39 +1,31 @@
 SIAP\Reference\Entity\Keuskupan:
-    samarinda:
-        kode: '028'
-        noUrutKeuskupan: 1
-        namaKeuskupan: Keuskupan Agung Samarinda
-        namaUskupSaatIni: Mgr. Yustinus Harjosusanto
+    keuskupan:
+        kode: '999'
+        noUrut: 1
+        nama: Keuskupan Agung Test
+        namaUskupSaatIni: Mgr. Test
 
 SIAP\Reference\Entity\Paroki:
-    pkrbt:
-        kode: '028.018'
-        noParoki: 1
-        namaParoki: Barong Tongkok
-        namaGereja: Kristus Raja
-        kotaParoki: Kutai Barat
-        keuskupan: '@samarinda'
+    paroki:
+        kode: '999.999'
+        noUrut: 1
+        nama: Paroki Test
+        namaGereja: Gereja Test
+        kota: Kutai Barat
+        keuskupan: '@keuskupan'
 
 SIAP\Reference\Entity\Lingkungan:
     lingkungan:
         kode: '0101'
-        paroki: '@pkrbt'
+        paroki: '@paroki'
         nama: St. Markus
-
-SIAP\User\Entity\User:
-    user:
-        nama: Anthonius
-        username: toni
-        email: me@itstoni.com
-        plainPassword: 123password
 
 SIAP\Baptis\Entity\Baptis:
     markus:
-        paroki: '@pkrbt'
+        paroki: '@paroki'
         lingkungan: '@lingkungan'
         nama: Markus
         jenisKelamin: 1
         buku: I
         nomor: 1
-        updatedBy: '@user'
 

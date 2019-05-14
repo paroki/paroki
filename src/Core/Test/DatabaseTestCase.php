@@ -26,6 +26,7 @@ abstract class DatabaseTestCase extends KernelTestCase
 
     protected function setUp()
     {
+
         $kernel   = self::bootKernel();
         $this->em = $kernel->getContainer()
             ->get('doctrine')
@@ -39,6 +40,6 @@ abstract class DatabaseTestCase extends KernelTestCase
      */
     protected function getRepository($class)
     {
-        return $this->getRepository($class);
+        return $this->em->getRepository($class);
     }
 }

@@ -1,13 +1,18 @@
 SIAP\User\Entity\User:
     attributes:
         normalization_context:
-            groups: ['read']
+            groups: ['read','paroki']
         denormalization_context:
             groups: ['write']
     collectionOperations:
-        get: ~
+        get:
+            filters:
+                - siap.user.orders.user
+            groups: ['read']
         post: ~
     itemOperations:
         get: ~
         put: ~
         delete: ~
+    properties:
+        paroki:

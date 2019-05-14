@@ -15,39 +15,33 @@ namespace SIAP\Reference\Entity;
 
 class Keuskupan
 {
-    private $noUrutKeuskupan;
+    private $noUrut;
 
-    private $namaKeuskupan;
+    private $nama;
 
-    private $namaKeuskupanLatin;
+    private $namaLatin;
 
-    private $alamatKeuskupan;
+    private $alamat;
 
-    private $kotaKeuskupan;
+    private $kota;
 
-    private $teleponKeuskupan;
+    private $telepon;
 
-    private $faxKeuskupan;
+    private $fax;
 
-    private $websiteKeuskupan;
+    private $website;
 
-    private $emailKeuskupan;
+    private $email;
 
     private $namaUskupSaatIni;
 
     private $kode;
 
-    /**
-     * GUID for keuskupan.
-     *
-     * @var string
-     */
-    private $guid;
-
     private $id;
 
-    public function __construct()
+    public function getKode(): ?string
     {
+        return $this->kode;
     }
 
     public function setKode(string $kode): self
@@ -57,110 +51,110 @@ class Keuskupan
         return $this;
     }
 
-    public function getNoUrutKeuskupan(): ?int
+    public function getNoUrut(): ?int
     {
-        return $this->noUrutKeuskupan;
+        return $this->noUrut;
     }
 
-    public function setNoUrutKeuskupan(?int $noUrutKeuskupan): self
+    public function setNoUrut(?int $noUrut): self
     {
-        $this->noUrutKeuskupan = $noUrutKeuskupan;
+        $this->noUrut = $noUrut;
 
         return $this;
     }
 
-    public function getNamaKeuskupan(): ?string
+    public function getNama(): ?string
     {
-        return $this->namaKeuskupan;
+        return $this->nama;
     }
 
-    public function setNamaKeuskupan(?string $namaKeuskupan): self
+    public function setNama(?string $nama): self
     {
-        $this->namaKeuskupan = $namaKeuskupan;
+        $this->nama = $nama;
 
         return $this;
     }
 
-    public function getNamaKeuskupanLatin(): ?string
+    public function getNamaLatin(): ?string
     {
-        return $this->namaKeuskupanLatin;
+        return $this->namaLatin;
     }
 
-    public function setNamaKeuskupanLatin(?string $namaKeuskupanLatin): self
+    public function setNamaLatin(?string $namaLatin): self
     {
-        $this->namaKeuskupanLatin = $namaKeuskupanLatin;
+        $this->namaLatin = $namaLatin;
 
         return $this;
     }
 
-    public function getAlamatKeuskupan(): ?string
+    public function getAlamat(): ?string
     {
-        return $this->alamatKeuskupan;
+        return $this->alamat;
     }
 
-    public function setAlamatKeuskupan(?string $alamatKeuskupan): self
+    public function setAlamat(?string $alamat): self
     {
-        $this->alamatKeuskupan = $alamatKeuskupan;
+        $this->alamat = $alamat;
 
         return $this;
     }
 
-    public function getKotaKeuskupan(): ?string
+    public function getKota(): ?string
     {
-        return $this->kotaKeuskupan;
+        return $this->kota;
     }
 
-    public function setKotaKeuskupan(?string $kotaKeuskupan): self
+    public function setKota(?string $kota): self
     {
-        $this->kotaKeuskupan = $kotaKeuskupan;
+        $this->kota = $kota;
 
         return $this;
     }
 
-    public function getTeleponKeuskupan(): ?string
+    public function getTelepon(): ?string
     {
-        return $this->teleponKeuskupan;
+        return $this->telepon;
     }
 
-    public function setTeleponKeuskupan(?string $teleponKeuskupan): self
+    public function setTelepon(?string $telepon): self
     {
-        $this->teleponKeuskupan = $teleponKeuskupan;
+        $this->telepon = $telepon;
 
         return $this;
     }
 
-    public function getFaxKeuskupan(): ?string
+    public function getFax(): ?string
     {
-        return $this->faxKeuskupan;
+        return $this->fax;
     }
 
-    public function setFaxKeuskupan(?string $faxKeuskupan): self
+    public function setFax(?string $fax): self
     {
-        $this->faxKeuskupan = $faxKeuskupan;
+        $this->fax = $fax;
 
         return $this;
     }
 
-    public function getWebsiteKeuskupan(): ?string
+    public function getWebsite(): ?string
     {
-        return $this->websiteKeuskupan;
+        return $this->website;
     }
 
-    public function setWebsiteKeuskupan(?string $websiteKeuskupan): self
+    public function setWebsite(?string $website): self
     {
-        $this->websiteKeuskupan = $websiteKeuskupan;
+        $this->website = $website;
 
         return $this;
     }
 
-    public function getEmailKeuskupan(): ?string
+    public function getEmail(): ?string
     {
-        return $this->emailKeuskupan;
+        return $this->email;
     }
 
-    public function setEmailKeuskupan(?string $emailKeuskupan): self
+    public function setEmail(?string $email): self
     {
-        $this->emailKeuskupan = $emailKeuskupan;
+        $this->email = $email;
 
         return $this;
     }
@@ -177,25 +171,9 @@ class Keuskupan
         return $this;
     }
 
-    public function getKode(): ?string
-    {
-        return $this->kode;
-    }
-
-    public function getGuid(): ?string
-    {
-        return $this->guid;
-    }
-
-    public function setGuid(string $guid): self
-    {
-        $this->guid = $guid;
-
-        return $this;
-    }
-
     public function getId(): ?string
     {
         return $this->id;
     }
+
 }

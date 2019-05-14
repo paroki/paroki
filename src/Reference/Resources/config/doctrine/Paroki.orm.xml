@@ -1,30 +1,30 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="SIAP\Reference\Entity\Paroki" table="ref_paroki">
+  <entity name="SIAP\Reference\Entity\Paroki" table="tr_paroki">
     <id name="id" type="guid">
       <generator strategy="UUID"/>
     </id>
     <field name="kode" type="string" unique="true" length="7" nullable="false" column="kode"/>
-    <field name="noParoki" type="integer" length="4" nullable="true"/>
-    <field name="namaParoki" type="string" length="50" nullable="true"/>
+    <field name="noUrut" type="integer" length="4" nullable="true"/>
+    <field name="nama" type="string" length="50" nullable="true"/>
     <field name="namaGereja" type="string" length="150" nullable="true"/>
-    <field name="alamatParoki" type="string" length="255" nullable="true"/>
-    <field name="kotaParoki" type="string" length="50" nullable="true"/>
-    <field name="teleponParoki" type="string" length="50" nullable="true"/>
-    <field name="faxParoki" type="string" length="50" nullable="true"/>
-    <field name="websiteParoki" type="string" length="50" nullable="true"/>
-    <field name="emailParoki" type="string" length="50" nullable="true"/>
-    <field name="pastorParoki" type="string" length="100" nullable="true"/>
+    <field name="alamat" type="string" length="255" nullable="true"/>
+    <field name="kota" type="string" length="50" nullable="true"/>
+    <field name="telepon" type="string" length="50" nullable="true"/>
+    <field name="fax" type="string" length="50" nullable="true"/>
+    <field name="website" type="string" length="50" nullable="true"/>
+    <field name="email" type="string" length="50" nullable="true"/>
+    <field name="pastor" type="string" length="100" nullable="true"/>
     <field name="wilayahKeuskupan" type="string" length="50" nullable="true"/>
     <indexes>
-      <index name="ix_paroki_nama" columns="nama_paroki"/>
+      <index name="ix_paroki_nama" columns="nama"/>
       <index name="ix_paroki_gereja" columns="nama_gereja"/>
-      <index name="ix_kota_paroki" columns="kota_paroki"/>
+      <index name="ix_kota_paroki" columns="kota"/>
     </indexes>
     <unique-constraints>
       <unique-constraint name="ix_paroki_kode" columns="kode"/>
     </unique-constraints>
-    <many-to-one field="keuskupan" target-entity="SIAP\Reference\Entity\Keuskupan" fetch="EAGER">
+    <many-to-one field="keuskupan" target-entity="SIAP\Reference\Entity\Keuskupan">
       <join-columns>
         <join-column name="keuskupan_id" referenced-column-name="id"/>
       </join-columns>

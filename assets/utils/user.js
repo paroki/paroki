@@ -1,5 +1,9 @@
 import jwt from 'jsonwebtoken';
 
+export const hasRole = () => {
+    this.$store.getters('siap/users');
+};
+
 export default class User {
     constructor(){
         this.authenticated = false;

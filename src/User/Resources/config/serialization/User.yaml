@@ -16,3 +16,5 @@ SIAP\User\Entity\User:
             groups: ['read','write']
         plainPassword:
             groups: ['write']
+        paroki:
+            groups: ['read', 'paroki']

@@ -23,10 +23,18 @@
     </services>
     -->
     <services>
+        <defaults autoconfigure="true" public="true" autowire="true">
+        </defaults>
         <defaults autoconfigure="true" autowire="true"/>
         <prototype namespace="SIAP\Reference\" resource="../../" exclude="../../{Resources,Entity,Migrations,Tests,DependencyInjection}"/>
         <prototype namespace="SIAP\Reference\Listener\" resource="../../Listener">
             <tag name="doctrine.event_subscriber"/>
         </prototype>
+        <prototype namespace="SIAP\Reference\Controller\" resource="../../Controller/*">
+            <tag name="controller.service_arguments"/>
+        </prototype>
+        <prototype namespace="SIAP\Reference\Services\" resource="../../Services/*">
+        </prototype>
+        <service id="SIAP\Reference\Services\SearchService"/>
     </services>
 </container>

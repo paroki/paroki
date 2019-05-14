@@ -17,6 +17,8 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\Routing\Loader\YamlFileLoader as YamlRoutingLoader;
 
 class ReferenceExtension extends Extension
 {
@@ -25,5 +27,15 @@ class ReferenceExtension extends Extension
         $locator = new FileLocator(__DIR__.'/../Resources/config');
         $loader  = new XmlFileLoader($container, $locator);
         $loader->load('services.xml');
+
+        $yaml = new YamlFileLoader($container, $locator);
+        $yaml->load('filters.yaml');
+    }
+
+    private function loadRoutes(ContainerBuilder $container, FileLocator $locator)
+    {
+        $loader = new YamlRoutingLoader($locator);
+        $loader->load(__DIR__.'/../Resources/config/routes.yaml');
+
     }
 }

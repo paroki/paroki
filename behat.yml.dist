@@ -1,0 +1,23 @@
+default:
+  suites:
+    default:
+      contexts:
+        - SIAP\Behat\Contexts\FeatureContext:
+            kernel: '@kernel'
+
+  extensions:
+    Behat\Symfony2Extension:
+      kernel:
+        env: 'test'
+        debug: 'true'
+        class: SIAP\Core\Kernel
+        #path: 'fixtures/src/Kernel.php'
+        bootstrap: 'config/bootstrap.php'
+
+coverage:
+  suites:
+    default:
+      contexts:
+        - SIAP\Behat\Contexts\CoverageContext
+        - SIAP\Behat\Contexts\FeatureContext:
+            kernel: '@kernel'

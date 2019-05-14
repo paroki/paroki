@@ -2,12 +2,14 @@ SIAP\Reference\Entity\Paroki:
     attributes:
         route_prefix: '/reference'
     collectionOperations:
-        get: ~
+        get:
+            filters:
+                - siap.reference.filters.paroki
+        search:
+            route_name: siap_search_paroki
         post: ~
     itemOperations:
-        get:
-            path: '/paroki/{id}.{_format}'
-            requirements:
-                id: '\d{3}\.\d{3}'
+        get: ~
         put: ~
         delete: ~
+    properties: ~

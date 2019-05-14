@@ -17,7 +17,7 @@
       </join-columns>
     </many-to-one>
     <many-to-many field="dokumen" target-entity="SIAP\Core\Entity\Dokumen">
-      <join-table name="BaptisPerkawinanDokumen">
+      <join-table name="td_baptis_perkawinan_dokumen">
         <join-columns>
           <join-column name="baptis_perkawinan_id" referenced-column-name="id" nullable="false"/>
         </join-columns>
