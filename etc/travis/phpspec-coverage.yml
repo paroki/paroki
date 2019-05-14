@@ -1,11 +1,11 @@
 formatter.name: pretty
 suites:
     default:
-        namespace: Doyo\UserBundle
-        psr4_prefix: Doyo\UserBundle
+        namespace: SIAP
+        psr4_prefix: SIAP
 
 extensions:
-  LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
+  SIAP\Core\Test\PhpSpecCodeCoverageExtension:
     format:
       - php
     output:

@@ -38,6 +38,8 @@ install:
   - cp etc/travis/env.local .env.local
   - yarn install
   - composer install --ansi
+  - yarn build
+  - composer prepare-test
 
 script:
 - ./etc/travis/test.sh
