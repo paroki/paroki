@@ -71,7 +71,7 @@
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.2.*",
         "symfony/swiftmailer-bundle": "^3.2",
-        "symfony/webpack-encore-bundle": "^1.5",
+        "symfony/translation": "4.2.*",
         "symfony/yaml": "4.2.*"
     },
     "require-dev": {
