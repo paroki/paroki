@@ -1,4 +1,5 @@
-import fetch from '../../../../utils/fetch'
+import ApiService from '../../../../services/api';
+
 import * as types from './mutation_types'
 
 const generateParams = (payload) => {
@@ -17,8 +18,7 @@ const getItems = ({ commit, state }, payload) => {
     const params = generateParams(payload);
     const url = `/api/user?`+params.join('&');
     commit(types.TOGGLE_LOADING);
-    return fetch(url)
-        .then(response => response.json())
+    return ApiService.get(url)
         .then((data) => {
             commit(types.TOGGLE_LOADING);
             const views = {

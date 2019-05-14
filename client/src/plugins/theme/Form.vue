@@ -104,7 +104,7 @@
         },
         methods: {
             isInvalid (key) {
-                return Object.keys(this.violations).length > 0 && this.violations[key]
+                return Object.keys(this.violations).length > 0 && !!this.violations[key];
             },
             getError(key){
                 return this.violations[key];

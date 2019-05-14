@@ -10,6 +10,15 @@
                                 <v-spacer></v-spacer>
                             </v-toolbar>
                             <v-card-text>
+                                <v-alert
+                                    v-model="hasError"
+                                    type="error"
+                                    dismissible
+                                >
+                                    {{ error }}
+                                </v-alert>
+                            </v-card-text>
+                            <v-card-text>
                                 <v-form>
                                     <v-text-field
                                         prepend-icon="person"
@@ -29,7 +38,11 @@
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn @click="handleLogin" color="primary">Login</v-btn>
+                                <v-btn
+                                    @click="handleLogin"
+                                    color="primary"
+                                    :loading="!isLoading"
+                                >Login</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-flex>
@@ -55,12 +68,23 @@
         },
         computed: {
             ...mapGetters({
-
-            })
+                error: 'siap/loginError'
+            }),
+            hasError(){
+                return this.error;
+            }
+        },
+        created(){
+            this.reset();
+        },
+        destroy(){
+            this.reset();
         },
         methods: {
             ...mapActions({
-                login: 'siap/login'
+                login: 'siap/login',
+                reset: 'siap/loginReset',
+                isLoading: 'siap/isLoading'
             }),
             handleLogin(){
                 const payload = {
@@ -70,6 +94,9 @@
                 this.login(payload)
                     .then(() => {
                         this.$router.push('/');
+                    })
+                    .catch( () => {
+
                     })
                 ;
             }

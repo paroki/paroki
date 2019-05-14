@@ -1,6 +1,6 @@
 import * as types from './types';
-import axios from 'axios';
-import { ENTRYPOINT } from "../../utils/fetch";
+import ApiService from '../../services/api';
+import {TokenService} from "../../services/token";
 
 export const toggleLoading = ({ commit }) => {
     commit(types.SIAP_TOGGLE_LOADING);
@@ -34,42 +34,30 @@ export const snackbarError  = ({commit}, message) => {
 
 export const login = ({commit},payload) => {
     commit(types.SIAP_TOGGLE_LOADING);
-    commit(types.SIAP_LOGIN_START)
-    commit(types.SIAP_LOGIN_ERROR,'');
+    commit(types.SIAP_LOGIN_START);
+    commit(types.SIAP_LOGIN_ERROR,false);
 
-    /*let options = {
-        headers: new Headers({
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        }),
-        method: 'POST',
-        body: JSON.stringify(payload)
-    };*/
+    return ApiService.post('/login_check',payload)
+        .then(data => {
+            TokenService.saveToken(data.token);
+            commit(types.SIAP_LOGIN_END);
+            commit(types.SIAP_TOGGLE_LOADING);
+            ApiService.setHeader();
+        }).catch(error => {
+            commit(types.SIAP_LOGIN_END);
+            commit(types.SIAP_LOGIN_ERROR, error.response.data.message);
+            commit(types.SIAP_TOGGLE_LOADING);
+            throw  error;
+        });
+};
 
-    let url = `https://siap.itstoni.com/api/login_check`;
-    console.log(url);
-    return axios.post(url,{
-        ...payload
-    }).then(response => {
-
-        localStorage.setItem('token', response.data.token);
-        commit(types.SIAP_LOGIN_END);
-        commit(types.SIAP_UPDATE_TOKEN, response.data.token);
-        commit(types.SIAP_TOGGLE_LOADING);
-
-    }).catch(error => {
-
-        commit(types.SIAP_LOGIN_END);
-        commit(types.SIAP_LOGIN_ERROR, error.response.data.message);
-        commit(types.SIAP_TOGGLE_LOADING);
-    });
+export const loginReset = ({commit}) => {
+    commit(types.SIAP_LOGIN_RESET);
 };
 
 export const logout = ({commit}) => {
     commit(types.SIAP_TOGGLE_LOADING);
-    localStorage.removeItem('token');
-    commit(types.SIAP_LOGOUT);
-    commit(types.SIAP_UPDATE_TOKEN, null)
-
+    ApiService.removeHeader();
+    TokenService.removeToken();
     commit(types.SIAP_TOGGLE_LOADING);
 };

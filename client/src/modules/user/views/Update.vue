@@ -26,7 +26,10 @@
             <v-tab-item value="tab-profil" darken10>
                 <v-card flat>
                     <v-card-text>
-                        <profile-form></profile-form>
+                        <profile-form
+                            :errors="violations"
+                            :initial-values="retrieved"
+                        ></profile-form>
                     </v-card-text>
                     <v-btn
                         :to="{ name: 'UserList' }"
@@ -111,8 +114,6 @@
                 this.$router.push({ name: 'UserList' })
             }
         },
-
-
 
         methods: {
             ...mapActions({

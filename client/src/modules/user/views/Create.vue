@@ -6,7 +6,10 @@
 
         <v-card flat>
             <v-card-text>
-                <user-form></user-form>
+                <user-form
+                    :errors="violations"
+                    :initial-values="item"
+                ></user-form>
             </v-card-text>
             <v-btn
                 :to="{ name: 'UserList' }"

@@ -4,7 +4,7 @@
             :fields="fields"
             :values="values"
             :errors="violations"
-            :initial-values="retrieved"
+            :initial-values="item"
         >
         </c-form>
     </v-flex>
@@ -12,6 +12,14 @@
 <script>
     export default {
         props: {
+            errors: {
+                type: [Array, Object],
+                default: () => {}
+            },
+            initialValues: {
+                type: [Array, Object],
+                default: () => {}
+            },
         },
 
         data: () => {
@@ -29,27 +37,9 @@
             // eslint-disable-next-line
             item () {
                 return this.initialValues || this.values
-            }
-        },
-        methods: {
-            beforeDestroy () {
-                this.reset()
             },
-            isInvalid (key) {
-                return Object.keys(this.violations).length > 0 && this.violations[key]
-            },
-            updateField (field, value) {
-                this.updateRetrieved({ [field]: value })
-            },
-            del () {
-                if (window.confirm('Are you sure you want to delete this user ?')) {
-                    this.deleteItem(this.retrieved)
-                }
-            },
-            reset () {
-                this.updateReset()
-                this.delReset()
-                this.createReset()
+            violations(){
+                return this.errors ? this.errors:{};
             }
         }
     }

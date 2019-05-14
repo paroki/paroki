@@ -4,15 +4,9 @@ import store from './store';
 import App from './App';
 import './plugins';
 
-/*new Vue({
-    el: '#app',
-    store,
-    router,
-    template: '<App/>',
-    components: {
-        App
-    }
-})*/
+import ApiService from './services/api';
+
+ApiService.init(process.env.VUE_APP_API_ENTRYPOINT);
 
 new Vue({
   router,

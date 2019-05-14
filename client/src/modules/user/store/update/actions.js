@@ -1,5 +1,5 @@
 import SubmissionError from '../../../../utils/SubmissionError';
-import fetch from '../../../../utils/fetch';
+import ApiService from '../../../../services/api';
 import * as types from './mutation_types';
 import toggleLoading from '../../../../utils/toggleLoading';
 
@@ -10,8 +10,7 @@ export const reset = ({ commit }) => {
 export const retrieve = ({ commit }, id) => {
     toggleLoading(commit)
 
-    return fetch(`/api/user/${id}`)
-        .then(response => response.json())
+    return ApiService.get(`/api/user/${id}`)
         .then((data) => {
             toggleLoading(commit)
             commit(types.SET_RETRIEVED, data)
@@ -19,38 +18,30 @@ export const retrieve = ({ commit }, id) => {
         .catch((e) => {
             toggleLoading(commit)
             commit(types.SET_ERROR, e.message)
-        })
+        });
 }
 
 export const update = ({ commit, state }, payload) => {
     if(!payload){
         payload = state.retrieved;
     }
-    commit(types.SET_ERROR, '')
+    commit(types.SET_ERROR, '');
     commit(types.TOGGLE_LOADING);
-    return fetch(state.retrieved['@id'], {
-        method: 'PUT',
-        headers: new Headers({ 'Content-Type': 'application/ld+json' }),
-        body: JSON.stringify(payload)
-    })
-        .then(response => response.json())
+    return ApiService.put(state.retrieved['@id'], payload)
         .then((data) => {
             commit(types.TOGGLE_LOADING);
-            commit(types.SET_UPDATED, data)
+            commit(types.SET_UPDATED, data);
         })
         .catch((e) => {
             commit(types.TOGGLE_LOADING);
 
             if (e instanceof SubmissionError) {
-                commit(types.SET_VIOLATIONS, e.errors)
+                commit(types.SET_VIOLATIONS, e.errors);
                 // eslint-disable-next-line
-                commit(types.SET_ERROR, e.errors._error)
-
-                return
+                commit(types.SET_ERROR, e.errors._error);
+            }else{
+                commit(commit(types.SET_ERROR, e))
             }
-
-            // eslint-disable-next-line
-            commit(commit(types.SET_ERROR, e))
         })
 }
 

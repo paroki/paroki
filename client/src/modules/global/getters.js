@@ -1,6 +1,4 @@
 export const isLoading = state => state.isLoading;
 export const loggingIn = state => state.loggingIn;
-export const error = state => state.error;
-export const token = state => state.token;
-export const credentials = state => state.credentials;
+export const loginError = state => state.loginError;
 export const snackbar = state => state.snackbar;

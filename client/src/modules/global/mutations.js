@@ -1,7 +1,14 @@
 import * as types from './types';
-import jwt from 'jsonwebtoken';
 
 export default {
+    [types.SIAP_LOGIN_RESET](state){
+        Object.assign(state, {
+            loggingIn: false,
+            loginError: false,
+            isLoading: false
+        });
+    },
+
     [types.SIAP_TOGGLE_LOADING](state){
         Object.assign(state, {isLoading: !state.isLoading})
     },
@@ -14,21 +21,8 @@ export default {
         Object.assign(state, {loggingIn: false})
     },
 
-    [types.SIAP_LOGIN_ERROR](state,error){
-        Object.assign(state, { error })
-    },
-
-    [types.SIAP_UPDATE_TOKEN](state,token){
-        let credentials = null;
-        if(token !== null){
-            credentials = jwt.decode(token);
-        }
-        Object.assign(state,{ token, credentials });
-    },
-
-    [types.SIAP_LOGOUT](state){
-        localStorage.removeItem('token');
-        Object.assign(state, {token: null});
+    [types.SIAP_LOGIN_ERROR](state,loginError){
+        Object.assign(state, { loginError })
     },
 
     [types.SIAP_SNACKBAR](state, snackbar){
