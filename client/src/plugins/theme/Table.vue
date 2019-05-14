@@ -19,14 +19,14 @@
                             v-if="actions.edit"
                             fab
                         >
-                            fas fa-edit
+                            edit
                         </v-icon>
                         <v-icon
                             small
                             @click="deleteAction(props.item)"
                             v-if="header.delete"
                         >
-                            fas fa-trash
+                            delete
                         </v-icon>
                     </span>
                     <span v-else>

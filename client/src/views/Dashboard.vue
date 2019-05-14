@@ -2,7 +2,7 @@
     <v-flex md12 fill-height>
         <v-toolbar color="primary" class="lighten1" dark>
             <v-btn label="hello world" icon>
-                <v-icon>fas fa-search</v-icon>
+                <v-icon>search</v-icon>
             </v-btn>
             <v-toolbar-title centered>
                 Hello World

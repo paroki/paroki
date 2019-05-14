@@ -39,14 +39,15 @@ export const login = ({commit},payload) => {
 
     return ApiService.post('/api/login_check',payload)
         .then(data => {
+            TokenService.saveToken(data.token);
             commit(types.SIAP_LOGIN_END);
             commit(types.SIAP_TOGGLE_LOADING);
-            TokenService.saveToken(data.token);
             ApiService.setHeader();
         }).catch(error => {
             commit(types.SIAP_LOGIN_END);
-            commit(types.SIAP_LOGIN_ERROR, error.message);
+            commit(types.SIAP_LOGIN_ERROR, error.response.data.message);
             commit(types.SIAP_TOGGLE_LOADING);
+            throw  error;
         });
 };
 

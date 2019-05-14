@@ -1,10 +1,10 @@
-import ApiService from '../../../../services/api'
+import fetch from '../../../../utils/fetch'
 import * as types from './mutation_types'
 
 export const del = ({ commit }, item) => {
   commit(types.USER_DELETE_TOGGLE_LOADING)
 
-  return ApiService.delete(item['@id'], { method: 'DELETE' })
+  return fetch(item['@id'], { method: 'DELETE' })
     .then(() => {
       commit(types.USER_DELETE_TOGGLE_LOADING)
       commit(types.USER_DELETE_SET_DELETED, item)

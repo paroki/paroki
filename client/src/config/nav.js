@@ -1,16 +1,16 @@
 export default [
     {
         name: 'Dashboard',
-        icon: 'fas fa-tachometer-alt'
+        icon: 'dashboard'
     },
     {
         name: 'Administrasi',
-        icon: 'fas fa-screwdriver',
+        icon: 'icon-folder-alt',
         children: [
             {
                 name: 'UserList',
                 label: 'User',
-                icon: 'fas fa-user-cog',
+                icon: 'people',
                 url: '/user/'
             }
         ]

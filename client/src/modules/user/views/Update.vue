@@ -1,6 +1,5 @@
 <template>
     <v-flex md12 fill-height>
-
         <v-toolbar color="cyan" dark tabs>
             <v-toolbar-title centered>{{ retrieved && retrieved.nama }}</v-toolbar-title>
             <template v-slot:extension>
@@ -12,13 +11,13 @@
                     <v-tabs-slider color="yellow"></v-tabs-slider>
 
                     <v-tab href="#tab-profil">
-                        <v-icon>fas fa-user</v-icon>
-                        &nbsp;Profil
+                        <v-icon>account_box</v-icon>
+                        Profil
                     </v-tab>
 
                     <v-tab href="#tab-password">
-                        <v-icon>fas fa-lock</v-icon>
-                        &nbsp;Password
+                        <v-icon>lock</v-icon>
+                        Password
                     </v-tab>
                 </v-tabs>
             </template>
@@ -36,7 +35,7 @@
                         :to="{ name: 'UserList' }"
                         color="info"
                     >
-                        <v-icon left>fas fa-step-backward</v-icon>
+                        <v-icon left>arrow_back_ios</v-icon>
                         Kembali
                     </v-btn>
                     <v-btn
@@ -44,7 +43,7 @@
                         color="success"
                         :loading="isLoading"
                     >
-                        <v-icon left>fas fa-save</v-icon>
+                        <v-icon left>cloud_upload</v-icon>
                         Simpan
                     </v-btn>
                 </v-card>
@@ -58,24 +57,6 @@
                     </v-card-text>
                 </v-card>
             </v-tab-item>
-            <c-simple-dialog
-                title="Konfirmasi Hapus Data"
-                content="Apakah anda yakin ingin menghapus data ini?"
-                :resolve="onDelete"
-                :activator="dialogActivator"
-            >
-            </c-simple-dialog>
-            <v-btn
-                color="error"
-                @click="dialogActivator = true"
-                dark
-                absolute
-                top
-                right
-                fab
-            >
-                <v-icon>fas fa-trash</v-icon>
-            </v-btn>
         </v-tabs-items>
     </v-flex>
 
@@ -86,21 +67,18 @@
     import ProfileForm from './ProfileForm.vue'
     import User from "../../../utils/user";
     import AdminPasswordForm from './Form/AdminPasswordForm';
-    import CSimpleDialog from "../../../plugins/siap/SimpleDialog";
 
     export default {
         components: {
-            CSimpleDialog,
             ProfileForm,
             AdminPasswordForm
         },
 
-        data: () => {
+        data () {
             return {
                 item: {},
                 tab: null,
-                user: new User(),
-                dialogActivator: false
+                user: new User()
             }
         },
 
@@ -135,6 +113,7 @@
                 if (!deleted) {
                     return
                 }
+
                 this.$router.push({ name: 'UserList' })
             }
         },
@@ -165,12 +144,6 @@
                 this.updateReset()
                 this.delReset()
                 this.createReset()
-            },
-            onDelete(val) {
-                if(val){
-                    this.deleteItem(this.retrieved);
-                }
-                this.dialogActivator = false;
             }
         }
     }
