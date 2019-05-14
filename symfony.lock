@@ -175,12 +175,6 @@
             "./config/packages/lexik_jwt_authentication.yaml"
         ]
     },
-    "matthiasnoback/symfony-config-test": {
-        "version": "4.0.1"
-    },
-    "matthiasnoback/symfony-dependency-injection-test": {
-        "version": "v3.1.0"
-    },
     "myclabs/deep-copy": {
         "version": "1.9.1"
     },
@@ -234,7 +228,7 @@
         "version": "v1.1.0"
     },
     "phpspec/phpspec": {
-        "version": "4.3.2"
+        "version": "5.1.0"
     },
     "phpspec/prophecy": {
         "version": "1.8.0"
