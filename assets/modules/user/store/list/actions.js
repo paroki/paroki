@@ -21,11 +21,13 @@ const getItems = ({ commit, state }, payload) => {
         .then(response => response.json())
         .then((data) => {
             commit(types.TOGGLE_LOADING);
-            let views = data['hydra:view'];
-            views['totalItems'] = data['hydra:totalItems'];
-                commit(types.SET_ITEMS, data['hydra:member'])
-                commit(types.SET_VIEW, views)
-            })
+            const views = {
+                ...data['hydra:view'],
+                totalItems: data['hydra:totalItems']
+            };
+            commit(types.SET_ITEMS, data['hydra:member'])
+            commit(types.SET_VIEW, views)
+        })
         .catch((e) => {
             commit(types.TOGGLE_LOADING);
             commit(types.SET_ERROR, e.message)
