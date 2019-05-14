@@ -9,6 +9,7 @@
                 <user-form
                     :errors="violations"
                     :initial-values="item"
+                    type="create"
                 ></user-form>
             </v-card-text>
             <v-btn
@@ -61,7 +62,7 @@
                     return
                 }
 
-                this.$router.push({ name: 'UserUpdate', params: { id: created['@id'] } })
+                this.$router.push({ name: 'UserUpdate', params: { id: created['id'] } })
             }
         },
 
@@ -72,10 +73,6 @@
 
             onSendForm () {
                 this.create(this.item)
-            },
-
-            updateField (field, value) {
-                Object.assign(this.item, { [field]: value })
             }
         }
     }
