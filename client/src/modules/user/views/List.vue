@@ -1,49 +1,60 @@
 <template>
     <v-flex md-12 fill-height>
-        <v-toolbar color="cyan" dark>
-            <v-toolbar-title centered>Daftar User</v-toolbar-title>
-        </v-toolbar>
-        <v-card>
+        <c-card
+            title="Daftar Pengguna"
+        >
             <v-card-text>
                 <c-table
                     :items="items"
                     :headers="headers"
-                    :pageAction="getPage"
-                    pager="user/list/pager"
-                    :edit-action="editItem"
+                    :pager="pager"
+                    :handle-edit="handleEdit"
                     :actions="actions"
-                    :total-items="view['totalItems']"
+                    :total-items="totalItems"
                     :loading="isLoading"
+                    :load-page-action="getPage"
+                    :set-pager-action="setPager"
                 >
                 </c-table>
+
+            </v-card-text>
+            <v-flex slot="actions">
                 <v-btn
                     :to="{ name: 'UserCreate' }"
                     color="cyan"
                     dark
-                    absolute
-                    bottom
-                    left
-                    fab
                 >
-                    <v-icon>fas fa-plus</v-icon>
+                    <v-icon v-text="$vuetify.icons.add"></v-icon>
+                    Data Baru
                 </v-btn>
-            </v-card-text>
-        </v-card>
+                <c-pagination
+                    :total-items="totalItems"
+                    :set-pager-action="setPager"
+                    :load-page-action="getPage"
+                    :pager="pager"
+                    fill-height
+                >
+                </c-pagination>
+            </v-flex>
+        </c-card>
     </v-flex>
 </template>
 
 <script>
     import { mapActions, mapGetters } from 'vuex'
+    import CPagination from "../../../components/core/Pagination";
 
     export default {
+        components: {CPagination},
         computed: {
             ...mapGetters({
                 deletedItem: 'user/del/deleted',
                 error: 'user/list/error',
                 items: 'user/list/items',
-                isLoading: 'siap/isLoading',
+                isLoading: 'user/list/isLoading',
                 view: 'user/list/view',
-                pager: 'user/list/pager'
+                pager: 'user/list/pager',
+                totalItems: 'user/list/totalItems'
             })
         },
         data(){
@@ -67,20 +78,15 @@
                     delete: {
 
                     }
-                },
-                perPage: null,
-                currentPage: 1
+                }
             }
-        },
-        created(){
-            //this.getPage();
-            //this.getPage(this.pager);
         },
         methods: {
             ...mapActions({
-                getPage: 'user/list/default'
+                getPage: 'user/list/default',
+                setPager: 'user/list/setPager'
             }),
-            editItem(item){
+            handleEdit(item){
                 this.$router.push({name: 'UserUpdate', params: {id: item.id}});
             }
         }

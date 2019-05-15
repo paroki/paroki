@@ -3,8 +3,9 @@ import router from './router';
 import store from './store';
 import App from './App';
 import './plugins';
+import './components';
 
-import ApiService from './services/api';
+import ApiService from './services/ApiService';
 
 ApiService.init(process.env.VUE_APP_API_ENTRYPOINT);
 

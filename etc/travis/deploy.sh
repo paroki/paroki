@@ -3,8 +3,9 @@
 ssh -i ./deploy_key travis@$IP -p $PORT <<EOF
   cd $DEPLOY_DIR
   git pull origin master
-  cd client
+  cd api
   composer install --ansi
+  cd ../client
   yarn install
   yarn build
   cd ../

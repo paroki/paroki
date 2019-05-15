@@ -9,6 +9,7 @@ export default {
         isLoading: false,
         items: [],
         view: [],
+        totalItems: 0,
         pager: {
             descending: true,
             page: 1,
