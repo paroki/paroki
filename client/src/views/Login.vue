@@ -21,7 +21,7 @@
                             <v-card-text>
                                 <v-form>
                                     <v-text-field
-                                        prepend-icon="person"
+                                        prepend-icon="fas fa-person"
                                         name="username"
                                         label="Enter your username"
                                         v-model="username"
@@ -29,7 +29,7 @@
 
                                     <v-text-field
                                         id="current-password"
-                                        prepend-icon="lock"
+                                        prepend-icon="fas fa-lock"
                                         name="currentPassword"
                                         label="Enter your current password"
                                         v-model="currentPassword"
