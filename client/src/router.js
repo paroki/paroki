@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import DefaultContainer from './plugins/siap/DefaultContainer';
+import DefaultContainer from './views/DefaultContainer';
 import Login from './views/Login';
 import Dashboard from './views/Dashboard';
-import { TokenService } from './services/token';
+import { TokenService } from './services';
 
 Vue.use(VueRouter);
 

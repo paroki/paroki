@@ -1,11 +1,7 @@
-import DefaultContainer from './DefaultContainer';
 import LoadingOverlay  from './LoadingOverlay';
-import SimpleDialog from './SimpleDialog';
 
 const components = [
-    DefaultContainer,
     LoadingOverlay,
-    SimpleDialog,
 ];
 
 export default {
@@ -17,7 +13,5 @@ export default {
 }
 
 export {
-    DefaultContainer,
-    LoadingOverlay,
-    SimpleDialog
+    LoadingOverlay
 }

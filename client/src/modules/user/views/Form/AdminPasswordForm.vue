@@ -8,9 +8,10 @@
         <v-btn
             @click="onSendForm"
             color="success"
+            small
         >
-            <v-icon left>fas fa-save</v-icon>
-            Update Password
+            <v-icon left v-text="$vuetify.icons.save"></v-icon>
+            Simpan
         </v-btn>
     </v-flex>
 </template>

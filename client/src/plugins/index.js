@@ -1,15 +1,16 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify'
 import theme from './theme';
-import siap from './siap';
+import icons from './icons';
 
+import '@mdi/font/css/materialdesignicons.css';
 
 Vue.use(Vuetify, {
-    iconfont: 'fa'
+    iconfont: 'mdi',
+    theme,
+    icons
 });
-Vue.use(theme);
-Vue.use(siap);
 
 //import 'material-design-icons-iconfont/dist/material-design-icons.css';
-import '@fortawesome/fontawesome-free/css/all.css'
 import 'vuetify/dist/vuetify.min.css';
+import '@/styles/index.scss';

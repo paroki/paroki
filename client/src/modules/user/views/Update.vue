@@ -1,84 +1,83 @@
 <template>
     <v-flex md12 fill-height>
-
-        <v-toolbar color="cyan" dark tabs>
-            <v-toolbar-title centered>{{ retrieved && retrieved.nama }}</v-toolbar-title>
-            <template v-slot:extension>
+        <c-card
+            class="card-tabs"
+            color="blue"
+            :title="retrieved && retrieved['nama']"
+        >
+            <v-flex slot="header">
                 <v-tabs
-                    color="cyan"
-                    dark
                     v-model="tab"
+                    color="transparent"
                 >
-                    <v-tabs-slider color="yellow"></v-tabs-slider>
 
                     <v-tab href="#tab-profil">
-                        <v-icon>fas fa-user</v-icon>
+                        <v-icon v-text="$vuetify.icons.user"></v-icon>
                         &nbsp;Profil
                     </v-tab>
 
                     <v-tab href="#tab-password">
-                        <v-icon>fas fa-lock</v-icon>
+                        <v-icon v-text="$vuetify.icons.password"></v-icon>
                         &nbsp;Password
                     </v-tab>
                 </v-tabs>
-            </template>
-        </v-toolbar>
-        <v-tabs-items v-model="tab">
-            <v-tab-item value="tab-profil" darken10>
-                <v-card flat>
-                    <v-card-text>
-                        <profile-form
-                            :errors="violations"
-                            :initial-values="retrieved"
-                        ></profile-form>
-                    </v-card-text>
-                    <v-btn
-                        :to="{ name: 'UserList' }"
-                        color="info"
-                    >
-                        <v-icon left>fas fa-step-backward</v-icon>
-                        Kembali
-                    </v-btn>
-                    <v-btn
-                        @click="onSendForm"
-                        color="success"
-                        :loading="isLoading"
-                    >
-                        <v-icon left>fas fa-save</v-icon>
-                        Simpan
-                    </v-btn>
-                </v-card>
-            </v-tab-item>
-            <v-tab-item value="tab-password">
-                <v-card flat>
-                    <v-card-text>
-                        <AdminPasswordForm
-                            v-if="user.hasRole('ROLE_ADMIN')"
-                        ></AdminPasswordForm>
-                    </v-card-text>
-                </v-card>
-            </v-tab-item>
-            <c-simple-dialog
-                title="Konfirmasi Hapus Data"
-                content="Apakah anda yakin ingin menghapus data ini?"
-                :resolve="onDelete"
-                :activator="dialogActivator"
-            >
-            </c-simple-dialog>
-            <v-btn
-                color="error"
-                @click="dialogActivator = true"
-                dark
-                absolute
-                top
-                right
-                fab
-            >
-                <v-icon>fas fa-trash</v-icon>
-            </v-btn>
-        </v-tabs-items>
+            </v-flex>
+            <v-tabs-items v-model="tab">
+                <v-tab-item value="tab-profil" darken10>
+                    <v-card flat>
+                        <v-card-text>
+                            <profile-form
+                                :errors="violations"
+                                :initial-values="retrieved"
+                            ></profile-form>
+                        </v-card-text>
+                        <v-btn
+                            @click="onSendForm"
+                            color="success"
+                            :loading="isLoading"
+                            small
+                        >
+                            <v-icon left v-text="$vuetify.icons.save"></v-icon>
+                            Simpan
+                        </v-btn>
+                    </v-card>
+                </v-tab-item>
+                <v-tab-item value="tab-password">
+                    <v-card flat>
+                        <v-card-text>
+                            <AdminPasswordForm
+                                v-if="user.hasRole('ROLE_ADMIN')"
+                            ></AdminPasswordForm>
+                        </v-card-text>
+                    </v-card>
+                </v-tab-item>
+                <c-simple-dialog
+                    title="Konfirmasi Hapus Data"
+                    content="Apakah anda yakin ingin menghapus data ini?"
+                    :resolve="onDelete"
+                    :activator="dialogActivator"
+                >
+                </c-simple-dialog>
+            </v-tabs-items>
+            <v-flex slot="actions">
+                <v-btn
+                    :to="{ name: 'UserList' }"
+                    color="info"
+                >
+                    <v-icon left v-text="$vuetify.icons.back"></v-icon>
+                    Kembali
+                </v-btn>
+                <v-btn
+                    color="error"
+                    @click="dialogActivator = true"
+                    dark
+                >
+                    <v-icon v-text="$vuetify.icons.delete"></v-icon>
+                    Hapus
+                </v-btn>
+            </v-flex>
+        </c-card>
     </v-flex>
-
 </template>
 
 <script>
@@ -86,11 +85,9 @@
     import ProfileForm from './ProfileForm.vue'
     import User from "../../../utils/user";
     import AdminPasswordForm from './Form/AdminPasswordForm';
-    import CSimpleDialog from "../../../plugins/siap/SimpleDialog";
 
     export default {
         components: {
-            CSimpleDialog,
             ProfileForm,
             AdminPasswordForm
         },

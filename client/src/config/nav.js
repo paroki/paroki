@@ -1,16 +1,16 @@
 export default [
     {
         name: 'Dashboard',
-        icon: 'fas fa-tachometer-alt'
+        icon: 'mdi-view-dashboard'
     },
     {
         name: 'Administrasi',
-        icon: 'fas fa-screwdriver',
+        icon: 'mdi-settings',
         children: [
             {
                 name: 'UserList',
                 label: 'User',
-                icon: 'fas fa-user-cog',
+                icon: 'mdi-shield-check',
                 url: '/user/'
             }
         ]

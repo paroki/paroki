@@ -1,10 +1,8 @@
 <template>
     <v-flex md12>
-        <v-toolbar color="cyan" dark>
-            <v-toolbar-title centered>Pengguna Baru</v-toolbar-title>
-        </v-toolbar>
-
-        <v-card flat>
+        <c-card
+            title="Pengguna Baru"
+        >
             <v-card-text>
                 <user-form
                     :errors="violations"
@@ -16,7 +14,7 @@
                 :to="{ name: 'UserList' }"
                 color="info"
             >
-                <v-icon left>fas fa-angle-left</v-icon>
+                <v-icon left v-text="$vuetify.icons.back"></v-icon>
                 Kembali
             </v-btn>
             <v-btn
@@ -24,10 +22,10 @@
                 color="success"
                 :loading="isLoading"
             >
-                <v-icon left>fas fa-save</v-icon>
+                <v-icon left v-text="$vuetify.icons.save"></v-icon>
                 Simpan
             </v-btn>
-        </v-card>
+        </c-card>
     </v-flex>
 </template>
 

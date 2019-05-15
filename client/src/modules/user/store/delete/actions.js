@@ -1,4 +1,4 @@
-import ApiService from '../../../../services/api'
+import ApiService from '@/services/ApiService'
 import * as types from './mutation_types'
 
 export const del = ({ commit }, item) => {
