@@ -7,6 +7,7 @@ export default {
             isLoading: false,
             items: [],
             view: [],
+            totalItems: 0,
             pager: {
                 descending: true,
                 page: 1,
@@ -35,5 +36,9 @@ export default {
 
     [types.SET_PAGER] (state, pager) {
         Object.assign(state, { pager })
+    },
+
+    [types.SET_TOTAL_ITEMS] (state, totalItems) {
+        Object.assign(state, { totalItems })
     },
 }

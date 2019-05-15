@@ -5,7 +5,7 @@
         :pagination.sync="pagination"
         :total-items="totalItems"
         :rows-per-page-items="pagination.rowsPerPageItems"
-        :loading="isLoading"
+        :loading="loading"
         min-height="400px"
     >
         <template v-slot:items="props">
@@ -15,16 +15,16 @@
                             color="green"
                             small
                             class="mr-2"
-                            @click="editAction(props.item)"
-                            v-if="actions.edit"
+                            @click="handleEdit(props.item)"
+                            v-if="handleEdit"
                             fab
                         >
                             fas fa-edit
                         </v-icon>
                         <v-icon
                             small
-                            @click="deleteAction(props.item)"
-                            v-if="header.delete"
+                            @click="handleDelete(props.item)"
+                            v-if="handleDelete"
                         >
                             fas fa-trash
                         </v-icon>
@@ -54,20 +54,11 @@
                 type: Boolean,
                 default: false
             },
-            // pager getter/setter name
-            pager: {
-                type: String,
-                required: true
-            },
-            pageAction: {
-                type: Function,
-                required: true
-            },
-            editAction: {
+            handleEdit: {
                 type: Function,
                 required: false
             },
-            deleteAction: {
+            handleDelete: {
                 type: Function,
                 required: false
             },
@@ -75,38 +66,40 @@
                 type: [Array, Object],
                 default: () => {}
             },
+            // pager getter/setter name
+            pager: {
+                type: [Array, Object],
+                required: true
+            },
+            loadPageAction: {
+                type: Function,
+                required: true
+            },
             totalItems: {
                 type: Number,
                 default: 0
-            }
-        },
-        data: () => {
-            return {
-            }
-        },
-        watch: {
-            pagination: {
-                handler() {
-                    this.pageAction();
-                },
-                deep: true
+            },
+            setPagerAction: {
+                type: Function,
+                required: true
             }
         },
         computed: {
             pagination: {
-                get: function(){
-                    return this.$store.getters[this.pager];
-                },
                 set: function(value){
-                    value.rowsPerPage = 5;
-                    this.$store.commit(this.pager,value);
+                    this.setPagerAction(value)
+                },
+                get: function(){
+                    return this.pager;
                 }
-            },
-            isLoading() {
-                return this.$store.getters['user/list/isLoading'];
             }
         },
-        methods: {
+        watch: {
+            pagination: {
+                handler(){
+                    this.loadPageAction();
+                }
+            }
         }
     }
 </script>

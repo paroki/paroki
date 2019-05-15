@@ -12,6 +12,11 @@ const generateParams = (payload) => {
     }
     return params;
 }
+
+export const setPager = ({commit}, payload) => {
+    commit(types.SET_PAGER,payload);
+}
+
 const getItems = ({ commit, state }, payload) => {
     payload = state.pager;
 
@@ -21,12 +26,9 @@ const getItems = ({ commit, state }, payload) => {
     return ApiService.get(url)
         .then((data) => {
             commit(types.TOGGLE_LOADING);
-            const views = {
-                ...data['hydra:view'],
-                totalItems: data['hydra:totalItems']
-            };
             commit(types.SET_ITEMS, data['hydra:member'])
-            commit(types.SET_VIEW, views)
+            commit(types.SET_VIEW, data['hydra:view'])
+            commit(types.SET_TOTAL_ITEMS, data['hydra:totalItems'])
         })
         .catch((e) => {
             commit(types.TOGGLE_LOADING);

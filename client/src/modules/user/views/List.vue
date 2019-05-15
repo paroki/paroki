@@ -8,12 +8,13 @@
                 <c-table
                     :items="items"
                     :headers="headers"
-                    :pageAction="getPage"
-                    pager="user/list/pager"
-                    :edit-action="editItem"
+                    :pager="pager"
+                    :handle-edit="handleEdit"
                     :actions="actions"
-                    :total-items="view['totalItems']"
+                    :total-items="totalItems"
                     :loading="isLoading"
+                    :load-page-action="getPage"
+                    :set-pager-action="setPager"
                 >
                 </c-table>
                 <v-btn
@@ -43,7 +44,8 @@
                 items: 'user/list/items',
                 isLoading: 'siap/isLoading',
                 view: 'user/list/view',
-                pager: 'user/list/pager'
+                pager: 'user/list/pager',
+                totalItems: 'user/list/totalItems'
             })
         },
         data(){
@@ -67,20 +69,15 @@
                     delete: {
 
                     }
-                },
-                perPage: null,
-                currentPage: 1
+                }
             }
-        },
-        created(){
-            //this.getPage();
-            //this.getPage(this.pager);
         },
         methods: {
             ...mapActions({
-                getPage: 'user/list/default'
+                getPage: 'user/list/default',
+                setPager: 'user/list/setPager'
             }),
-            editItem(item){
+            handleEdit(item){
                 this.$router.push({name: 'UserUpdate', params: {id: item.id}});
             }
         }
