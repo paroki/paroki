@@ -21,11 +21,13 @@ SIAP\Reference\Entity\Lingkungan:
         nama: St. Markus
 
 SIAP\Baptis\Entity\Baptis:
-    markus:
+    baptis_{1..100}:
         paroki: '@paroki'
         lingkungan: '@lingkungan'
-        nama: Markus
-        jenisKelamin: 1
+        jenisKelamin: '<numberBetween(1,2)>'
+        nama: '<baptismName(@self->getJenisKelamin())>'
         buku: I
-        nomor: 1
+        nomor: <current()>
+        updatedBy: '@admin'
+
 

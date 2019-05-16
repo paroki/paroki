@@ -37,6 +37,7 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->setEnabled(true);
+        $this->addRole('ROLE_USER');
     }
 
     public function getNama(): ?string
