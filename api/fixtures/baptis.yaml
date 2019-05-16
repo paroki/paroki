@@ -1,5 +1,5 @@
 SIAP\Baptis\Entity\Baptis:
-    baptis_{1..100}:
+    baptis_{1..10}:
         paroki: '@paroki'
         lingkungan: '@lingkungan'
         jenisKelamin: '<numberBetween(1,2)>'

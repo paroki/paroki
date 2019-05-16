@@ -20,4 +20,10 @@ SIAP\Reference\Entity\Lingkungan:
         paroki: '@paroki'
         nama: St. Markus
 
-
+SIAP\User\Entity\User:
+    admin:
+        nama: Anthonius Munthi
+        username: admin
+        email: me@itstoni.com
+        paroki: '@paroki'
+        plainPassword: 'admin'
