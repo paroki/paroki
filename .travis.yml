@@ -31,7 +31,7 @@ jobs:
         script: etc/travis/deploy.sh
         skip_cleanup: true
         on:
-          branch: travis-build
+          branch: master
   allow_failures:
     - env: COVERAGE=yes
 
