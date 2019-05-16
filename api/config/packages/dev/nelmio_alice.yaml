@@ -1,4 +1,5 @@
 nelmio_alice:
+    locale: id
     functions_blacklist:
         - 'current'
         - 'shuffle'

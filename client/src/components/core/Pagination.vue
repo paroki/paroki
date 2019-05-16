@@ -1,7 +1,7 @@
 <template>
     <v-pagination
         v-bind="$attrs"
-        :length="Math.round(totalItems/pager.rowsPerPage)"
+        :length="getLength"
         v-model="pagination"
     ></v-pagination>
 </template>
@@ -46,6 +46,9 @@
                 get: function(){
                     return this.pager.page;
                 }
+            },
+            getLength(){
+                return Math.round(this.totalItems/this.pager.rowsPerPage)
             }
         },
         watch: {

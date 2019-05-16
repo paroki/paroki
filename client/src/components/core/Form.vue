@@ -1,6 +1,5 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <v-form>
-
         <template v-for="field in fields">
             <div :key="field.name">
                 <v-text-field
@@ -12,6 +11,7 @@
                     v-model="item[field.name]"
                     v-if="field.type === 'text'"
                     class="purple-input"
+                    @input="handleUpdateField(field.name, $event.target.value)">
                 ></v-text-field>
                 <v-text-field
                     :label="field.label"
@@ -22,6 +22,7 @@
                     v-if="field.type === 'password'"
                     :error="isInvalid(field.name)"
                     :error-messages="getError(field.name)"
+                    @input="handleUpdateField(field.name, $event.target.value)">
                 ></v-text-field>
                 <c-datepicker
                     v-if="field.type === 'date'"
@@ -31,6 +32,7 @@
                     :data="item"
                     :error="isInvalid(field.name)"
                     :error-messages="getError(field.name)"
+                    @input="handleUpdateField(field.name, $event.target.value)">
                 ></c-datepicker>
                 <v-radio-group
                     v-model="item[field.name]"
@@ -38,6 +40,7 @@
                     :label="field.label"
                     :error="isInvalid(field.name)"
                     :error-messages="getError(field.name)"
+                    @input="handleUpdateField(field.name, $event.target.value)">
                 >
                     <v-radio
                         v-for="(option, index) in field.options"
@@ -59,6 +62,7 @@
                         :value="option.value"
                         :error="isInvalid(field.name)"
                         :error-messages="getError(field.name)"
+                        @input="handleUpdateField(field.name, $event.target.value)">
                     ></v-checkbox>
                 </v-item-group>
                 <c-autocomplete
@@ -67,6 +71,7 @@
                     :label="field.label"
                     :error="isInvalid(field.name)"
                     :error-messages="getError(field.name)"
+                    @input="handleUpdateField(field.name, $event.target.value)">
                 ></c-autocomplete>
             </div>
         </template>
@@ -91,6 +96,10 @@
             },
             initialValues: {
                 type: Object,
+                default: () => {}
+            },
+            handleUpdateField: {
+                type: Function,
                 default: () => {}
             }
         },

@@ -1,7 +1,7 @@
 SIAP\User\Entity\User:
     user_{1..10}:
-        nama: <name()>
+        nama: <baptismName()>
         username: <userName()>
-        email: <email()>
+        email: '@self->getUsername()\@example.org'
         plainPassword: 123password
         paroki: '@paroki'

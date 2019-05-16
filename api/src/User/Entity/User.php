@@ -37,6 +37,7 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->setEnabled(true);
+        $this->addRole('ROLE_USER');
     }
 
     public function getNama(): ?string
@@ -44,7 +45,7 @@ class User extends BaseUser
         return $this->nama;
     }
 
-    public function setNama(string $nama): self
+    public function setNama(?string $nama): self
     {
         $this->nama = $nama;
 

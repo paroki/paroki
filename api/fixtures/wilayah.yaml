@@ -20,12 +20,10 @@ SIAP\Reference\Entity\Lingkungan:
         paroki: '@paroki'
         nama: St. Markus
 
-SIAP\Baptis\Entity\Baptis:
-    markus:
+SIAP\User\Entity\User:
+    admin:
+        nama: Anthonius Munthi
+        username: admin
+        email: me@itstoni.com
         paroki: '@paroki'
-        lingkungan: '@lingkungan'
-        nama: Markus
-        jenisKelamin: 1
-        buku: I
-        nomor: 1
-
+        plainPassword: 'admin'

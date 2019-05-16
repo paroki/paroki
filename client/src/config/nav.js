@@ -4,6 +4,11 @@ export default [
         icon: 'mdi-view-dashboard'
     },
     {
+        name: 'BaptisList',
+        label: 'Buku Baptis',
+        icon: 'mdi-account',
+    },
+    {
         name: 'Administrasi',
         icon: 'mdi-settings',
         children: [

@@ -1,11 +1,11 @@
 api_platform:
     resource: .
     type: api_platform
-    prefix: /api
+    prefix: /
 
 
 login_check:
-    path: /api/login_check
+    path: /login_check
     methods: [POST]
 
 bundle_routes:

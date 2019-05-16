@@ -3,14 +3,30 @@ import { TokenService } from '@/services'
 import SubmissionError from "../utils/SubmissionError";
 
 const ApiService = {
-    generateUrl(url){
+    generateListParams(payload){
+        if(!payload) return [];
+        const sortOrder = payload.descending ? 'desc':'asc';
+        const params = [];
+        params.push(`page=${payload.page}`);
+        if(payload.sortBy){
+            params.push(`order[${payload.sortBy}]=${sortOrder}`);
+        }
+        return params;
+    },
+
+    generateUrl(url, params = false){
         const path = process.env.VUE_APP_API_PATH;
-        return `${url}/${path}`;
+        url = `${path}/${url}`;
+        url.replace('//','/');
+        if(params){
+            url = `${url}?${params.join('&')}`
+        }
+        url = url.replace(/\/+/,'/');
+        return url;
     },
 
     init(baseURL) {
         axios.defaults.baseURL = baseURL;
-
         axios.interceptors.request.use(
             (config) => {
                 const url = config.url.replace('api/api', 'api');
@@ -54,6 +70,7 @@ const ApiService = {
     },
 
     post(resource, data) {
+        console.log(axios.defaults.baseURL);
         return axios.post(resource, data)
     },
 

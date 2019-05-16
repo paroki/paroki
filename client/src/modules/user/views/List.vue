@@ -33,6 +33,7 @@
                     :load-page-action="getPage"
                     :pager="pager"
                     fill-height
+                    :circle="true"
                 >
                 </c-pagination>
             </v-flex>

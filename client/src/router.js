@@ -8,6 +8,7 @@ import { TokenService } from './services';
 Vue.use(VueRouter);
 
 import user from './modules/user/routes';
+import baptis from './modules/baptis/routes';
 
 let router =  new VueRouter({
     mode: 'history',
@@ -37,7 +38,8 @@ let router =  new VueRouter({
                         requiresAuth: true
                     }
                 },
-                ...user
+                ...user,
+                ...baptis
             ]
         },
         {

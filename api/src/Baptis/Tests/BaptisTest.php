@@ -29,9 +29,9 @@ use SIAP\Reference\Entity\Paroki;
 class BaptisTest extends DatabaseTestCase
 {
     /**
-     * @return object|Paroki
+     * @return null|object|Paroki
      */
-    public function getParoki(): Paroki
+    public function getParoki(): ?Paroki
     {
         return $this->getRepository(Paroki::class)
             ->findOneBy(['kode' => '999.999']);

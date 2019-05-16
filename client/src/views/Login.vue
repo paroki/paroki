@@ -93,7 +93,9 @@
                 };
                 this.login(payload)
                     .then(() => {
-                        this.$router.push('/');
+                        if(!this.hasError) {
+                            this.$router.push('/');
+                        }
                     })
                     .catch( (e) => {
                         this.error = e;

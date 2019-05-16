@@ -1,20 +1,28 @@
-import fetch from '../../../../utils/fetch'
-import * as types from './mutation_types'
+import ApiService from '@/services/ApiService';
+import * as types from './mutation_types';
 
-const getItems = ({ commit }, page = '{{{name}}}') => {
-  commit(types.TOGGLE_LOADING)
+const getItems = ({ commit, state }, payload) => {
+    payload = state.pager;
 
-  fetch(page)
-    .then(response => response.json())
-    .then((data) => {
-      commit(types.TOGGLE_LOADING)
-      commit(types.SET_ITEMS, data['{{{hydraPrefix}}}member'])
-      commit(types.SET_VIEW, data['{{{hydraPrefix}}}view'])
-    })
-    .catch((e) => {
-      commit(types.TOGGLE_LOADING)
-      commit(types.SET_ERROR, e.message)
-    })
-}
+    const params = ApiService.generateListParams(payload);
+    const url = ApiService.generateUrl('{{{name}}}', params);
+
+    commit(types.TOGGLE_LOADING);
+    ApiService.get(url)
+        .then((data) => {
+            commit(types.TOGGLE_LOADING);
+            commit(types.SET_ITEMS, data['{{{hydraPrefix}}}member']);
+            commit(types.SET_VIEW, data['{{{hydraPrefix}}}view']);
+            commit(types.SET_TOTAL_ITEMS, data['hydra:totalItems']);
+        })
+        .catch((e) => {
+            commit(types.TOGGLE_LOADING);
+            commit(types.SET_ERROR, e.message);
+        })
+};
+
+export const setPager = ({commit}, payload) => {
+    commit(types.SET_PAGER,payload);
+};
 
 export default getItems
