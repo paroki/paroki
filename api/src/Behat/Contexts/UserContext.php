@@ -13,14 +13,15 @@ declare(strict_types=1);
 
 namespace SIAP\Behat\Contexts;
 
-use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
+use SIAP\Reference\Entity\Paroki;
 use SIAP\User\Entity\User;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\PyStringNode;
 use Behatch\Context\RestContext;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
+use SIAP\User\Services\UserManager;
 
 class UserContext implements Context
 {
@@ -40,7 +41,7 @@ class UserContext implements Context
     private $retryTtl;
 
     /**
-     * @var UserManagerInterface
+     * @var UserManager
      */
     private $userManager;
 
@@ -51,9 +52,14 @@ class UserContext implements Context
 
     private $tokenGenerator;
 
+    /**
+     * @var ReferenceContext
+     */
+    private $referenceContext;
+
     public function __construct(
         JWTManager $jwtManager,
-        UserManagerInterface $userManager,
+        UserManager $userManager,
         TokenGeneratorInterface $tokenGenerator,
         $retryTtl
     )
@@ -70,6 +76,7 @@ class UserContext implements Context
     public function gatherContexts(BeforeScenarioScope $scope)
     {
         $this->restContext = $scope->getEnvironment()->getContext(RestContext::class);
+        $this->referenceContext = $scope->getEnvironment()->getContext(ReferenceContext::class);
     }
 
     /**
@@ -116,11 +123,30 @@ class UserContext implements Context
     }
 
     /**
-     * @Given I have logged in as admin
+     * @Given I have logged in as an admin
      */
     public function iHaveLoggedInAsAdmin()
     {
         $user  = $this->thereIsAdminUserWith('admin', 'admin');
+        $token = $this->jwtManager->create($user);
+        $this->restContext->iAddHeaderEqualTo('Authorization', 'Bearer '.$token);
+    }
+
+    /**
+     * @Given I have logged in as an administrator for paroki :name
+     */
+    public function iHaveLoggedInAsAdminForParokiTest($name)
+    {
+        $user = $this->thereIsUser('admin');
+        $paroki = $user->getParoki();
+        $reference = $this->referenceContext;
+
+        if(!$paroki instanceof Paroki || $paroki->getNama()!==$name){
+            $paroki = $reference->iHaveParoki($name);
+        }
+        $user->setParoki($paroki);
+        $this->userManager->updateUser($user);
+
         $token = $this->jwtManager->create($user);
         $this->restContext->iAddHeaderEqualTo('Authorization', 'Bearer '.$token);
     }
@@ -196,5 +222,19 @@ class UserContext implements Context
             $user->setPasswordRequestedAt(null);
             $userManager->updateUser($user);
         }
+    }
+
+    /**
+     * @Given there are no user with username :username
+     *
+     * @param string $username
+     */
+    public function thereIsNoUser($username)
+    {
+       $user = $this->userManager->findUserByUsername($username);
+       $manager = $this->userManager;
+       if($user  instanceof User){
+           $manager->deleteUser($user);
+       }
     }
 }

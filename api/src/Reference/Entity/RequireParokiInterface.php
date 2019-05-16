@@ -20,5 +20,10 @@ interface RequireParokiInterface
      *
      * @return static
      */
-    public function setParoki(Paroki $paroki = null);
+    public function setParoki(Paroki $paroki);
+
+    /**
+     * @return Paroki
+     */
+    public function getParoki();
 }

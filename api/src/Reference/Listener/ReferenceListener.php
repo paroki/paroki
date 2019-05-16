@@ -18,9 +18,27 @@ use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use Ramsey\Uuid\Uuid;
 use SIAP\Reference\Entity\Lingkungan;
+use SIAP\Reference\Entity\Paroki;
+use SIAP\Reference\Entity\RequireParokiInterface;
+use SIAP\User\Entity\User;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class KodeGenerator implements EventSubscriber
+class ReferenceListener implements EventSubscriber
 {
+    /**
+     * @var null|User
+     */
+    private $currentUser;
+
+    public function __construct(
+        TokenStorageInterface $security
+    )
+    {
+        if(!is_null($security->getToken())){
+            $this->currentUser = $security->getToken()->getUser();
+        }
+    }
+
     public function getSubscribedEvents()
     {
         return [
@@ -50,7 +68,7 @@ class KodeGenerator implements EventSubscriber
             $entity->setGuid(Uuid::uuid4());
         }
 
-        if (method_exists($entity, 'setParoki') && Events::prePersist === $event) {
+        if ($entity instanceof RequireParokiInterface && Events::prePersist === $event) {
             $this->setParoki($entity);
         }
     }
@@ -64,7 +82,18 @@ class KodeGenerator implements EventSubscriber
         $entity->setId($kode);
     }
 
-    private function setParoki($entity)
+    private function setParoki(RequireParokiInterface $entity)
     {
+        if($entity->getParoki() instanceof Paroki){
+            return;
+        }
+
+        if(is_null($this->currentUser)) return;
+
+        $currentUser = $this->currentUser;
+        $paroki = $currentUser->getParoki();
+        if(!is_null($paroki)){
+            $entity->setParoki($paroki);
+        }
     }
 }
