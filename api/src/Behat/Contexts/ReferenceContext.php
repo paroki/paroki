@@ -58,7 +58,7 @@ class ReferenceContext implements Context
         $repository = $this->getParokiRepository();
 
         $paroki = $repository->findOneBy(['kode' => '999.999']);
-        if(!$paroki  instanceof $paroki){
+        if(!$paroki  instanceof Paroki){
             $keuskupan = $this->iHaveKeuskupan($keuskupan);
             $paroki = new Paroki();
             $paroki->setKeuskupan($keuskupan);
