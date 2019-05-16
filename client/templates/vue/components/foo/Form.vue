@@ -1,11 +1,10 @@
 <template>
     <v-flex>
         <c-form
-            v-bind="$attrs"
             :fields="fields"
             :values="values"
             :errors="violations"
-            :inital-values="item"
+            :initial-values="item"
         ></c-form>
     </v-flex>
 </template>

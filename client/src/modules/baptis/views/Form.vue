@@ -3,8 +3,8 @@
         <c-form
             :fields="fields"
             :values="values"
+            :initial-values="item"
             :errors="violations"
-            :inital-values="item"
         ></c-form>
     </v-flex>
 </template>

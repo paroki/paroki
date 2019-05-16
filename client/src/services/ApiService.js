@@ -14,9 +14,13 @@ const ApiService = {
         return params;
     },
 
-    generateUrl(url){
+    generateUrl(url, params = false){
         const path = process.env.VUE_APP_API_PATH;
-        return `${path}/${url}`;
+        url = `${path}/${url}`;
+        if(params){
+            url = `${url}?${params.join('&')}`
+        }
+        return url;
     },
 
     init(baseURL) {

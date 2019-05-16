@@ -5,7 +5,7 @@ const getItems = ({ commit, state }, payload) => {
     payload = state.pager;
 
     const params = ApiService.generateListParams(payload);
-    const url = ApiService.generateUrl('baptis');
+    const url = ApiService.generateUrl('baptis', params);
 
     commit(types.TOGGLE_LOADING);
     commit(types.TOGGLE_LOADING)

@@ -6,8 +6,7 @@ export default [
     {
         name: 'BaptisList',
         label: 'Buku Baptis',
-        icon: 'mdi-settings',
-        url: '/baptis/'
+        icon: 'mdi-account',
     },
     {
         name: 'Administrasi',
