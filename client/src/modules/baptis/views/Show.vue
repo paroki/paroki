@@ -34,8 +34,8 @@
         </thead>
         <tbody>
           <tr>
-            <td>baptisId</td>
-            <td>{{ item['baptisId'] }}</td>
+            <td>kodeBaptis</td>
+            <td>{{ item['kodeBaptis'] }}</td>
           </tr>
           <tr>
             <td>buku</td>
@@ -48,6 +48,14 @@
           <tr>
             <td>nomor</td>
             <td>{{ item['nomor'] }}</td>
+          </tr>
+          <tr>
+            <td>lanjutan</td>
+            <td>{{ item['lanjutan'] }}</td>
+          </tr>
+          <tr>
+            <td>namaBaptis</td>
+            <td>{{ item['namaBaptis'] }}</td>
           </tr>
           <tr>
             <td>tempatBaptis</td>
@@ -70,64 +78,8 @@
             <td>{{ item['catatan'] }}</td>
           </tr>
           <tr>
-            <td>updatedAt</td>
-            <td>{{ item['updatedAt'] }}</td>
-          </tr>
-          <tr>
-            <td>komuni</td>
-            <td>{{ item['komuni'] }}</td>
-          </tr>
-          <tr>
-            <td>krisma</td>
-            <td>{{ item['krisma'] }}</td>
-          </tr>
-          <tr>
-            <td>perkawinan</td>
-            <td>{{ item['perkawinan'] }}</td>
-          </tr>
-          <tr>
-            <td>diterima</td>
-            <td>{{ item['diterima'] }}</td>
-          </tr>
-          <tr>
-            <td>updatedBy</td>
-            <td>{{ item['updatedBy'] }}</td>
-          </tr>
-          <tr>
-            <td>paroki</td>
-            <td>{{ item['paroki'] }}</td>
-          </tr>
-          <tr>
-            <td>lingkungan</td>
-            <td>{{ item['lingkungan'] }}</td>
-          </tr>
-          <tr>
-            <td>agamaSebelumBaptis</td>
-            <td>{{ item['agamaSebelumBaptis'] }}</td>
-          </tr>
-          <tr>
-            <td>lanjutan</td>
-            <td>{{ item['lanjutan'] }}</td>
-          </tr>
-          <tr>
-            <td>kodeBaptis</td>
-            <td>{{ item['kodeBaptis'] }}</td>
-          </tr>
-          <tr>
-            <td>namaBaptis</td>
-            <td>{{ item['namaBaptis'] }}</td>
-          </tr>
-          <tr>
-            <td>dokumen</td>
-            <td>{{ item['dokumen'] }}</td>
-          </tr>
-          <tr>
             <td>nama</td>
             <td>{{ item['nama'] }}</td>
-          </tr>
-          <tr>
-            <td>jenisKelamin</td>
-            <td>{{ item['jenisKelamin'] }}</td>
           </tr>
           <tr>
             <td>tempatLahir</td>

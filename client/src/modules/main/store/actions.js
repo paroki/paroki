@@ -40,7 +40,8 @@ export const login = ({commit},payload) => {
     commit(types.SIAP_LOGIN_START);
     commit(types.SIAP_LOGIN_ERROR,false);
 
-    return ApiService.post('/api/login_check',payload)
+    const url = ApiService.generateUrl('/login_check');
+    return ApiService.post(url,payload)
         .then(data => {
             commit(types.SIAP_LOGIN_END);
             commit(types.SIAP_TOGGLE_LOADING);

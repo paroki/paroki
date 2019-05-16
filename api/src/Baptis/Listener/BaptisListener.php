@@ -17,6 +17,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use SIAP\Baptis\Entity\Baptis;
+use SIAP\Reference\Entity\Paroki;
 
 class BaptisListener implements EventSubscriber
 {
@@ -44,6 +45,9 @@ class BaptisListener implements EventSubscriber
         $entity = $args->getObject();
 
         if (!$entity instanceof Baptis) {
+            return;
+        }
+        if(!$entity->getParoki() instanceof Paroki){
             return;
         }
         $exp = [

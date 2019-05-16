@@ -3,16 +3,11 @@
         <c-card
             title="Data {{{titleUcFirst}}} Baru"
         >
-            <{{{titleUcFirst}}}Form
-            :handle-submit="onSendForm"
-            :handle-update-field="updateField"
-            :values="item"
-            :errors="violations" />
             <v-card-text>
                 <{{{titleUcFirst}}}Form
-                    :errors="violations"
-                    :initial-values="item"
-                ></{{{titleUcFirst}}}Form>
+                :handle-update-field="updateField"
+                :values="item"
+                :errors="violations" />
             </v-card-text>
             <v-flex slot="actions">
                 <v-btn

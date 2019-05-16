@@ -30,7 +30,7 @@ class Baptis extends AbstractBiodata
     private $kodeBaptis;
 
     /**
-     * @var string
+     * @var null|string
      */
     private $buku;
 
@@ -40,12 +40,12 @@ class Baptis extends AbstractBiodata
     private $halaman = 0;
 
     /**
-     * @var string
+     * @var int
      */
     private $nomor;
 
     /**
-     * @var int
+     * @var null|string
      */
     private $lanjutan;
 

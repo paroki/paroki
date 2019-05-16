@@ -41,8 +41,7 @@
         "load-fixtures": "APP_ENV=test bin/console hautelook:fixtures:load -n",
         "prepare-test": [
             "./bin/console doctrine:database:create --env=test",
-            "bin/console doctrine:schema:create --env=test",
-            "@load-fixtures"
+            "bin/console doctrine:schema:create --env=test"
         ],
         "test": "./vendor/bin/phpunit"
     },

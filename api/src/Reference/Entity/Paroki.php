@@ -211,9 +211,6 @@ class Paroki
         return $this->keuskupan;
     }
 
-    /**
-     * @return Paroki
-     */
     public function setKeuskupan(?Keuskupan $keuskupan): self
     {
         $this->keuskupan = $keuskupan;

@@ -81,4 +81,10 @@ class PersonProvider extends BasePersonID
             static::randomElement(static::$baptismFemaleName)
         );
     }
+
+    public function halamanBaptis($index)
+    {
+        $value = floor($index/10)+1;
+        return (integer)$value;
+    }
 }

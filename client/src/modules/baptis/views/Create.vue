@@ -3,16 +3,11 @@
         <c-card
             title="Data Baptis Baru"
         >
-            <BaptisForm
-            :handle-submit="onSendForm"
-            :handle-update-field="updateField"
-            :values="item"
-            :errors="violations" />
             <v-card-text>
                 <BaptisForm
-                    :errors="violations"
-                    :initial-values="item"
-                ></BaptisForm>
+                :handle-update-field="updateField"
+                :values="item"
+                :errors="violations" />
             </v-card-text>
             <v-flex slot="actions">
                 <v-btn

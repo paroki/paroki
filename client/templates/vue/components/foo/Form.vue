@@ -12,11 +12,6 @@
 <script>
     export default {
         props: {
-            handleSubmit: {
-                type: Function,
-                required: true
-            },
-
             handleUpdateField: {
                 type: Function,
                 required: true

@@ -1,0 +1,12 @@
+SIAP\Baptis\Entity\Baptis:
+    baptis_{1..100}:
+        paroki: '@paroki'
+        lingkungan: '@lingkungan'
+        jenisKelamin: '<numberBetween(1,2)>'
+        nama: '<baptismName(@self->getJenisKelamin())>'
+        ayah: '<baptismName(1)>'
+        ibu: '<baptismName(2)>'
+        buku: I
+        halaman: '<halamanBaptis(<current()>)>'
+        nomor: <current()>
+        updatedBy: '@admin'

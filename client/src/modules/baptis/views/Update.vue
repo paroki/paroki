@@ -5,6 +5,7 @@
         >
             <v-card-text>
                 <BaptisForm
+                v-if="item"
                 :handle-submit="onSendForm"
                 :handle-update-field="updateField"
                 :values="item"

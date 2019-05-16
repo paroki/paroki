@@ -21,7 +21,7 @@ const getItems = ({ commit, state }, payload) => {
     payload = state.pager;
 
     const params = generateParams(payload);
-    const url = `/api/user?`+params.join('&');
+    const url = ApiService.generateUrl('/user',params);
     commit(types.TOGGLE_LOADING);
     return ApiService.get(url)
         .then((data) => {

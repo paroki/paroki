@@ -1,0 +1,38 @@
+SIAP\Baptis\Entity\Baptis:
+    attributes:
+        id:
+            groups: ['read']
+        kodeBaptis:
+            groups: ['read']
+        buku:
+            groups: ['read','write']
+        halaman:
+            groups: ['read','write']
+        nomor:
+            groups: ['read','write']
+        lanjutan:
+            groups: ['read','write']
+        nama:
+            groups: ['read','write']
+        tempatLahir:
+            groups: ['read','write']
+        tanggalLahir:
+            groups: ['read','write']
+        ayah:
+            groups: ['read','write']
+        ibu:
+            groups: ['read','write']
+        alamat:
+            groups: ['read','write']
+        namaBaptis:
+            groups: ['read','write']
+        tempatBaptis:
+            groups: ['read','write']
+        tanggalBaptis:
+            groups: ['read','write']
+        waliBaptis1:
+            groups: ['read','write']
+        waliBaptis2:
+            groups: ['read','write']
+        catatan:
+            groups: ['read','write']

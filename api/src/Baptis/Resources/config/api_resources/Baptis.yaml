@@ -4,8 +4,14 @@ SIAP\Baptis\Entity\BaptisKrisma:
     shortName: baptis-krisma
 SIAP\Baptis\Entity\BaptisPerkawinan:
     shortName: baptis-perkawinan
+    
 SIAP\Baptis\Entity\Baptis:
     shortName: baptis
+    attributes:
+        normalization_context:
+            groups: ['read']
+        denormalization_context:
+            groups: ['write']
     collectionOperations:
         post: ~
         get:
