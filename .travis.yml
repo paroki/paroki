@@ -46,7 +46,7 @@ install:
   - composer prepare-test --ansi
   - cd $TRAVIS_BUILD_DIR/client
   - yarn install
-  - if [[ $BUILD=yes ]]; then yarn build; fi;
+  - if [[ $BUILD == yes ]]; then yarn build; fi;
 
 script:
 - cd $TRAVIS_BUILD_DIR
