@@ -25,11 +25,6 @@ use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
 class UserContext implements Context
 {
     /**
-     * @var DoctrineContext
-     */
-    private $doctrine;
-
-    /**
      * @var JWTManager
      */
     private $jwtManager;
@@ -80,9 +75,11 @@ class UserContext implements Context
     /**
      * @param string $username
      *
+     * @param string $password
+     * @param string $role
      * @return User|object|null
      */
-    public function thereIsUser($username, string $password=null, string $role= 'ROLE_ADMIN')
+    public function thereIsUser($username, $password = 'password', $role= 'ROLE_ADMIN')
     {
         $userManager = $this->userManager;
         $user     = $userManager->findUserByUsername($username);
@@ -98,7 +95,7 @@ class UserContext implements Context
             ->setPlainPassword($password)
             ->setEnabled(true);
 
-        $user->addRole('ROLE_ADMIN');
+        $user->addRole($role);
         $userManager->updateUser($user);
 
         return $user;
