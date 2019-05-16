@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ec6c93e802bf1b9f08417c69adbd445",
+    "content-hash": "8afcda6d7e8c5716e111811804c98d2c",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -8646,9 +8646,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "behatch/contexts": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -2,8 +2,15 @@ default:
   suites:
     default:
       contexts:
-        - SIAP\Behat\Contexts\FeatureContext:
-            kernel: '@kernel'
+        - Behat\MinkExtension\Context\MinkContext
+        - Behatch\Context\RestContext
+        - SIAP\Behat\Contexts\JsonContext
+        - SIAP\Behat\Contexts\CustomContext
+        - SIAP\Behat\Contexts\UserContext:
+            jwtManager: '@lexik_jwt_authentication.jwt_manager'
+            userManager: '@fos_user.user_manager'
+            retryTtl: 3600
+            tokenGenerator: '@fos_user.util.token_generator'
 
   extensions:
     Behat\Symfony2Extension:
@@ -13,6 +20,12 @@ default:
         class: SIAP\Core\Kernel
         #path: 'fixtures/src/Kernel.php'
         bootstrap: 'config/bootstrap.php'
+    'Behat\MinkExtension':
+      base_url: 'http://example.com/'
+      sessions:
+        default:
+          symfony2: ~
+    'Behatch\Extension': ~
 
 coverage:
   suites:

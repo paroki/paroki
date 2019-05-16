@@ -5,7 +5,7 @@ api_platform:
 
 
 login_check:
-    path: /login_check
+    path: /login-check
     methods: [POST]
 
 bundle_routes:

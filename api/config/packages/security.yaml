@@ -24,7 +24,7 @@ security:
             anonymous: true
             provider: app_entity_provider
             json_login:
-                check_path:               /login_check
+                check_path:               /login-check
                 success_handler:          lexik_jwt_authentication.handler.authentication_success
                 failure_handler:          lexik_jwt_authentication.handler.authentication_failure
         #api:
