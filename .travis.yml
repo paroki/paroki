@@ -1,9 +1,14 @@
+dist: xenial
 language: php
 
 cache:
   directories:
     - $HOME/.composer/cache
     - $HOME/.npm
+    - $TRAVIS_BUILD_DIR/client/node_modules
+
+node_js:
+  - "10"
 
 stages:
   - test
@@ -12,7 +17,7 @@ stages:
 jobs:
   include:
     - stage: test
-      php: '7.2'
+      php: '7.3'  
     - stage: test
       php: '7.3'
     - stage: test
@@ -20,32 +25,28 @@ jobs:
       env: COVERAGE=yes
     - stage: deploy
       php: '7.2'
-      install: "echo 'No install required'"
-      script: "echo 'No script during deploy'"
+      env: 'BUILD=yes INTEGRATION=yes'
       deploy:
         provider: script
         script: etc/travis/deploy.sh
         skip_cleanup: true
         on:
-          branch: master
+          branch: travis-build
   allow_failures:
     - env: COVERAGE=yes
 
 before_install:
   # remove xdebug when not collecting code coverage
   - if [[ $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini || echo "xdebug not available"; fi;
-  - sudo rm -rf ~/.nvm
-  - curl -sL "https://deb.nodesource.com/setup_10.x" | sudo -E bash -
-  - sudo apt-get install -y nodejs
 
 install:
   - cp etc/travis/env.local api/.env.local
   - cd $TRAVIS_BUILD_DIR/api
   - composer install --ansi
-  - composer prepare-test
+  - composer prepare-test --ansi
   - cd $TRAVIS_BUILD_DIR/client
   - yarn install
-  - yarn build
+  - if [[ $BUILD=yes ]]; then yarn build; fi;
 
 script:
 - cd $TRAVIS_BUILD_DIR
@@ -61,8 +62,7 @@ before_deploy:
 - chmod 600 ./deploy_key
 - echo -e "Host $IP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - ssh-add ./deploy_key
-- chmod +x etc/travis/deploy.sh
-
+- rsync -r $TRAVIS_BUILD_DIR/client/dist travis@$IP:$DEPLOY_DIR
 
 after_script:
   # process coverage

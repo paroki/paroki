@@ -18,9 +18,11 @@ if [[ ${COVERAGE} == yes ]]; then
     BEHAT_OPTS="--profile coverage";
 fi;
 
-${PHP_CMD} ./api/vendor/bin/phpspec run --ansi ${PHPSPEC_OPTS} || EXIT_CODE=1
-${PHP_CMD} ./api/vendor/bin/phpunit -c api --colors=always ${PHPUNIT_OPTS} || EXIT_CODE=1
-${PHP_CMD} ./api/vendor/bin/behat -c api/behat.yml.dist --colors ${BEHAT_OPTS} || EXIT_CODE=1
+if [[ ${INTEGRATON} != yes ]]; then
+    ${PHP_CMD} ./api/vendor/bin/phpspec run --ansi ${PHPSPEC_OPTS} || EXIT_CODE=1;
+    ${PHP_CMD} ./api/vendor/bin/phpunit -c api --colors=always ${PHPUNIT_OPTS} || EXIT_CODE=1;
+    ${PHP_CMD} ./api/vendor/bin/behat -c api/behat.yml.dist --colors ${BEHAT_OPTS} || EXIT_CODE=1;
+fi;
 
 if [[ ${COVERAGE} == yes ]]; then
     ./api/vendor/bin/phpcov merge --clover build/logs/clover.xml build/cov;
