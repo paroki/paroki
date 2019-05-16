@@ -21,7 +21,7 @@ return [
     SIAP\Core\CoreBundle::class                                                => ['all' => true],
     SIAP\Reference\ReferenceBundle::class                                      => ['all' => true],
     SIAP\User\UserBundle::class                                                => ['all' => true],
-    SIAP\Behat\BehatBundle::class => ['dev'=> true, 'test' => true],
+    SIAP\Behat\BehatBundle::class                                              => ['dev'=> true, 'test' => true],
     Symfony\Bundle\MakerBundle\MakerBundle::class                              => ['dev' => true],
     Nelmio\CorsBundle\NelmioCorsBundle::class                                  => ['all' => true],
     ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle::class            => ['all' => true],

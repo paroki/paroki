@@ -11,10 +11,8 @@
 
 declare(strict_types=1);
 
-namespace SIAP\Behat;
+namespace SIAP\Behat\Contexts;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-
-class BehatBundle extends Bundle
+class UserContext
 {
 }
