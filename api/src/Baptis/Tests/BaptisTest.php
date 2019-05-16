@@ -33,7 +33,7 @@ class BaptisTest extends DatabaseTestCase
      */
     public function getParoki(): ?Paroki
     {
-        $paroki = $this->getRepository(Paroki::class)
+        return $this->getRepository(Paroki::class)
             ->findOneBy(['kode' => '999.999']);
     }
 
