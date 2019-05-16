@@ -1,22 +1,22 @@
 <template>
     <v-flex>
         <c-card
-            title="Data {{{titleUcFirst}}} Baru"
+            title="Data Baptis Baru"
         >
-            <{{{titleUcFirst}}}Form
+            <BaptisForm
             :handle-submit="onSendForm"
             :handle-update-field="updateField"
             :values="item"
             :errors="violations" />
             <v-card-text>
-                <{{{titleUcFirst}}}Form
+                <BaptisForm
                     :errors="violations"
                     :initial-values="item"
-                ></{{{titleUcFirst}}}Form>
+                ></BaptisForm>
             </v-card-text>
             <v-flex slot="actions">
                 <v-btn
-                    :to="{ name: '{{{titleUcFirst}}}List' }"
+                    :to="{ name: 'BaptisList' }"
                     color="info"
                 >
                     <v-icon left v-text="$vuetify.icons.back"></v-icon>
@@ -38,13 +38,13 @@
 <script>
 
     import { createNamespacedHelpers } from 'vuex'
-    import {{{titleUcFirst}}}Form from './Form'
+    import BaptisForm from './Form'
 
-    const { mapGetters, mapActions } = createNamespacedHelpers('{{{lc}}}/create')
+    const { mapGetters, mapActions } = createNamespacedHelpers('baptis/create')
 
     export default {
         components: {
-            {{{titleUcFirst}}}Form
+            BaptisForm
         },
 
         data () {
@@ -69,7 +69,7 @@
                     return
                 }
 
-                this.$router.push({ name: '{{{titleUcFirst}}}Update', params: { id: created['id'] } })
+                this.$router.push({ name: 'BaptisUpdate', params: { id: created['id'] } })
             }
         },
 

@@ -3,9 +3,20 @@ import { TokenService } from '@/services'
 import SubmissionError from "../utils/SubmissionError";
 
 const ApiService = {
+    generateListParams(payload){
+        if(!payload) return [];
+        const sortOrder = payload.descending ? 'desc':'asc';
+        const params = [];
+        params.push(`page=${payload.page}`);
+        if(payload.sortBy){
+            params.push(`order[${payload.sortBy}]=${sortOrder}`);
+        }
+        return params;
+    },
+
     generateUrl(url){
         const path = process.env.VUE_APP_API_PATH;
-        return `${url}/${path}`;
+        return `${path}/${url}`;
     },
 
     init(baseURL) {

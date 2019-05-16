@@ -1,0 +1,7 @@
+export const RESET = 'BAPTIS_LIST_RESET'
+export const SET_ITEMS = 'BAPTIS_LIST_SET_ITEMS'
+export const SET_ERROR = 'BAPTIS_LIST_SET_ERROR'
+export const SET_VIEW = 'BAPTIS_LIST_SET_VIEW'
+export const TOGGLE_LOADING = 'BAPTIS_LIST_TOGGLE_LOADING'
+export const SET_PAGER = 'pager'
+export const SET_TOTAL_ITEMS = 'USER_LIST_SET_TOTAL_ITEMS';

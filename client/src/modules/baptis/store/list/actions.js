@@ -5,7 +5,7 @@ const getItems = ({ commit, state }, payload) => {
     payload = state.pager;
 
     const params = ApiService.generateListParams(payload);
-    const url = ApiService.generateUrl('{{{name}}}');
+    const url = ApiService.generateUrl('baptis');
 
     commit(types.TOGGLE_LOADING);
     commit(types.TOGGLE_LOADING)
@@ -13,8 +13,8 @@ const getItems = ({ commit, state }, payload) => {
     ApiService.get(url)
         .then((data) => {
             commit(types.TOGGLE_LOADING)
-            commit(types.SET_ITEMS, data['{{{hydraPrefix}}}member'])
-            commit(types.SET_VIEW, data['{{{hydraPrefix}}}view'])
+            commit(types.SET_ITEMS, data['hydra:member'])
+            commit(types.SET_VIEW, data['hydra:view'])
         })
         .catch((e) => {
             commit(types.TOGGLE_LOADING)

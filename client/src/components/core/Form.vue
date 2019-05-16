@@ -1,6 +1,5 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <v-form>
-
         <template v-for="field in fields">
             <div :key="field.name">
                 <v-text-field

@@ -8,7 +8,7 @@ export const reset = ({ commit }) => {
 
 export const retrieve = ({ commit }, id) => {
     commit(types.TOGGLE_LOADING)
-    const url = ApiService.generateUrl('{{{name}}}/'+id)
+    const url = ApiService.generateUrl('baptis/'+id)
     return ApiService.get(url)
         .then((data) => {
             commit(types.TOGGLE_LOADING)

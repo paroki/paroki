@@ -1,11 +1,10 @@
 <template>
     <v-flex md12 fill-height>
         <c-card
-            title="Edit data {{titleUcFirst}}"
+            title="Edit data Baptis"
         >
             <v-card-text>
-                <{{{titleUcFirst}}}Form
-                v-if="item"
+                <BaptisForm
                 :handle-submit="onSendForm"
                 :handle-update-field="updateField"
                 :values="item"
@@ -14,7 +13,7 @@
             </v-card-text>
             <v-flex slot="actions">
                 <v-btn
-                    :to="{ name: '{{{titleUcFirst}}}List' }"
+                    :to="{ name: 'BaptisList' }"
                     color="info"
                 >
                     <v-icon left v-text="$vuetify.icons.back"></v-icon>
@@ -50,11 +49,11 @@
 
 <script>
     import { mapActions, mapGetters } from 'vuex'
-    import {{{titleUcFirst}}}Form from './Form.vue'
+    import BaptisForm from './Form.vue'
 
     export default {
         components: {
-            {{{titleUcFirst}}}Form
+            BaptisForm
         },
 
         data () {
@@ -66,15 +65,15 @@
 
         computed: {
         ...mapGetters({
-                isLoading: '{{{lc}}}/update/isLoading',
-                error: '{{{lc}}}/update/error',
-                deleteError: '{{{lc}}}/del/error',
-                deleteLoading: '{{{lc}}}/del/isLoading',
-                created: '{{{lc}}}/create/created',
-                deleted: '{{{lc}}}/del/deleted',
-                retrieved: '{{{lc}}}/update/retrieved',
-                updated: '{{{lc}}}/update/updated',
-                violations: '{{{lc}}}/update/violations'
+                isLoading: 'baptis/update/isLoading',
+                error: 'baptis/update/error',
+                deleteError: 'baptis/del/error',
+                deleteLoading: 'baptis/del/isLoading',
+                created: 'baptis/create/created',
+                deleted: 'baptis/del/deleted',
+                retrieved: 'baptis/update/retrieved',
+                updated: 'baptis/update/updated',
+                violations: 'baptis/update/violations'
             })
         },
 
@@ -85,7 +84,7 @@
                     return
                 }
 
-                this.$router.push({ name: '{{{titleUcFirst}}}List' })
+                this.$router.push({ name: 'BaptisList' })
             }
         },
 
@@ -96,19 +95,19 @@
         created () {
             this.retrieve(decodeURIComponent(this.$route.params.id))
             if(this.created){
-                this.snackbarSuccess('Data {{{titleUcFirst}}} berhasil ditambahkan!');
+                this.snackbarSuccess('Data Baptis berhasil ditambahkan!');
             }
         },
 
         methods: {
             ...mapActions({
-                createReset: '{{{lc}}}/create/reset',
-                deleteItem: '{{{lc}}}/del/del',
-                delReset: '{{{lc}}}/del/reset',
-                retrieve: '{{{lc}}}/update/retrieve',
-                updateReset: '{{{lc}}}/update/reset',
-                update: '{{{lc}}}/update/update',
-                updateRetrieved: '{{{lc}}}/update/updateRetrieved',
+                createReset: 'baptis/create/reset',
+                deleteItem: 'baptis/del/del',
+                delReset: 'baptis/del/reset',
+                retrieve: 'baptis/update/retrieve',
+                updateReset: 'baptis/update/reset',
+                update: 'baptis/update/update',
+                updateRetrieved: 'baptis/update/updateRetrieved',
                 snackbarSuccess: 'siap/snackbarSuccess',
                 snackbarError: 'siap/snackbarError'
             }),
