@@ -7,7 +7,7 @@ BEHAT_OPTS=""
 JEST_OPTS=""
 
 PHP_CMD=php
-JEST_CMD="jest test:unit"
+JEST_CMD="yarn test:unit"
 test=`which phpdbg`
 
 cd api
