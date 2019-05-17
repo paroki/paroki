@@ -15,8 +15,9 @@ namespace SIAP\User\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use SIAP\Reference\Entity\Paroki;
+use SIAP\Reference\Entity\RequireParokiInterface;
 
-class User extends BaseUser
+class User extends BaseUser implements RequireParokiInterface
 {
     /**
      * @var string Nama lengkap pengguna
@@ -45,7 +46,7 @@ class User extends BaseUser
         return $this->nama;
     }
 
-    public function setNama(?string $nama): self
+    public function setNama(string $nama): self
     {
         $this->nama = $nama;
 

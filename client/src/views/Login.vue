@@ -71,7 +71,7 @@
                 error: 'siap/loginError'
             }),
             hasError(){
-                return this.error;
+                return this.error ? true:false;
             }
         },
         created(){
@@ -93,12 +93,9 @@
                 };
                 this.login(payload)
                     .then(() => {
-                        if(!this.hasError) {
-                            this.$router.push('/');
-                        }
+                        this.$router.push('/');
                     })
                     .catch( (e) => {
-                        this.error = e;
                     })
                 ;
             }

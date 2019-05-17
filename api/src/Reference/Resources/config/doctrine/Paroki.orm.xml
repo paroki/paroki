@@ -24,7 +24,7 @@
     <unique-constraints>
       <unique-constraint name="ix_paroki_kode" columns="kode"/>
     </unique-constraints>
-    <many-to-one field="keuskupan" target-entity="SIAP\Reference\Entity\Keuskupan">
+    <many-to-one field="keuskupan" target-entity="SIAP\Reference\Entity\Keuskupan" fetch="EAGER">
       <join-columns>
         <join-column name="keuskupan_id" referenced-column-name="id"/>
       </join-columns>

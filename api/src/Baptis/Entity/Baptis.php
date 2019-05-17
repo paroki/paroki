@@ -20,9 +20,10 @@ use SIAP\Core\Entity\Dokumen;
 use SIAP\Reference\Entity\Agama;
 use SIAP\Reference\Entity\Lingkungan;
 use SIAP\Reference\Entity\Paroki;
+use SIAP\Reference\Entity\RequireParokiInterface;
 use SIAP\User\Entity\User;
 
-class Baptis extends AbstractBiodata
+class Baptis extends AbstractBiodata implements RequireParokiInterface
 {
     /**
      * @var string
@@ -30,7 +31,7 @@ class Baptis extends AbstractBiodata
     private $kodeBaptis;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     private $buku;
 
@@ -45,7 +46,7 @@ class Baptis extends AbstractBiodata
     private $nomor;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     private $lanjutan;
 

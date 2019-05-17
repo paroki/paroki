@@ -6,9 +6,9 @@
     <field name="nama" type="string" length="100" nullable="true"/>
     <field name="ketua" type="string" length="255" nullable="true"/>
     <field name="refDuk" type="integer" nullable="true"/>
-    <many-to-one field="wilayah" target-entity="SIAP\Reference\Entity\JenisWilayah" inversed-by="wilayahs">
+    <many-to-one field="jenisWilayah" target-entity="SIAP\Reference\Entity\JenisWilayah">
       <join-columns>
-        <join-column name="wilayah_bagian_id" referenced-column-name="id"/>
+        <join-column name="jenis_wilayah_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
   </entity>

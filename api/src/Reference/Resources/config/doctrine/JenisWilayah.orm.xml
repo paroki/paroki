@@ -5,6 +5,5 @@
       <generator strategy="AUTO"/>
     </id>
     <field name="jenis" type="string" length="50" nullable="true"/>
-    <one-to-many field="wilayahs" target-entity="SIAP\Reference\Entity\Wilayah" mapped-by="wilayah"/>
   </entity>
 </doctrine-mapping>

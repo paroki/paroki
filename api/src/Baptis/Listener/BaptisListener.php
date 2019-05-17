@@ -47,7 +47,7 @@ class BaptisListener implements EventSubscriber
         if (!$entity instanceof Baptis) {
             return;
         }
-        if(!$entity->getParoki() instanceof Paroki){
+        if (!$entity->getParoki() instanceof Paroki) {
             return;
         }
         $exp = [

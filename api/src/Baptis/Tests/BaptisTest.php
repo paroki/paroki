@@ -29,7 +29,7 @@ use SIAP\Reference\Entity\Paroki;
 class BaptisTest extends DatabaseTestCase
 {
     /**
-     * @return null|object|Paroki
+     * @return object|Paroki|null
      */
     public function getParoki(): ?Paroki
     {

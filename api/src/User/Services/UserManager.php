@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace SIAP\User\Services;
 
-class UserManager
+use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
+
+class UserManager extends BaseUserManager
 {
 }

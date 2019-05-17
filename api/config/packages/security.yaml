@@ -18,24 +18,27 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        docs:
+            pattern: ^/docs
+            security: false
         login:
             pattern:  ^/login
             stateless: true
             anonymous: true
             provider: app_entity_provider
             json_login:
-                check_path:               /login_check
+                check_path:               /login-check
                 success_handler:          lexik_jwt_authentication.handler.authentication_success
                 failure_handler:          lexik_jwt_authentication.handler.authentication_failure
-        #api:
-        #    pattern:  ^/api
-        #    stateless: true
-        #    anonymous: false
-        #    provider: app_entity_provider
-        #    guard:
-        #        authenticators:
-        #            - lexik_jwt_authentication.jwt_token_authenticator
+        api:
+            pattern:  ^/
+            stateless: true
+            anonymous: false
+            provider: app_entity_provider
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        #- { path: ^/,       roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/,      roles: IS_AUTHENTICATED_FULLY }
