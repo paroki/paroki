@@ -66,4 +66,30 @@ INSERT INTO tr_paroki(
      from master_paroki paroki);
 
 
+INSERT INTO tr_jenis_wilayah values (1, 'Pusat Paroki');
+INSERT INTO tr_jenis_wilayah values (2, 'Stasi');
+
+DELETE from tr_lingkungan;
+INSERT INTO
+    tr_lingkungan(
+    id,
+    no_urut,
+    kode_lingkungan,
+    nama,
+    ketua
+)
+    (select
+         uuid_generate_v4(),
+         "NoLingkungan",
+         "KodeWLID",
+         "LingkunganID",
+         "NamaKetuaLingkungan"
+     FROM master_lingkungan
+    )
+;
+UPDATE tr_lingkungan SET kode=CONCAT('027.018.',kode_lingkungan);
+UPDATE tr_lingkungan SET paroki_id = (SELECT id from tr_paroki where tr_paroki.kode='027.018');
+UPDATE tr_lingkungan SET jenis_wilayah_id=1 where kode_lingkungan like '01%';
+UPDATE tr_lingkungan SET jenis_wilayah_id=2 where kode_lingkungan like '02%';
+
 UPDATE sc_user SET paroki_id=(SELECT id from tr_paroki where kode='027.018');

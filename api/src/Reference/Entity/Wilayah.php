@@ -32,6 +32,8 @@ class Wilayah
 
     private $lingkungans;
 
+    private $jenisWilayah;
+
     public function __construct()
     {
         $this->lingkungans = new ArrayCollection();

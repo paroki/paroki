@@ -20,6 +20,8 @@ class Lingkungan implements RequireParokiInterface
      */
     private $kode;
 
+    private $kodeLingkungan;
+
     private $nama;
 
     private $noUrut;
@@ -35,6 +37,8 @@ class Lingkungan implements RequireParokiInterface
     private $bagian;
 
     private $paroki;
+
+    private $jenis;
 
     public function setId(string $id): self
     {
@@ -144,14 +148,14 @@ class Lingkungan implements RequireParokiInterface
         return $this;
     }
 
-    public function getKodeWilayah(): ?string
+    public function getKodeLingkungan(): ?string
     {
-        return $this->kodeWilayah;
+        return $this->kodeLingkungan;
     }
 
-    public function setKodeWilayah(string $kodeWilayah): self
+    public function setKodeLingkungan(?string $kodeLingkungan): self
     {
-        $this->kodeWilayah = $kodeWilayah;
+        $this->kodeLingkungan = $kodeLingkungan;
 
         return $this;
     }

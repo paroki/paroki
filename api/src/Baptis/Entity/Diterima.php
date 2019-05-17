@@ -146,7 +146,7 @@ class Diterima
         $this->baptis = $baptis;
 
         // set (or unset) the owning side of the relation if necessary
-        $newDiterima = null === $baptis ? null : $this;
+        $newDiterima = $baptis === null ? null : $this;
         if ($newDiterima !== $baptis->getDiterima()) {
             $baptis->setDiterima($newDiterima);
         }
