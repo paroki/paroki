@@ -66,6 +66,5 @@ after_script:
     travis_retry php ocular.phar code-coverage:upload --format=php-clover api/build/logs/clover.xml;
     wget https://codecov.io/bash;
     chmod +x bash;
-    ./bash -F api -s api/build/logs/ -f "*.xml";
     ./bash -F client -s client/build/logs/ -f "*.xml";
   fi
