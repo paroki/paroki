@@ -71,11 +71,18 @@ class ReferenceListener implements EventSubscriber
             return;
         }
 
-        $currentUser = $this->tokenStorage->getToken()->getUser();
+        $currentUser = $this->getUser();
+
+        if(is_null($currentUser)) return;
 
         $paroki = $currentUser->getParoki();
         if(!is_null($paroki)){
             $entity->setParoki($paroki);
         }
+    }
+
+    private function getUser()
+    {
+        return is_null($this->tokenStorage->getToken()) ? null:$this->tokenStorage->getToken()->getUser();
     }
 }
