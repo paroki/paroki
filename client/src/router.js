@@ -10,7 +10,7 @@ Vue.use(VueRouter);
 import user from './modules/user/routes';
 import baptis from './modules/baptis/routes';
 
-let router =  new VueRouter({
+const routes = {
     mode: 'history',
     routes: [
         {
@@ -51,9 +51,12 @@ let router =  new VueRouter({
             }
         }
     ]
-});
+};
+
+let router =  new VueRouter(routes);
 
 router.beforeEach((to, from, next) =>{
+
     if(to.matched.some(record => record.meta.requiresAuth )){
         if(TokenService.getToken() == null){
             next ({

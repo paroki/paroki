@@ -75,7 +75,6 @@ const ApiService = {
     },
 
     post(resource, data) {
-        console.log(axios.defaults.baseURL);
         return axios.post(resource, data)
     },
 
