@@ -21,16 +21,18 @@ Feature: Security
     """
     {
       "username": "admin",
-      "password": "Username atau password anda salah, periksa kembali username dan password yang anda masukkan."
+      "password": "foobar"
     }
     """
     Then the response status code should be 401
     And the JSON should be a superset of:
     """
     {
-      "status": "401 Unauthorized",
-      "message": "Foo bar"
-
+      "code": 401,
+      "message": {
+        "status": "401 Unauthorized",
+        "message": "bad_credentials"
+      }
     }
     """
 

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { TokenService } from '@/services'
 import SubmissionError from "../utils/SubmissionError";
+import LoginError from "./LoginError";
 
 const ApiService = {
     generateListParams(payload){
@@ -50,6 +51,10 @@ const ApiService = {
                         Object.assign(errors, { [violation.propertyPath]: violation.message }));
 
                     throw new SubmissionError(errors)
+                }
+
+                if(401 === response.status){
+                    throw new LoginError(error, json);
                 }
 
                 return Promise.reject(error);

@@ -14,7 +14,7 @@ class AuthenticationFailureListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            Events::AUTHENTICATION_FAILURE => ['onAuthenticationFailureResponse',1000]
+            Events::AUTHENTICATION_FAILURE => 'onAuthenticationFailureResponse'
         ];
     }
 
@@ -22,7 +22,7 @@ class AuthenticationFailureListener implements EventSubscriberInterface
     {
         $data = [
             'status'  => '401 Unauthorized',
-            'message' => 'Username atau password anda salah, periksa kembali username dan password yang anda masukkan.',
+            'message' => 'bad_credentials',
         ];
 
 
