@@ -56,7 +56,7 @@ before_deploy:
 - chmod 600 ./deploy_key
 - echo -e "Host $IP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - ssh-add ./deploy_key
-- rsync -v --stats --progress $TRAVIS_BUILD_DIR/client/dist travis@$IP:$DEPLOY_DIR
+- rsync -v --stats --progress -aP --delete $TRAVIS_BUILD_DIR/client/dist travis@$IP:$DEPLOY_DIR
 after_script:
 - if [[ $COVERAGE = yes ]]; then 
     cd $TRAVIS_BUILD_DIR;
