@@ -18,11 +18,10 @@ const ApiService = {
     generateUrl(url, params = false){
         const path = process.env.VUE_APP_API_PATH;
         url = `${path}/${url}`;
-        url.replace('//','/');
         if(params){
             url = `${url}?${params.join('&')}`
         }
-        url = url.replace(/\/+/,'/');
+        url = url.replace(/\/+/gm,'/');
         return url;
     },
 
@@ -75,7 +74,6 @@ const ApiService = {
     },
 
     post(resource, data) {
-        console.log(axios.defaults.baseURL);
         return axios.post(resource, data)
     },
 

@@ -36,6 +36,12 @@ const TokenService = {
 
     getCredentials() {
         return jwt.decode(this.getToken());
+    },
+
+    hasExpired(){
+        const token = this.getCredentials();
+        const unixTime = Date.now()/1000|0;
+        return unixTime > token.exp;
     }
 };
 

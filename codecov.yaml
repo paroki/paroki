@@ -1,0 +1,35 @@
+coverage:
+    precision: 0
+    round: down
+    status:
+        project:
+            default: off
+            api:
+                flags: api
+                threshold: 1
+            client:
+                flags: client
+                threshold: 1
+
+flags:
+    api:
+        paths:
+            - api/src
+        ignore:
+            - api/src/Behat
+            - api/src/DataFixtures
+            - api/src/**/Test
+            - api/src/**/Tests
+            - api/src/**/Spec
+            - api/src/**/Resources
+    client:
+        paths:
+            - client/src
+
+comment:
+    layout: "diff,flags"
+    behavior: default
+    require_changes: false  # if true: only post the comment if coverage changes
+    require_base: no        # [yes :: must have a base report to post]
+    require_head: yes       # [yes :: must have a head report to post]
+    branches: null
