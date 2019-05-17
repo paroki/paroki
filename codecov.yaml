@@ -22,7 +22,7 @@ flags:
             - api/src/**/Tests
             - api/src/**/Spec
             - api/src/**/Resources
-    frontend:
+    client:
         paths:
             - client/src
 
