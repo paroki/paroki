@@ -1,7 +1,10 @@
 services:
-
     siap.user.orders.user:
         parent: 'api_platform.doctrine.orm.order_filter'
         arguments: [{nama: ~, username: ~, email: ~}]
         tags: ['api_platform.filter']
 
+    siap.user.listeners.authentication_failure:
+        class: SIAP\User\Listener\AuthenticationFailureListener
+        tags:
+            - { name: kernel.event_subscriber }

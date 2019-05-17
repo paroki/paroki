@@ -21,10 +21,18 @@ Feature: Security
     """
     {
       "username": "admin",
-      "password": "bar"
+      "password": "Username atau password anda salah, periksa kembali username dan password yang anda masukkan."
     }
     """
     Then the response status code should be 401
+    And the JSON should be a superset of:
+    """
+    {
+      "status": "401 Unauthorized",
+      "message": "Foo bar"
+
+    }
+    """
 
   #@todo make this scenario working again
   #Scenario: Access restricted resource without login
