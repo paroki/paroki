@@ -25,17 +25,17 @@ class UserExtension extends Extension implements PrependExtensionInterface
 {
     public function prepend(ContainerBuilder $container)
     {
-        $container->prependExtensionConfig('fos_user',[
-            'db_driver' => 'orm',
-            'user_class' => User::class,
+        $container->prependExtensionConfig('fos_user', [
+            'db_driver'     => 'orm',
+            'user_class'    => User::class,
             'firewall_name' => 'main',
-            'from_email' => [
-                'address' => 'me@itstoni.com',
-                'sender_name' => 'Anthonius Munthi'
+            'from_email'    => [
+                'address'     => 'me@itstoni.com',
+                'sender_name' => 'Anthonius Munthi',
             ],
             'service' => [
-                'user_manager' => 'siap.user.user_manager'
-            ]
+                'user_manager' => 'siap.user.user_manager',
+            ],
         ]);
     }
 

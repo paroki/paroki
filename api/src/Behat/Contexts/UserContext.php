@@ -13,14 +13,13 @@ declare(strict_types=1);
 
 namespace SIAP\Behat\Contexts;
 
-use FOS\UserBundle\Util\TokenGeneratorInterface;
-use SIAP\Reference\Entity\Paroki;
-use SIAP\User\Entity\User;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
-use Behat\Gherkin\Node\PyStringNode;
 use Behatch\Context\RestContext;
+use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
+use SIAP\Reference\Entity\Paroki;
+use SIAP\User\Entity\User;
 use SIAP\User\Services\UserManager;
 
 class UserContext implements Context
@@ -36,7 +35,7 @@ class UserContext implements Context
     private $restContext;
 
     /**
-     * @var integer
+     * @var int
      */
     private $retryTtl;
 
@@ -62,11 +61,10 @@ class UserContext implements Context
         UserManager $userManager,
         TokenGeneratorInterface $tokenGenerator,
         $retryTtl
-    )
-    {
-        $this->jwtManager = $jwtManager;
-        $this->userManager = $userManager;
-        $this->retryTtl = $retryTtl;
+    ) {
+        $this->jwtManager     = $jwtManager;
+        $this->userManager    = $userManager;
+        $this->retryTtl       = $retryTtl;
         $this->tokenGenerator = $tokenGenerator;
     }
 
@@ -75,22 +73,22 @@ class UserContext implements Context
      */
     public function gatherContexts(BeforeScenarioScope $scope)
     {
-        $this->restContext = $scope->getEnvironment()->getContext(RestContext::class);
+        $this->restContext      = $scope->getEnvironment()->getContext(RestContext::class);
         $this->referenceContext = $scope->getEnvironment()->getContext(ReferenceContext::class);
     }
 
     /**
      * @param string $username
-     *
      * @param string $password
      * @param string $role
+     *
      * @return User|object|null
      */
     public function thereIsUser($username, $password = 'password', $role= 'ROLE_ADMIN')
     {
         $userManager = $this->userManager;
-        $user     = $userManager->findUserByUsername($username);
-        $password = null === $password ? $username : $password;
+        $user        = $userManager->findUserByUsername($username);
+        $password    = null === $password ? $username : $password;
 
         if (null === $user) {
             $user = $userManager->createUser();
@@ -137,11 +135,11 @@ class UserContext implements Context
      */
     public function iHaveLoggedInAsAdminForParokiTest($name)
     {
-        $user = $this->thereIsUser('admin');
-        $paroki = $user->getParoki();
+        $user      = $this->thereIsUser('admin');
+        $paroki    = $user->getParoki();
         $reference = $this->referenceContext;
 
-        if(!$paroki instanceof Paroki || $paroki->getNama()!==$name){
+        if (!$paroki instanceof Paroki || $paroki->getNama() !== $name) {
             $paroki = $reference->iHaveParoki($name);
         }
         $user->setParoki($paroki);
@@ -164,13 +162,15 @@ class UserContext implements Context
     /**
      * @Given I have request reset password for user :username
      * @Given I have request reset password
+     *
      * @param string $username
+     *
      * @throws \Exception
      */
     public function iHaveRequestPassword($username = null)
     {
-        $username = is_null($username) ? $this->currentUsername:$username;
-        $user = $this->thereIsUser($username);
+        $username    = null === $username ? $this->currentUsername : $username;
+        $user        = $this->thereIsUser($username);
         $userManager = $this->userManager;
 
         $user->setPasswordRequestedAt(new \DateTime());
@@ -181,13 +181,15 @@ class UserContext implements Context
     /**
      * @Given I have an expired request reset password for user :username
      * @Given I have an expired request reset password
+     *
      * @param string $username
+     *
      * @throws \Exception
      */
     public function iHaveAnExpiredRequestPassword($username = null)
     {
-        $username = is_null($username) ? $this->currentUsername:$username;
-        $user = $this->thereIsUser($username);
+        $username    = null === $username ? $this->currentUsername : $username;
+        $user        = $this->thereIsUser($username);
         $userManager = $this->userManager;
 
         $timestamp = (new \DateTime())->getTimestamp() - $this->retryTtl;
@@ -198,6 +200,7 @@ class UserContext implements Context
 
     /**
      * @Given My username is :username
+     *
      * @param string $username
      */
     public function myUsernameIs($username)
@@ -209,16 +212,18 @@ class UserContext implements Context
     /**
      * @Given I never request password
      * @Given I never request password for :username
+     *
      * @param string $username
+     *
      * @throws \Exception
      */
     public function iDonTRequestPassword($username=null)
     {
-        $username = is_null($username) ? $this->currentUsername:$username;
-        $user = $this->thereIsUser($username);
+        $username    = null === $username ? $this->currentUsername : $username;
+        $user        = $this->thereIsUser($username);
         $userManager = $this->userManager;
 
-        if($user->getPasswordRequestedAt() instanceof \DateTime){
+        if ($user->getPasswordRequestedAt() instanceof \DateTime) {
             $user->setPasswordRequestedAt(null);
             $userManager->updateUser($user);
         }
@@ -231,10 +236,10 @@ class UserContext implements Context
      */
     public function thereIsNoUser($username)
     {
-       $user = $this->userManager->findUserByUsername($username);
-       $manager = $this->userManager;
-       if($user  instanceof User){
-           $manager->deleteUser($user);
-       }
+        $user    = $this->userManager->findUserByUsername($username);
+        $manager = $this->userManager;
+        if ($user  instanceof User) {
+            $manager->deleteUser($user);
+        }
     }
 }
