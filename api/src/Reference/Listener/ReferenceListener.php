@@ -59,26 +59,10 @@ class ReferenceListener implements EventSubscriber
     private function doProcess(LifecycleEventArgs $args, $event)
     {
         $entity = $args->getObject();
-        if ($entity instanceof Lingkungan) {
-            $this->generateLingkunganId($entity, $args);
-        }
-
-        if (method_exists($entity, 'setGuid')) {
-            $entity->setGuid(Uuid::uuid4());
-        }
 
         if ($entity instanceof RequireParokiInterface && Events::prePersist === $event) {
             $this->setParoki($entity);
         }
-    }
-
-    private function generateLingkunganId(Lingkungan $entity, LifecycleEventArgs $args)
-    {
-        $kode = implode('.', [
-            $entity->getParoki()->getKode(),
-            $entity->getKode(),
-        ]);
-        $entity->setId($kode);
     }
 
     private function setParoki(RequireParokiInterface $entity)
@@ -88,7 +72,6 @@ class ReferenceListener implements EventSubscriber
         }
 
         $currentUser = $this->tokenStorage->getToken()->getUser();
-        if(is_null($currentUser)) return;
 
         $paroki = $currentUser->getParoki();
         if(!is_null($paroki)){

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace SIAP\Reference\Entity;
 
-class Lingkungan
+class Lingkungan implements RequireParokiInterface
 {
     /**
      * @var string
@@ -140,6 +140,18 @@ class Lingkungan
     public function setParoki(?Paroki $paroki): self
     {
         $this->paroki = $paroki;
+
+        return $this;
+    }
+
+    public function getKodeWilayah(): ?string
+    {
+        return $this->kodeWilayah;
+    }
+
+    public function setKodeWilayah(string $kodeWilayah): self
+    {
+        $this->kodeWilayah = $kodeWilayah;
 
         return $this;
     }

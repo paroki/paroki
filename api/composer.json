@@ -12,11 +12,15 @@
     "autoload": {
         "psr-4": {
             "SIAP\\": "src/"
-        }
+        },
+        "exclude-from-classmap": [
+            "src/*/Spec/"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
-            "SIAP\\Tests\\": "tests/"
+            "SIAP\\Tests\\": "tests/",
+            "Spec\\SIAP\\Reference\\": "src/Reference/Spec"
         }
     },
     "replace": {

@@ -1,9 +1,12 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="SIAP\Reference\Entity\Agama" table="ref_agama">
+  <entity name="SIAP\Komuni\Entity\KomuniBaptis">
     <id name="id" type="guid">
       <generator strategy="UUID"/>
     </id>
-    <field name="agama" type="string" length="50" nullable="true"/>
+    <field name="register" type="string" nullable="true"/>
+    <field name="buku" type="string" nullable="true"/>
+    <field name="halaman" type="integer" nullable="true"/>
+    <field name="nomor" type="integer" nullable="true"/>
   </entity>
 </doctrine-mapping>

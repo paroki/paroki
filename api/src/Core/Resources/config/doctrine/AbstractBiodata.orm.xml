@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <mapped-superclass name="SIAP\Core\Entity\AbstractBiodata" class-type="mapped-superclass">
+  <mapped-superclass name="SIAP\Core\Entity\AbstractBiodata" extends="SIAP\Komuni\Entity\Komuni" class-type="mapped-superclass">
     <field name="nama" type="string" length="255" nullable="false">
       <options>
         <option name="default">N/A</option>

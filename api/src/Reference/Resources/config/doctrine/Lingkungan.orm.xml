@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="SIAP\Reference\Entity\Lingkungan" table="tr_lingkungan">
-    <id name="id" type="string" length="50" column="id">
+  <entity name="SIAP\Reference\Entity\Lingkungan" table="ref_lingkungan">
+    <id name="id" type="guid" column="id">
+      <generator strategy="UUID"/>
       <custom-id-generator class="Paroki\Reference\Doctrine\CustomIdGenerator"/>
     </id>
     <field name="kode" type="string" unique="true" length="50" nullable="true"/>

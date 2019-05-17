@@ -26,7 +26,6 @@
         <defaults autoconfigure="true" public="true" autowire="true">
         </defaults>
         <defaults autoconfigure="true" autowire="true"/>
-        <prototype namespace="SIAP\Reference\" resource="../../" exclude="../../{Resources,Entity,Migrations,Tests,DependencyInjection}"/>
         <prototype namespace="SIAP\Reference\Listener\" resource="../../Listener">
             <tag name="doctrine.event_subscriber"/>
         </prototype>
