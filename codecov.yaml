@@ -6,10 +6,10 @@ coverage:
             default: off
             api:
                 flags: api
-                target: 80%
+                threshold: 1
             client:
-                target: 80%
                 flags: client
+                threshold: 1
 
 flags:
     api:
