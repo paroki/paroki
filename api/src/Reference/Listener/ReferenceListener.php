@@ -16,25 +16,20 @@ namespace SIAP\Reference\Listener;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
-use Ramsey\Uuid\Uuid;
-use SIAP\Reference\Entity\Lingkungan;
 use SIAP\Reference\Entity\Paroki;
 use SIAP\Reference\Entity\RequireParokiInterface;
-use SIAP\User\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Security;
 
 class ReferenceListener implements EventSubscriber
 {
     /**
-     * @var null|TokenStorageInterface
+     * @var TokenStorageInterface|null
      */
     private $tokenStorage;
 
     public function __construct(
         TokenStorageInterface $storage
-    )
-    {
+    ) {
         $this->tokenStorage = $storage;
     }
 
@@ -67,15 +62,23 @@ class ReferenceListener implements EventSubscriber
 
     private function setParoki(RequireParokiInterface $entity)
     {
-        if($entity->getParoki() instanceof Paroki){
+        if ($entity->getParoki() instanceof Paroki) {
             return;
         }
 
-        $currentUser = $this->tokenStorage->getToken()->getUser();
+        $currentUser = $this->getUser();
 
+        if (null === $currentUser) {
+            return;
+        }
         $paroki = $currentUser->getParoki();
-        if(!is_null($paroki)){
+        if (null !== $paroki) {
             $entity->setParoki($paroki);
         }
+    }
+
+    private function getUser()
+    {
+        return null === $this->tokenStorage->getToken() ? null : $this->tokenStorage->getToken()->getUser();
     }
 }

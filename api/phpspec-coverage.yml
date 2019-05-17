@@ -29,10 +29,8 @@ extensions:
     SIAP\Core\Test\PhpSpecCodeCoverageExtension:
         format:
             - php
-            - html
         output:
             php: build/cov/coverage-phpspec.cov
-            html: build/html
         whitelist:
             - src
         blacklist:
