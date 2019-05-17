@@ -1,17 +1,20 @@
-api_platform:
-    resource: .
-    type: api_platform
-    prefix: /
+bundle_routes:
+    resource: '@ReferenceBundle/Controller/'
+    type: annotation
 
+swagger_ui:
+    path: /docs
+    controller: api_platform.swagger.action.ui
 
 login_check:
     path: /login-check
     methods: [POST]
 
-bundle_routes:
-    resource: '@ReferenceBundle/Controller/'
-    type: annotation
-
 core_controllers:
     resource: ../../Controller/
     type: annotation
+    
+api_platform:
+    resource: .
+    type: api_platform
+    prefix: /

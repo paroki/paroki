@@ -22,21 +22,20 @@ use SIAP\Reference\Entity\Paroki;
 use SIAP\Reference\Entity\RequireParokiInterface;
 use SIAP\User\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Security;
 
 class ReferenceListener implements EventSubscriber
 {
     /**
-     * @var null|User
+     * @var null|TokenStorageInterface
      */
-    private $currentUser;
+    private $tokenStorage;
 
     public function __construct(
-        TokenStorageInterface $security
+        TokenStorageInterface $storage
     )
     {
-        if(!is_null($security->getToken())){
-            $this->currentUser = $security->getToken()->getUser();
-        }
+        $this->tokenStorage = $storage;
     }
 
     public function getSubscribedEvents()
@@ -88,9 +87,9 @@ class ReferenceListener implements EventSubscriber
             return;
         }
 
-        if(is_null($this->currentUser)) return;
+        $currentUser = $this->tokenStorage->getToken()->getUser();
+        if(is_null($currentUser)) return;
 
-        $currentUser = $this->currentUser;
         $paroki = $currentUser->getParoki();
         if(!is_null($paroki)){
             $entity->setParoki($paroki);
