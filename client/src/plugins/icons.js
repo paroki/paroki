@@ -6,5 +6,6 @@ export default {
     back: 'mdi-arrow-left-circle',
     save: 'mdi-content-save',
     password: 'mdi-lock-question',
-    user: 'mdi-account-box'
+    user: 'mdi-account-box',
+    logout: 'mdi-account-arrow-left'
 }

@@ -11,6 +11,16 @@
                 :key="`${item.name}-${i}`"
                 :item="item">
             </c-drawer-item>
+            <v-list-tile
+                @click="logout"
+            >
+                <v-list-tile-action>
+                    <v-icon v-text="$vuetify.icons.logout"></v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                    <v-list-tile-title>Logout</v-list-tile-title>
+                </v-list-tile-content>
+            </v-list-tile>
         </v-list>
     </v-navigation-drawer>
 </template>
@@ -71,6 +81,9 @@
                     items.push(item);
                 });
                 return items;
+            },
+            logout(){
+                this.$router.push({name: 'Logout'});
             }
         }
     }

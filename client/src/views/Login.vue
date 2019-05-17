@@ -75,6 +75,7 @@
             }
         },
         created(){
+            this.logout();
             this.reset();
         },
         beforeDestroy(){
@@ -84,7 +85,8 @@
             ...mapActions({
                 login: 'siap/login',
                 reset: 'siap/loginReset',
-                isLoading: 'siap/isLoading'
+                isLoading: 'siap/isLoading',
+                logout: 'siap/logout'
             }),
             handleLogin(){
                 const payload = {
@@ -94,8 +96,6 @@
                 this.login(payload)
                     .then(() => {
                         this.$router.push('/');
-                    })
-                    .catch( (e) => {
                     })
                 ;
             }

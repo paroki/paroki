@@ -11,7 +11,7 @@
                     v-model="item[field.name]"
                     v-if="field.type === 'text'"
                     class="purple-input"
-                    @input="handleUpdateField(field.name, $event.target.value)">
+                    @input="handleUpdateField(field.name)">
                 ></v-text-field>
                 <v-text-field
                     :label="field.label"
@@ -22,7 +22,7 @@
                     v-if="field.type === 'password'"
                     :error="isInvalid(field.name)"
                     :error-messages="getError(field.name)"
-                    @input="handleUpdateField(field.name, $event.target.value)">
+                    @input="handleUpdateField(field.name)">
                 ></v-text-field>
                 <c-datepicker
                     v-if="field.type === 'date'"
@@ -32,7 +32,7 @@
                     :data="item"
                     :error="isInvalid(field.name)"
                     :error-messages="getError(field.name)"
-                    @input="handleUpdateField(field.name, $event.target.value)">
+                    @input="handleUpdateField(field.name)">
                 ></c-datepicker>
                 <v-radio-group
                     v-model="item[field.name]"
@@ -40,7 +40,7 @@
                     :label="field.label"
                     :error="isInvalid(field.name)"
                     :error-messages="getError(field.name)"
-                    @input="handleUpdateField(field.name, $event.target.value)">
+                    @input="handleUpdateField(field.name)">
                 >
                     <v-radio
                         v-for="(option, index) in field.options"
@@ -62,7 +62,7 @@
                         :value="option.value"
                         :error="isInvalid(field.name)"
                         :error-messages="getError(field.name)"
-                        @input="handleUpdateField(field.name, $event.target.value)">
+                        @input="handleUpdateField(field.name)">
                     ></v-checkbox>
                 </v-item-group>
                 <c-autocomplete
@@ -71,7 +71,7 @@
                     :label="field.label"
                     :error="isInvalid(field.name)"
                     :error-messages="getError(field.name)"
-                    @input="handleUpdateField(field.name, $event.target.value)">
+                    @input="handleUpdateField(field.name)">
                 ></c-autocomplete>
             </div>
         </template>

@@ -51,7 +51,6 @@ export const login = ({commit},payload) => {
             commit(types.SIAP_LOGIN_END);
             commit(types.SIAP_LOGIN_ERROR, error.message);
             commit(types.SIAP_TOGGLE_LOADING);
-            throw error;
         });
 };
 
