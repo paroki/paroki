@@ -13,7 +13,7 @@ stages:
 jobs:
   include:
   - stage: test
-    php: '7.3'
+    php: '7.2'
   - stage: test
     php: '7.3'
   - stage: test
