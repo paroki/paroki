@@ -21,16 +21,18 @@ if [[ ${COVERAGE} == yes ]]; then
     JEST_OPTS="--coverage";
 fi;
 
-if [[ ${CLIENT} != yes ]]; then
+if [[ ${CLIENT} != yes || ${COVERAGE} == yes ]]; then
     cd api
     ${PHP_CMD} ./vendor/bin/phpspec run --ansi ${PHPSPEC_OPTS} || EXIT_CODE=1;
     ${PHP_CMD} ./vendor/bin/phpunit --colors=always ${PHPUNIT_OPTS} || EXIT_CODE=1;
     ${PHP_CMD} ./vendor/bin/behat --colors ${BEHAT_OPTS} || EXIT_CODE=1;
     cd ..
-else
-    cd client;
-    ${JEST_CMD} --colors ${JEST_OPTS};
-    cd ..;
+fi;
+
+if [[ ${COVERAGE} == yes || ${CLIENT} == yes ]]; then
+  cd client;
+  ${JEST_CMD} --colors ${JEST_OPTS};
+  cd ..;
 fi;
 
 if [[ ${COVERAGE} == yes ]]; then

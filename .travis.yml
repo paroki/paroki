@@ -17,8 +17,8 @@ jobs:
   - stage: test
     php: '7.3'
   - stage: test
-    php: '7.3'
-    env: COVERAGE=yes
+    node: '10.15.3'
+    env: CLIENT=yes
   - stage: test
     php: '7.3'
     env: CLIENT=yes COVERAGE=yes
