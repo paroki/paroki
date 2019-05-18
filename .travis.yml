@@ -20,7 +20,7 @@ jobs:
     php: '7.3'
     env: COVERAGE=yes
   - stage: deploy
-    if: branch=master
+    if: branch in (master,travis-debug) AND type != pull_request
     php: '7.2'
     env: DEPLOY=yes
     deploy:
