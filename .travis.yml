@@ -14,8 +14,10 @@ jobs:
   include:
   - stage: test
     php: '7.2'
+    env: API=yes
   - stage: test
     php: '7.3'
+    env: API=yes
   - stage: test
     node: '10.15.3'
     env: CLIENT=yes
