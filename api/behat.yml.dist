@@ -8,6 +8,8 @@ default:
         - Behatch\Context\RestContext
         - SIAP\Behat\Contexts\JsonContext
         - SIAP\Behat\Contexts\CustomContext
+        - SIAP\Behat\Contexts\BaptisContext:
+            manager: "@siap.baptis.baptis_manager"
         - SIAP\Behat\Contexts\ReferenceContext:
             doctrine: '@doctrine'
         - SIAP\Behat\Contexts\UserContext:

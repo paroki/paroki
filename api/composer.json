@@ -50,8 +50,7 @@
         "prepare-test": [
             "./bin/console doctrine:database:create --env=test",
             "./bin/console doctrine:schema:create --env=test",
-            "./bin/console siap:generate:jwt-keys",
-            "@load-fixtures"
+            "./bin/console siap:generate:jwt-keys"
         ],
         "test": "./vendor/bin/phpunit"
     },

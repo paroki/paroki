@@ -37,14 +37,14 @@ class ReferenceContext implements Context
     public function iHaveKeuskupan($nama)
     {
         $keuskupan = $this->getKeuskupanRepository()
-            ->findOneBy(['kode' => 999]);
+            ->findOneBy(['kode' => '999']);
         $manager = $this->manager;
 
         if (!$keuskupan instanceof Keuskupan) {
             $keuskupan = new Keuskupan();
         }
 
-        $keuskupan->setKode(999)
+        $keuskupan->setKode('999')
             ->setNama($nama);
         $manager->persist($keuskupan);
         $manager->flush();

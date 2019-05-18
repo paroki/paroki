@@ -4,8 +4,6 @@ SIAP\Baptis\Entity\Baptis:
             - NotBlank: { message: "siap.validation.baptis.buku" }
         nomor:
             - NotBlank: { message: "siap.validation.baptis.nomor" }
-        tempatBaptis:
-            - NotBlank: { message: "siap.validation.baptis.tempat_baptis" }
         tanggalBaptis:
             - NotBlank: { message: "siap.validation.baptis.tanggal_baptis" }
         waliBaptis1:
