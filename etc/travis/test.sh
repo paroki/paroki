@@ -27,9 +27,12 @@ if [[ ${INTEGRATON} != yes ]]; then
     ${PHP_CMD} ./vendor/bin/phpspec run --ansi ${PHPSPEC_OPTS} || EXIT_CODE=1;
     ${PHP_CMD} ./vendor/bin/phpunit --colors=always ${PHPUNIT_OPTS} || EXIT_CODE=1;
     ${PHP_CMD} ./vendor/bin/behat --colors ${BEHAT_OPTS} || EXIT_CODE=1;
-    cd ../client;
-    ${JEST_CMD} --colors ${JEST_OPTS} || EXIT_CODE=1;
-    cd ..
+fi;
+
+if [[ ${CLIENT} == yes ]]; then
+  cd ../client;
+  ${JEST_CMD} --colors ${JEST_OPTS} || EXIT_CODE=1;
+  cd ..;
 fi;
 
 if [[ ${COVERAGE} == yes ]]; then

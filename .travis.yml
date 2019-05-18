@@ -19,6 +19,9 @@ jobs:
   - stage: test
     php: '7.3'
     env: COVERAGE=yes
+  - stage: test
+    php: '7.3'
+    env: CLIENT=yes
   - stage: deploy
     if: branch in (master,travis-debug) AND type != pull_request
     php: '7.2'
