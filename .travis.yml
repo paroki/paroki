@@ -56,8 +56,6 @@ before_install:
 
 install:
   - etc/travis/install.sh
-  # wait for postgresql to shutdown
-  - while sudo lsof -Pi :5432 -sTCP:LISTEN -t; do sleep 1; done
 
 script:
   - cd $TRAVIS_BUILD_DIR
