@@ -103,20 +103,20 @@
 
         computed: {
             ...mapGetters({
+                created: 'user/create/created',
+                retrieved: 'user/update/retrieved',
+                updated: 'user/update/updated',
+                violations: 'user/update/violations',
                 isLoading: 'user/update/isLoading',
                 error: 'user/update/error',
                 deleteError: 'user/del/error',
                 deleteLoading: 'user/del/isLoading',
-                created: 'user/create/created',
-                deleted: 'user/del/deleted',
-                retrieved: 'user/update/retrieved',
-                updated: 'user/update/updated',
-                violations: 'user/update/violations'
+                deleted: 'user/del/deleted'
             })
         },
 
         created () {
-            this.retrieve(decodeURIComponent(this.$route.params.id));
+            this.retrieve(this.$route.params.id);
             if(this.created){
                 this.snackbarSuccess(`User ${this.created.nama} berhasil dibuat!`);
             }
