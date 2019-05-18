@@ -42,11 +42,11 @@ install:
 - composer prepare-test --ansi
 - cd $TRAVIS_BUILD_DIR/client
 - yarn install
-- if [[ $INTEGRATION == yes || $DEPLOY==yes ]]; then yarn build; fi;
+- if [[ $INTEGRATION == yes || $DEPLOY == yes ]]; then yarn build; fi;
 
 script:
 - cd $TRAVIS_BUILD_DIR
-- if [[ $INTEGRATION != yes && $DEPLOY!= yes ]]; then ./etc/travis/test.sh; fi;
+- if [[ $INTEGRATION != yes && $DEPLOY != yes ]]; then ./etc/travis/test.sh; fi;
 
 before_deploy:
 - cd $TRAVIS_BUILD_DIR
