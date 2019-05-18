@@ -1,15 +1,22 @@
 dist: xenial
+
 language: php
+
+notifications:
+  email:
+    on_failure: change
+    on_success: never
+
 cache:
   directories:
   - "$HOME/.composer/cache"
   - "$HOME/.npm"
   - "$TRAVIS_BUILD_DIR/client/node_modules"
-node_js:
-- '10'
+
 stages:
 - test
 - deploy
+
 jobs:
   include:
   - stage: test
