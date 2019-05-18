@@ -1,72 +1,79 @@
 dist: xenial
+
 language: php
+
+notifications:
+  email:
+    on_failure: change
+    on_success: never
+
 cache:
   directories:
-  - "$HOME/.composer/cache"
-  - "$HOME/.npm"
-  - "$TRAVIS_BUILD_DIR/client/node_modules"
-node_js:
-- '10'
+    - "$HOME/.composer/cache"
+    - "$HOME/.npm"
+    - "$TRAVIS_BUILD_DIR/client/node_modules"
+
 stages:
-- test
-- deploy
+  - test
+  - deploy
+
 jobs:
   include:
-  - stage: test
-    php: '7.2'
-  - stage: test
-    php: '7.3'
-  - stage: test
-    php: '7.3'
-    env: COVERAGE=yes
-  - stage: deploy
-    if: branch=master
-    php: '7.2'
-    env: DEPLOY=yes
-    deploy:
-      provider: script
-      script: etc/travis/deploy.sh
-      skip_cleanup: true
-      on:
-        branch: master
+    - stage: test
+      php: '7.2'
+      env: API=yes
+    - stage: test
+      php: '7.3'
+      env: API=yes
+    - stage: test
+      php: '7.3'
+      env: CLIENT=yes
+    - stage: test
+      php: '7.3'
+      env: COVERAGE=yes
+    - stage: test
+      php: '7.2'
+      env: INTEGRATION=yes
+      services:
+        - docker
+    - stage: deploy
+      if: branch in (master,travis-debug) AND type != pull_request
+      php: '7.2'
+      env: DEPLOY=yes
+      deploy:
+        provider: script
+        script: etc/travis/deploy.sh
+        skip_cleanup: true
+        on:
+          branch: master
   allow_failures:
-  - env: COVERAGE=yes
+    - env: COVERAGE=yes
+    - env: INTEGRATION=yes
+    - env: DEPLOY=yes
 
 before_install:
-- if [[ $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini || echo "xdebug not
-  available"; fi;
+  - if [[ $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini || echo "xdebug not available"; fi;
+  - sudo service postgresql stop
+  # wait for postgresql to shutdown
+  - while sudo lsof -Pi :5432 -sTCP:LISTEN -t; do sleep 1; done
 
 install:
-- cp etc/travis/env.local api/.env.local
-- cd $TRAVIS_BUILD_DIR/api
-- composer install --ansi
-- composer prepare-test --ansi
-- cd $TRAVIS_BUILD_DIR/client
-- yarn install
-- if [[ $INTEGRATION == yes || $DEPLOY == yes ]]; then yarn build; fi;
+  - etc/travis/install.sh
 
 script:
-- cd $TRAVIS_BUILD_DIR
-- if [[ $INTEGRATION != yes && $DEPLOY != yes ]]; then ./etc/travis/test.sh; fi;
+  - cd $TRAVIS_BUILD_DIR
+  - if [[ $INTEGRATION != yes && $DEPLOY != yes ]]; then ./etc/travis/test.sh; fi;
+  - if [[ $INTEGRATION = yes ]]; then ./etc/travis/integration.sh; fi;
 
 before_deploy:
-- cd $TRAVIS_BUILD_DIR
-- openssl aes-256-cbc -K $encrypted_6041831ee8a2_key -iv $encrypted_6041831ee8a2_iv
-  -in etc/travis/deploy_key.enc -out deploy_key -d
-- eval "$(ssh-agent -s)"
-- chmod 600 ./deploy_key
-- echo -e "Host $IP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-- ssh-add ./deploy_key
-- rsync --stats --progress -avh --delete-before $TRAVIS_BUILD_DIR/client/dist travis@$IP:$DEPLOY_DIR
+  - cd $TRAVIS_BUILD_DIR
+  - openssl aes-256-cbc -K $encrypted_6041831ee8a2_key -iv $encrypted_6041831ee8a2_iv
+    -in etc/travis/deploy_key.enc -out deploy_key -d
+  - eval "$(ssh-agent -s)"
+  - chmod 600 ./deploy_key
+  - echo -e "Host $IP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  - ssh-add ./deploy_key
+  - rsync --stats --progress -avh --delete-before $TRAVIS_BUILD_DIR/client/dist travis@$IP:$DEPLOY_DIR
 
 after_script:
-- if [[ $COVERAGE = yes ]]; then
-    cd $TRAVIS_BUILD_DIR;
-    wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.1.0/php-coveralls.phar;
-    chmod +x php-coveralls.phar; travis_retry ./php-coveralls.phar --json_path=api/build/logs/coveralls-upload.json
-    -vvv -x $TRAVIS_BUILD_DIR/api/build/logs/clover.xml; wget https://scrutinizer-ci.com/ocular.phar;
-    travis_retry php ocular.phar code-coverage:upload --format=php-clover api/build/logs/clover.xml;
-    wget https://codecov.io/bash;
-    chmod +x bash;
-    ./bash -F client -s client/build/logs/ -f "*.xml";
-  fi
+  - etc/travis/after-script.sh
