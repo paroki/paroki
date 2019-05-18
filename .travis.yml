@@ -46,7 +46,7 @@ install:
 
 script:
 - cd $TRAVIS_BUILD_DIR
-- ./etc/travis/test.sh
+- if [[ $INTEGRATION != yes ]]; then ./etc/travis/test.sh; fi;
 
 before_deploy:
 - cd $TRAVIS_BUILD_DIR
