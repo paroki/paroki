@@ -1,0 +1,4 @@
+SIAP\Core\Entity\AbstractBiodata:
+    properties:
+        jenisKelamin:
+            groups: ['read','write']

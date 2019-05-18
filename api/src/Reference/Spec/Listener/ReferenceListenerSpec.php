@@ -18,10 +18,13 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SIAP\Reference\Entity\Paroki;
 use SIAP\Reference\Entity\RequireParokiInterface;
+use SIAP\Reference\Events;
 use SIAP\Reference\Listener\ReferenceListener;
 use SIAP\User\Entity\User;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use SIAP\Reference\Events\SetParokiEvent;
 
 class ReferenceListenerSpec extends ObjectBehavior
 {
@@ -29,13 +32,14 @@ class ReferenceListenerSpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         Paroki $paroki,
         User $user,
-        TokenInterface $token
+        TokenInterface $token,
+        EventDispatcherInterface $dispatcher
     ) {
         $tokenStorage->getToken()->willReturn($token);
         $token->getUser()->willReturn($user);
         $user->getParoki()->willReturn($paroki);
         $paroki->getKode()->willReturn('some');
-        $this->beConstructedWith($tokenStorage);
+        $this->beConstructedWith($tokenStorage, $dispatcher);
     }
 
     public function it_is_initializable()
@@ -46,13 +50,19 @@ class ReferenceListenerSpec extends ObjectBehavior
     public function it_should_set_paroki_using_user_paroki(
         LifecycleEventArgs $args,
         Paroki $paroki,
-        RequireParokiInterface $entity
+        RequireParokiInterface $entity,
+        EventDispatcherInterface $dispatcher
     ) {
         $entity->getParoki()->willReturn(null);
         $entity->setParoki($paroki)
             ->shouldBeCalled();
 
         $args->getObject()->willReturn($entity);
+        $dispatcher->dispatch(
+            Events::SET_PAROKI,
+                Argument::type(SetParokiEvent::class)
+            )
+            ->shouldBeCalled();
 
         $this->prePersist($args);
     }
@@ -76,7 +86,8 @@ class ReferenceListenerSpec extends ObjectBehavior
         TokenInterface $token,
         User $user,
         RequireParokiInterface $entity,
-        LifecycleEventArgs $args
+        LifecycleEventArgs $args,
+        EventDispatcherInterface $dispatcher
     ) {
         $tokenStorage->getToken()->willReturn($token);
         $token->getUser()->willReturn($user);
@@ -88,7 +99,7 @@ class ReferenceListenerSpec extends ObjectBehavior
 
         $args->getObject()->willReturn($entity);
 
-        $this->beConstructedWith($tokenStorage);
+        $this->beConstructedWith($tokenStorage, $dispatcher);
         $this->prePersist($args);
     }
 }

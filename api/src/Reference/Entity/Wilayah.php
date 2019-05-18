@@ -158,4 +158,16 @@ class Wilayah
 
         return $this;
     }
+
+    public function getJenisWilayah(): ?JenisWilayah
+    {
+        return $this->jenisWilayah;
+    }
+
+    public function setJenisWilayah(?JenisWilayah $jenisWilayah): self
+    {
+        $this->jenisWilayah = $jenisWilayah;
+
+        return $this;
+    }
 }

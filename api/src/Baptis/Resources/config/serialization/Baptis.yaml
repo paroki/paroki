@@ -14,6 +14,8 @@ SIAP\Baptis\Entity\Baptis:
             groups: ['read','write']
         nama:
             groups: ['read','write']
+        jenisKelamin:
+            groups: ['read','write']
         tempatLahir:
             groups: ['read','write']
         tanggalLahir:

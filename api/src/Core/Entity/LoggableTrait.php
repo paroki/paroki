@@ -20,7 +20,7 @@ trait LoggableTrait
     /**
      * Data di update pada waktu.
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
     protected $updatedAt;
 
@@ -31,7 +31,7 @@ trait LoggableTrait
      */
     protected $updatedBy;
 
-    public function getUpdatedAt(): ?\DateTime
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
@@ -39,7 +39,7 @@ trait LoggableTrait
     /**
      * @return static
      */
-    public function setUpdatedAt(?\DateTime $updatedAt = null)
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt)
     {
         $this->updatedAt = $updatedAt;
 

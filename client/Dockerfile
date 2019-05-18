@@ -1,8 +1,9 @@
-FROM node:11.5-alpine
+FROM node:10.15-alpine
 
 RUN mkdir -p /usr/src/client
 
 WORKDIR /usr/src/client
+
 
 RUN yarn global add @api-platform/client-generator
 

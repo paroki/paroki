@@ -4,22 +4,22 @@
     <id name="id" type="guid">
       <generator strategy="UUID"/>
     </id>
-    <field name="kodeBaptis" type="string" unique="true" length="50" nullable="false"/>
+    <field name="kodeBaptis" type="string" unique="true" length="50" nullable="true"/>
     <field name="namaBaptis" type="string" nullable="true"/>
-    <field name="buku" type="string" length="50" nullable="false"/>
-    <field name="halaman" type="integer" nullable="false">
+    <field name="buku" type="string" length="50" nullable="true"/>
+    <field name="halaman" type="integer" nullable="true">
       <options>
         <option name="default">0</option>
       </options>
     </field>
-    <field name="nomor" type="integer" nullable="false"/>
+    <field name="nomor" type="integer" nullable="true"/>
     <field name="lanjutan" type="string" length="1" nullable="true"/>
     <field name="tempatBaptis" type="string" length="255" nullable="true"/>
     <field name="tanggalBaptis" type="date" nullable="true"/>
     <field name="waliBaptis1" type="string" nullable="true"/>
     <field name="waliBaptis2" type="string" nullable="true"/>
     <field name="catatan" type="text" nullable="true"/>
-    <field name="updatedAt" type="date" nullable="false"/>
+    <field name="updatedAt" type="date" nullable="true"/>
     <indexes>
       <index name="ix_baptis_nama" columns="nama"/>
       <index name="ix_baptis_kode" columns="kode_baptis"/>

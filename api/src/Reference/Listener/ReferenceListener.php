@@ -18,6 +18,9 @@ use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use SIAP\Reference\Entity\Paroki;
 use SIAP\Reference\Entity\RequireParokiInterface;
+use SIAP\Reference\Events as ReferenceEvents;
+use SIAP\Reference\Events\SetParokiEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ReferenceListener implements EventSubscriber
@@ -27,10 +30,17 @@ class ReferenceListener implements EventSubscriber
      */
     private $tokenStorage;
 
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $dispatcher;
+
     public function __construct(
-        TokenStorageInterface $storage
+        TokenStorageInterface $storage,
+        EventDispatcherInterface $dispatcher
     ) {
         $this->tokenStorage = $storage;
+        $this->dispatcher = $dispatcher;
     }
 
     public function getSubscribedEvents()
@@ -74,7 +84,15 @@ class ReferenceListener implements EventSubscriber
         $paroki = $currentUser->getParoki();
         if (null !== $paroki) {
             $entity->setParoki($paroki);
+            $this->dispatchSetParokiEvent($entity);
         }
+    }
+
+    private function dispatchSetParokiEvent(RequireParokiInterface $entity)
+    {
+        $dispatcher = $this->dispatcher;
+        $event = new SetParokiEvent($entity);
+        $dispatcher->dispatch(ReferenceEvents::SET_PAROKI,$event);
     }
 
     private function getUser()

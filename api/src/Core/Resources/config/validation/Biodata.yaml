@@ -1,0 +1,8 @@
+SIAP\Core\Entity\AbstractBiodata:
+    properties:
+        nama:
+            - NotBlank: { message: "siap.validation.biodata.nama" }
+        tempatLahir:
+            - NotBlank: { message: "siap.validation.biodata.tempat_lahir" }
+        tanggalLahir:
+            - NotBlank: { message: "siap.validation.biodata.tanggal_lahir" }

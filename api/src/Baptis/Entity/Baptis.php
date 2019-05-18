@@ -13,20 +13,20 @@ declare(strict_types=1);
 
 namespace SIAP\Baptis\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use SIAP\Core\Entity\AbstractBiodata;
-use SIAP\Core\Entity\Dokumen;
+use SIAP\Core\Entity\DokumenOwnerTrait;
+use SIAP\Core\Entity\LoggableTrait;
+use SIAP\Core\Entity\RequireParokiTrait;
 use SIAP\Reference\Entity\Agama;
 use SIAP\Reference\Entity\Lingkungan;
-use SIAP\Reference\Entity\Paroki;
 use SIAP\Reference\Entity\RequireParokiInterface;
-use SIAP\User\Entity\User;
 
 class Baptis extends AbstractBiodata implements RequireParokiInterface
 {
+    use LoggableTrait, DokumenOwnerTrait, RequireParokiTrait;
+
     /**
-     * @var string
+     * @var string|null
      */
     private $kodeBaptis;
 
@@ -36,12 +36,12 @@ class Baptis extends AbstractBiodata implements RequireParokiInterface
     private $buku;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $halaman = 0;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $nomor;
 
@@ -56,37 +56,32 @@ class Baptis extends AbstractBiodata implements RequireParokiInterface
     private $namaBaptis;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $tempatBaptis;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     private $tanggalBaptis;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $waliBaptis1;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $waliBaptis2;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $catatan;
 
     /**
-     * @var \DateTime
-     */
-    private $updatedAt;
-
-    /**
-     * @var string
+     * @var string|null
      */
     private $id;
 
@@ -111,16 +106,6 @@ class Baptis extends AbstractBiodata implements RequireParokiInterface
     private $diterima;
 
     /**
-     * @var User|null
-     */
-    private $updatedBy;
-
-    /**
-     * @var Paroki|null
-     */
-    private $paroki;
-
-    /**
      * @var Lingkungan|null
      */
     private $lingkungan;
@@ -130,19 +115,12 @@ class Baptis extends AbstractBiodata implements RequireParokiInterface
      */
     private $agamaSebelumBaptis;
 
-    private $dokumen;
-
-    public function __construct()
-    {
-        $this->dokumen = new ArrayCollection();
-    }
-
-    public function getBaptisId(): ?string
+    public function getKodeBaptis(): ?string
     {
         return $this->kodeBaptis;
     }
 
-    public function setBaptisId(string $kodeBaptis): self
+    public function setKodeBaptis(?string $kodeBaptis): self
     {
         $this->kodeBaptis = $kodeBaptis;
 
@@ -154,7 +132,7 @@ class Baptis extends AbstractBiodata implements RequireParokiInterface
         return $this->buku;
     }
 
-    public function setBuku(string $buku): self
+    public function setBuku(?string $buku): self
     {
         $this->buku = $buku;
 
@@ -166,7 +144,7 @@ class Baptis extends AbstractBiodata implements RequireParokiInterface
         return $this->halaman;
     }
 
-    public function setHalaman(int $halaman): self
+    public function setHalaman(?int $halaman): self
     {
         $this->halaman = $halaman;
 
@@ -178,9 +156,33 @@ class Baptis extends AbstractBiodata implements RequireParokiInterface
         return $this->nomor;
     }
 
-    public function setNomor(int $nomor): self
+    public function setNomor(?int $nomor): self
     {
         $this->nomor = $nomor;
+
+        return $this;
+    }
+
+    public function getLanjutan(): ?string
+    {
+        return $this->lanjutan;
+    }
+
+    public function setLanjutan(?string $lanjutan): self
+    {
+        $this->lanjutan = $lanjutan;
+
+        return $this;
+    }
+
+    public function getNamaBaptis(): ?string
+    {
+        return $this->namaBaptis;
+    }
+
+    public function setNamaBaptis(?string $namaBaptis): self
+    {
+        $this->namaBaptis = $namaBaptis;
 
         return $this;
     }
@@ -245,18 +247,6 @@ class Baptis extends AbstractBiodata implements RequireParokiInterface
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
     public function getId(): ?string
     {
         return $this->id;
@@ -310,30 +300,6 @@ class Baptis extends AbstractBiodata implements RequireParokiInterface
         return $this;
     }
 
-    public function getUpdatedBy(): ?User
-    {
-        return $this->updatedBy;
-    }
-
-    public function setUpdatedBy(?User $updatedBy): self
-    {
-        $this->updatedBy = $updatedBy;
-
-        return $this;
-    }
-
-    public function getParoki(): ?Paroki
-    {
-        return $this->paroki;
-    }
-
-    public function setParoki(?Paroki $paroki): self
-    {
-        $this->paroki = $paroki;
-
-        return $this;
-    }
-
     public function getLingkungan(): ?Lingkungan
     {
         return $this->lingkungan;
@@ -354,68 +320,6 @@ class Baptis extends AbstractBiodata implements RequireParokiInterface
     public function setAgamaSebelumBaptis(?Agama $agamaSebelumBaptis): self
     {
         $this->agamaSebelumBaptis = $agamaSebelumBaptis;
-
-        return $this;
-    }
-
-    public function getLanjutan(): ?string
-    {
-        return $this->lanjutan;
-    }
-
-    public function setLanjutan(?string $lanjutan): self
-    {
-        $this->lanjutan = $lanjutan;
-
-        return $this;
-    }
-
-    public function getKodeBaptis(): ?string
-    {
-        return $this->kodeBaptis;
-    }
-
-    public function setKodeBaptis(string $kodeBaptis): self
-    {
-        $this->kodeBaptis = $kodeBaptis;
-
-        return $this;
-    }
-
-    public function getNamaBaptis(): ?string
-    {
-        return $this->namaBaptis;
-    }
-
-    public function setNamaBaptis(?string $namaBaptis): self
-    {
-        $this->namaBaptis = $namaBaptis;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Dokumen[]
-     */
-    public function getDokumen(): Collection
-    {
-        return $this->dokumen;
-    }
-
-    public function addDokuman(Dokumen $dokuman): self
-    {
-        if (!$this->dokumen->contains($dokuman)) {
-            $this->dokumen[] = $dokuman;
-        }
-
-        return $this;
-    }
-
-    public function removeDokuman(Dokumen $dokuman): self
-    {
-        if ($this->dokumen->contains($dokuman)) {
-            $this->dokumen->removeElement($dokuman);
-        }
 
         return $this;
     }

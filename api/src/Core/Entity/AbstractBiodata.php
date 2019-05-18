@@ -15,18 +15,39 @@ namespace SIAP\Core\Entity;
 
 class AbstractBiodata
 {
+    /**
+     * @var string|null
+     */
     private $nama;
 
+    /**
+     * @var int|null
+     */
     private $jenisKelamin;
 
+    /**
+     * @var string|null
+     */
     private $tempatLahir;
 
+    /**
+     * @var \DateTimeInterface|null
+     */
     private $tanggalLahir;
 
+    /**
+     * @var string|null
+     */
     private $ayah;
 
+    /**
+     * @var string|null
+     */
     private $ibu;
 
+    /**
+     * @var string|null
+     */
     private $alamat;
 
     public function getNama(): ?string
