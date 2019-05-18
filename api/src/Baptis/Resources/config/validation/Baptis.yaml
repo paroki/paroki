@@ -1,0 +1,12 @@
+SIAP\Baptis\Entity\Baptis:
+    properties:
+        buku:
+            - NotBlank: { message: "siap.validation.baptis.buku" }
+        nomor:
+            - NotBlank: { message: "siap.validation.baptis.nomor" }
+        tempatBaptis:
+            - NotBlank: { message: "siap.validation.baptis.tempatBaptis" }
+        tanggalBaptis:
+            - NotBlank: { message: "siap.validation.baptis.tanggalBaptis" }
+        waliBaptis1:
+            - NotBlank: { message: "siap.validation.baptis.wali_baptis1" }

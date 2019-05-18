@@ -1,0 +1,4 @@
+SIAP\Core\Entity\AbstractBiodata:
+    properties:
+        nama:
+            - NotBlank: { message: "siap.validation.nama" }
