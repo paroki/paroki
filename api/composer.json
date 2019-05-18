@@ -20,7 +20,11 @@
     "autoload-dev": {
         "psr-4": {
             "SIAP\\Tests\\": "tests/",
-            "Spec\\SIAP\\Reference\\": "src/Reference/Spec"
+            "Spec\\SIAP\\Baptis\\": "src/Baptis/Spec",
+            "Spec\\SIAP\\Core\\": "src/Core/Spec",
+            "Spec\\SIAP\\Komuni\\": "src/Baptis/Spec",
+            "Spec\\SIAP\\Reference\\": "src/Reference/Spec",
+            "Spec\\SIAP\\User\\": "src/User/Spec"
         }
     },
     "replace": {

@@ -1,4 +1,5 @@
 formater.name: dot
+spec_prefix: Spec
 suites:
     Baptis:
         namespace: SIAP\Baptis

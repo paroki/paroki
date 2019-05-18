@@ -26,7 +26,7 @@ use SIAP\User\Entity\User;
 class Baptis extends AbstractBiodata implements RequireParokiInterface
 {
     /**
-     * @var string
+     * @var null|string
      */
     private $kodeBaptis;
 
@@ -36,12 +36,12 @@ class Baptis extends AbstractBiodata implements RequireParokiInterface
     private $buku;
 
     /**
-     * @var int
+     * @var null|int
      */
     private $halaman = 0;
 
     /**
-     * @var int
+     * @var null|int
      */
     private $nomor;
 
@@ -56,37 +56,37 @@ class Baptis extends AbstractBiodata implements RequireParokiInterface
     private $namaBaptis;
 
     /**
-     * @var string
+     * @var null|string
      */
     private $tempatBaptis;
 
     /**
-     * @var \DateTime
+     * @var null|\DateTime
      */
     private $tanggalBaptis;
 
     /**
-     * @var string
+     * @var null|string
      */
     private $waliBaptis1;
 
     /**
-     * @var string
+     * @var null|string
      */
     private $waliBaptis2;
 
     /**
-     * @var string
+     * @var null|string
      */
     private $catatan;
 
     /**
-     * @var \DateTime
+     * @var null|\DateTime
      */
     private $updatedAt;
 
     /**
-     * @var string
+     * @var null|string
      */
     private $id;
 
@@ -130,11 +130,45 @@ class Baptis extends AbstractBiodata implements RequireParokiInterface
      */
     private $agamaSebelumBaptis;
 
+    /**
+     * @var ArrayCollection|Dokumen[]
+     */
     private $dokumen;
 
     public function __construct()
     {
         $this->dokumen = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Dokumen[]
+     */
+    public function getDokumen(): Collection
+    {
+        return $this->dokumen;
+    }
+
+    public function addDokumen(Dokumen $dokuman): self
+    {
+        if (!$this->dokumen->contains($dokuman)) {
+            $this->dokumen[] = $dokuman;
+        }
+
+        return $this;
+    }
+
+    public function hasDokumen($dokumen)
+    {
+        return $this->dokumen->contains($dokumen) ? true:false;
+    }
+
+    public function removeDokumen(Dokumen $dokumen): self
+    {
+        if ($this->dokumen->contains($dokumen)) {
+            $this->dokumen->removeElement($dokumen);
+        }
+
+        return $this;
     }
 
     public function getBaptisId(): ?string
@@ -390,32 +424,6 @@ class Baptis extends AbstractBiodata implements RequireParokiInterface
     public function setNamaBaptis(?string $namaBaptis): self
     {
         $this->namaBaptis = $namaBaptis;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Dokumen[]
-     */
-    public function getDokumen(): Collection
-    {
-        return $this->dokumen;
-    }
-
-    public function addDokuman(Dokumen $dokuman): self
-    {
-        if (!$this->dokumen->contains($dokuman)) {
-            $this->dokumen[] = $dokuman;
-        }
-
-        return $this;
-    }
-
-    public function removeDokuman(Dokumen $dokuman): self
-    {
-        if ($this->dokumen->contains($dokuman)) {
-            $this->dokumen->removeElement($dokuman);
-        }
 
         return $this;
     }
