@@ -38,8 +38,7 @@ jobs:
   - env: COVERAGE=yes
 
 before_install:
-- if [[ $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini || echo "xdebug not
-  available"; fi;
+- if [[ $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini || echo "xdebug not available"; fi;
 
 install:
 - etc/travis/install.sh
