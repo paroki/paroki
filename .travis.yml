@@ -21,7 +21,7 @@ jobs:
     env: COVERAGE=yes
   - stage: deploy
     php: '7.2'
-    env: BUILD=yes INTEGRATION=yes
+    env: DEPLOY=yes
     deploy:
       provider: script
       script: etc/travis/deploy.sh
@@ -42,11 +42,11 @@ install:
 - composer prepare-test --ansi
 - cd $TRAVIS_BUILD_DIR/client
 - yarn install
-- if [[ $BUILD == yes ]]; then yarn build; fi;
+- if [[ $INTEGRATION == yes || $DEPLOY==yes ]]; then yarn build; fi;
 
 script:
 - cd $TRAVIS_BUILD_DIR
-- if [[ $INTEGRATION != yes ]]; then ./etc/travis/test.sh; fi;
+- if [[ $INTEGRATION != yes && $DEPLOY!= yes ]]; then ./etc/travis/test.sh; fi;
 
 before_deploy:
 - cd $TRAVIS_BUILD_DIR
