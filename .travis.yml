@@ -37,13 +37,7 @@ before_install:
   available"; fi;
 
 install:
-- cp etc/travis/env.local api/.env.local
-- cd $TRAVIS_BUILD_DIR/api
-- composer install --ansi
-- composer prepare-test --ansi
-- cd $TRAVIS_BUILD_DIR/client
-- yarn install
-- if [[ $INTEGRATION == yes || $DEPLOY == yes ]]; then yarn build; fi;
+- etc/travis/install.sh
 
 script:
 - cd $TRAVIS_BUILD_DIR
