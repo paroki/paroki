@@ -14,3 +14,4 @@ if [[ $INTEGRATION == yes || $DEPLOY == yes ]]; then
   cd $TRAVIS_BUILD_DIR/client;
   yarn build;
 fi;
+
