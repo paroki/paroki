@@ -14,12 +14,16 @@ declare(strict_types=1);
 namespace SIAP\Baptis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use SIAP\Core\Entity\Dokumen;
-use SIAP\User\Entity\User;
+use SIAP\Core\Entity\DokumenOwnerTrait;
+use SIAP\Core\Entity\LoggableInterface;
+use SIAP\Core\Entity\LoggableTrait;
+use SIAP\Core\Entity\RequireParokiTrait;
+use SIAP\Reference\Entity\RequireParokiInterface;
 
-class Diterima
+class Diterima implements RequireParokiInterface, LoggableInterface
 {
+    use DokumenOwnerTrait, RequireParokiTrait, LoggableTrait;
+
     private $tempatBaptis;
 
     private $tanggalBaptis;
@@ -32,15 +36,9 @@ class Diterima
 
     private $catatan;
 
-    private $updatedAt;
-
     private $id;
 
     private $baptis;
-
-    private $updatedBy;
-
-    private $dokumen;
 
     public function __construct()
     {
@@ -119,76 +117,8 @@ class Diterima
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
     public function getId(): ?string
     {
         return $this->id;
-    }
-
-    public function getBaptis(): ?Baptis
-    {
-        return $this->baptis;
-    }
-
-    public function setBaptis(?Baptis $baptis): self
-    {
-        $this->baptis = $baptis;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newDiterima = null === $baptis ? null : $this;
-        if ($newDiterima !== $baptis->getDiterima()) {
-            $baptis->setDiterima($newDiterima);
-        }
-
-        return $this;
-    }
-
-    public function getUpdatedBy(): ?User
-    {
-        return $this->updatedBy;
-    }
-
-    public function setUpdatedBy(?User $updatedBy): self
-    {
-        $this->updatedBy = $updatedBy;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Dokumen[]
-     */
-    public function getDokumen(): Collection
-    {
-        return $this->dokumen;
-    }
-
-    public function addDokuman(Dokumen $dokuman): self
-    {
-        if (!$this->dokumen->contains($dokuman)) {
-            $this->dokumen[] = $dokuman;
-        }
-
-        return $this;
-    }
-
-    public function removeDokuman(Dokumen $dokuman): self
-    {
-        if ($this->dokumen->contains($dokuman)) {
-            $this->dokumen->removeElement($dokuman);
-        }
-
-        return $this;
     }
 }

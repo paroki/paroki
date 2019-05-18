@@ -13,54 +13,50 @@ declare(strict_types=1);
 
 namespace SIAP\Baptis\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use SIAP\Core\Entity\Dokumen;
-use SIAP\Reference\Entity\Paroki;
-use SIAP\User\Entity\User;
+use SIAP\Core\Entity\DokumenOwnerTrait;
+use SIAP\Core\Entity\LoggableInterface;
+use SIAP\Core\Entity\LoggableTrait;
+use SIAP\Core\Entity\RequireParokiTrait;
+use SIAP\Reference\Entity\RequireParokiInterface;
 
-class BaptisKrisma
+class BaptisKrisma implements LoggableInterface, RequireParokiInterface
 {
+    use LoggableTrait, RequireParokiTrait, DokumenOwnerTrait;
+
+    /**
+     * @var string|null Nama Krisma
+     */
     private $nama;
 
+    /**
+     * @var string|null Tempat Krisma
+     */
     private $tempat;
 
+    /**
+     * @var \DateTimeInterface|null Tanggal Krisma
+     */
     private $tanggal;
 
+    /**
+     * @var string|null Yang memberi krisma
+     */
     private $pemberi;
 
+    /**
+     * @var string|null
+     */
     private $catatan;
 
+    /**
+     * @var string|null
+     */
     private $id;
-
-    private $baptis;
-
-    private $paroki;
 
     /**
      * @var string
      */
     private $register;
-
-    /**
-     * @var \DateTime
-     */
-    private $updatedAt;
-
-    /**
-     * @var User
-     */
-    private $updatedBy;
-
-    /**
-     * @var Dokumen[]
-     */
-    private $dokumen;
-
-    public function __construct()
-    {
-        $this->dokumen = new ArrayCollection();
-    }
 
     public function getRegister(): ?string
     {
@@ -134,70 +130,8 @@ class BaptisKrisma
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
     public function getId(): ?string
     {
         return $this->id;
-    }
-
-    public function getParoki(): ?Paroki
-    {
-        return $this->paroki;
-    }
-
-    public function setParoki(?Paroki $paroki): self
-    {
-        $this->paroki = $paroki;
-
-        return $this;
-    }
-
-    public function getUpdatedBy(): ?User
-    {
-        return $this->updatedBy;
-    }
-
-    public function setUpdatedBy(?User $updatedBy): self
-    {
-        $this->updatedBy = $updatedBy;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Dokumen[]
-     */
-    public function getDokumen(): Collection
-    {
-        return $this->dokumen;
-    }
-
-    public function addDokuman(Dokumen $dokuman): self
-    {
-        if (!$this->dokumen->contains($dokuman)) {
-            $this->dokumen[] = $dokuman;
-        }
-
-        return $this;
-    }
-
-    public function removeDokuman(Dokumen $dokuman): self
-    {
-        if ($this->dokumen->contains($dokuman)) {
-            $this->dokumen->removeElement($dokuman);
-        }
-
-        return $this;
     }
 }

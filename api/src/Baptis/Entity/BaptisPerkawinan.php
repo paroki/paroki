@@ -13,21 +13,21 @@ declare(strict_types=1);
 
 namespace SIAP\Baptis\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use SIAP\Core\Entity\Dokumen;
+use SIAP\Core\Entity\DokumenOwnerTrait;
 use SIAP\Core\Entity\LoggableInterface;
 use SIAP\Core\Entity\LoggableTrait;
+use SIAP\Core\Entity\RequireParokiTrait;
+use SIAP\Reference\Entity\RequireParokiInterface;
 
-class BaptisPerkawinan implements LoggableInterface
+class BaptisPerkawinan implements LoggableInterface, RequireParokiInterface
 {
-    use LoggableTrait;
+    use LoggableTrait, RequireParokiTrait, DokumenOwnerTrait;
 
     private $register;
 
-    private $tanggal;
-
     private $tempat;
+
+    private $tanggal;
 
     private $menikahDengan;
 
@@ -36,20 +36,6 @@ class BaptisPerkawinan implements LoggableInterface
     private $catatan;
 
     private $id;
-
-    private $baptis;
-
-    private $paroki;
-
-    /**
-     * @var Dokumen[]
-     */
-    private $dokumen;
-
-    public function __construct()
-    {
-        $this->dokumen = new ArrayCollection();
-    }
 
     public function getRegister(): ?string
     {
@@ -126,49 +112,5 @@ class BaptisPerkawinan implements LoggableInterface
     public function getId(): ?string
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection|Dokumen[]
-     */
-    public function getDokumen(): Collection
-    {
-        return $this->dokumen;
-    }
-
-    public function addDokumen(Dokumen $dokuman): self
-    {
-        if (!$this->dokumen->contains($dokuman)) {
-            $this->dokumen[] = $dokuman;
-        }
-
-        return $this;
-    }
-
-    public function removeDokumen(Dokumen $dokuman): self
-    {
-        if ($this->dokumen->contains($dokuman)) {
-            $this->dokumen->removeElement($dokuman);
-        }
-
-        return $this;
-    }
-
-    public function addDokuman(Dokumen $dokuman): self
-    {
-        if (!$this->dokumen->contains($dokuman)) {
-            $this->dokumen[] = $dokuman;
-        }
-
-        return $this;
-    }
-
-    public function removeDokuman(Dokumen $dokuman): self
-    {
-        if ($this->dokumen->contains($dokuman)) {
-            $this->dokumen->removeElement($dokuman);
-        }
-
-        return $this;
     }
 }
