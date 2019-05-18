@@ -21,7 +21,7 @@ jobs:
     env: CLIENT=yes
   - stage: test
     php: '7.3'
-    env: CLIENT=yes COVERAGE=yes
+    env: COVERAGE=yes
   - stage: deploy
     if: branch in (master,travis-debug) AND type != pull_request
     php: '7.2'
@@ -33,7 +33,7 @@ jobs:
       on:
         branch: master
   allow_failures:
-  - env: CLIENT=yes COVERAGE=yes
+  - env: COVERAGE=yes
 
 before_install:
 - if [[ $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini || echo "xdebug not
