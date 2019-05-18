@@ -159,4 +159,16 @@ class Lingkungan implements RequireParokiInterface
 
         return $this;
     }
+
+    public function getJenis(): ?JenisWilayah
+    {
+        return $this->jenis;
+    }
+
+    public function setJenis(?JenisWilayah $jenis): self
+    {
+        $this->jenis = $jenis;
+
+        return $this;
+    }
 }

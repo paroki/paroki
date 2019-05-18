@@ -1,49 +1,55 @@
 <?php
 
+/*
+ * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
+ *
+ * (c) Anthonius Munthi <me@itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
 
 namespace SIAP\Core\Test;
 
-
-use Doctrine\Common\Collections\Collection;
-
 trait MutableSpecTrait
 {
-    abstract function getMutableProperties();
+    abstract public function getMutableProperties();
 
-    abstract function getMutableClassToTest();
+    abstract public function getMutableClassToTest();
 
-    function its_properties_should_be_mutable()
+    /**
+     * @throws \ReflectionException
+     */
+    public function its_properties_should_be_mutable()
     {
         $properties = $this->getMutableProperties();
-        $r = new \ReflectionClass($this->getMutableClassToTest());
-        foreach($properties as $method => $value){
+        $r          = new \ReflectionClass($this->getMutableClassToTest());
+        foreach ($properties as $method => $value) {
+            $setter = 'set'.$method;
+            $getter = 'get'.$method;
 
-            $setter = "set".$method;
-            $getter = "get".$method;
-
-            $value = is_null($value) ? 'some-value':$value;
-
-            if($r->hasMethod('add'.$method)){
+            if ($r->hasMethod('add'.$method)) {
                 $this->handleCollectionProperties($method, $value);
-            }else{
-                $this->$setter($value)->shouldReturn($this);
-                $this->$getter()->shouldReturn($value);
+            } elseif ($r->hasMethod($setter)) {
+                $this->{$setter}($value)->shouldReturn($this);
+            } elseif ($r->hasMethod($getter)) {
+                $this->{$getter}()->shouldReturn($value);
             }
         }
     }
 
     private function handleCollectionProperties($method, $value)
     {
-        $has = 'has'.$method;
-        $add = 'add'.$method;
+        $has    = 'has'.$method;
+        $add    = 'add'.$method;
         $remove = 'remove'.$method;
 
+        $this->{$add}($value)->shouldReturn($this);
+        $this->{$has}($value)->shouldReturn(true);
 
-        $this->$add($value)->shouldReturn($this);
-        $this->$has($value)->shouldReturn(true);
-
-        $this->$remove($value)->shouldReturn($this);
-        $this->$has($value)->shouldReturn(false);
+        $this->{$remove}($value)->shouldReturn($this);
+        $this->{$has}($value)->shouldReturn(false);
     }
-
 }

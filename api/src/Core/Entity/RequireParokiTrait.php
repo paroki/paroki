@@ -13,21 +13,27 @@ declare(strict_types=1);
 
 namespace SIAP\Core\Entity;
 
-use SIAP\User\Entity\User;
+use SIAP\Reference\Entity\Paroki;
 
-interface LoggableInterface
+trait RequireParokiTrait
 {
     /**
-     * @return static
+     * @var Paroki|null
      */
-    public function setUpdatedAt(\DateTimeInterface $updatedAt);
+    protected $paroki;
 
-    public function getUpdatedAt(): ?\DateTimeInterface;
+    public function getParoki(): ?Paroki
+    {
+        return $this->paroki;
+    }
 
     /**
      * @return static
      */
-    public function setUpdatedBy(?User $user);
+    public function setParoki(?Paroki $paroki)
+    {
+        $this->paroki = $paroki;
 
-    public function getUpdatedBy(): ?User;
+        return $this;
+    }
 }

@@ -46,7 +46,7 @@ class User extends BaseUser implements RequireParokiInterface
         return $this->nama;
     }
 
-    public function setNama(string $nama): self
+    public function setNama(?string $nama): self
     {
         $this->nama = $nama;
 
