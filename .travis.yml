@@ -24,6 +24,11 @@ jobs:
   - stage: test
     php: '7.3'
     env: COVERAGE=yes
+  - stage: test
+    php: '7.2'
+    env: INTEGRATION=yes
+    services:
+      - docker
   - stage: deploy
     if: branch in (master,travis-debug) AND type != pull_request
     php: '7.2'
@@ -36,6 +41,7 @@ jobs:
         branch: master
   allow_failures:
   - env: COVERAGE=yes
+  - env: INTEGRATION=yes
 
 before_install:
 - if [[ $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini || echo "xdebug not available"; fi;
@@ -46,6 +52,7 @@ install:
 script:
 - cd $TRAVIS_BUILD_DIR
 - if [[ $INTEGRATION != yes && $DEPLOY != yes ]]; then ./etc/travis/test.sh; fi;
+- if [[ $INTEGRATION = yes ]]; then ./etc/travis/integration.sh; fi;
 
 before_deploy:
 - cd $TRAVIS_BUILD_DIR
