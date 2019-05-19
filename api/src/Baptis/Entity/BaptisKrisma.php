@@ -94,12 +94,12 @@ class BaptisKrisma implements LoggableInterface, RequireParokiInterface
         return $this;
     }
 
-    public function getTanggal(): ?string
+    public function getTanggal(): ?\DateTimeInterface
     {
         return $this->tanggal;
     }
 
-    public function setTanggal(?string $tanggal): self
+    public function setTanggal(?\DateTimeInterface $tanggal): self
     {
         $this->tanggal = $tanggal;
 

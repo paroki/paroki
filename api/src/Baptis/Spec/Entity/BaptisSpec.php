@@ -22,6 +22,7 @@ use SIAP\Baptis\Entity\Diterima;
 use SIAP\Core\Entity\Dokumen;
 use SIAP\Core\Test\MutableSpecTrait;
 use SIAP\Reference\Entity\Agama;
+use SIAP\Reference\Entity\Lingkungan;
 use SIAP\Reference\Entity\Paroki;
 use SIAP\User\Entity\User;
 
@@ -73,6 +74,7 @@ class BaptisSpec extends ObjectBehavior
             'paroki'             => new Paroki(),
             'agamaSebelumBaptis' => new Agama(),
             'dokumen'            => new Dokumen(),
+            'lingkungan' => new Lingkungan()
         ];
     }
 }

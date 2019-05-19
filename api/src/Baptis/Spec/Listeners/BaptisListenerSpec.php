@@ -7,6 +7,7 @@ use SIAP\Baptis\Listeners\BaptisListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SIAP\Reference\Entity\Paroki;
+use SIAP\Reference\Events;
 use SIAP\Reference\Events\SetParokiEvent;
 
 class BaptisListenerSpec extends ObjectBehavior
@@ -14,6 +15,12 @@ class BaptisListenerSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType(BaptisListener::class);
+    }
+
+    function it_should_subscribe_to_kernel_event()
+    {
+        $events = $this->getSubscribedEvents();
+        $events->shouldHaveKey(Events::SET_PAROKI);
     }
 
     function it_should_set_kode_baptis_automatically(

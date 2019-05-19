@@ -57,12 +57,12 @@ class Diterima implements RequireParokiInterface, LoggableInterface
         return $this;
     }
 
-    public function getTanggalBaptis(): ?string
+    public function getTanggalBaptis(): ?\DateTimeInterface
     {
         return $this->tanggalBaptis;
     }
 
-    public function setTanggalBaptis(?string $tanggalBaptis): self
+    public function setTanggalBaptis(?\DateTimeInterface $tanggalBaptis): self
     {
         $this->tanggalBaptis = $tanggalBaptis;
 
