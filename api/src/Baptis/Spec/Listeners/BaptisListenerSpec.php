@@ -1,34 +1,43 @@
 <?php
 
+/*
+ * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
+ *
+ * (c) Anthonius Munthi <me@itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Spec\SIAP\Baptis\Listeners;
 
+use PhpSpec\ObjectBehavior;
 use SIAP\Baptis\Entity\Baptis;
 use SIAP\Baptis\Listeners\BaptisListener;
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use SIAP\Reference\Entity\Paroki;
 use SIAP\Reference\Events;
 use SIAP\Reference\Events\SetParokiEvent;
 
 class BaptisListenerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(BaptisListener::class);
     }
 
-    function it_should_subscribe_to_kernel_event()
+    public function it_should_subscribe_to_kernel_event()
     {
         $events = $this->getSubscribedEvents();
         $events->shouldHaveKey(Events::SET_PAROKI);
     }
 
-    function it_should_set_kode_baptis_automatically(
+    public function it_should_set_kode_baptis_automatically(
         SetParokiEvent $event,
         Baptis $entity,
         Paroki $paroki
-    )
-    {
+    ) {
         $event->getEntity()->willReturn($entity);
         $entity->getParoki()->willReturn($paroki);
         $paroki->getKode()->willReturn('paroki');

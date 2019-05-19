@@ -74,7 +74,7 @@ class BaptisSpec extends ObjectBehavior
             'paroki'             => new Paroki(),
             'agamaSebelumBaptis' => new Agama(),
             'dokumen'            => new Dokumen(),
-            'lingkungan' => new Lingkungan()
+            'lingkungan'         => new Lingkungan(),
         ];
     }
 }
