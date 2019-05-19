@@ -5,7 +5,8 @@ code=0
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/common.sh"
 
 print_header "Integration" "check client dir"
-run_command "ls -l client/dist"
+run_command "ls -l client/dist" || code=1
+
 print_header "Integration" "check nginx output"
 run_command "curl http://siap.localhost" || code=2
 
