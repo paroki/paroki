@@ -32,10 +32,13 @@ trait MutableSpecTrait
 
             if ($r->hasMethod('add'.$method)) {
                 $this->handleCollectionProperties($method, $value);
-            } elseif ($r->hasMethod($setter)) {
-                $this->{$setter}($value)->shouldReturn($this);
-            } elseif ($r->hasMethod($getter)) {
-                $this->{$getter}()->shouldReturn($value);
+            } else {
+                if ($r->hasMethod($setter)) {
+                    $this->{$setter}($value)->shouldReturn($this);
+                }
+                if ($r->hasMethod($getter)) {
+                    $this->{$getter}()->shouldReturn($value);
+                }
             }
         }
     }

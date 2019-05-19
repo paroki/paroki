@@ -15,9 +15,12 @@ namespace Spec\SIAP\Baptis\Entity;
 
 use PhpSpec\ObjectBehavior;
 use SIAP\Baptis\Entity\BaptisKrisma;
+use SIAP\Core\Test\MutableSpecTrait;
 
 class BaptisKrismaSpec extends ObjectBehavior
 {
+    use MutableSpecTrait;
+
     public function it_is_initializable()
     {
         $this->shouldHaveType(BaptisKrisma::class);

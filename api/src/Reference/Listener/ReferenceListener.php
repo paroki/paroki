@@ -40,7 +40,7 @@ class ReferenceListener implements EventSubscriber
         EventDispatcherInterface $dispatcher
     ) {
         $this->tokenStorage = $storage;
-        $this->dispatcher = $dispatcher;
+        $this->dispatcher   = $dispatcher;
     }
 
     public function getSubscribedEvents()
@@ -91,8 +91,8 @@ class ReferenceListener implements EventSubscriber
     private function dispatchSetParokiEvent(RequireParokiInterface $entity)
     {
         $dispatcher = $this->dispatcher;
-        $event = new SetParokiEvent($entity);
-        $dispatcher->dispatch(ReferenceEvents::SET_PAROKI,$event);
+        $event      = new SetParokiEvent($entity);
+        $dispatcher->dispatch(ReferenceEvents::SET_PAROKI, $event);
     }
 
     private function getUser()

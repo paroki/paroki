@@ -19,12 +19,12 @@ use Prophecy\Argument;
 use SIAP\Reference\Entity\Paroki;
 use SIAP\Reference\Entity\RequireParokiInterface;
 use SIAP\Reference\Events;
+use SIAP\Reference\Events\SetParokiEvent;
 use SIAP\Reference\Listener\ReferenceListener;
 use SIAP\User\Entity\User;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use SIAP\Reference\Events\SetParokiEvent;
 
 class ReferenceListenerSpec extends ObjectBehavior
 {

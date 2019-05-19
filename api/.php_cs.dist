@@ -13,6 +13,7 @@ HEADER;
 
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
+    ->exclude('src/*/Spec')
     ->exclude('tests/Resources/app/var')
     ->exclude('var')
     ->exclude('assets')
