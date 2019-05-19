@@ -26,6 +26,7 @@ if [[ $DEPLOY = yes || $INTEGRATION = yes ]]; then
 fi;
 
 if [[ $INTEGRATION = yes ]]; then
+ run_command "cd ${BUILD_DIR}"
  php-fpm --fpm-config ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default --define cgi.fix_pathinfo=0 -i | grep cgi.fix_pathinfo
  php-fpm --fpm-config ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default --define cgi.fix_pathinfo=0 && ps -C php-fpm
  sudo cp etc/travis/nginx.conf /etc/nginx/sites-available/$SITE_DOMAIN
