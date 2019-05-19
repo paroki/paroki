@@ -26,7 +26,7 @@ fi;
 
 if [[ $INTEGRATION = yes ]]; then
  run_command "cd ${BUILD_DIR}"
- chmod 775 -Rvf api/client/dist
+ chmod 775 -Rvf client/dist
  php-fpm --fpm-config ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default --define cgi.fix_pathinfo=0 -i | grep cgi.fix_pathinfo
  php-fpm --fpm-config ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default --define cgi.fix_pathinfo=0 && ps -C php-fpm
  sudo cp etc/travis/config/nginx.conf /etc/nginx/sites-available/$SITE_DOMAIN
