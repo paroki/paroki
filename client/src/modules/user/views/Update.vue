@@ -116,7 +116,8 @@
         },
 
         created () {
-            this.retrieve(this.$route.params.id);
+            this.retrieve(this.$route.params.id).then( () => {
+            });
             if(this.created){
                 this.snackbarSuccess(`User ${this.created.nama} berhasil dibuat!`);
             }

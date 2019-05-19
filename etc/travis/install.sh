@@ -28,6 +28,7 @@ if [[ $INTEGRATION = yes ]]; then
   docker-compose pull
   docker-compose build --pull
   docker-compose up -d
+  docker-compose exec php composer install
 fi;
 
 exit ${code}

@@ -1,13 +1,9 @@
 import routes from '@/modules/routes';
-import VueRouter from 'vue-router';
-import { getLocalVue } from './helper.js';
+import { getLocalVue, getRouter } from './helper.js';
 
 const localVue = getLocalVue();
-localVue.use(VueRouter);
-const router = new VueRouter({
-  mode: 'history',
-  routes
-})
+const router = getRouter(localVue);
+
 function getMeta(routeName){
     return router.resolve({name: routeName}).route.meta;
 }
