@@ -39,7 +39,6 @@ jobs:
       addons:
         apt:
           packages:
-            - php7-2-fpm
             - nginx
         hosts:
           - siap.localhost
