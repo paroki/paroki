@@ -16,8 +16,8 @@
         <join-column name="updated_by_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-many field="dokumen" target-entity="SIAP\Core\Entity\Dokumen">
-      <join-table name="td_baptis_perkawinan_dokumen">
+    <many-to-many field="media" target-entity="SIAP\Core\Entity\MediaObject">
+      <join-table name="td_baptis_perkawinan_media">
         <join-columns>
           <join-column name="baptis_perkawinan_id" referenced-column-name="id" nullable="false"/>
         </join-columns>

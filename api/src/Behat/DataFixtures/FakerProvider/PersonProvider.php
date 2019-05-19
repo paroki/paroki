@@ -67,6 +67,7 @@ class PersonProvider extends BasePersonID
      */
     public function baptismName($gender = null)
     {
+        $gender = (int)$gender;
         if ($gender === static::GENDER_MALE) {
             $format = static::randomElement(static::$baptismMaleNameFormats);
         } elseif ($gender === static::GENDER_FEMALE) {

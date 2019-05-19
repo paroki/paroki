@@ -16,10 +16,26 @@ namespace SIAP\Core\DependencyInjection;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
-class CoreExtension extends Extension
+class CoreExtension extends Extension implements PrependExtensionInterface
 {
+    public function prepend(ContainerBuilder $container)
+    {
+        $publicDir = $container->getParameter('kernel.root_dir').'/public/media';
+
+        $container->prependExtensionConfig('vich_uploader', [
+            'db_driver' => 'orm',
+            'mappings' => [
+                'media_object' => [
+                    'uri_prefix' => 'media',
+                    'upload_destination' => $publicDir
+                ]
+            ]
+        ]);
+    }
+
     public function load(array $configs, ContainerBuilder $container)
     {
         $locator = new FileLocator(__DIR__.'/../Resources/config');

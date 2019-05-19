@@ -5,7 +5,7 @@
       <generator strategy="UUID"/>
     </id>
     <field name="tempatBaptis" type="string" nullable="true"/>
-    <field name="tanggalBaptis" type="string" nullable="true"/>
+    <field name="tanggalBaptis" type="date" nullable="true"/>
     <field name="gerejaBaptis" type="string" nullable="true"/>
     <field name="yangMembaptis" type="string" nullable="true"/>
     <field name="nomorBukuBaptis" type="string" nullable="true"/>
@@ -17,8 +17,8 @@
       </join-columns>
     </many-to-one>
     <one-to-one field="baptis" target-entity="SIAP\Baptis\Entity\Baptis" mapped-by="diterima" fetch="EXTRA_LAZY"/>
-    <many-to-many field="dokumen" target-entity="SIAP\Core\Entity\Dokumen">
-      <join-table name="td_baptis_diterima_dokumen">
+    <many-to-many field="media" target-entity="SIAP\Core\Entity\MediaObject">
+      <join-table name="td_baptis_diterima_media">
         <join-columns>
           <join-column name="diterima_id" referenced-column-name="id" nullable="false"/>
         </join-columns>
