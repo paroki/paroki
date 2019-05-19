@@ -14,12 +14,17 @@ declare(strict_types=1);
 namespace SIAP\Baptis\Services;
 
 use SIAP\Baptis\Entity\Baptis;
+use SIAP\Reference\Entity\Paroki;
 
 class Updater
 {
     public function update(Baptis $entity)
     {
         $paroki = $entity->getParoki();
+
+        if(!$paroki instanceof Paroki){
+            return;
+        }
 
         $kode = [$paroki->getKode()];
 
