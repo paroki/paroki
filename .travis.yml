@@ -1,5 +1,7 @@
 dist: xenial
 
+sudo: required
+
 language: php
 
 notifications:
@@ -34,8 +36,13 @@ jobs:
     - stage: test
       php: '7.2'
       env: INTEGRATION=yes
-      services:
-        - docker
+      addons:
+        apt:
+          packages:
+            - php7-fpm
+            - nginx
+        hosts:
+          - siap.localhost
     - stage: deploy
       if: branch in (master,travis-debug) AND type != pull_request
       php: '7.2'
@@ -50,6 +57,7 @@ jobs:
     - env: COVERAGE=yes
     - env: INTEGRATION=yes
     - env: DEPLOY=yes
+  fast_finish: true
 
 before_install:
   - if [[ $COVERAGE != yes ]]; then phpenv config-rm xdebug.ini || echo "xdebug not available"; fi;

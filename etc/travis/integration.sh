@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker-compose exec php ./vendor/bin/behat
+curl http://siap.localhost
