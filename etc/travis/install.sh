@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+set -x
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/common.sh"
 
