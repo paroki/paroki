@@ -5,6 +5,7 @@
             :values="values"
             :errors="violations"
             :initial-values="item"
+            :handle-update-field="handleUpdateField"
         ></c-form>
     </v-flex>
 </template>
