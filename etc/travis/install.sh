@@ -33,7 +33,7 @@ if [[ $INTEGRATION = yes ]]; then
  sudo sed -e "s?%TRAVIS_BUILD_DIR%?$TRAVIS_BUILD_DIR?g" --in-place /etc/nginx/sites-available/$SITE_DOMAIN
  sudo sed -e "s?%SITE_DOMAIN%?$SITE_DOMAIN?g" --in-place /etc/nginx/sites-available/$SITE_DOMAIN
  sudo ln -s /etc/nginx/sites-available/$SITE_DOMAIN /etc/nginx/sites-enabled/
- sudo service nginx restart && ps -C nginx
+ sudo service nginx start && ps -C nginx
 fi;
 
 exit ${code}
