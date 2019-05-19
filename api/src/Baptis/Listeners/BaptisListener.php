@@ -13,13 +13,29 @@ declare(strict_types=1);
 
 namespace SIAP\Baptis\Listeners;
 
+use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use SIAP\Baptis\Entity\Baptis;
+use SIAP\Baptis\Services\Updater;
 use SIAP\Reference\Events as ReferenceEvents;
 use SIAP\Reference\Events\SetParokiEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class BaptisListener implements EventSubscriberInterface
 {
+    /**
+     * @var Updater
+     */
+    private $updater;
+
+    /**
+     * BaptisListener constructor.
+     */
+    public function __construct(
+        Updater $updater
+    ) {
+        $this->updater = $updater;
+    }
+
     public static function getSubscribedEvents()
     {
         return [
@@ -27,34 +43,26 @@ class BaptisListener implements EventSubscriberInterface
         ];
     }
 
-    public function onSetParoki(SetParokiEvent $event)
+    public function preUpdate(LifecycleEventArgs $args)
     {
-        /** @var \SIAP\Baptis\Entity\Baptis $entity */
-        $entity = $event->getEntity();
-        $paroki = $entity->getParoki();
+        $entity = $args->getObject();
 
         if (!$entity instanceof Baptis) {
             return;
         }
 
-        $kode = [$paroki->getKode()];
+        $this->updater->update($entity);
+    }
 
-        if (null !== $entity->getBuku()) {
-            $kode[] = $entity->getBuku();
+    public function onSetParoki(SetParokiEvent $event)
+    {
+        /** @var \SIAP\Baptis\Entity\Baptis $entity */
+        $entity = $event->getEntity();
+
+        if (!$entity instanceof Baptis) {
+            return;
         }
 
-        if (null !== $entity->getHalaman()) {
-            $kode[] = $entity->getHalaman();
-        }
-
-        if (null !== $entity->getNomor()) {
-            $kode[] = $entity->getNomor();
-        }
-
-        if (null !== $entity->getLanjutan()) {
-            $kode[] = $entity->getLanjutan();
-        }
-
-        $entity->setKodeBaptis(implode('.', $kode));
+        $this->updater->update($entity);
     }
 }

@@ -8,10 +8,13 @@
         <defaults public="true" autowire="true" autoconfigure="true"/>
         <service id="siap.baptis.listeners.baptis" class="SIAP\Baptis\Listeners\BaptisListener">
             <tag name="kernel.event_subscriber" />
+            <tag name="doctrine.event_listener" event="preUpdate"/>
+            <argument type="service" id="siap.baptis.updater"/>
         </service>
         <service id="siap.baptis.baptis_manager" class="SIAP\Baptis\Services\BaptisManager">
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
+        <service id="siap.baptis.updater" class="SIAP\Baptis\Services\Updater"/>
     </services>
 
 </container>
