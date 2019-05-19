@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace SIAP\User\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
+use SIAP\Core\Entity\MediaObject;
 use SIAP\Reference\Entity\Paroki;
 use SIAP\Reference\Entity\RequireParokiInterface;
 
@@ -23,6 +24,11 @@ class User extends BaseUser implements RequireParokiInterface
      * @var string Nama lengkap pengguna
      */
     private $nama;
+
+    /**
+     * @var MediaObject
+     */
+    private $foto;
 
     /**
      * @var Paroki paroki pengguna
@@ -67,6 +73,24 @@ class User extends BaseUser implements RequireParokiInterface
     {
         $this->paroki = $paroki;
 
+        return $this;
+    }
+
+    /**
+     * @return MediaObject
+     */
+    public function getFoto(): MediaObject
+    {
+        return $this->foto;
+    }
+
+    /**
+     * @param MediaObject $foto
+     * @return User
+     */
+    public function setFoto(MediaObject $foto): User
+    {
+        $this->foto = $foto;
         return $this;
     }
 }

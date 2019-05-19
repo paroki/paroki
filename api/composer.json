@@ -80,7 +80,8 @@
         "symfony/framework-bundle": "4.2.*",
         "symfony/swiftmailer-bundle": "^3.2",
         "symfony/translation": "4.2.*",
-        "symfony/yaml": "4.2.*"
+        "symfony/yaml": "4.2.*",
+        "vich/uploader-bundle": "^1.9"
     },
     "require-dev": {
         "behat/mink-browserkit-driver": "^1.3",

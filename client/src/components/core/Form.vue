@@ -10,9 +10,23 @@
                     :error-messages="getError(field.name)"
                     v-model="item[field.name]"
                     v-if="field.type === 'text'"
+                    :type="field.type"
                     class="purple-input"
-                    @input="handleUpdateField(field.name)">
+                    @input="handleUpdateField(field.name, $event)">
                 ></v-text-field>
+                <v-text-field
+                    :label="field.label"
+                    :name="field.name"
+                    :placeholder="field.placeholder"
+                    :error="isInvalid(field.name)"
+                    :error-messages="getError(field.name)"
+                    v-model.number="item[field.name]"
+                    v-if="field.type === 'number'"
+                    :type="field.type"
+                    class="purple-input"
+                    :mask="field.mask"
+                    @input="handleUpdateField(field.name)">
+                    ></v-text-field>
                 <v-text-field
                     :label="field.label"
                     :name="field.name"
@@ -29,10 +43,10 @@
                     :name="field.name"
                     :label="field.label"
                     :format="field.format"
-                    :data="item"
+                    :data="item[field.name]"
                     :error="isInvalid(field.name)"
                     :error-messages="getError(field.name)"
-                    @input="handleUpdateField(field.name)">
+                    :handle-update-field="handleUpdateField">
                 ></c-datepicker>
                 <v-radio-group
                     v-model="item[field.name]"
@@ -40,7 +54,7 @@
                     :label="field.label"
                     :error="isInvalid(field.name)"
                     :error-messages="getError(field.name)"
-                    @input="handleUpdateField(field.name)">
+                    @input="handleUpdateField(field.name)"
                 >
                     <v-radio
                         v-for="(option, index) in field.options"

@@ -1,5 +1,5 @@
 SIAP\User\Entity\User:
-    user_{1..10}:
+    user_{1..100}:
         nama: <baptismName()>
         username: <userName()>
         email: '@self->getUsername()\@example.org'

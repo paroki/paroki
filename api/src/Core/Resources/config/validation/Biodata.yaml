@@ -6,3 +6,5 @@ SIAP\Core\Entity\AbstractBiodata:
             - NotBlank: { message: "siap.validation.biodata.tempat_lahir" }
         tanggalLahir:
             - NotBlank: { message: "siap.validation.biodata.tanggal_lahir" }
+        jenisKelamin:
+            - NotBlank: { message: "siap.validation.biodata.jenis_kelamin" }

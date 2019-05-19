@@ -11,25 +11,26 @@ import Toolbar from './core/Toolbar';
 import Offset from './helper/Offset';
 
 const components = [
-  Card,
-  DatePicker,
-  Drawer,
-  DrawerItem,
-  Form,
-  Pagination,
-  SimpleDialog,
-  Snackbar,
-  Table,
-  Toolbar,
-  Offset
+    Card,
+    DatePicker,
+    Drawer,
+    DrawerItem,
+    Form,
+    Pagination,
+    SimpleDialog,
+    Snackbar,
+    Table,
+    Toolbar,
+    Offset
 ];
 
 export default {
-  install(Vue){
-      components.forEach( (item) => {
-        Vue.component(item.name, item);
-      });
-  }
+
+    install(Vue){
+        components.forEach( (item) => {
+            Vue.component(item.name, item);
+        });
+    }
 }
 
 
