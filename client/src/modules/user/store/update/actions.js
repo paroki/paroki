@@ -9,8 +9,8 @@ export const reset = ({ commit }) => {
 
 export const retrieve = ({ commit }, id) => {
     toggleLoading(commit)
-
-    return ApiService.get(`/api/user/${id}`)
+    const url = ApiService.generateUrl(`/user/${id}`)
+    return ApiService.get(url)
         .then((data) => {
             toggleLoading(commit)
             commit(types.SET_RETRIEVED, data)
