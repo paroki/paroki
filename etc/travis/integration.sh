@@ -16,4 +16,6 @@ run_command "curl http://siap.localhost/api/user.json" || code=3
 print_header "Integration" "check nginx config"
 run_command "cat /etc/nginx/sites-enabled/siap.localhost" || code=4
 
-exit($code)
+run_command "sudo cat /var/log/nginx/project_error.log"
+
+exit $code
