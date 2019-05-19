@@ -19,8 +19,8 @@ if [[ $CLIENT = yes || $COVERAGE = yes || $INTEGRATION = yes ]]; then
   yarn;
 fi;
 
-if [[ INTEGRATION = yes ]]; then
-  run_command 'cp etc/travis/config/client.local client/.env.local'
+if [[ $INTEGRATION = yes ]]; then
+  run_command "cp ${BUILD_DIR}/etc/travis/config/client.local ${BUILD_DIR}/client/.env.local"
 fi;
 
 if [[ $DEPLOY = yes || $INTEGRATION = yes ]]; then
