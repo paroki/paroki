@@ -10,6 +10,7 @@ notifications:
     on_success: never
 
 cache:
+  apt: true
   directories:
     - "$HOME/.composer/cache"
     - "$HOME/.npm"
