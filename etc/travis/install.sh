@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -e
-set -x
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/common.sh"
 
@@ -16,7 +15,8 @@ if [[ $INTEGRATION = yes ]]; then
  sudo sed -e "s?%TRAVIS_BUILD_DIR%?$TRAVIS_BUILD_DIR?g" --in-place /etc/nginx/sites-available/$SITE_DOMAIN
  sudo sed -e "s?%SITE_DOMAIN%?$SITE_DOMAIN?g" --in-place /etc/nginx/sites-available/$SITE_DOMAIN
  sudo ln -s /etc/nginx/sites-available/$SITE_DOMAIN /etc/nginx/sites-enabled/
- sudo service nginx start && ps -C nginx
+ sudo service nginx status
+ sudo service nginx restart
 fi;
 
 if [[ $API = yes || $COVERAGE = yes || $INTEGRATION = yes ]]; then
