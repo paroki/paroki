@@ -4,7 +4,7 @@ set -e
 
 code=0
 BUILD_DIR=$PWD
-SITE_DOMAIN=siap.dev
+SITE_DOMAIN=siap.localhost
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/common.sh"
 
