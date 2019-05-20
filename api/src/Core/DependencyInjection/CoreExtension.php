@@ -23,7 +23,7 @@ class CoreExtension extends Extension implements PrependExtensionInterface
 {
     public function prepend(ContainerBuilder $container)
     {
-        $publicDir = $container->getParameter('kernel.root_dir').'/public/media';
+        $publicDir = $container->getParameter('kernel.project_dir').'/public/media';
 
         $container->prependExtensionConfig('vich_uploader', [
             'db_driver' => 'orm',

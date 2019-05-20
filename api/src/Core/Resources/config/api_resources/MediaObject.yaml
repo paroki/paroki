@@ -1,0 +1,24 @@
+SIAP\Core\Entity\MediaObject:
+    shortname: media
+    iri: "http://schema.org/MediaObject"
+    attributes:
+        normalizationContext:
+            groups: ['media_object_read']
+
+    collectionOperations:
+        post:
+            controller: SIAP\Core\Controller\CreateMediaObject
+            defaults:
+                _api_receive: false
+            access_control: is_granted('ROLE_USER')
+            validation_groups: ['default', 'media_object_create']
+            swagger_context:
+                consumes: [ 'multipart/form-data' ]
+                parameters:
+                    in: formData
+                    name: 'file'
+                    type: 'file'
+                    description: 'The file to upload'
+        get: ~
+    itemOperations:
+        get: ~

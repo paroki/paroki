@@ -1,0 +1,4 @@
+SIAP\Core\Entity\MediaObject:
+    properties:
+        contentUrl:
+            groups: ['default','media_object_read']
