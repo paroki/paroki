@@ -19,7 +19,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         docs:
-            pattern: ^/docs
+            pattern: ^/(docs|doc)
             security: false
         login:
             pattern:  ^/login

@@ -72,6 +72,7 @@
         "api-platform/api-pack": "^1.2",
         "friendsofsymfony/user-bundle": "^2.1",
         "lexik/jwt-authentication-bundle": "^2.6",
+        "nelmio/api-doc-bundle": "^3.4",
         "phpunit/phpcov": "^5.0",
         "ramsey/uuid-doctrine": "^1.5",
         "symfony/console": "4.2.*",

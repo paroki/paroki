@@ -85,6 +85,7 @@ class User extends BaseUser implements RequireParokiInterface
     /**
      * @param mixed $fotoFile
      * @return User
+     * @throws \Exception
      */
     public function setFotoFile(?File $fotoFile = null)
     {
