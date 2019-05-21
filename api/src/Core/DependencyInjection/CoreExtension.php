@@ -18,6 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Vich\UploaderBundle\Naming\UniqidNamer;
 
 class CoreExtension extends Extension implements PrependExtensionInterface
 {
@@ -30,7 +31,11 @@ class CoreExtension extends Extension implements PrependExtensionInterface
             'mappings' => [
                 'media_object' => [
                     'uri_prefix' => 'media',
-                    'upload_destination' => $publicDir
+                    'upload_destination' => $publicDir,
+                    'namer'=> UniqidNamer::class,
+                    'inject_on_load' => true,
+                    'delete_on_update' => true,
+                    'delete_on_remove' => true
                 ]
             ]
         ]);

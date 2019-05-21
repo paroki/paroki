@@ -19,7 +19,6 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\MinkContext;
 use Behatch\Context\RestContext;
-use SIAP\User\Entity\User;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Behatch\HttpCall\Request;
 
@@ -138,13 +137,14 @@ class CustomContext implements Context
         ];
         $parameters = [
             'type' => 'user',
-            'property' => 'foto',
+            'property' => 'setFoto',
             'id' => $id
         ];
+        $url = '/user/'.$id.'/upload-foto';
         $request->setHttpHeader('Accept','application/json');
         $request->send(
             'POST',
-            $minkContext->locatePath('/media-object'),
+            $minkContext->locatePath($url),
             $parameters,
             $files
         );

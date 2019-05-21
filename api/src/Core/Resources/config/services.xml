@@ -37,5 +37,17 @@
         <service id="siap.core.listeners.resolve_media_url" class="SIAP\Core\Listener\ResolveMediaContentUrlSubscriber">
             <tag name="kernel.event_subscriber"/>
         </service>
+        <service id="siap.core.media" class="SIAP\Core\Services\MediaService">
+            <argument type="service" id="doctrine"/>
+            <argument type="service" id="api_platform.validator"/>
+            <argument type="service" id="api_platform.metadata.resource.metadata_factory"/>
+            <argument type="service" id="security.token_storage"/>
+            <argument type="service" id="api_platform.item_data_provider"/>
+            <argument type="service" id="api_platform.identifier.converter"/>
+        </service>
+        <service id="SIAP\Core\Services\MediaService" alias="siap.core.media"/>
+        <service id="siap.core.controller.media_upload" class="SIAP\Core\Controller\CreateMediaObject">
+            <tag name="controller.service_arguments"/>
+        </service>
     </services>
 </container>

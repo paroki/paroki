@@ -1,19 +1,22 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="SIAP\User\Entity\User" table="sc_user">
-    <id name="id" type="guid">
-      <generator strategy="UUID"/>
-    </id>
-    <field name="nama" type="string" nullable="true"/>
-    <many-to-one field="foto" target-entity="SIAP\Core\Entity\MediaObject">
-      <join-columns>
-        <join-column name="foto_id" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
-    <many-to-one field="paroki" target-entity="SIAP\Reference\Entity\Paroki">
-      <join-columns>
-        <join-column name="paroki_id" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
-  </entity>
+    <entity name="SIAP\User\Entity\User" table="sc_user">
+        <id name="id" type="guid">
+            <generator strategy="UUID"/>
+        </id>
+        <field name="nama" type="string" nullable="true"/>
+        <field name="updatedAt" type="datetime" nullable="true"/>
+        <many-to-one field="foto" target-entity="SIAP\Core\Entity\MediaObject" fetch="EAGER">
+            <join-column nullable="true"/>
+            <join-columns>
+                <join-column name="foto_id" referenced-column-name="id" on-delete="CASCADE"/>
+            </join-columns>
+            <cascade><cascade-all/></cascade>
+        </many-to-one>
+        <many-to-one field="paroki" target-entity="SIAP\Reference\Entity\Paroki">
+            <join-columns>
+                <join-column name="paroki_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one>
+    </entity>
 </doctrine-mapping>

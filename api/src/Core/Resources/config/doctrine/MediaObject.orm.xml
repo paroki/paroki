@@ -9,11 +9,10 @@
         <field name="filePath" type="string" nullable="true"/>
         <field name="contentUrl" type="string" nullable="true"/>
         <field name="uploadedAt" type="date" nullable="true"/>
-        <field name="file" type="string" nullable="true"/>
         <field name="originalName" type="string" nullable="true"/>
         <field name="mimeType" type="string" nullable="true"/>
         <field name="size" type="integer" nullable="true"/>
-        <field name="dimensions" type="simple_array" nullable="true"/>
+        <field name="dimensions" type="array" nullable="true"/>
         <many-to-one field="uploadedBy" target-entity="SIAP\User\Entity\User">
             <join-columns>
                 <join-column name="uploaded_by_id" referenced-column-name="id"/>

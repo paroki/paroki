@@ -41,11 +41,6 @@ class MediaObject
     private $filePath;
 
     /**
-     * @var null|File
-     */
-    private $file;
-
-    /**
      * @var null|string
      */
     private $contentUrl;
@@ -89,6 +84,11 @@ class MediaObject
      * @var array|null
      */
     protected $dimensions;
+
+    public function __construct()
+    {
+        $this->dimensions = array();
+    }
 
     /**
      * @return string|null
@@ -157,6 +157,9 @@ class MediaObject
      */
     public function getDimensions(): ?array
     {
+        if(is_null($this->dimensions)){
+            $this->dimensions = [];
+        }
         return $this->dimensions;
     }
 
@@ -164,18 +167,10 @@ class MediaObject
      * @param array $dimensions
      * @return MediaObject
      */
-    public function setDimensions(array $dimensions): MediaObject
+    public function setDimensions(?array $dimensions): MediaObject
     {
         $this->dimensions = $dimensions;
         return $this;
-    }
-
-    /**
-     * @return File|null
-     */
-    public function getFile()
-    {
-        return $this->file;
     }
 
     /**
@@ -193,20 +188,6 @@ class MediaObject
     public function setFileName(string $fileName): MediaObject
     {
         $this->fileName = $fileName;
-        return $this;
-    }
-
-    /**
-     * @param File|null $file
-     * @return MediaObject
-     * @throws \Exception
-     */
-    public function setFile(?File $file): MediaObject
-    {
-        $this->file = $file;
-        if($file){
-            $this->setUploadedAt(new \DateTime());
-        }
         return $this;
     }
 

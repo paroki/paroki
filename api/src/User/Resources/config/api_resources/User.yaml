@@ -14,5 +14,21 @@ SIAP\User\Entity\User:
         get: ~
         put: ~
         delete: ~
+        uploadFoto:
+            method: POST
+            path: /user/{id}/upload-foto
+            controller: siap.core.controller.media_upload
+            defaults:
+                _api_receive: false
+                property: foto
+            swagger_context:
+                summary: Upload user foto
+                consumes: [ 'multipart/form-data' ]
+                parameters:
+                    - 
+                        in: formData
+                        name: 'picture'
+                        type: 'file'
+                        description: 'The file to upload'
     properties:
-        paroki:
+        paroki: ~

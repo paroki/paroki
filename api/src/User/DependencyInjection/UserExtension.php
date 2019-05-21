@@ -20,6 +20,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Vich\UploaderBundle\Naming\UniqidNamer;
 
 class UserExtension extends Extension implements PrependExtensionInterface
 {
@@ -36,6 +37,20 @@ class UserExtension extends Extension implements PrependExtensionInterface
             'service' => [
                 'user_manager' => 'siap.user.user_manager',
             ],
+        ]);
+
+        $publicDir = $container->getParameter('kernel.project_dir').'/public/media/user-foto';
+        $container->prependExtensionConfig('vich_uploader',[
+            'mappings' => [
+                'user_foto' => [
+                    'uri_prefix' => 'media',
+                    'upload_destination' => $publicDir,
+                    'namer'=> UniqidNamer::class,
+                    'inject_on_load' => false,
+                    'delete_on_update' => true,
+                    'delete_on_remove' => true
+                ]
+            ]
         ]);
     }
 

@@ -8,6 +8,7 @@ use ApiPlatform\Core\Util\RequestAttributesExtractor;
 use ApiPlatform\Core\Validator\ValidatorInterface;
 use SIAP\Core\Entity\MediaObject;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use SIAP\Core\Services\MediaService;
 use SIAP\User\Entity\User;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,53 +35,11 @@ final class CreateMediaObject
 
     /**
      * @param Request $request
+     * @param MediaService $service
      * @return MediaObject
-     * @throws ResourceClassNotFoundException
      */
-    public function __invoke(Request $request): MediaObject
+    public function __invoke(Request $request, MediaService $service): MediaObject
     {
-        /* @var UploadedFile $uploadedFile */
-        $uploadedFile = $request->files->get('file');
-
-        if (!$uploadedFile) {
-            throw new BadRequestHttpException('"file" is required');
-        }
-
-        $mediaObject = new MediaObject();
-        $mediaObject->setNama($request->get('nama'));
-        $mediaObject->setFile($uploadedFile);
-
-        $this->validate($mediaObject, $request);
-
-
-        $em = $this->managerRegistry->getManager();
-        $em->persist($mediaObject);
-        $em->flush();
-
-        $type = $request->get('type');
-        $id = $request->get('id');
-        $property = 'set'.$request->get('property');
-        $repo = $this->managerRegistry->getManager()->getRepository($this->map[$type]);
-        $entity = $repo->findOneBy(['id' => $id]);
-        call_user_func_array([$entity,$property],[$mediaObject]);
-
-        $em->persist($entity);
-        $em->flush();
-        return $mediaObject;
-    }
-
-    /**
-     * @param MediaObject $mediaObject
-     * @param Request $request
-     * @throws ResourceClassNotFoundException
-     */
-    private function validate(MediaObject $mediaObject, Request $request): void
-    {
-        $attributes = RequestAttributesExtractor::extractAttributes($request);
-        $resourceMetadata = $this->resourceMetadataFactory->create(MediaObject::class);
-
-        $validationGroups = $resourceMetadata->getOperationAttribute($attributes, 'validation_groups', null, true);
-
-        $this->validator->validate($mediaObject, ['groups' => $validationGroups]);
+        return $service->createMediaObject($request);
     }
 }

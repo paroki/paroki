@@ -13,11 +13,19 @@ declare(strict_types=1);
 
 namespace SIAP\User\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use SIAP\Core\Entity\MediaObject;
 use SIAP\Reference\Entity\Paroki;
 use SIAP\Reference\Entity\RequireParokiInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+/**
+ * Class User
+ * @Vich\Uploadable()
+ * @package SIAP\User\Entity
+ */
 class User extends BaseUser implements RequireParokiInterface
 {
     /**
@@ -26,9 +34,22 @@ class User extends BaseUser implements RequireParokiInterface
     private $nama;
 
     /**
+     * @Vich\UploadableField(
+     *     mapping="user_foto",
+     *     fileNameProperty="foto.filePath",
+     *     size="foto.size",
+     *     mimeType="foto.mimeType",
+     *     originalName="foto.originalName",
+     *     dimensions="foto.dimensions"
+     * )
+     */
+    private $fotoFile;
+
+    /**
      * @var MediaObject
      */
     private $foto;
+
 
     /**
      * @var Paroki paroki pengguna
@@ -40,12 +61,59 @@ class User extends BaseUser implements RequireParokiInterface
      */
     protected $id;
 
+    /**
+     * @var \DateTimeImmutable
+     */
+    private $updatedAt;
+
     public function __construct()
     {
         parent::__construct();
         $this->setEnabled(true);
         $this->addRole('ROLE_USER');
+        $this->foto = new MediaObject();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFotoFile(): ?File
+    {
+        return $this->fotoFile;
+    }
+
+    /**
+     * @param mixed $fotoFile
+     * @return User
+     */
+    public function setFotoFile(?File $fotoFile = null)
+    {
+        $this->fotoFile = $fotoFile;
+        if(null !== $fotoFile){
+            $this->setUpdatedAt(new \DateTimeImmutable());
+        }
+        return $this;
+    }
+
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getUpdatedAt(): \DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTimeImmutable $updatedAt
+     * @return User
+     */
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): User
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+
 
     public function getNama(): ?string
     {
@@ -79,7 +147,7 @@ class User extends BaseUser implements RequireParokiInterface
     /**
      * @return MediaObject
      */
-    public function getFoto(): MediaObject
+    public function getFoto(): ?MediaObject
     {
         return $this->foto;
     }
