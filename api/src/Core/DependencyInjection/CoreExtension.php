@@ -28,16 +28,16 @@ class CoreExtension extends Extension implements PrependExtensionInterface
 
         $container->prependExtensionConfig('vich_uploader', [
             'db_driver' => 'orm',
-            'mappings' => [
+            'mappings'  => [
                 'media_object' => [
-                    'uri_prefix' => 'media',
+                    'uri_prefix'         => 'media',
                     'upload_destination' => $publicDir,
-                    'namer'=> UniqidNamer::class,
-                    'inject_on_load' => true,
-                    'delete_on_update' => true,
-                    'delete_on_remove' => true
-                ]
-            ]
+                    'namer'              => UniqidNamer::class,
+                    'inject_on_load'     => true,
+                    'delete_on_update'   => true,
+                    'delete_on_remove'   => true,
+                ],
+            ],
         ]);
     }
 

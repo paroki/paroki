@@ -1,21 +1,30 @@
 <?php
 
+/*
+ * This file is part of the Sistim Informasi Antar Paroki (SIAP) project.
+ *
+ * (c) Anthonius Munthi <me@itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace SIAP\Core\Services;
 
+use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\Exception\InvalidIdentifierException;
 use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
 use ApiPlatform\Core\Exception\RuntimeException;
 use ApiPlatform\Core\Identifier\IdentifierConverterInterface;
-use ApiPlatform\Core\Metadata\Resource\Factory\ResourceMetadataFactoryInterface;
 use ApiPlatform\Core\Util\RequestAttributesExtractor;
-use ApiPlatform\Core\Validator\ValidatorInterface;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\Common\Persistence\ObjectManager;
 use SIAP\Core\Entity\MediaObject;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
 use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
 
@@ -53,13 +62,6 @@ class MediaService
 
     /**
      * MediaService constructor.
-     * @param Registry $registry
-     * @param ValidatorInterface $validator
-     * @param ResourceMetadataFactoryInterface $metadataFactory
-     * @param TokenStorageInterface $tokenStorage
-     * @param ItemDataProviderInterface $dataProvider
-     * @param IdentifierConverterInterface $identifierConverter
-     * @param PropertyMappingFactory $mappingFactory
      */
     public function __construct(
         Registry $registry,
@@ -67,47 +69,44 @@ class MediaService
         ItemDataProviderInterface $dataProvider,
         IdentifierConverterInterface $identifierConverter,
         PropertyMappingFactory $mappingFactory
-    )
-    {
-
-        $this->registry = $registry;
-        $this->tokenStorage = $tokenStorage;
-        $this->dataProvider = $dataProvider;
+    ) {
+        $this->registry            = $registry;
+        $this->tokenStorage        = $tokenStorage;
+        $this->dataProvider        = $dataProvider;
         $this->identifierConverter = $identifierConverter;
-        $this->mappingFactory = $mappingFactory;
+        $this->mappingFactory      = $mappingFactory;
     }
 
     /**
-     * @param Request $request
-     * @return object|null
      * @throws InvalidIdentifierException
      * @throws ResourceClassNotSupportedException
+     *
+     * @return object|null
      */
     public function createMediaObject(Request $request)
     {
-        $item = $this->getItem($request);
-        $manager = $this->manager;
+        $item         = $this->getItem($request);
+        $manager      = $this->manager;
         $uploadedFile = $request->files->get('file');
-        $user = $this->tokenStorage->getToken()->getUser();
+        $user         = $this->tokenStorage->getToken()->getUser();
 
-
-        if(!$uploadedFile){
+        if (!$uploadedFile) {
             throw new BadRequestHttpException('"File" is required');
         }
 
-        $property = $request->get('property');
-        $getter = 'get'.$property;
-        $setter = 'set'.$property;
+        $property   = $request->get('property');
+        $getter     = 'get'.$property;
+        $setter     = 'set'.$property;
         $fileSetter = 'set'.$property.'file';
 
-        /* @var MediaObject $mediaObject */
-        $mediaObject = call_user_func([$item,$getter]);
-        if(!$mediaObject instanceof MediaObject){
+        /** @var MediaObject $mediaObject */
+        $mediaObject = \call_user_func([$item, $getter]);
+        if (!$mediaObject instanceof MediaObject) {
             $mediaObject = new MediaObject();
-            call_user_func([$item, $setter],$mediaObject);
+            \call_user_func([$item, $setter], $mediaObject);
         }
 
-        call_user_func([$item,$fileSetter],$uploadedFile);
+        \call_user_func([$item, $fileSetter], $uploadedFile);
 
         $mapping = $this->mappingFactory->fromField($item, $property.'File');
         $mediaObject->setUploadedBy($user);
@@ -117,33 +116,32 @@ class MediaService
         $manager->persist($item);
         $manager->flush();
 
-        return call_user_func([$item, $getter]);
+        return \call_user_func([$item, $getter]);
     }
 
     /**
-     * @param   Request $request
-     * @return  object|null
-     * @throws  InvalidIdentifierException
-     * @throws  ResourceClassNotSupportedException
+     * @throws InvalidIdentifierException
+     * @throws ResourceClassNotSupportedException
+     *
+     * @return object|null
      */
     private function getItem(Request $request)
     {
-        $attributes = RequestAttributesExtractor::extractAttributes($request);
-        $provider = $this->dataProvider;
-        $identifiers = $this->extractIdentifiers($request->attributes->all(), $attributes);
+        $attributes    = RequestAttributesExtractor::extractAttributes($request);
+        $provider      = $this->dataProvider;
+        $identifiers   = $this->extractIdentifiers($request->attributes->all(), $attributes);
         $resourceClass = $attributes['resource_class'];
 
-        $item = $provider->getItem($resourceClass, $identifiers, $attributes['item_operation_name']);
+        $item          = $provider->getItem($resourceClass, $identifiers, $attributes['item_operation_name']);
         $this->manager = $this->registry->getManagerForClass($resourceClass);
 
         return $item;
     }
 
     /**
-     * @param array $parameters
-     * @param array $attributes
-     * @return array|mixed
      * @throws InvalidIdentifierException
+     *
+     * @return array|mixed
      */
     private function extractIdentifiers(array $parameters, array $attributes)
     {

@@ -22,7 +22,7 @@ class Updater
     {
         $paroki = $entity->getParoki();
 
-        if(!$paroki instanceof Paroki){
+        if (!$paroki instanceof Paroki) {
             return;
         }
 

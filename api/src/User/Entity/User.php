@@ -21,9 +21,9 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * Class User
- * @Vich\Uploadable()
- * @package SIAP\User\Entity
+ * Class User.
+ *
+ * @Vich\Uploadable
  */
 class User extends BaseUser implements RequireParokiInterface
 {
@@ -48,7 +48,6 @@ class User extends BaseUser implements RequireParokiInterface
      * @var MediaObject
      */
     private $foto;
-
 
     /**
      * @var Paroki paroki pengguna
@@ -83,37 +82,32 @@ class User extends BaseUser implements RequireParokiInterface
 
     /**
      * @param mixed $fotoFile
-     * @return User
+     *
      * @throws \Exception
+     *
+     * @return User
      */
     public function setFotoFile(?File $fotoFile = null)
     {
         $this->fotoFile = $fotoFile;
-        if(null !== $fotoFile){
+        if (null !== $fotoFile) {
             $this->setUpdatedAt(new \DateTimeImmutable());
         }
+
         return $this;
     }
 
-    /**
-     * @return \DateTimeImmutable
-     */
     public function getUpdatedAt(): \DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @param \DateTimeImmutable $updatedAt
-     * @return User
-     */
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): User
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
-
-
 
     public function getNama(): ?string
     {
@@ -152,13 +146,10 @@ class User extends BaseUser implements RequireParokiInterface
         return $this->foto;
     }
 
-    /**
-     * @param MediaObject $foto
-     * @return User
-     */
-    public function setFoto(MediaObject $foto): User
+    public function setFoto(MediaObject $foto): self
     {
         $this->foto = $foto;
+
         return $this;
     }
 }

@@ -14,49 +14,47 @@ declare(strict_types=1);
 namespace SIAP\Core\Entity;
 
 use SIAP\User\Entity\User;
-use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * Class MediaObject
- * @Vich\Uploadable()
- * @package SIAP\Core\Entity
+ * Class MediaObject.
+ *
+ * @Vich\Uploadable
  */
 class MediaObject
 {
     /**
-     * @var null|string
+     * @var string|null
      */
     private $id;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     private $nama;
 
     /**
-     *
-     * @var null|string
+     * @var string|null
      */
     private $filePath;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     private $urlPrefix;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     private $catatan;
 
     /**
-     * @var null|User
+     * @var User|null
      */
     private $uploadedBy;
 
     /**
-     * @var null|\DateTimeInterface
+     * @var \DateTimeInterface|null
      */
     private $uploadedAt;
 
@@ -87,100 +85,74 @@ class MediaObject
 
     public function __construct()
     {
-        $this->dimensions = array();
+        $this->dimensions = [];
     }
 
     public function getContentUrl()
     {
-        if(is_null($this->getFilePath())){
+        if (null === $this->getFilePath()) {
             return null;
         }
 
-        if(is_null($this->getUploadedAt())){
+        if (null === $this->getUploadedAt()) {
             $this->setUploadedAt(new \DateTimeImmutable());
         }
-        
-        return $this->urlPrefix. '/'.
+
+        return $this->urlPrefix.'/'.
             $this->getFilePath().
             '?t='.$this->getUploadedAt()->format('Y-m-d-H-i-s');
     }
-    /**
-     * @return string|null
-     */
+
     public function getUrlPrefix(): ?string
     {
         return $this->urlPrefix;
     }
 
-    /**
-     * @param string|null $urlPrefix
-     * @return MediaObject
-     */
-    public function setUrlPrefix(?string $urlPrefix): MediaObject
+    public function setUrlPrefix(?string $urlPrefix): self
     {
         $this->urlPrefix = $urlPrefix;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getId(): ?string
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOriginalName(): ?string
     {
         return $this->originalName;
     }
 
-    /**
-     * @param string|null $originalName
-     * @return MediaObject
-     */
-    public function setOriginalName(?string $originalName): MediaObject
+    public function setOriginalName(?string $originalName): self
     {
         $this->originalName = $originalName;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMimeType(): ?string
     {
         return $this->mimeType;
     }
 
-    /**
-     * @param string|null $mimeType
-     * @return MediaObject
-     */
-    public function setMimeType(?string $mimeType): MediaObject
+    public function setMimeType(?string $mimeType): self
     {
         $this->mimeType = $mimeType;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getSize(): ?int
     {
         return $this->size;
     }
 
-    /**
-     * @param int|null $size
-     * @return MediaObject
-     */
-    public function setSize(?int $size): MediaObject
+    public function setSize(?int $size): self
     {
         $this->size = $size;
+
         return $this;
     }
 
@@ -189,128 +161,92 @@ class MediaObject
      */
     public function getDimensions(): ?array
     {
-        if(is_null($this->dimensions)){
+        if (null === $this->dimensions) {
             $this->dimensions = [];
         }
+
         return $this->dimensions;
     }
 
     /**
      * @param array $dimensions
-     * @return MediaObject
      */
-    public function setDimensions(?array $dimensions): MediaObject
+    public function setDimensions(?array $dimensions): self
     {
         $this->dimensions = $dimensions;
+
         return $this;
     }
 
-    /**
-     * @return null|string
-     */
     public function getFileName(): ?string
     {
         return $this->fileName;
     }
 
-    /**
-     * @param string $fileName
-     * @return MediaObject
-     */
-    public function setFileName(string $fileName): MediaObject
+    public function setFileName(string $fileName): self
     {
         $this->fileName = $fileName;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getNama(): ?string
     {
         return $this->nama;
     }
 
-    /**
-     * @param string|null $nama
-     * @return MediaObject
-     */
-    public function setNama(?string $nama): MediaObject
+    public function setNama(?string $nama): self
     {
         $this->nama = $nama;
+
         return $this;
     }
 
-
-    /**
-     * @return string|null
-     */
     public function getFilePath(): ?string
     {
         return $this->filePath;
     }
 
-    /**
-     * @param string|null $filePath
-     * @return MediaObject
-     */
-    public function setFilePath(?string $filePath): MediaObject
+    public function setFilePath(?string $filePath): self
     {
         $this->filePath = $filePath;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCatatan(): ?string
     {
         return $this->catatan;
     }
 
-    /**
-     * @param string|null $catatan
-     * @return MediaObject
-     */
-    public function setCatatan(?string $catatan): MediaObject
+    public function setCatatan(?string $catatan): self
     {
         $this->catatan = $catatan;
+
         return $this;
     }
 
-    /**
-     * @return User|null
-     */
     public function getUploadedBy(): ?User
     {
         return $this->uploadedBy;
     }
 
-    /**
-     * @param User|null $uploadedBy
-     * @return MediaObject
-     */
-    public function setUploadedBy(?User $uploadedBy): MediaObject
+    public function setUploadedBy(?User $uploadedBy): self
     {
         $this->uploadedBy = $uploadedBy;
+
         return $this;
     }
 
-    /**
-     * @return \DateTimeInterface|null
-     */
     public function getUploadedAt(): ?\DateTimeInterface
     {
         return $this->uploadedAt;
     }
 
-    /**
-     * @param \DateTimeInterface|null $uploadedAt
-     * @return MediaObject
-     */
-    public function setUploadedAt(?\DateTimeInterface $uploadedAt): MediaObject
+    public function setUploadedAt(?\DateTimeInterface $uploadedAt): self
     {
         $this->uploadedAt = $uploadedAt;
+
         return $this;
     }
 }

@@ -40,17 +40,17 @@ class UserExtension extends Extension implements PrependExtensionInterface
         ]);
 
         $publicDir = $container->getParameter('kernel.project_dir').'/public/media/user-foto';
-        $container->prependExtensionConfig('vich_uploader',[
+        $container->prependExtensionConfig('vich_uploader', [
             'mappings' => [
                 'user_foto' => [
-                    'uri_prefix' => '/media/user-foto',
+                    'uri_prefix'         => '/media/user-foto',
                     'upload_destination' => $publicDir,
-                    'namer'=> UniqidNamer::class,
-                    'inject_on_load' => false,
-                    'delete_on_update' => true,
-                    'delete_on_remove' => true
-                ]
-            ]
+                    'namer'              => UniqidNamer::class,
+                    'inject_on_load'     => false,
+                    'delete_on_update'   => true,
+                    'delete_on_remove'   => true,
+                ],
+            ],
         ]);
     }
 
