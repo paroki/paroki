@@ -9,7 +9,7 @@
 
             </template>
             <c-upload-button
-                label="Hello WOrld"
+                label="Upload File"
                 @file-changed="handleUpload"
                 color="success"
             />
