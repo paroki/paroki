@@ -92,6 +92,9 @@ class MediaObject
 
     public function getContentUrl()
     {
+        if(is_null($this->getFilePath())){
+            return null;
+        }
         return $this->urlPrefix. '/'.
             $this->getFilePath().
             '?t='.$this->getUploadedAt()->format('Y-m-d-H-i-s');
