@@ -43,7 +43,8 @@ coverage:
         - Behat\MinkExtension\Context\MinkContext
         - Behatch\Context\RestContext
         - SIAP\Behat\Contexts\JsonContext
-        - SIAP\Behat\Contexts\CustomContext
+        - SIAP\Behat\Contexts\CustomContext:
+            kernelCacheDir: "%%kernel.cache_dir%%"
         - SIAP\Behat\Contexts\BaptisContext:
             manager: "@siap.baptis.baptis_manager"
         - SIAP\Behat\Contexts\ReferenceContext:
