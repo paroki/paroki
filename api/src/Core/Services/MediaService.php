@@ -3,7 +3,6 @@
 namespace SIAP\Core\Services;
 
 use ApiPlatform\Core\Exception\InvalidIdentifierException;
-use ApiPlatform\Core\Exception\ResourceClassNotFoundException;
 use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
 use ApiPlatform\Core\Exception\RuntimeException;
 use ApiPlatform\Core\Identifier\IdentifierConverterInterface;
@@ -13,18 +12,12 @@ use ApiPlatform\Core\Validator\ValidatorInterface;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\Common\Persistence\ObjectManager;
 use SIAP\Core\Entity\MediaObject;
-use SIAP\User\Entity\User;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
 use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
-use Vich\UploaderBundle\Storage\StorageInterface;
 
 class MediaService
 {
@@ -39,26 +32,9 @@ class MediaService
     private $manager;
 
     /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
-    /**
-     * @var ResourceMetadataFactoryInterface
-     */
-    private $metadataFactory;
-
-    /**
      * @var TokenStorageInterface
      */
     private $tokenStorage;
-
-    /**
-     * @var array
-     */
-    private $map = [
-        'user' => User::class
-    ];
 
     /**
      * @var ItemDataProviderInterface
@@ -83,20 +59,18 @@ class MediaService
      * @param TokenStorageInterface $tokenStorage
      * @param ItemDataProviderInterface $dataProvider
      * @param IdentifierConverterInterface $identifierConverter
+     * @param PropertyMappingFactory $mappingFactory
      */
     public function __construct(
         Registry $registry,
-        ValidatorInterface $validator,
-        ResourceMetadataFactoryInterface $metadataFactory,
         TokenStorageInterface $tokenStorage,
         ItemDataProviderInterface $dataProvider,
         IdentifierConverterInterface $identifierConverter,
         PropertyMappingFactory $mappingFactory
     )
     {
+
         $this->registry = $registry;
-        $this->validator = $validator;
-        $this->metadataFactory = $metadataFactory;
         $this->tokenStorage = $tokenStorage;
         $this->dataProvider = $dataProvider;
         $this->identifierConverter = $identifierConverter;
@@ -114,6 +88,7 @@ class MediaService
         $item = $this->getItem($request);
         $manager = $this->manager;
         $uploadedFile = $request->files->get('file');
+        $user = $this->tokenStorage->getToken()->getUser();
 
 
         if(!$uploadedFile){
@@ -135,6 +110,8 @@ class MediaService
         call_user_func([$item,$fileSetter],$uploadedFile);
 
         $mapping = $this->mappingFactory->fromField($item, $property.'File');
+        $mediaObject->setUploadedBy($user);
+
         $mediaObject->setUrlPrefix($mapping->getUriPrefix());
         $manager->persist($item);
         $manager->flush();
@@ -202,51 +179,5 @@ class MediaService
         }
 
         return $identifiers;
-    }
-
-    private function processEntity(Request $request, MediaObject $mediaObject)
-    {
-        $type = $request->get('type');
-        $id = $request->get('id');
-        $property = $request->get('property');
-        $manager = $this->manager;
-        $repo = $manager->getRepository($this->map[$type]);
-        $entity = $repo->findOneBy(['id' => $id]);
-
-        call_user_func([$entity,$property], $mediaObject);
-        $manager->persist($entity);
-        $manager->flush();
-
-    }
-
-    /**
-     * @param object $item
-     * @param UploadedFile $file
-     * @return MediaObject
-     * @throws \Exception
-     */
-    private function process(object $item, UploadedFile $file)
-    {
-        $em = $this->manager;
-        $mediaObject = new MediaObject();
-        $mediaObject->setFile($file);
-        $em->persist($mediaObject);
-        $em->flush();
-        return $mediaObject;
-    }
-
-    /**
-     * @param MediaObject $mediaObject
-     * @param Request $request
-     * @throws ResourceClassNotFoundException
-     */
-    private function validate(MediaObject $mediaObject, Request $request): void
-    {
-        $attributes = RequestAttributesExtractor::extractAttributes($request);
-        $resourceMetadata = $this->metadataFactory->create(MediaObject::class);
-
-        $validationGroups = $resourceMetadata->getOperationAttribute($attributes, 'validation_groups', null, true);
-
-        $this->validator->validate($mediaObject, ['groups' => $validationGroups]);
     }
 }
