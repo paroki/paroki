@@ -15,7 +15,7 @@
             :color="color"
             small
         >
-            <v-icon>mdi-file-upload</v-icon>
+            <v-icon left>mdi-file-upload</v-icon>
             {{label}}
         </v-btn>
     </div>
