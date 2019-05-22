@@ -111,6 +111,7 @@ class MediaService
 
         $mapping = $this->mappingFactory->fromField($item, $property.'File');
         $mediaObject->setUploadedBy($user);
+        $mediaObject->setUploadedAt(new \DateTimeImmutable());
 
         $mediaObject->setUrlPrefix($mapping->getUriPrefix());
         $manager->persist($item);

@@ -95,6 +95,11 @@ class MediaObject
         if(is_null($this->getFilePath())){
             return null;
         }
+
+        if(is_null($this->getUploadedAt())){
+            $this->setUploadedAt(new \DateTimeImmutable());
+        }
+        
         return $this->urlPrefix. '/'.
             $this->getFilePath().
             '?t='.$this->getUploadedAt()->format('Y-m-d-H-i-s');
