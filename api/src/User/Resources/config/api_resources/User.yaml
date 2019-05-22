@@ -1,7 +1,7 @@
 SIAP\User\Entity\User:
     attributes:
         normalization_context:
-            groups: ['read','paroki']
+            groups: ['read']
         denormalization_context:
             groups: ['write']
     collectionOperations:
@@ -14,12 +14,11 @@ SIAP\User\Entity\User:
         get: ~
         put: ~
         delete: ~
-        uploadFoto:
+        upload_foto:
             method: POST
             path: /user/{id}/upload-foto
             controller: siap.core.controller.media_upload
             defaults:
-                _api_receive: false
                 property: foto
             swagger_context:
                 summary: Upload user foto
@@ -32,3 +31,5 @@ SIAP\User\Entity\User:
                         description: 'The file to upload'
     properties:
         paroki: ~
+        foto:
+            groups: ['read']

@@ -18,6 +18,9 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        media:
+            pattern: ^/(css|images|js|media)/
+            security: false
         docs:
             pattern: ^/(docs|doc)
             security: false

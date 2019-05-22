@@ -15,10 +15,16 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SIAP\Core\Entity\MediaObject;
 use SIAP\User\Entity\User;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
+use Vich\UploaderBundle\Mapping\PropertyMapping;
+use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
+use Vich\UploaderBundle\Storage\StorageInterface;
 
 class MediaService
 {
@@ -65,6 +71,11 @@ class MediaService
     private $identifierConverter;
 
     /**
+     * @var PropertyMapping
+     */
+    private $mappingFactory;
+
+    /**
      * MediaService constructor.
      * @param Registry $registry
      * @param ValidatorInterface $validator
@@ -79,7 +90,8 @@ class MediaService
         ResourceMetadataFactoryInterface $metadataFactory,
         TokenStorageInterface $tokenStorage,
         ItemDataProviderInterface $dataProvider,
-        IdentifierConverterInterface $identifierConverter
+        IdentifierConverterInterface $identifierConverter,
+        PropertyMappingFactory $mappingFactory
     )
     {
         $this->registry = $registry;
@@ -88,11 +100,12 @@ class MediaService
         $this->tokenStorage = $tokenStorage;
         $this->dataProvider = $dataProvider;
         $this->identifierConverter = $identifierConverter;
+        $this->mappingFactory = $mappingFactory;
     }
 
     /**
      * @param Request $request
-     * @return MediaObject
+     * @return object|null
      * @throws InvalidIdentifierException
      * @throws ResourceClassNotSupportedException
      */
@@ -101,28 +114,32 @@ class MediaService
         $item = $this->getItem($request);
         $manager = $this->manager;
         $uploadedFile = $request->files->get('file');
+
+
         if(!$uploadedFile){
             throw new BadRequestHttpException('"File" is required');
         }
 
+        $property = $request->get('property');
+        $getter = 'get'.$property;
+        $setter = 'set'.$property;
+        $fileSetter = 'set'.$property.'file';
 
-        //$media = $this->process($uploadedFile);
-        //$this->processEntity($item, $request, $media);
-        $getter = 'getfoto';
-        $setter = 'setfoto';
-
-        if(is_null($item->getFoto())){
-            $item->setFoto(new MediaObject());
+        /* @var MediaObject $mediaObject */
+        $mediaObject = call_user_func([$item,$getter]);
+        if(!$mediaObject instanceof MediaObject){
+            $mediaObject = new MediaObject();
+            call_user_func([$item, $setter],$mediaObject);
         }
-        //B379F992-4702-4320-BF08-40E423D1E061
 
-        $item->setFotoFile($uploadedFile);
+        call_user_func([$item,$fileSetter],$uploadedFile);
 
-        //call_user_func([$item, $setter], $media);
-
+        $mapping = $this->mappingFactory->fromField($item, $property.'File');
+        $mediaObject->setUrlPrefix($mapping->getUriPrefix());
         $manager->persist($item);
         $manager->flush();
-        return $item->getFoto();
+
+        return call_user_func([$item, $getter]);
     }
 
     /**

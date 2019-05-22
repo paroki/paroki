@@ -43,7 +43,7 @@ class MediaObject
     /**
      * @var null|string
      */
-    private $contentUrl;
+    private $urlPrefix;
 
     /**
      * @var null|string
@@ -88,6 +88,30 @@ class MediaObject
     public function __construct()
     {
         $this->dimensions = array();
+    }
+
+    public function getContentUrl()
+    {
+        return $this->urlPrefix. '/'.
+            $this->getFilePath().
+            '?t='.$this->getUploadedAt()->format('Y-m-d-H-i-s');
+    }
+    /**
+     * @return string|null
+     */
+    public function getUrlPrefix(): ?string
+    {
+        return $this->urlPrefix;
+    }
+
+    /**
+     * @param string|null $urlPrefix
+     * @return MediaObject
+     */
+    public function setUrlPrefix(?string $urlPrefix): MediaObject
+    {
+        $this->urlPrefix = $urlPrefix;
+        return $this;
     }
 
     /**
@@ -225,24 +249,6 @@ class MediaObject
     public function setFilePath(?string $filePath): MediaObject
     {
         $this->filePath = $filePath;
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getContentUrl(): ?string
-    {
-        return $this->contentUrl;
-    }
-
-    /**
-     * @param string|null $contentUrl
-     * @return MediaObject
-     */
-    public function setContentUrl(?string $contentUrl): MediaObject
-    {
-        $this->contentUrl = $contentUrl;
         return $this;
     }
 

@@ -25,6 +25,12 @@ const ApiService = {
         return url;
     },
 
+    generateFullUrl(url, params){
+        const genUrl = this.generateUrl(url, params);
+        const baseUrl = axios.defaults.baseURL;
+        return `${baseUrl}${genUrl}`;
+    },
+
     init(baseURL) {
         axios.defaults.baseURL = baseURL;
         axios.interceptors.request.use(
@@ -73,8 +79,8 @@ const ApiService = {
         return axios.get(resource);
     },
 
-    post(resource, data) {
-        return axios.post(resource, data)
+    post(resource, data, options={}) {
+        return axios.post(resource, data, options)
     },
 
     put(resource, data) {

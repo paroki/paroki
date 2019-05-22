@@ -1,4 +1,10 @@
 SIAP\Core\Entity\MediaObject:
-    properties:
+    attributes:
+        id:
+            groups: ['read']
+        uploadedAt:
+            groups: ['read', 'write']
+        filePath:
+            groups: ['read', 'write']
         contentUrl:
-            groups: ['default','media_object_read']
+            groups: ['read', 'write']

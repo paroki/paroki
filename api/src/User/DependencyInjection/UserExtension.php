@@ -43,7 +43,7 @@ class UserExtension extends Extension implements PrependExtensionInterface
         $container->prependExtensionConfig('vich_uploader',[
             'mappings' => [
                 'user_foto' => [
-                    'uri_prefix' => 'media',
+                    'uri_prefix' => '/media/user-foto',
                     'upload_destination' => $publicDir,
                     'namer'=> UniqidNamer::class,
                     'inject_on_load' => false,

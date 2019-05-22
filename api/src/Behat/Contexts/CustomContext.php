@@ -135,17 +135,12 @@ class CustomContext implements Context
         $files = [
             'file' => $cachePath
         ];
-        $parameters = [
-            'type' => 'user',
-            'property' => 'setFoto',
-            'id' => $id
-        ];
         $url = '/user/'.$id.'/upload-foto';
         $request->setHttpHeader('Accept','application/json');
         $request->send(
             'POST',
             $minkContext->locatePath($url),
-            $parameters,
+            [],
             $files
         );
     }

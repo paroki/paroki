@@ -2,24 +2,17 @@
 
 namespace SIAP\Core\Controller;
 
-use ApiPlatform\Core\Exception\ResourceClassNotFoundException;
+use ApiPlatform\Core\Exception\InvalidIdentifierException;
+use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
 use ApiPlatform\Core\Metadata\Resource\Factory\ResourceMetadataFactoryInterface;
-use ApiPlatform\Core\Util\RequestAttributesExtractor;
 use ApiPlatform\Core\Validator\ValidatorInterface;
-use SIAP\Core\Entity\MediaObject;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use SIAP\Core\Services\MediaService;
 use SIAP\User\Entity\User;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 final class CreateMediaObject
 {
-    private $map = [
-        'user' => User::class
-    ];
-
     private $managerRegistry;
 
     private $validator;
@@ -33,12 +26,15 @@ final class CreateMediaObject
         $this->resourceMetadataFactory = $resourceMetadataFactory;
     }
 
+
     /**
      * @param Request $request
      * @param MediaService $service
-     * @return MediaObject
+     * @return object|null
+     * @throws InvalidIdentifierException
+     * @throws ResourceClassNotSupportedException
      */
-    public function __invoke(Request $request, MediaService $service): MediaObject
+    public function __invoke(Request $request, MediaService $service): ?object
     {
         return $service->createMediaObject($request);
     }

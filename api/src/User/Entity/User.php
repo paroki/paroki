@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace SIAP\User\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use SIAP\Core\Entity\MediaObject;
 use SIAP\Reference\Entity\Paroki;

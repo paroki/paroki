@@ -1,9 +1,3 @@
 SIAP\Core\Entity\MediaObject:
-    shortname: media
-    iri: "http://schema.org/MediaObject"
-    attributes:
-        normalizationContext:
-            groups: ['media_object_read']
-        get: ~
-    itemOperations:
-        get: ~
+    shortName: 'media'
+    itemOperations: ~

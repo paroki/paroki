@@ -1,9 +1,13 @@
 SIAP\User\Entity\User:
+    enable_max_depth: true
     attributes:
         id:
             groups: ['read']
         nama:
             groups: ['read', 'write']
+        foto:
+            groups: ['read', 'foto']
+            max_depth: 1
         username:
             groups: ['read','write']
         email:

@@ -7,8 +7,8 @@
         <field name="nama" type="string" nullable="true"/>
         <field name="catatan" type="text" nullable="true"/>
         <field name="filePath" type="string" nullable="true"/>
-        <field name="contentUrl" type="string" nullable="true"/>
-        <field name="uploadedAt" type="date" nullable="true"/>
+        <field name="urlPrefix" type="string" nullable="true"/>
+        <field name="uploadedAt" type="datetime" nullable="true"/>
         <field name="originalName" type="string" nullable="true"/>
         <field name="mimeType" type="string" nullable="true"/>
         <field name="size" type="integer" nullable="true"/>
