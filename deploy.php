@@ -20,7 +20,7 @@ add('shared_dirs', ['api/public/media']);
 // Writable dirs by web server
 add('writable_dirs', [
     'api/public/media',
-    'api/vars'
+    'api/var'
 ]);
 
 
