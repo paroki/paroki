@@ -13,24 +13,28 @@ set('repository', 'https://github.com/paroki/siap.git');
 set('git_tty', true);
 set('git_cache', true);
 
-// Shared files/dirs between deploys 
+// Shared files/dirs between deploys
 add('shared_files', []);
 add('shared_dirs', ['api/public/media']);
 
-// Writable dirs by web server 
+// Writable dirs by web server
 add('writable_dirs', [
     'api/public/media',
-    'api/public/vars'
+    'api/vars'
 ]);
 
 
 // Hosts
 
 host('itstoni.com')
-    ->set('deploy_path', '/srv/{{application}}')
+    ->set('deploy_path', '/home/travis/{{application}}')
     ->set('branch','master')
+    ->user('travis')
+    ->identityFile(__DIR__.'/deploy_key')
+    ->addSshOption('UserKnownHostsFile', '/dev/null')
+    ->addSshOption('StrictHostKeyChecking', 'no');
 ;
-    
+
 // Tasks
 
 task('build', function () {
@@ -45,11 +49,11 @@ after('deploy:failed', 'deploy:unlock');
 //before('deploy:symlink', 'database:migrate');
 
 task('deploy:vendors', function(){
-    run('cp /srv/siap/env.local {{release_path}}/api/.env.local');
+    run('cp /home/travis/siap/env.local {{release_path}}/api/.env.local');
     run('cd {{release_path}}/api && composer install');
     run('cd {{release_path}}/api && bin/console doctrine:query:sql \'create extension if not exists "uuid-ossp"\'');
     run('cd {{release_path}}/api && bin/console doctrine:schema:update --force');
-    upload('./client/dist','{{release_path}}/client/dist');
+    upload('./client/dist/','{{release_path}}/client/dist/');
 });
 
 task('deploy', [

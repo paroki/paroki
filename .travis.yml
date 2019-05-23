@@ -49,7 +49,7 @@ jobs:
       env: DEPLOY=yes
       deploy:
         provider: script
-        script: etc/travis/deploy.sh
+        script: php ./dep deploy
         skip_cleanup: true
         on:
           branch: master
@@ -79,9 +79,11 @@ before_deploy:
     -in etc/travis/config/deploy_key.enc -out deploy_key -d
   - eval "$(ssh-agent -s)"
   - chmod 600 ./deploy_key
-  - echo -e "Host $IP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  #- echo -e "Host $IP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   - ssh-add ./deploy_key
-  - rsync --stats --progress -avh --delete-before $TRAVIS_BUILD_DIR/client/dist travis@$IP:$DEPLOY_DIR
+  - curl -LO https://deployer.org/deployer.phar
+  - mv deployer.phar dep
+  - chmod +x dep
 
 after_script:
   - etc/travis/after-script.sh
