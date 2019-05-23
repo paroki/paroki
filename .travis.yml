@@ -44,7 +44,7 @@ jobs:
         hosts:
           - siap.localhost
     - stage: deploy
-      if: branch in (master,travis-debug) #AND type != pull_request
+      if: branch in (master,travis-debug) AND type != pull_request
       php: '7.2'
       env: DEPLOY=yes
       deploy:
