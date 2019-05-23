@@ -28,8 +28,9 @@ export const uploadAvatar = ( {commit, state}, file) => {
     let retrieved = state.retrieved;
 
     const formData = new FormData();
+    const url = ApiService.generateUrl(`/user/${id}/upload-foto`);
     formData.append('file',file);
-    return ApiService.post(`/user/${id}/upload-foto`, formData, {
+    return ApiService.post(url, formData, {
             headers: {
                 'Content-TYpe': 'multipart/form-data'
             }

@@ -14,7 +14,9 @@ set('git_tty', true);
 set('git_cache', true);
 
 // Shared files/dirs between deploys
-add('shared_files', []);
+add('shared_files', [
+
+]);
 add('shared_dirs', ['api/public/media']);
 
 // Writable dirs by web server
