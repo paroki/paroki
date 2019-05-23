@@ -14,7 +14,7 @@ if [[ $API = yes || $COVERAGE = yes || $INTEGRATION = yes ]]; then
   run_command "composer prepare-test --ansi"
 fi;
 
-if [[ $CLIENT = yes || $COVERAGE = yes || $INTEGRATION = yes ]]; then
+if [[ $API != yes ]]; then
   run_command "cd ${BUILD_DIR}/client"
   yarn;
 fi;
