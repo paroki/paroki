@@ -14,15 +14,15 @@ declare(strict_types=1);
 namespace SIAP\Baptis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use SIAP\Core\Entity\DokumenOwnerTrait;
 use SIAP\Core\Entity\LoggableInterface;
 use SIAP\Core\Entity\LoggableTrait;
+use SIAP\Core\Entity\MediaOwnerTrait;
 use SIAP\Core\Entity\RequireParokiTrait;
 use SIAP\Reference\Entity\RequireParokiInterface;
 
 class Diterima implements RequireParokiInterface, LoggableInterface
 {
-    use DokumenOwnerTrait, RequireParokiTrait, LoggableTrait;
+    use MediaOwnerTrait, RequireParokiTrait, LoggableTrait;
 
     private $tempatBaptis;
 
@@ -57,12 +57,12 @@ class Diterima implements RequireParokiInterface, LoggableInterface
         return $this;
     }
 
-    public function getTanggalBaptis(): ?string
+    public function getTanggalBaptis(): ?\DateTimeInterface
     {
         return $this->tanggalBaptis;
     }
 
-    public function setTanggalBaptis(?string $tanggalBaptis): self
+    public function setTanggalBaptis(?\DateTimeInterface $tanggalBaptis): self
     {
         $this->tanggalBaptis = $tanggalBaptis;
 

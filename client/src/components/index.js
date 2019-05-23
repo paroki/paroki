@@ -1,17 +1,51 @@
-import Vue from 'vue'
-const requireComponent = require.context(
-    '@/components', true, /\.vue$/
-)
+import Card from './core/Card';
+import DatePicker from './core/DatePicker';
+import Drawer from './core/Drawer';
+import DrawerItem from './core/DrawerItem';
+import Form from './core/Form';
+import Pagination from './core/Pagination';
+import SimpleDialog from './core/SimpleDialog';
+import Snackbar from './core/Snackbar';
+import Table from './core/Table';
+import Toolbar from './core/Toolbar';
+import Offset from './helper/Offset';
+import UploadButton from './core/UploadButton';
 
-requireComponent.keys().forEach(fileName => {
-    const componentConfig = requireComponent(fileName)
+const components = [
+    Card,
+    DatePicker,
+    Drawer,
+    DrawerItem,
+    Form,
+    Pagination,
+    SimpleDialog,
+    Snackbar,
+    Table,
+    Toolbar,
+    Offset,
+    UploadButton
+];
 
-    /*const componentName = upperFirst(
-        camelCase(fileName.replace(/^\.\//, '').replace(/\.\w+$/, ''))
-    )*/
+export default {
 
-    const componentName = componentConfig.default.name;
-    if(componentName){
-        Vue.component(componentName, componentConfig.default || componentConfig)
+    install(Vue){
+        components.forEach( (item) => {
+            Vue.component(item.name, item);
+        });
     }
-})
+}
+
+
+export {
+    Card,
+    DatePicker,
+    Drawer,
+    DrawerItem,
+    Form,
+    Pagination,
+    SimpleDialog,
+    Snackbar,
+    Table,
+    Toolbar,
+    Offset
+}

@@ -15,9 +15,12 @@ namespace Spec\SIAP\Baptis\Entity;
 
 use PhpSpec\ObjectBehavior;
 use SIAP\Baptis\Entity\Diterima;
+use SIAP\Core\Test\MutableSpecTrait;
 
 class DiterimaSpec extends ObjectBehavior
 {
+    use MutableSpecTrait;
+
     public function it_is_initializable()
     {
         $this->shouldHaveType(Diterima::class);

@@ -125,6 +125,9 @@
     "egulias/email-validator": {
         "version": "2.1.7"
     },
+    "exsyst/swagger": {
+        "version": "v0.4.1"
+    },
     "facebook/webdriver": {
         "version": "1.6.0"
     },
@@ -153,6 +156,9 @@
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
+    },
+    "jms/metadata": {
+        "version": "2.0.0"
     },
     "justinrainbow/json-schema": {
         "version": "5.x-dev"
@@ -192,6 +198,19 @@
         "files": [
             "./config/packages/dev/nelmio_alice.yaml",
             "./config/packages/test/nelmio_alice.yaml"
+        ]
+    },
+    "nelmio/api-doc-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "c8e0c38e1a280ab9e37587a8fa32b251d5bc1c94"
+        },
+        "files": [
+            "config/packages/nelmio_api_doc.yaml",
+            "config/routes/nelmio_api_doc.yaml"
         ]
     },
     "nelmio/cors-bundle": {
@@ -670,10 +689,25 @@
     "twig/twig": {
         "version": "v2.9.0"
     },
+    "vich/uploader-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "c4f5755b37fb65b9c6a3cbdae91205c15a137ed4"
+        },
+        "files": [
+            "config/packages/vich_uploader.yaml"
+        ]
+    },
     "webmozart/assert": {
         "version": "1.4.0"
     },
     "willdurand/negotiation": {
         "version": "v2.3.1"
+    },
+    "zircote/swagger-php": {
+        "version": "2.0.14"
     }
 }

@@ -1,0 +1,2 @@
+VUE_APP_API_ENTRYPOINT=https://siap.localhost
+VUE_APP_API_PATH='/api'

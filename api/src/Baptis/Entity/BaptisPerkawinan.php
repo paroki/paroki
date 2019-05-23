@@ -13,15 +13,15 @@ declare(strict_types=1);
 
 namespace SIAP\Baptis\Entity;
 
-use SIAP\Core\Entity\DokumenOwnerTrait;
 use SIAP\Core\Entity\LoggableInterface;
 use SIAP\Core\Entity\LoggableTrait;
+use SIAP\Core\Entity\MediaOwnerTrait;
 use SIAP\Core\Entity\RequireParokiTrait;
 use SIAP\Reference\Entity\RequireParokiInterface;
 
 class BaptisPerkawinan implements LoggableInterface, RequireParokiInterface
 {
-    use LoggableTrait, RequireParokiTrait, DokumenOwnerTrait;
+    use LoggableTrait, RequireParokiTrait, MediaOwnerTrait;
 
     private $register;
 

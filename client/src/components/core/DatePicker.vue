@@ -11,19 +11,25 @@
             full-width
             max-width="290px"
             min-width="290px"
+            dark
         >
             <template v-slot:activator="{ on }">
                 <v-text-field
                     v-model="dateFormatted"
                     label="Date"
-                    hint="MM/DD/YYYY format"
+                    hint="DD/MM/YYYY format"
                     persistent-hint
-                    prepend-icon="event"
+                    prepend-icon="mdi-calendar"
                     @blur="date = parseDate(dateFormatted)"
                     v-on="on"
                 ></v-text-field>
             </template>
-            <v-date-picker v-model="date" no-title @input="menu = false"></v-date-picker>
+            <v-date-picker
+                v-bind="$attrs"
+                v-model="date"
+                no-title
+                @input="handleInput"
+            ></v-date-picker>
         </v-menu>
         <!--
         <p>Date in ISO format: <strong>{{ data[name] }}</strong></p>
@@ -40,17 +46,20 @@
                 required: true
             },
             data: {
-                type: [Array, Object],
-                required: () => {}
+                type: String,
+                default: null
             },
-
             label: {
                 type: String,
                 required: true
             },
             format: {
                 type: String,
-                default: 'DD-MM-YYYY'
+                default: 'DD/MM/YYYY'
+            },
+            handleUpdateField: {
+                type: Function,
+                default: () => {}
             }
         },
         data(){
@@ -58,39 +67,33 @@
                 menu: false,
                 display: null,
                 date: null,
-                dateFormatted: null,
+                dateFormatted: null
             }
         },
-        computed: {
-
-        },
-
-        created(){
-            const val = this.data[this.name];
-            if(val){
-                this.date = val;
-            }
-        },
-
         watch: {
+            data(val){
+                this.date = val;
+            },
             date () {
                 this.dateFormatted = this.formatDate(this.date);
-                this.data[this.name] = this.date;
             },
         },
 
         methods: {
             formatDate (date) {
                 if (!date) return null
-
+                date = date.substring(0,10);
                 const [year, month, day] = date.split('-')
                 return `${day}/${month}/${year}`
             },
             parseDate (date) {
                 if (!date) return null
-
                 const [day, month, year] = date.split('/')
                 return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+            },
+            handleInput(){
+                this.menu = false
+                this.handleUpdateField(this.name,this.date);
             }
         }
     }

@@ -15,9 +15,12 @@ namespace Spec\SIAP\Baptis\Entity;
 
 use PhpSpec\ObjectBehavior;
 use SIAP\Baptis\Entity\BaptisPerkawinan;
+use SIAP\Core\Test\MutableSpecTrait;
 
 class BaptisPerkawinanSpec extends ObjectBehavior
 {
+    use MutableSpecTrait;
+
     public function it_is_initializable()
     {
         $this->shouldHaveType(BaptisPerkawinan::class);

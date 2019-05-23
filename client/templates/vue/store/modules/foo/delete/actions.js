@@ -3,8 +3,8 @@ import * as types from './mutation_types'
 
 export const del = ({ commit }, item) => {
     commit(types.{{{uc}}}_DELETE_TOGGLE_LOADING)
-
-    return ApiService.delete(item['@id'])
+    const url = ApiService.generateUrl(item['@id']);
+    return ApiService.delete(url)
         .then(() => {
             commit(types.{{{uc}}}_DELETE_TOGGLE_LOADING)
             commit(types.{{{uc}}}_DELETE_SET_DELETED, item)

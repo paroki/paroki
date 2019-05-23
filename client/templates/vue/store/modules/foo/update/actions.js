@@ -24,7 +24,8 @@ export const update = ({ commit, state }) => {
     commit(types.SET_ERROR, '')
     commit(types.TOGGLE_LOADING)
 
-    return ApiService.put(state.retrieved['@id'], state.retrieved)
+    const url = ApiService.generateUrl(state.retrieved['@id']);
+    return ApiService.put(url, state.retrieved)
         .then((data) => {
             commit(types.TOGGLE_LOADING)
             commit(types.SET_UPDATED, data)

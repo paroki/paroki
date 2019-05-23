@@ -13,15 +13,15 @@ declare(strict_types=1);
 
 namespace SIAP\Baptis\Entity;
 
-use SIAP\Core\Entity\DokumenOwnerTrait;
 use SIAP\Core\Entity\LoggableInterface;
 use SIAP\Core\Entity\LoggableTrait;
+use SIAP\Core\Entity\MediaOwnerTrait;
 use SIAP\Core\Entity\RequireParokiTrait;
 use SIAP\Reference\Entity\RequireParokiInterface;
 
 class BaptisKrisma implements LoggableInterface, RequireParokiInterface
 {
-    use LoggableTrait, RequireParokiTrait, DokumenOwnerTrait;
+    use LoggableTrait, RequireParokiTrait, MediaOwnerTrait;
 
     /**
      * @var string|null Nama Krisma
@@ -94,12 +94,12 @@ class BaptisKrisma implements LoggableInterface, RequireParokiInterface
         return $this;
     }
 
-    public function getTanggal(): ?string
+    public function getTanggal(): ?\DateTimeInterface
     {
         return $this->tanggal;
     }
 
-    public function setTanggal(?string $tanggal): self
+    public function setTanggal(?\DateTimeInterface $tanggal): self
     {
         $this->tanggal = $tanggal;
 

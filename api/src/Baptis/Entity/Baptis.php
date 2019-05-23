@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace SIAP\Baptis\Entity;
 
 use SIAP\Core\Entity\AbstractBiodata;
-use SIAP\Core\Entity\DokumenOwnerTrait;
 use SIAP\Core\Entity\LoggableTrait;
+use SIAP\Core\Entity\MediaOwnerTrait;
 use SIAP\Core\Entity\RequireParokiTrait;
 use SIAP\Reference\Entity\Agama;
 use SIAP\Reference\Entity\Lingkungan;
@@ -23,7 +23,7 @@ use SIAP\Reference\Entity\RequireParokiInterface;
 
 class Baptis extends AbstractBiodata implements RequireParokiInterface
 {
-    use LoggableTrait, DokumenOwnerTrait, RequireParokiTrait;
+    use LoggableTrait, MediaOwnerTrait, RequireParokiTrait;
 
     /**
      * @var string|null

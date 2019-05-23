@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="SIAP\Core\Entity\MediaObject" table="td_media_object">
+        <id name="id" type="guid">
+            <generator strategy="UUID"/>
+        </id>
+        <field name="nama" type="string" nullable="true"/>
+        <field name="catatan" type="text" nullable="true"/>
+        <field name="filePath" type="string" nullable="true"/>
+        <field name="urlPrefix" type="string" nullable="true"/>
+        <field name="uploadedAt" type="datetime" nullable="true"/>
+        <field name="originalName" type="string" nullable="true"/>
+        <field name="mimeType" type="string" nullable="true"/>
+        <field name="size" type="integer" nullable="true"/>
+        <field name="dimensions" type="array" nullable="true"/>
+        <many-to-one field="uploadedBy" target-entity="SIAP\User\Entity\User">
+            <join-columns>
+                <join-column name="uploaded_by_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>
