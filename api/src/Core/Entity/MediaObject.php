@@ -59,11 +59,6 @@ class MediaObject
     private $uploadedAt;
 
     /**
-     * @var string
-     */
-    private $fileName;
-
-    /**
      * @var string|null
      */
     protected $originalName;
@@ -161,31 +156,16 @@ class MediaObject
      */
     public function getDimensions(): ?array
     {
-        if (null === $this->dimensions) {
-            $this->dimensions = [];
-        }
-
         return $this->dimensions;
     }
 
     /**
-     * @param array $dimensions
+     * @param array|null $dimensions
+     * @return MediaObject
      */
     public function setDimensions(?array $dimensions): self
     {
         $this->dimensions = $dimensions;
-
-        return $this;
-    }
-
-    public function getFileName(): ?string
-    {
-        return $this->fileName;
-    }
-
-    public function setFileName(string $fileName): self
-    {
-        $this->fileName = $fileName;
 
         return $this;
     }
