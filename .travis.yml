@@ -79,7 +79,7 @@ before_deploy:
     -in etc/travis/config/deploy_key.enc -out deploy_key -d
   - eval "$(ssh-agent -s)"
   - chmod 600 ./deploy_key
-  - echo -e "Host $IP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  #- echo -e "Host $IP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   - ssh-add ./deploy_key
   - curl -LO https://deployer.org/deployer.phar
   - mv deployer.phar dep

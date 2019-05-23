@@ -20,15 +20,19 @@ add('shared_dirs', ['api/public/media']);
 // Writable dirs by web server
 add('writable_dirs', [
     'api/public/media',
-    'api/public/vars'
+    'api/vars'
 ]);
 
 
 // Hosts
 
 host('itstoni.com')
-    ->set('deploy_path', '/home/travis/siap/{{application}}')
+    ->set('deploy_path', '/home/travis/{{application}}')
     ->set('branch','master')
+    ->user('travis')
+    ->identityFile(__DIR__.'/deploy_key')
+    ->addSshOption('UserKnownHostsFile', '/dev/null')
+    ->addSshOption('StrictHostKeyChecking', 'no');
 ;
 
 // Tasks
@@ -45,11 +49,13 @@ after('deploy:failed', 'deploy:unlock');
 //before('deploy:symlink', 'database:migrate');
 
 task('deploy:vendors', function(){
-    run('cp /home/travis/siap/env.local {{release_path}}/api/.env.local');
+    run('cp {{deploy_path}}/env.local {{release_path}}/api/.env.local');
     run('cd {{release_path}}/api && composer install');
     run('cd {{release_path}}/api && bin/console doctrine:query:sql \'create extension if not exists "uuid-ossp"\'');
     run('cd {{release_path}}/api && bin/console doctrine:schema:update --force');
-    upload('./client/dist','{{release_path}}/client/dist');
+    run('cd {{release_path}}/api && bin/console siap:generate:jwt-keys');
+    run('cd {{release_path}}/api && bin/console cache:clear');
+    upload('./client/dist/','{{release_path}}/client/dist/');
 });
 
 task('deploy', [
