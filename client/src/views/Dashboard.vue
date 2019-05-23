@@ -22,7 +22,6 @@
         name: 'Dashboard',
         methods: {
             handleUpload(file){
-                console.log(file);
             }
         }
     }

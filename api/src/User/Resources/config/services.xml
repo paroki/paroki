@@ -29,5 +29,9 @@
             <argument type="service" id="fos_user.object_manager"/>
             <argument>SIAP\User\Entity\User</argument>
         </service>
+        <service id="siap.user.listeners.token_created" class="SIAP\User\Listener\TokenCreatedListener">
+            <argument type="service" id="fos_user.user_manager"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
     </services>
 </container>

@@ -14,6 +14,16 @@ SIAP\User\Entity\User:
         get: ~
         put: ~
         delete: ~
+        profile_get:
+            method: GET
+            path: /profile/{id}
+            access_control: 'is_granted("ROLE_USER") and object == user'
+            access_control_message: 'Hanya user yang bersangkutan bisa mengubah profil'
+        profile_update:
+            method: PUT
+            path: /profile/{id}
+            access_control: 'is_granted("ROLE_USER") and object == user'
+            access_control_message: 'Hanya user yang bersangkutan bisa mengubah profil'
         upload_foto:
             method: POST
             path: /user/{id}/upload-foto

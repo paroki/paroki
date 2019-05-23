@@ -7,6 +7,46 @@ export const reset = ({ commit }) => {
     commit(types.RESET)
 }
 
+export const getProfile = ( {commit}, id ) => {
+    commit(types.TOGGLE_LOADING);
+    const url = ApiService.generateUrl(`/profile/${id}`);
+    return ApiService.get(url)
+        .then((data) => {
+            commit(types.TOGGLE_LOADING);
+            commit(types.SET_RETRIEVED, data)
+        })
+        .catch((e) => {
+            commit(types.TOGGLE_LOADING);
+            commit(types.SET_ERROR, e.message);
+        });
+}
+
+export const updateProfile = ( {commit, state}, payload ) => {
+    if(!payload){
+        payload = state.retrieved;
+    }
+    const id = state.retrieved.id;
+    const url = ApiService.generateUrl(`/profile/${id}`);
+    commit(types.SET_ERROR, '');
+    commit(types.TOGGLE_LOADING);
+    return ApiService.put(url, payload)
+        .then((data) => {
+            commit(types.TOGGLE_LOADING);
+            commit(types.SET_UPDATED, data);
+        })
+        .catch((e) => {
+            commit(types.TOGGLE_LOADING);
+
+            if (e instanceof SubmissionError) {
+                commit(types.SET_VIOLATIONS, e.errors);
+                // eslint-disable-next-line
+                commit(types.SET_ERROR, e.errors._error);
+            }else{
+                commit(types.SET_ERROR, e);
+            }
+        })
+}
+
 export const retrieve = ({ commit }, id) => {
     toggleLoading(commit)
     const url = ApiService.generateUrl(`/user/${id}`)
