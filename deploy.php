@@ -13,11 +13,11 @@ set('repository', 'https://github.com/paroki/siap.git');
 set('git_tty', true);
 set('git_cache', true);
 
-// Shared files/dirs between deploys 
+// Shared files/dirs between deploys
 add('shared_files', []);
 add('shared_dirs', ['api/public/media']);
 
-// Writable dirs by web server 
+// Writable dirs by web server
 add('writable_dirs', [
     'api/public/media',
     'api/public/vars'
@@ -27,10 +27,10 @@ add('writable_dirs', [
 // Hosts
 
 host('itstoni.com')
-    ->set('deploy_path', '/srv/{{application}}')
+    ->set('deploy_path', '/home/travis/test/{{application}}')
     ->set('branch','master')
 ;
-    
+
 // Tasks
 
 task('build', function () {
