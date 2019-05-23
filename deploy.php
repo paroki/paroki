@@ -27,7 +27,7 @@ add('writable_dirs', [
 // Hosts
 
 host('itstoni.com')
-    ->set('deploy_path', '/home/travis/test/{{application}}')
+    ->set('deploy_path', '/home/travis/siap/{{application}}')
     ->set('branch','master')
 ;
 
@@ -45,7 +45,7 @@ after('deploy:failed', 'deploy:unlock');
 //before('deploy:symlink', 'database:migrate');
 
 task('deploy:vendors', function(){
-    run('cp /srv/siap/env.local {{release_path}}/api/.env.local');
+    run('cp /home/travis/siap/env.local {{release_path}}/api/.env.local');
     run('cd {{release_path}}/api && composer install');
     run('cd {{release_path}}/api && bin/console doctrine:query:sql \'create extension if not exists "uuid-ossp"\'');
     run('cd {{release_path}}/api && bin/console doctrine:schema:update --force');
