@@ -49,10 +49,12 @@ after('deploy:failed', 'deploy:unlock');
 //before('deploy:symlink', 'database:migrate');
 
 task('deploy:vendors', function(){
-    run('cp /home/travis/siap/env.local {{release_path}}/api/.env.local');
+    run('cp {{deploy_path}}/env.local {{release_path}}/api/.env.local');
     run('cd {{release_path}}/api && composer install');
     run('cd {{release_path}}/api && bin/console doctrine:query:sql \'create extension if not exists "uuid-ossp"\'');
     run('cd {{release_path}}/api && bin/console doctrine:schema:update --force');
+    run('cd {{release_path}}/api && bin/console siap:generate:jwt-keys');
+    run('cd {{release_path}}/api && bin/console cache:clear');
     upload('./client/dist/','{{release_path}}/client/dist/');
 });
 
