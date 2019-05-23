@@ -9,6 +9,7 @@ import Snackbar from './core/Snackbar';
 import Table from './core/Table';
 import Toolbar from './core/Toolbar';
 import Offset from './helper/Offset';
+import UploadButton from './core/UploadButton';
 
 const components = [
     Card,
@@ -21,7 +22,8 @@ const components = [
     Snackbar,
     Table,
     Toolbar,
-    Offset
+    Offset,
+    UploadButton
 ];
 
 export default {

@@ -10,9 +10,20 @@ api_platform:
     collection:
         pagination:
             items_per_page: 5
+    enable_nelmio_api_doc: true
 
 doctrine:
     dbal:
         types:
             uuid:  Ramsey\Uuid\Doctrine\UuidType
+            
+nelmio_api_doc:
+    documentation:
+        info:
+            title: SIAP
+            description: Sistim Informasi dan Administrasi Paroki
+            version: 1.0.0
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/(?!/doc$) # Accepts routes under /api except /api/doc
 

@@ -73,7 +73,7 @@ class BaptisSpec extends ObjectBehavior
             'updatedBy'          => new User(),
             'paroki'             => new Paroki(),
             'agamaSebelumBaptis' => new Agama(),
-            'media'            => new MediaObject(),
+            'media'              => new MediaObject(),
             'lingkungan'         => new Lingkungan(),
         ];
     }

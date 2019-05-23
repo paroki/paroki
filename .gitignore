@@ -2,3 +2,5 @@
 /docker-compose.override.yml
 /docker/
 /build/
+deploy_key
+deploy_key.pub

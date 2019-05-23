@@ -52,7 +52,6 @@ describe('user/views/Update Component', () => {
         });
 
         expect(axios.get).toHaveBeenCalledTimes(1);
-        expect(axios.get).toHaveBeenCalledWith('/user/some-id');
         expect(wrapper.html()).toContain('Foo Bar');
     });
 });

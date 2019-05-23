@@ -18,21 +18,26 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Vich\UploaderBundle\Naming\UniqidNamer;
 
 class CoreExtension extends Extension implements PrependExtensionInterface
 {
     public function prepend(ContainerBuilder $container)
     {
-        $publicDir = $container->getParameter('kernel.root_dir').'/public/media';
+        $publicDir = $container->getParameter('kernel.project_dir').'/public/media';
 
         $container->prependExtensionConfig('vich_uploader', [
             'db_driver' => 'orm',
-            'mappings' => [
+            'mappings'  => [
                 'media_object' => [
-                    'uri_prefix' => 'media',
-                    'upload_destination' => $publicDir
-                ]
-            ]
+                    'uri_prefix'         => 'media',
+                    'upload_destination' => $publicDir,
+                    'namer'              => UniqidNamer::class,
+                    'inject_on_load'     => true,
+                    'delete_on_update'   => true,
+                    'delete_on_remove'   => true,
+                ],
+            ],
         ]);
     }
 
