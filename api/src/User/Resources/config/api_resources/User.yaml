@@ -24,6 +24,13 @@ SIAP\User\Entity\User:
             path: /profile/{id}
             access_control: 'is_granted("ROLE_USER") and object == user'
             access_control_message: 'Hanya user yang bersangkutan bisa mengubah profil'
+        profile_password:
+            method: PUT
+            path: /profile-password/{id}
+            access_control: 'is_granted("ROLE_USER") and object == user'
+            access_control_message: 'Hanya user yang bersangkutan bisa mengubah password'
+            validation_groups: ['password', 'profile-password']
+            
         upload_foto:
             method: POST
             path: /user/{id}/upload-foto

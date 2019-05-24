@@ -3,6 +3,7 @@
         <template v-for="field in fields">
             <div :key="field.name">
                 <v-text-field
+                    :id="getId(field)"
                     :label="field.label"
                     :name="field.name"
                     :placeholder="field.placeholder"
@@ -15,6 +16,7 @@
                     @input="handleUpdateField(field.name, $event)">
                 ></v-text-field>
                 <v-text-field
+                    :id="getId(field)"
                     :label="field.label"
                     :name="field.name"
                     :placeholder="field.placeholder"
@@ -28,6 +30,7 @@
                     @input="handleUpdateField(field.name)">
                     ></v-text-field>
                 <v-text-field
+                    v-bind:id="getId(field)"
                     :label="field.label"
                     :name="field.name"
                     :placeholder="field.placeholder"
@@ -39,6 +42,7 @@
                     @input="handleUpdateField(field.name)">
                 ></v-text-field>
                 <c-datepicker
+                    :id="getId(field)"
                     v-if="field.type === 'date'"
                     :name="field.name"
                     :label="field.label"
@@ -49,6 +53,7 @@
                     :handle-update-field="handleUpdateField">
                 ></c-datepicker>
                 <v-radio-group
+                    :id="getId(field)"
                     v-model="item[field.name]"
                     v-if="field.type === 'radio'"
                     :label="field.label"
@@ -80,6 +85,7 @@
                     ></v-checkbox>
                 </v-item-group>
                 <c-autocomplete
+                    :id="getId(field)"
                     v-if="field.type === 'autocomplete'"
                     :item="item[field.name]"
                     :label="field.label"
@@ -132,6 +138,9 @@
             },
             getError(key){
                 return this.violations[key];
+            },
+            getId(field){
+                return field.id || field.name;
             }
         }
 

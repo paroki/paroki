@@ -71,13 +71,13 @@
         methods: {
             ...mapActions({
                 getProfile: 'user/update/getProfile',
-                updateProfile: 'user/update/profile',
-                updatePassword: 'user/update/profilePassword',
+                update: 'user/update/profile',
+                password: 'user/update/profilePassword',
                 snackbarSuccess: 'siap/snackbarSuccess',
                 snackbarError: 'siap/snackbarError'
             }),
             handleUpdateProfile(){
-                this.updateProfile().then( () => {
+                this.update().then( () => {
                     if(!this.error){
                         this.snackbarSuccess('Profil berhasil disimpan!');
                     }else{
@@ -86,8 +86,12 @@
                 });
             },
             handleUpdatePassword(payload){
-                this.updatePassword(payload).then( () => {
-
+                this.password(payload).then( () => {
+                    if(!this.error){
+                        this.snackbarSuccess('Password berhasil diperbaharui!');
+                    }else{
+                        this.snackbarError('Gagal menyimpan password');
+                    }
                 } );
             },
             activateComponent(item){

@@ -21,6 +21,27 @@ export const getProfile = ( {commit}, id ) => {
         });
 }
 
+export const profilePassword = ( { commit, state }, payload ) => {
+    const id = state.retrieved.id;
+    commit(types.TOGGLE_LOADING);
+    const url = ApiService.generateUrl(`/profile-password/${id}`);
+    console.log(payload);
+    return ApiService.put(url, payload)
+        .then((data) => {
+            commit(types.TOGGLE_LOADING);
+            commit(types.SET_RETRIEVED, data);
+        })
+        .catch( (e) => {
+            if (e instanceof SubmissionError) {
+                commit(types.SET_VIOLATIONS, e.errors);
+                // eslint-disable-next-line
+                commit(types.SET_ERROR, e.errors._error);
+            }else{
+                commit(types.SET_ERROR, e);
+            }
+        });
+}
+
 export const profile = ( {commit, state}, payload ) => {
     if(!payload){
         payload = state.retrieved;

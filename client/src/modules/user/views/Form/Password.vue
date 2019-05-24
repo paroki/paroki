@@ -33,9 +33,9 @@
         data: () => {
             return {
                 fields: [
-                    { name: 'currentPassword', type: 'password', label: 'Password anda saat ini', required: true},
-                    { name: 'plainPassword', type: 'password', label: 'Masukkan password baru', required: true},
-                    { name: 'plainPasswordConfirm', type: 'password', label: 'Masukkan ulang password baru'},
+                    { id: 'current-password', name: 'currentPassword', type: 'password', label: 'Password anda saat ini', required: true},
+                    { id: 'new-password', name: 'plainPassword', type: 'password', label: 'Masukkan password baru', required: true},
+                    { id: 'new-password-confirm', name: 'plainPasswordConfirm', type: 'password', label: 'Masukkan ulang password baru'},
                 ],
                 values: {
                     currentPassword: null,
@@ -53,16 +53,10 @@
             }),
             onSendForm(){
                 const payload = {
+                    currentPassword: this.values.currentPassword,
                     plainPassword: this.values.plainPassword
                 };
-                this.update(payload)
-                    .then( () => {
-                        this.snackbarSuccess('Password baru berhasil disimpan');
-                    })
-                    .catch( () => {
-                        this.snackbarError('Gagal merubah password!');
-                    })
-                ;
+                this.$emit('update-password', payload);
             }
         }
     }

@@ -14,5 +14,10 @@ SIAP\User\Entity\User:
         email:
             - NotBlank: { message: "siap.validation.email.blank" }
             - Email: { message: "siap.validation.email.format" }
+        currentPassword:
+            - NotBlank: { message: 'siap.validation.current_password.blank', groups: 'profile-password' }
+            - Symfony\Component\Security\Core\Validator\Constraints\UserPassword:
+                  message: 'siap.validation.current_password.invalid'
+                  groups: 'profile-password'
         plainPassword:
             - NotBlank: { message: 'siap.validation.password.blank', groups: ['password']}
