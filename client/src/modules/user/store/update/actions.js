@@ -99,7 +99,7 @@ export const uploadAvatar = ( {commit, state}, file) => {
     formData.append('file',file);
     return ApiService.post(url, formData, {
             headers: {
-                'Content-TYpe': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data'
             }
         }).then( (data) => {
             retrieved = {
