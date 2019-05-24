@@ -16,8 +16,8 @@ export const getProfile = ( {commit}, id ) => {
     const url = ApiService.generateUrl(`/profile/${id}`);
     return ApiService.get(url)
         .then((data) => {
+            commit(types.SET_RETRIEVED, data);
             commit(types.TOGGLE_LOADING);
-            commit(types.SET_RETRIEVED, data)
         })
         .catch((e) => {
             commit(types.TOGGLE_LOADING);
@@ -32,12 +32,10 @@ export const profilePassword = ( { commit, state }, payload ) => {
     const url = ApiService.generateUrl(`/profile-password/${id}`);
     return ApiService.put(url, payload)
         .then((data) => {
-            commit(types.TOGGLE_LOADING);
             commit(types.SET_RETRIEVED, data);
-            payload = {};
+            commit(types.TOGGLE_LOADING);
         })
         .catch( (e) => {
-            commit(types.TOGGLE_LOADING);
             if (e instanceof SubmissionError) {
                 commit(types.SET_VIOLATIONS, e.errors);
                 // eslint-disable-next-line
@@ -45,6 +43,7 @@ export const profilePassword = ( { commit, state }, payload ) => {
             }else{
                 commit(types.SET_ERROR, e);
             }
+            commit(types.TOGGLE_LOADING);
         });
 }
 
@@ -100,7 +99,7 @@ export const uploadAvatar = ( {commit, state}, file) => {
     formData.append('file',file);
     return ApiService.post(url, formData, {
             headers: {
-                'Content-TYpe': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data'
             }
         }).then( (data) => {
             retrieved = {
@@ -110,7 +109,7 @@ export const uploadAvatar = ( {commit, state}, file) => {
             commit(types.SET_RETRIEVED, retrieved);
             commit(types.TOGGLE_LOADING);
         }).catch( (e) => {
-            commit(types.SET_ERROR, e.error);
+            commit(types.SET_ERROR, e.message);
             commit(types.TOGGLE_LOADING);
         });
 };
@@ -121,7 +120,8 @@ export const update = ({ commit, state }, payload) => {
     }
     resetError({commit});
     commit(types.TOGGLE_LOADING);
-    return ApiService.put(state.retrieved['@id'], payload)
+    const url = ApiService.generateUrl(`/user/${payload.id}`);
+    return ApiService.put(url, payload)
         .then((data) => {
             commit(types.TOGGLE_LOADING);
             commit(types.SET_UPDATED, data);
