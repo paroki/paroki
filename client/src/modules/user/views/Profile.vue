@@ -5,6 +5,7 @@
                 <v-list>
                     <v-list-tile
                         v-for="item in items"
+                        :name="item.title"
                         :key="item.title"
                         @click="activateComponent(item)"
                         :active="active === item.component"
@@ -68,6 +69,7 @@
         created() {
             const credentials = TokenService.getCredentials();
             this.getProfile(credentials.id);
+
         },
         beforeDestroy(){
             this.updateReset();

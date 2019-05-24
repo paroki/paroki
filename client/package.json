@@ -19,7 +19,6 @@
     "vue-loading-overlay": "^3.2.0",
     "vue-router": "^3.0.3",
     "vuetify": "^1.5.5",
-    "vuetify-upload-button": "^2.0.0",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -61,6 +60,9 @@
       "parser": "babel-eslint"
     }
   },
+  "eslintIgnore": [
+    "src/**/*.spec.js"
+  ],
   "postcss": {
     "plugins": {
       "autoprefixer": {}
