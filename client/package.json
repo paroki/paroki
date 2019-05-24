@@ -75,7 +75,8 @@
   "jest": {
     "coverageDirectory": "build/logs/",
     "coverageReporters": [
-      "clover"
+      "clover",
+      "lcov"
     ],
     "coveragePathIgnorePatterns": [
       "tests",

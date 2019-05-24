@@ -86,22 +86,20 @@
                 resetError: 'user/update/resetError'
             }),
             handleUpdateProfile(){
-                this.updateProfile().then( () => {
-                    if(!this.error){
-                        this.snackbarSuccess('Profil berhasil disimpan!');
-                    }else{
-                        this.snackbarError('Gagal menyimpan profil');
-                    }
-                });
+                this.updateProfile();
+                if(!this.error){
+                    this.snackbarSuccess('Profil berhasil disimpan!');
+                }else{
+                    this.snackbarError('Gagal menyimpan profil');
+                }
             },
             handleUpdatePassword(payload){
-                this.profilePassword(payload).then( () => {
-                    if(!this.error){
-                        this.snackbarSuccess('Password berhasil diperbaharui!');
-                    }else{
-                        this.snackbarError('Gagal menyimpan password');
-                    }
-                } );
+                this.profilePassword(payload);
+                if(!this.error){
+                    this.snackbarSuccess('Password berhasil diperbaharui!');
+                }else{
+                    this.snackbarError('Gagal menyimpan password');
+                }
             },
             activateComponent(item){
                 this.active = item.component;
