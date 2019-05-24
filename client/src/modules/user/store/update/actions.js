@@ -109,7 +109,7 @@ export const uploadAvatar = ( {commit, state}, file) => {
             commit(types.SET_RETRIEVED, retrieved);
             commit(types.TOGGLE_LOADING);
         }).catch( (e) => {
-            commit(types.SET_ERROR, e.error);
+            commit(types.SET_ERROR, e.message);
             commit(types.TOGGLE_LOADING);
         });
 };
@@ -120,7 +120,8 @@ export const update = ({ commit, state }, payload) => {
     }
     resetError({commit});
     commit(types.TOGGLE_LOADING);
-    return ApiService.put(state.retrieved['@id'], payload)
+    const url = ApiService.generateUrl(`/user/${payload.id}`);
+    return ApiService.put(url, payload)
         .then((data) => {
             commit(types.TOGGLE_LOADING);
             commit(types.SET_UPDATED, data);
