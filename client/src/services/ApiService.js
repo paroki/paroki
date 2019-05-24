@@ -83,8 +83,8 @@ const ApiService = {
         return axios.post(resource, data, options)
     },
 
-    put(resource, data) {
-        return axios.put(resource, data);
+    put(resource, data, options={}) {
+        return axios.put(resource, data, options);
     },
 
     delete(resource) {
