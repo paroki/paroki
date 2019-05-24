@@ -20,7 +20,12 @@
             </v-navigation-drawer>
         </v-flex>
         <v-flex md8>
-            <component class="sub-item" v-bind:is="active"/>
+            <component
+                class="sub-item"
+                v-bind:is="active"
+                @update-profile="handleUpdateProfile"
+                @update-password="handleUpdatePassword"
+            />
         </v-flex>
     </v-layout>
 </template>
@@ -40,7 +45,8 @@
         },
         computed: {
             ...mapGetters({
-                retrieved: 'user/update/retrieved'
+                retrieved: 'user/update/retrieved',
+                error: 'user/update/error'
             })
         },
         data: () => {
@@ -48,7 +54,12 @@
                 items: [
                     { title: 'Biodata', icon: 'mdi-dashboard', component: 'profile-form' },
                     { title: 'Foto', icon: 'mdi-person', component: 'avatar' },
-                    { title: 'Password', icon: 'mdi-lock', component: 'profile-password' }
+                    {
+                        title: 'Password',
+                        icon: 'mdi-lock',
+                        component: 'profile-password',
+                        handleUpdate: 'user/update/profile'
+                    }
                 ],
                 active: 'profile-form'
             }
@@ -59,8 +70,26 @@
         },
         methods: {
             ...mapActions({
-                getProfile: 'user/update/getProfile'
+                getProfile: 'user/update/getProfile',
+                updateProfile: 'user/update/profile',
+                updatePassword: 'user/update/profilePassword',
+                snackbarSuccess: 'siap/snackbarSuccess',
+                snackbarError: 'siap/snackbarError'
             }),
+            handleUpdateProfile(){
+                this.updateProfile().then( () => {
+                    if(!this.error){
+                        this.snackbarSuccess('Profil berhasil disimpan!');
+                    }else{
+                        this.snackbarError('Gagal menyimpan profil');
+                    }
+                });
+            },
+            handleUpdatePassword(payload){
+                this.updatePassword(payload).then( () => {
+
+                } );
+            },
             activateComponent(item){
                 this.active = item.component;
             }

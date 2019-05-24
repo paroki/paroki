@@ -21,7 +21,7 @@ export const getProfile = ( {commit}, id ) => {
         });
 }
 
-export const updateProfile = ( {commit, state}, payload ) => {
+export const profile = ( {commit, state}, payload ) => {
     if(!payload){
         payload = state.retrieved;
     }
@@ -45,7 +45,8 @@ export const updateProfile = ( {commit, state}, payload ) => {
                 commit(types.SET_ERROR, e);
             }
         })
-}
+};
+
 
 export const retrieve = ({ commit }, id) => {
     toggleLoading(commit)

@@ -42,7 +42,8 @@
             ...mapGetters({
                 loading: 'user/update/isLoading',
                 violations: 'user/update/violations',
-                retrieved: 'user/update/retrieved'
+                retrieved: 'user/update/retrieved',
+                error: 'user/update/error'
             }),
             item(){
                 return this.retrieved || this.values;
@@ -50,21 +51,13 @@
         },
         methods: {
             ...mapActions({
-                update: 'user/update/updateProfile',
-                snackbarSuccess: 'siap/snackbarSuccess',
-                snackbarError: 'siap/snackbarError'
+                update: 'user/update/updateProfile'
             }),
             handleUpdate(field,value){
                 this.retrieved[field] = value;
             },
             onSendForm(){
-                this.update().then( () => {
-                    if(!this.error){
-                        this.snackbarSuccess('Perubahan data berhasil disimpan!');
-                    }else{
-                        this.snackbarError();
-                    }
-                });
+                this.$emit('update-profile');
             }
         }
     }
