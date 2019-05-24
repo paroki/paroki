@@ -18,6 +18,8 @@ SIAP\User\Entity\User:
             groups: ['read','write']
         roles:
             groups: ['read','write']
+        currentPassword:
+            groups: ['write']
         plainPassword:
             groups: ['write']
         paroki:

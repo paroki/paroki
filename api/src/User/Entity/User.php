@@ -55,6 +55,11 @@ class User extends BaseUser implements RequireParokiInterface
     private $paroki;
 
     /**
+     * @var null|string
+     */
+    private $currentPassword;
+
+    /**
      * @var string
      */
     protected $id;
@@ -70,6 +75,24 @@ class User extends BaseUser implements RequireParokiInterface
         $this->setEnabled(true);
         $this->addRole('ROLE_USER');
         $this->foto = new MediaObject();
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCurrentPassword(): ?string
+    {
+        return $this->currentPassword;
+    }
+
+    /**
+     * @param string|null $currentPassword
+     * @return User
+     */
+    public function setCurrentPassword(?string $currentPassword): User
+    {
+        $this->currentPassword = $currentPassword;
+        return $this;
     }
 
     /**

@@ -84,7 +84,7 @@
     import { mapActions, mapGetters } from 'vuex'
     import ProfileForm from './ProfileForm.vue'
     import User from "../../../utils/user";
-    import AdminPasswordForm from './Form/AdminPasswordForm';
+    import AdminPasswordForm from './Form/AdminPassword';
 
     export default {
         components: {

@@ -19,5 +19,11 @@ export default [
                 url: '/user/'
             }
         ]
+    },
+    {
+        name: 'UserProfile',
+        label: 'Profil',
+        icon: 'mdi-shield-check',
+        url: '/me'
     }
 ];
