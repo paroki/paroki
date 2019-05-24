@@ -1,7 +1,6 @@
 import SubmissionError from '../../../../utils/SubmissionError';
 import ApiService from '@/services/ApiService';
 import * as types from './mutation_types';
-import toggleLoading from '../../../../utils/toggleLoading';
 
 export const reset = ({ commit }) => {
     commit(types.RESET)
@@ -65,7 +64,6 @@ export const profile = ( {commit, state}, payload ) => {
         })
         .catch((e) => {
             commit(types.TOGGLE_LOADING);
-
             if (e instanceof SubmissionError) {
                 commit(types.SET_VIOLATIONS, e.errors);
                 // eslint-disable-next-line
@@ -78,15 +76,15 @@ export const profile = ( {commit, state}, payload ) => {
 
 
 export const retrieve = ({ commit }, id) => {
-    toggleLoading(commit)
+    commit(types.TOGGLE_LOADING);
     const url = ApiService.generateUrl(`/user/${id}`)
     return ApiService.get(url)
         .then((data) => {
-            toggleLoading(commit)
+            commit(types.TOGGLE_LOADING);
             commit(types.SET_RETRIEVED, data)
         })
         .catch((e) => {
-            toggleLoading(commit)
+            commit(types.TOGGLE_LOADING);
             commit(types.SET_ERROR, e.message)
         });
 }
@@ -121,7 +119,7 @@ export const update = ({ commit, state }, payload) => {
     if(!payload){
         payload = state.retrieved;
     }
-    commit(types.SET_ERROR, '');
+    resetError({commit});
     commit(types.TOGGLE_LOADING);
     return ApiService.put(state.retrieved['@id'], payload)
         .then((data) => {

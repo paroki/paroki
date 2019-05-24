@@ -7,6 +7,7 @@
                         v-for="item in items"
                         :key="item.title"
                         @click="activateComponent(item)"
+                        :active="active === item.component"
                     >
                         <v-list-tile-action>
                             <v-icon>{{ item.icon }}</v-icon>
@@ -68,13 +69,19 @@
             const credentials = TokenService.getCredentials();
             this.getProfile(credentials.id);
         },
+        beforeDestroy(){
+            this.updateReset();
+            this.resetError();
+        },
         methods: {
             ...mapActions({
                 getProfile: 'user/update/getProfile',
                 updateProfile: 'user/update/profile',
                 profilePassword: 'user/update/profilePassword',
                 snackbarSuccess: 'siap/snackbarSuccess',
-                snackbarError: 'siap/snackbarError'
+                snackbarError: 'siap/snackbarError',
+                updateReset: 'user/update/reset',
+                resetError: 'user/update/resetError'
             }),
             handleUpdateProfile(){
                 this.updateProfile().then( () => {
