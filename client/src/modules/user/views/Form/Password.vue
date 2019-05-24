@@ -9,12 +9,13 @@
         ></c-form>
         <template slot="actions">
             <v-btn
-                @click="onSendForm"
+                @click.stop="onSendForm"
                 color="success"
+                :loading="loading"
                 small
             >
                 <v-icon left v-text="$vuetify.icons.save"></v-icon>
-                Simpan
+                Update Password
             </v-btn>
         </template>
     </c-card>
@@ -27,7 +28,8 @@
         computed: {
             ...mapGetters({
                 violations: 'user/update/violations',
-                loading: 'user/update/isLoading'
+                loading: 'user/update/isLoading',
+                error: 'user/update/error'
             })
         },
         data: () => {
@@ -52,11 +54,7 @@
                 snackbarError: 'siap/snackbarError',
             }),
             onSendForm(){
-                const payload = {
-                    currentPassword: this.values.currentPassword,
-                    plainPassword: this.values.plainPassword
-                };
-                this.$emit('update-password', payload);
+                this.$emit('update-password', this.values);
             }
         }
     }
