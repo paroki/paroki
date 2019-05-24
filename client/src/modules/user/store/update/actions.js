@@ -16,8 +16,8 @@ export const getProfile = ( {commit}, id ) => {
     const url = ApiService.generateUrl(`/profile/${id}`);
     return ApiService.get(url)
         .then((data) => {
+            commit(types.SET_RETRIEVED, data);
             commit(types.TOGGLE_LOADING);
-            commit(types.SET_RETRIEVED, data)
         })
         .catch((e) => {
             commit(types.TOGGLE_LOADING);
@@ -32,12 +32,10 @@ export const profilePassword = ( { commit, state }, payload ) => {
     const url = ApiService.generateUrl(`/profile-password/${id}`);
     return ApiService.put(url, payload)
         .then((data) => {
-            commit(types.TOGGLE_LOADING);
             commit(types.SET_RETRIEVED, data);
-            payload = {};
+            commit(types.TOGGLE_LOADING);
         })
         .catch( (e) => {
-            commit(types.TOGGLE_LOADING);
             if (e instanceof SubmissionError) {
                 commit(types.SET_VIOLATIONS, e.errors);
                 // eslint-disable-next-line
@@ -45,6 +43,7 @@ export const profilePassword = ( { commit, state }, payload ) => {
             }else{
                 commit(types.SET_ERROR, e);
             }
+            commit(types.TOGGLE_LOADING);
         });
 }
 
