@@ -54,15 +54,25 @@ describe('Profile', () => {
 
     });
 
-    it('should rendered properly', () => {
+    it('should mount component on menu click', () => {
         const wrapper = shallowMount(Profile, {
             store,
             localVue
         });
-        const html = wrapper.html();
-        expect(actions.getProfile).toHaveBeenCalled();
-        expect(html).toContain('Biodata');
-        expect(html).toContain('Foto');
-        expect(html).toContain('Password');
+
+        // default
+        const menu = wrapper.findAll({name: 'v-list-tile'});
+        expect(menu.length).toEqual(3);
+        expect(wrapper.vm.active).toBe('profile-form');
+
+        menu.at(1).vm.$emit('click');
+        expect(wrapper.vm.active).toBe('avatar');
+
+        menu.at(2).vm.$emit('click');
+        expect(wrapper.vm.active).toBe('profile-password');
+
+
+        menu.at(0).vm.$emit('click');
+        expect(wrapper.vm.active).toBe('profile-form');
     });
 });
