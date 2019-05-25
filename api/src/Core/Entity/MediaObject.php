@@ -110,7 +110,7 @@ class MediaObject
         return $this;
     }
 
-    public function getId(): ?string
+    public function getId()
     {
         return $this->id;
     }
@@ -160,7 +160,6 @@ class MediaObject
     }
 
     /**
-     * @param array|null $dimensions
      * @return MediaObject
      */
     public function setDimensions(?array $dimensions): self

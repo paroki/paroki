@@ -117,7 +117,7 @@ class Diterima implements RequireParokiInterface, LoggableInterface
         return $this;
     }
 
-    public function getId(): ?string
+    public function getId()
     {
         return $this->id;
     }

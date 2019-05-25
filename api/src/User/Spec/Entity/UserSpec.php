@@ -14,11 +14,17 @@ declare(strict_types=1);
 namespace Spec\SIAP\User\Entity;
 
 use PhpSpec\ObjectBehavior;
+use Ramsey\Uuid\Uuid;
+use SIAP\Core\Entity\MediaObject;
+use SIAP\Core\Test\MutableSpecTrait;
 use SIAP\Reference\Entity\Paroki;
 use SIAP\User\Entity\User;
+use Symfony\Component\HttpFoundation\File\File;
 
 class UserSpec extends ObjectBehavior
 {
+    use MutableSpecTrait;
+
     public function it_is_initializable()
     {
         $this->shouldHaveType(User::class);
@@ -29,15 +35,23 @@ class UserSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    public function its_nama_should_be_mutable()
+    public function getMutableProperties()
     {
-        $this->setNama('some')->shouldReturn($this);
-        $this->getNama()->shouldReturn('some');
+        return [
+            'nama' => 'some',
+            'fotoFile' => new File(__FILE__),
+            'foto' => new MediaObject(),
+            'paroki' => new Paroki(),
+            'currentPassword' => 'some',
+            'id' => null,
+            'updatedAt' => new \DateTimeImmutable()
+        ];
     }
 
-    public function its_paroki_should_be_mutable(Paroki $paroki)
+    public function getMutableClassToTest()
     {
-        $this->setParoki($paroki)->shouldReturn($this);
-        $this->getParoki()->shouldReturn($paroki);
+        return User::class;
     }
+
+
 }

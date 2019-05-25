@@ -201,7 +201,7 @@ class Paroki
         return $this;
     }
 
-    public function getId(): ?string
+    public function getId()
     {
         return $this->id;
     }

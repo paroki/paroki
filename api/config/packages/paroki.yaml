@@ -11,12 +11,7 @@ api_platform:
         pagination:
             items_per_page: 5
     enable_nelmio_api_doc: true
-
-doctrine:
-    dbal:
-        types:
-            uuid:  Ramsey\Uuid\Doctrine\UuidType
-            
+    
 nelmio_api_doc:
     documentation:
         info:

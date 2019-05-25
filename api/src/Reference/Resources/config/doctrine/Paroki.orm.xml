@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="SIAP\Reference\Entity\Paroki" table="tr_paroki">
-    <id name="id" type="guid">
-      <generator strategy="UUID"/>
+    <id name="id" type="uuid">
+      <generator strategy="CUSTOM"/>
+      <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
     </id>
     <field name="kode" type="string" unique="true" length="7" nullable="false" column="kode"/>
     <field name="noUrut" type="integer" length="4" nullable="true"/>

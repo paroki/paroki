@@ -90,6 +90,7 @@
         "behat/symfony2-extension": "^2.1",
         "behatch/contexts": "^3.2",
         "hautelook/alice-bundle": "^2.5",
+        "matthiasnoback/symfony-dependency-injection-test": "@dev",
         "phpspec/phpspec": "^5.1",
         "symfony/apache-pack": "^1.0",
         "symfony/maker-bundle": "^1.11",

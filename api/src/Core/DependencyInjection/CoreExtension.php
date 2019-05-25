@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace SIAP\Core\DependencyInjection;
 
+use Ramsey\Uuid\Doctrine\UuidType;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -39,7 +40,17 @@ class CoreExtension extends Extension implements PrependExtensionInterface
                 ],
             ],
         ]);
+
+        $container->prependExtensionConfig('doctrine', [
+            'dbal' => [
+                'types' => [
+                    'uuid' => UuidType::class,
+                ],
+            ],
+        ]);
     }
+
+
 
     public function load(array $configs, ContainerBuilder $container)
     {
