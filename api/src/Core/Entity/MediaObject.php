@@ -160,7 +160,6 @@ class MediaObject
     }
 
     /**
-     * @param array|null $dimensions
      * @return MediaObject
      */
     public function setDimensions(?array $dimensions): self

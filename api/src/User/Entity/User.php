@@ -55,7 +55,7 @@ class User extends BaseUser implements RequireParokiInterface
     private $paroki;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     private $currentPassword;
 
@@ -77,21 +77,15 @@ class User extends BaseUser implements RequireParokiInterface
         $this->foto = new MediaObject();
     }
 
-    /**
-     * @return string|null
-     */
     public function getCurrentPassword(): ?string
     {
         return $this->currentPassword;
     }
 
-    /**
-     * @param string|null $currentPassword
-     * @return User
-     */
-    public function setCurrentPassword(?string $currentPassword): User
+    public function setCurrentPassword(?string $currentPassword): self
     {
         $this->currentPassword = $currentPassword;
+
         return $this;
     }
 
