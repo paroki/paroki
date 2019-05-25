@@ -78,5 +78,15 @@ class GenerateJWTKeyCommand extends Command
         $process->run(function ($type, $buffer) use ($output) {
             $output->write(sprintf('<info>%s</info>', $buffer));
         });
+
+        $output->writeln(
+            sprintf('chmod 0775 <info>%s</info>',$secKeyPath)
+        );
+        chmod($secKeyPath,0755);
+
+        $output->writeln(
+            sprintf('chmod 0775 <info>%s</info>',$pubKeyPath)
+        );
+        chmod($pubKeyPath,0755);
     }
 }
