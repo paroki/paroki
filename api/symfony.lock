@@ -181,6 +181,12 @@
             "./config/packages/lexik_jwt_authentication.yaml"
         ]
     },
+    "matthiasnoback/symfony-config-test": {
+        "version": "4.0.1"
+    },
+    "matthiasnoback/symfony-dependency-injection-test": {
+        "version": "v3.1.0"
+    },
     "monolog/monolog": {
         "version": "1.24.0"
     },
