@@ -44,7 +44,7 @@ class CoreExtension extends Extension implements PrependExtensionInterface
         $container->prependExtensionConfig('doctrine', [
             'dbal' => [
                 'types' => [
-                    'guid' => UuidType::class
+                    'uuid' => UuidType::class
                 ]
             ]
         ]);
