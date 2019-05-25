@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="SIAP\Baptis\Entity\Baptis" extends="SIAP\Core\Entity\AbstractBiodata" table="td_baptis">
+  <entity name="SIAP\Baptis\Entity\Baptis" table="td_baptis">
     <id name="id" type="guid">
-      <generator strategy="UUID"/>
+      <generator strategy="CUSTOM"/>
+      <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
     </id>
     <field name="kodeBaptis" type="string" unique="true" length="50" nullable="true"/>
     <field name="namaBaptis" type="string" nullable="true"/>
@@ -32,17 +33,17 @@
     </many-to-one>
     <one-to-one field="komuni" target-entity="SIAP\Baptis\Entity\BaptisKomuni" fetch="EAGER">
       <join-columns>
-        <join-column name="baptis_komuni_id" referenced-column-name="id" unique="true" on-delete="CASCADE" on-update="CASCADE"/>
+        <join-column name="baptis_komuni_id" referenced-column-name="id" unique="true" on-delete="CASCADE"/>
       </join-columns>
     </one-to-one>
     <one-to-one field="krisma" target-entity="SIAP\Baptis\Entity\BaptisKrisma" fetch="EXTRA_LAZY">
       <join-columns>
-        <join-column name="baptis_krisma_id" referenced-column-name="id" unique="true" on-delete="CASCADE" on-update="CASCADE"/>
+        <join-column name="baptis_krisma_id" referenced-column-name="id" unique="true" on-delete="CASCADE"/>
       </join-columns>
     </one-to-one>
     <one-to-one field="perkawinan" target-entity="SIAP\Baptis\Entity\BaptisPerkawinan" fetch="EXTRA_LAZY">
       <join-columns>
-        <join-column name="baptis_perkawinan_id" referenced-column-name="id" unique="true" on-delete="CASCADE" on-update="CASCADE"/>
+        <join-column name="baptis_perkawinan_id" referenced-column-name="id" unique="true" on-delete="CASCADE"/>
       </join-columns>
     </one-to-one>
     <one-to-one field="diterima" target-entity="SIAP\Baptis\Entity\Diterima" inversed-by="baptis" fetch="EXTRA_LAZY">
