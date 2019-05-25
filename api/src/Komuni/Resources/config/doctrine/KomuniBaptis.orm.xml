@@ -2,7 +2,8 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="SIAP\Komuni\Entity\KomuniBaptis">
     <id name="id" type="guid">
-      <generator strategy="UUID"/>
+      <generator strategy="CUSTOM"/>
+      <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
     </id>
     <field name="register" type="string" nullable="true"/>
     <field name="buku" type="string" nullable="true"/>
